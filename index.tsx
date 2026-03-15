@@ -286,10 +286,12 @@ const renderPage = () => {
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9881;</text></svg>">
   
-  <!-- Fonts -->
+  <!-- Fonts: async load to avoid render-blocking -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
   
   <!-- Security: Content Security Policy -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https://cdn.jsdelivr.net https://avatars.githubusercontent.com; connect-src 'self';">
@@ -643,8 +645,8 @@ const renderPage = () => {
             <!-- Profile Image Container -->
             <div class="absolute inset-6 sm:inset-8 rounded-full overflow-hidden border-4 border-slate-800/80 shadow-2xl shadow-brand-500/20 glass">
               <picture style="display:block;width:100%;height:100%;">
-                <source srcset="/assets/profile.webp" type="image/webp">
-                <img src="/assets/profile.jpg" alt="Amr Walid" width="320" height="320" fetchpriority="high" decoding="async" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top;" />
+                <source srcset="/assets/profile.webp" type="image/webp" sizes="(max-width: 640px) 176px, (max-width: 1024px) 208px, 240px">
+                <img src="/assets/profile.jpg" alt="Amr Walid" width="320" height="320" fetchpriority="high" decoding="async" sizes="(max-width: 640px) 176px, (max-width: 1024px) 208px, 240px" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top;" />
               </picture>
             </div>
 
