@@ -19,7 +19,7 @@ const portfolioData = {
     avatar: "https://avatars.githubusercontent.com/u/Amr-Walid"
   },
   summary: `Data Engineer with a deep focus on building and maintaining robust, scalable data pipelines. I specialize in the complete data lifecycle — from extraction and transformation to orchestration and delivery — ensuring data is not only accessible but actionable. My expertise spans ETL/ELT design, data modeling, workflow automation, and cloud-native data architectures. I combine strong engineering fundamentals with analytical thinking to build systems that turn raw data into strategic business assets.`,
-  
+
   skills: {
     "Data Engineering": [
       { name: "ETL/ELT Pipeline Design", level: 90 },
@@ -66,7 +66,7 @@ const portfolioData = {
       category: "Data Engineering",
       featured: true,
       image: "chart-line",
-      imageUrl: "assets/project-etl.png",
+      imageUrl: "/assets/project-etl.png",
       problem: "Cryptocurrency markets generate massive volumes of real-time price data across multiple exchanges. Manually tracking and recording this data for historical analysis is unreliable, inconsistent, and doesn't scale.",
       solution: "Designed and built a fully automated, cloud-hosted ETL pipeline that extracts live cryptocurrency market data from the CoinGecko API, transforms it using Python and Pandas into a structured schema, and loads it into a continuously growing time-series CSV dataset — all orchestrated by GitHub Actions running on an hourly cron schedule.",
       architecture: "CoinGecko API → Python (requests) → Pandas Transform → CSV Append → GitHub Actions (hourly cron) → Auto-commit to Repository",
@@ -86,7 +86,7 @@ const portfolioData = {
       category: "Data Engineering",
       featured: true,
       image: "database",
-      imageUrl: "assets/project-workflow.png",
+      imageUrl: "/assets/project-workflow.png",
       problem: "ETL processes often break due to environment inconsistencies between development, testing, and production. Dependencies, database connections, and configurations differ across machines, making pipelines fragile.",
       solution: "Built a containerized ETL pipeline using Docker and Docker Compose that packages the entire data workflow — extraction, transformation, and loading into PostgreSQL — into reproducible, isolated containers. A single command spins up the full environment.",
       architecture: "Source Data → Python ETL Container → Transform Layer → PostgreSQL Container → Docker Compose Orchestration",
@@ -106,7 +106,7 @@ const portfolioData = {
       category: "Data Analysis",
       featured: true,
       image: "chart-bar",
-      imageUrls: ["assets/project-sales.png", "assets/project-sales-new.png"],
+      imageUrls: ["/assets/project-sales.png", "/assets/project-sales-new.png"],
       problem: "A global manufacturing company had thousands of rows of unstructured sales data across multiple dimensions — products, customers, geography, and time — with no unified view for executive decision-making.",
       solution: "Designed and built a comprehensive interactive Excel dashboard using the AdventureWorks dataset. Applied Power Query for data cleaning, built a multi-table data model with proper relationships, and created dynamic PivotTable reports with slicers and timelines for self-service analytics.",
       architecture: "Raw Data → Power Query (Clean & Transform) → Data Model (Relationships) → PivotTables → Interactive Dashboard (Slicers, Timelines, Charts)",
@@ -373,6 +373,7 @@ const renderPage = () => {
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(59, 143, 255, 0.1);
+      transform: translateZ(0); /* Hardware acceleration */
     }
     
     .glass-light {
@@ -380,6 +381,7 @@ const renderPage = () => {
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(0, 0, 0, 0.08);
+      transform: translateZ(0); /* Hardware acceleration */
     }
     
     .card-hover {
@@ -406,14 +408,17 @@ const renderPage = () => {
     }
     
     @keyframes flow {
-      0% { background-position: 0% 0%; }
-      100% { background-position: 0% 100%; }
+      0% { transform: translateY(-50%); }
+      100% { transform: translateY(0%); }
     }
     
     .pipeline-line {
-      background: linear-gradient(180deg, #3b8fff, #38bdf8, #818cf8, #3b8fff);
+      background: linear-gradient(180deg, #3b8fff, #38bdf8, #818cf8, #3b8fff, #3b8fff, #38bdf8, #818cf8, #3b8fff);
       background-size: 100% 200%;
+      height: 200%;
+      top: -100%;
       animation: flow 3s linear infinite;
+      will-change: transform;
     }
     
     .glow {
@@ -461,16 +466,48 @@ const renderPage = () => {
     }
     
     @keyframes gridMove {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(40px, 40px); }
+      0% { transform: translate(0, 0) translateZ(0); }
+      100% { transform: translate(40px, 40px) translateZ(0); }
     }
     .grid-bg {
       background-image: radial-gradient(circle, rgba(59,143,255,0.08) 1px, transparent 1px);
       background-size: 40px 40px;
       animation: gridMove 20s linear infinite;
+      will-change: transform;
     }
     .dark .grid-bg {
       background-image: radial-gradient(circle, rgba(59,143,255,0.12) 1px, transparent 1px);
+    }
+
+    /* === Performance Optimizations for Mobile === */
+    section {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 600px;
+    }
+    #hero {
+      content-visibility: visible;
+    }
+
+    @media (max-width: 768px) {
+      /* Disable heavy GPU blurs on mobile */
+      .glass, .glass-light, .dark .glass {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(15, 23, 42, 0.85); /* Darker fallback for readability */
+      }
+      .light .glass, .glass-light {
+        background: rgba(255, 255, 255, 0.95);
+      }
+      /* Disable expensive background animations on mobile to stop frame drops */
+      .grid-bg {
+        animation: none;
+      }
+      .pipeline-line {
+        animation: none;
+      }
+      .animate-spin-slow, .animate-\\[spin_20s_linear_reverse\\] {
+        animation-play-state: paused;
+      }
     }
   </style>
 </head>
@@ -478,6 +515,7 @@ const renderPage = () => {
   
   <!-- ============ NAVIGATION ============ -->
   <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-2">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 lg:h-20">
         <!-- Logo -->
         <a href="#hero" class="flex items-center gap-3 group">
@@ -537,11 +575,7 @@ const renderPage = () => {
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <!-- Left Column -->
         <div class="space-y-8 animate-slide-up order-last lg:order-first">
-          <!-- Status Badge -->
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-500/5 border border-brand-500/10">
-            <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
-            <span class="text-sm font-medium text-brand-600">Open to Opportunities</span>
-          </div>
+
           
           <!-- Heading -->
           <div>
@@ -598,8 +632,11 @@ const renderPage = () => {
             <div class="absolute inset-4 border border-accent-500/20 rounded-full animate-[spin_20s_linear_reverse]"></div>
             
             <!-- Profile Image Container -->
-            <div class="absolute inset-8 rounded-full overflow-hidden border-4 border-slate-800/80 shadow-2xl shadow-brand-500/20 glass">
-              <img src="/assets/profile.jpg" alt="Amr Walid" class="w-full h-full object-cover object-[center_top]" />
+            <div class="absolute inset-6 sm:inset-8 rounded-full overflow-hidden border-4 border-slate-800/80 shadow-2xl shadow-brand-500/20 glass">
+              <picture style="display:block;width:100%;height:100%;">
+                <source srcset="/assets/profile.webp" type="image/webp">
+                <img src="/assets/profile.jpg" alt="Amr Walid" width="320" height="320" fetchpriority="high" decoding="sync" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top;" />
+              </picture>
             </div>
 
             <!-- Floating tech icons -->
@@ -667,6 +704,7 @@ const renderPage = () => {
       </div>
     </div>
   </section>
+
 
   <!-- ============ PROJECTS SECTION ============ -->
   <section id="projects" class="py-24 lg:py-32 bg-gray-50/50">
@@ -1011,7 +1049,7 @@ const renderPage = () => {
           </div>
         </div>
         
-        <div class="flex items-center gap-4">
+        <div class="flex flex-wrap items-center gap-4">
           <a href="https://github.com/Amr-Walid" target="_blank" class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-500 hover:text-brand-400 hover:bg-brand-500/10 transition-all">
             <i class="fab fa-github"></i>
           </a>
@@ -1040,76 +1078,67 @@ const renderPage = () => {
       const grid = document.getElementById('projectsGrid');
       const filtered = filter === 'all' ? projects : projects.filter(p => p.category === filter);
       
-      grid.innerHTML = filtered.map(p => {
-        const urls = p.imageUrls || (p.imageUrl ? [p.imageUrl] : []);
-        let imageHeader = '';
+      grid.innerHTML = filtered.map(function(p) {
+        var urls = p.imageUrls || (p.imageUrl ? [p.imageUrl] : []);
+        var imageHeader = '';
         if (urls.length > 0) {
-          imageHeader = \`<div class="w-full h-48 sm:h-56 relative bg-slate-200/50 border-b border-gray-200 flex flex-row overflow-hidden">
-            \${urls.map((url, i) => \`
-              <div class="flex-1 h-full flex items-center justify-center p-2 sm:p-3 relative group/img \${i > 0 ? 'border-l border-gray-300/50' : ''}">
-                <img src="\${url}" alt="\${p.title} - Image \${i + 1}" class="max-w-full max-h-full object-contain rounded shadow-sm group-hover/img:scale-105 transition-transform duration-500" loading="lazy" />
-              </div>
-            \`).join('')}
-          </div>\`;
+          var imgParts = urls.map(function(url, i) {
+            var webpUrl = url.replace(/\.(png|jpg|jpeg)$/i, '.webp');
+            var border = i > 0 ? 'border-l border-gray-200' : '';
+            return '<div class="flex-1 h-full flex items-center justify-center p-3 bg-white ' + border + '" style="min-width:0">' +
+              '<picture style="display:block;width:100%;height:100%;">' +
+                '<source srcset="' + webpUrl + '" type="image/webp">' +
+                '<img src="' + url + '" alt="' + p.title + ' - Image ' + (i + 1) + '" width="400" height="300" style="display:block;width:100%;height:100%;object-fit:contain;" loading="lazy" decoding="async" />' +
+              '</picture>' +
+            '</div>';
+          });
+          imageHeader = '<div class="w-full h-36 sm:h-44 lg:h-48 bg-white border-b border-gray-200 flex flex-row overflow-hidden">' + imgParts.join('') + '</div>';
         }
-
-        return \`
-        <div class="glass glass-light rounded-2xl overflow-hidden card-hover group project-card flex flex-col h-full" data-category="\${p.category}">
-          <!-- Project Image Header -->
-          \${imageHeader}
-          
-          <!-- Content Body -->
-          <div class="p-6 lg:p-8 flex flex-col flex-grow">
-            <div class="flex items-start justify-between mb-4">
-              <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center shrink-0 shadow-lg">
-                  <i class="fas fa-\${p.image} text-white text-lg"></i>
-                </div>
-                <div>
-                  <span class="text-xs font-bold text-brand-400 font-mono uppercase tracking-wider">\${p.category}</span>
-                  \${p.featured ? '<span class="ml-2 text-xs bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded-md font-bold">Featured</span>' : ''}
-                </div>
-              </div>
-              <a href="\${p.github}" target="_blank" class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-500 hover:text-brand-400 hover:bg-brand-500/10 transition-all shrink-0">
-                <i class="fab fa-github"></i>
-              </a>
-            </div>
-            
-            <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-brand-400 transition-colors">\${p.title}</h3>
-            
-            <!-- Problem & Solution Section -->
-            <div class="mb-4">
-              <p class="text-xs font-bold text-red-400 font-mono uppercase tracking-wider mb-1">Problem</p>
-              <p class="text-sm text-gray-600 leading-relaxed">\${p.problem}</p>
-            </div>
-            
-            <!-- Solution -->
-            <div class="mb-4">
-              <p class="text-xs font-bold text-emerald-400 font-mono uppercase tracking-wider mb-1">Solution</p>
-              <p class="text-sm text-gray-600 leading-relaxed">\${p.solution}</p>
-            </div>
-            
-            <!-- Architecture -->
-            <div class="mb-4 p-3 bg-gray-50 rounded-xl border border-gray-200">
-              <p class="text-xs font-bold text-purple-400 font-mono uppercase tracking-wider mb-1">Architecture</p>
-              <p class="text-xs text-gray-500 font-mono leading-relaxed">\${p.architecture}</p>
-            </div>
-            
-            <!-- Impact -->
-            <div class="mb-5">
-              <p class="text-xs font-bold text-accent-400 font-mono uppercase tracking-wider mb-2">Impact</p>
-              <ul class="space-y-1.5">
-                \${p.impact.map(i => \`<li class="flex items-start gap-2 text-sm text-gray-500"><i class="fas fa-check text-emerald-400 mt-0.5 text-xs"></i>\${i}</li>\`).join('')}
-              </ul>
-            </div>
-            
-            <!-- Tech Stack -->
-            <div class="flex flex-wrap gap-2">
-              \${p.techStack.map(t => \`<span class="tag px-2.5 py-1 bg-brand-500/5 text-brand-400 text-xs rounded-lg font-mono font-medium border border-brand-500/10 cursor-default">\${t}</span>\`).join('')}
-            </div>
-          </div>
-        </div>
-      \`}).join('');
+        var featuredBadge = p.featured ? '<span class="ml-2 text-xs bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded-md font-bold">Featured</span>' : '';
+        var impactItems = p.impact.map(function(item) {
+          return '<li class="flex items-start gap-2 text-sm text-gray-500"><i class="fas fa-check text-emerald-400 mt-0.5 text-xs"></i>' + item + '</li>';
+        }).join('');
+        var techItems = (p.techStack || []).map(function(t) {
+          return '<span class="tag px-2.5 py-1 bg-brand-500/5 text-brand-400 text-xs rounded-lg font-mono font-medium border border-brand-500/10 cursor-default">' + t + '</span>';
+        }).join('');
+        return '<div class="glass glass-light rounded-2xl overflow-hidden card-hover group project-card flex flex-col h-full" data-category="' + p.category + '">' +
+          imageHeader +
+          '<div class="p-5 sm:p-6 lg:p-8 flex flex-col flex-grow">' +
+            '<div class="flex items-start justify-between mb-4">' +
+              '<div class="flex items-center gap-3">' +
+                '<div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center shrink-0 shadow-lg">' +
+                  '<i class="fas fa-' + p.image + ' text-white text-base sm:text-lg"></i>' +
+                '</div>' +
+                '<div>' +
+                  '<span class="text-xs font-bold text-brand-400 font-mono uppercase tracking-wider">' + p.category + '</span>' +
+                  featuredBadge +
+                '</div>' +
+              '</div>' +
+              '<a href="' + p.github + '" target="_blank" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-500 hover:text-brand-400 hover:bg-brand-500/10 transition-all shrink-0">' +
+                '<i class="fab fa-github"></i>' +
+              '</a>' +
+            '</div>' +
+            '<h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-3 sm:mb-4 group-hover:text-brand-400 transition-colors">' + p.title + '</h3>' +
+            '<div class="mb-3">' +
+              '<p class="text-xs font-bold text-red-400 font-mono uppercase tracking-wider mb-1">Problem</p>' +
+              '<p class="text-sm text-gray-600 leading-relaxed">' + p.problem + '</p>' +
+            '</div>' +
+            '<div class="mb-3">' +
+              '<p class="text-xs font-bold text-emerald-400 font-mono uppercase tracking-wider mb-1">Solution</p>' +
+              '<p class="text-sm text-gray-600 leading-relaxed">' + p.solution + '</p>' +
+            '</div>' +
+            '<div class="mb-3 p-3 bg-gray-50 rounded-xl border border-gray-200">' +
+              '<p class="text-xs font-bold text-purple-400 font-mono uppercase tracking-wider mb-1">Architecture</p>' +
+              '<p class="text-xs text-gray-500 font-mono leading-relaxed">' + p.architecture + '</p>' +
+            '</div>' +
+            '<div class="mb-4">' +
+              '<p class="text-xs font-bold text-accent-400 font-mono uppercase tracking-wider mb-2">Impact</p>' +
+              '<ul class="space-y-1.5">' + impactItems + '</ul>' +
+            '</div>' +
+            '<div class="flex flex-wrap gap-2">' + techItems + '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
     }
 
     // ===== PROJECT FILTERS =====
@@ -1186,14 +1215,12 @@ const renderPage = () => {
     });
 
     // ===== NAVBAR SCROLL =====
+    const navbar = document.getElementById('navbar');
     let tickingNavbar = false;
     window.addEventListener('scroll', () => {
       if (!tickingNavbar) {
         window.requestAnimationFrame(() => {
-          const navbar = document.getElementById('navbar');
-          const scroll = window.scrollY;
-          
-          if (scroll > 50) {
+          if (window.scrollY > 50) {
             navbar.classList.add('glass', 'glass-light', 'shadow-lg', 'py-0');
             navbar.classList.remove('py-2');
           } else {
@@ -1207,10 +1234,11 @@ const renderPage = () => {
     }, { passive: true });
 
     // ===== SCROLL ANIMATIONS =====
-    const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
         }
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
@@ -1219,29 +1247,26 @@ const renderPage = () => {
 
     // ===== ACTIVE NAV LINK =====
     const sections = document.querySelectorAll('section[id]');
-    let tickingNavLinks = false;
-    window.addEventListener('scroll', () => {
-      if (!tickingNavLinks) {
-        window.requestAnimationFrame(() => {
-          const scroll = window.scrollY + 200;
-          sections.forEach(section => {
-            const top = section.offsetTop;
-            const height = section.offsetHeight;
-            const id = section.getAttribute('id');
-            const link = document.querySelector('a[href="#' + id + '"]');
-            if (link && link.classList.contains('nav-link')) {
-              if (scroll >= top && scroll < top + height) {
-                link.classList.add('active', 'text-brand-400');
-              } else {
-                link.classList.remove('active', 'text-brand-400');
-              }
+    const navLinksData = Array.from(sections).map(section => ({
+      section,
+      link: document.querySelector('a[href="#' + section.id + '"]')
+    })).filter(item => item.link);
+
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinksData.forEach(item => {
+            if (item.section === entry.target) {
+              item.link.classList.add('active', 'text-brand-400');
+            } else {
+              item.link.classList.remove('active', 'text-brand-400');
             }
           });
-          tickingNavLinks = false;
-        });
-        tickingNavLinks = true;
-      }
-    }, { passive: true });
+        }
+      });
+    }, { rootMargin: '-20% 0px -80% 0px' });
+
+    sections.forEach(sec => navObserver.observe(sec));
 
     // ===== INIT =====
     renderProjects();
