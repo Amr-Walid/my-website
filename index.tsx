@@ -1,5 +1,4 @@
 import { Hono } from 'hono'
-import { handle } from 'hono/vercel'
 import { cors } from 'hono/cors'
 
 const app = new Hono()
@@ -1257,5 +1256,4 @@ app.get('/', (c) => {
   return c.html(renderPage())
 })
 
-// هذا السطر هو الأهم لكي يعمل على Vercel
-export default handle(app)
+export default app
