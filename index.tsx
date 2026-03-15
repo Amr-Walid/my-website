@@ -536,7 +536,7 @@ const renderPage = () => {
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <!-- Left Column -->
-        <div class="space-y-8 animate-slide-up">
+        <div class="space-y-8 animate-slide-up order-last lg:order-first">
           <!-- Status Badge -->
           <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-500/5 border border-brand-500/10">
             <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
@@ -591,8 +591,8 @@ const renderPage = () => {
         </div>
         
         <!-- Right Column — Profile Picture -->
-        <div class="hidden lg:block relative flex items-center justify-center">
-          <div class="relative w-72 h-72 xl:w-80 xl:h-80 mx-auto">
+        <div class="relative flex items-center justify-center order-first lg:order-last mb-8 lg:mb-0">
+          <div class="relative w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 mx-auto">
             <!-- Decorative rings -->
             <div class="absolute inset-0 border border-brand-500/30 rounded-full animate-spin-slow" style="animation-duration: 15s;"></div>
             <div class="absolute inset-4 border border-accent-500/20 rounded-full animate-[spin_20s_linear_reverse]"></div>
