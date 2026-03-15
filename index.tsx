@@ -298,7 +298,8 @@ const renderPage = () => {
   <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" rel="stylesheet"></noscript>
   
-  <!-- Tailwind -->
+  <!-- Tailwind: preload hint to reduce render-blocking impact -->
+  <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -634,7 +635,7 @@ const renderPage = () => {
         
         <!-- Right Column — Profile Picture -->
         <div class="relative flex items-center justify-center order-first lg:order-last mb-8 lg:mb-0">
-          <div class="relative w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 mx-auto">
+          <div class="relative w-44 h-44 sm:w-52 sm:h-52 lg:w-60 lg:h-60 xl:w-64 xl:h-64 mx-auto">
             <!-- Decorative rings -->
             <div class="absolute inset-0 border border-brand-500/30 rounded-full animate-spin-slow" style="animation-duration: 15s;"></div>
             <div class="absolute inset-4 border border-accent-500/20 rounded-full animate-[spin_20s_linear_reverse]"></div>
@@ -643,7 +644,7 @@ const renderPage = () => {
             <div class="absolute inset-6 sm:inset-8 rounded-full overflow-hidden border-4 border-slate-800/80 shadow-2xl shadow-brand-500/20 glass">
               <picture style="display:block;width:100%;height:100%;">
                 <source srcset="/assets/profile.webp" type="image/webp">
-                <img src="/assets/profile.jpg" alt="Amr Walid" width="320" height="320" fetchpriority="high" decoding="sync" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top;" />
+                <img src="/assets/profile.jpg" alt="Amr Walid" width="320" height="320" fetchpriority="high" decoding="async" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top;" />
               </picture>
             </div>
 
@@ -661,7 +662,7 @@ const renderPage = () => {
     
     <!-- Scroll Indicator -->
     <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-      <a href="#about" class="dark:text-gray-500 text-gray-400 hover:text-brand-400 transition-colors">
+      <a href="#about" aria-label="Scroll to About section" class="text-gray-500 hover:text-brand-400 transition-colors">
         <i class="fas fa-chevron-down text-xl"></i>
       </a>
     </div>
@@ -1053,7 +1054,7 @@ const renderPage = () => {
           <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center text-white font-bold text-lg">AW</div>
           <div>
             <span class="font-bold text-slate-900">Amr Walid</span>
-            <span class="block text-xs text-gray-400 font-mono">Data Engineer</span>
+            <span class="block text-xs text-gray-500 font-mono">Data Engineer</span>
           </div>
         </div>
         
@@ -1069,7 +1070,7 @@ const renderPage = () => {
           </a>
         </div>
         
-        <p class="text-sm text-gray-400">
+        <p class="text-sm text-gray-600">
           &copy; 2026 Amr Walid. Built with passion.
         </p>
       </div>
