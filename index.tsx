@@ -291,8 +291,12 @@ const renderPage = () => {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
-  <!-- Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" rel="stylesheet">
+  <!-- Security: Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https://cdn.jsdelivr.net https://avatars.githubusercontent.com; connect-src 'self';">
+
+  <!-- Icons: load async to avoid render-blocking -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" rel="stylesheet"></noscript>
   
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -546,8 +550,8 @@ const renderPage = () => {
         
         <!-- Mobile Menu Button -->
         <div class="flex items-center gap-3 md:hidden">
-          <button id="mobileMenuBtn" class="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-slate-700">
-            <i class="fas fa-bars"></i>
+          <button id="mobileMenuBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu" class="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-slate-700">
+            <i class="fas fa-bars" aria-hidden="true"></i>
           </button>
         </div>
       </div>
@@ -1042,7 +1046,7 @@ const renderPage = () => {
   </section>
 
   <!-- ============ FOOTER ============ -->
-  <footer class="dark:bg-slate-900 bg-white border-t border-gray-200 py-12">
+  <footer class="bg-white border-t border-gray-200 py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row items-center justify-between gap-6">
         <div class="flex items-center gap-3">
@@ -1054,14 +1058,14 @@ const renderPage = () => {
         </div>
         
         <div class="flex flex-wrap items-center gap-4">
-          <a href="https://github.com/Amr-Walid" target="_blank" class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-500 hover:text-brand-400 hover:bg-brand-500/10 transition-all">
-            <i class="fab fa-github"></i>
+          <a href="https://github.com/Amr-Walid" target="_blank" rel="noopener noreferrer" aria-label="Visit Amr Walid's GitHub profile" class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-500 hover:text-brand-400 hover:bg-brand-500/10 transition-all">
+            <i class="fab fa-github" aria-hidden="true"></i>
           </a>
-          <a href="https://www.linkedin.com/in/amrwalidmaher" target="_blank" class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-500 hover:text-brand-400 hover:bg-brand-500/10 transition-all">
-            <i class="fab fa-linkedin-in"></i>
+          <a href="https://www.linkedin.com/in/amrwalidmaher" target="_blank" rel="noopener noreferrer" aria-label="Visit Amr Walid's LinkedIn profile" class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-500 hover:text-brand-400 hover:bg-brand-500/10 transition-all">
+            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
           </a>
-          <a href="mailto:amr.walid2022@feps.edu.eg" class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-500 hover:text-brand-400 hover:bg-brand-500/10 transition-all">
-            <i class="fas fa-envelope"></i>
+          <a href="mailto:amr.walid2022@feps.edu.eg" aria-label="Send email to Amr Walid" class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-500 hover:text-brand-400 hover:bg-brand-500/10 transition-all">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
           </a>
         </div>
         
@@ -1098,12 +1102,12 @@ const renderPage = () => {
           });
           imageHeader = '<div class="w-full h-36 sm:h-44 lg:h-48 bg-white border-b border-gray-200 flex flex-row overflow-hidden">' + imgParts.join('') + '</div>';
         }
-        var featuredBadge = p.featured ? '<span class="ml-2 text-xs bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded-md font-bold">Featured</span>' : '';
+        var featuredBadge = p.featured ? '<span class="ml-2 text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-md font-bold">Featured</span>' : '';
         var impactItems = p.impact.map(function(item) {
-          return '<li class="flex items-start gap-2 text-sm text-gray-500"><i class="fas fa-check text-emerald-400 mt-0.5 text-xs"></i>' + item + '</li>';
+          return '<li class="flex items-start gap-2 text-sm text-gray-600"><i class="fas fa-check text-emerald-600 mt-0.5 text-xs" aria-hidden="true"></i>' + item + '</li>';
         }).join('');
         var techItems = (p.techStack || []).map(function(t) {
-          return '<span class="tag px-2.5 py-1 bg-brand-500/5 text-brand-400 text-xs rounded-lg font-mono font-medium border border-brand-500/10 cursor-default">' + t + '</span>';
+          return '<span class="tag px-2.5 py-1 bg-brand-50 text-brand-700 text-xs rounded-lg font-mono font-medium border border-brand-200 cursor-default">' + t + '</span>';
         }).join('');
         return '<div class="glass glass-light rounded-2xl overflow-hidden card-hover group project-card flex flex-col h-full" data-category="' + p.category + '">' +
           imageHeader +
@@ -1114,29 +1118,29 @@ const renderPage = () => {
                   '<i class="fas fa-' + p.image + ' text-white text-base sm:text-lg"></i>' +
                 '</div>' +
                 '<div>' +
-                  '<span class="text-xs font-bold text-brand-400 font-mono uppercase tracking-wider">' + p.category + '</span>' +
+                  '<span class="text-xs font-bold text-brand-700 font-mono uppercase tracking-wider">' + p.category + '</span>' +
                   featuredBadge +
                 '</div>' +
               '</div>' +
-              '<a href="' + p.github + '" target="_blank" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-500 hover:text-brand-400 hover:bg-brand-500/10 transition-all shrink-0">' +
-                '<i class="fab fa-github"></i>' +
+              '<a href="' + p.github + '" target="_blank" rel="noopener noreferrer" aria-label="View ' + p.title + ' source code on GitHub" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-600 hover:text-brand-700 hover:bg-brand-100 transition-all shrink-0">' +
+                '<i class="fab fa-github" aria-hidden="true"></i>' +
               '</a>' +
             '</div>' +
             '<h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-3 sm:mb-4 group-hover:text-brand-400 transition-colors">' + p.title + '</h3>' +
             '<div class="mb-3">' +
-              '<p class="text-xs font-bold text-red-400 font-mono uppercase tracking-wider mb-1">Problem</p>' +
-              '<p class="text-sm text-gray-600 leading-relaxed">' + p.problem + '</p>' +
+              '<p class="text-xs font-bold text-red-700 font-mono uppercase tracking-wider mb-1">Problem</p>' +
+              '<p class="text-sm text-gray-700 leading-relaxed">' + p.problem + '</p>' +
             '</div>' +
             '<div class="mb-3">' +
-              '<p class="text-xs font-bold text-emerald-400 font-mono uppercase tracking-wider mb-1">Solution</p>' +
-              '<p class="text-sm text-gray-600 leading-relaxed">' + p.solution + '</p>' +
+              '<p class="text-xs font-bold text-emerald-700 font-mono uppercase tracking-wider mb-1">Solution</p>' +
+              '<p class="text-sm text-gray-700 leading-relaxed">' + p.solution + '</p>' +
             '</div>' +
             '<div class="mb-3 p-3 bg-gray-50 rounded-xl border border-gray-200">' +
-              '<p class="text-xs font-bold text-purple-400 font-mono uppercase tracking-wider mb-1">Architecture</p>' +
-              '<p class="text-xs text-gray-500 font-mono leading-relaxed">' + p.architecture + '</p>' +
+              '<p class="text-xs font-bold text-purple-700 font-mono uppercase tracking-wider mb-1">Architecture</p>' +
+              '<p class="text-xs text-gray-600 font-mono leading-relaxed">' + p.architecture + '</p>' +
             '</div>' +
             '<div class="mb-4">' +
-              '<p class="text-xs font-bold text-accent-400 font-mono uppercase tracking-wider mb-2">Impact</p>' +
+              '<p class="text-xs font-bold text-sky-700 font-mono uppercase tracking-wider mb-2">Impact</p>' +
               '<ul class="space-y-1.5">' + impactItems + '</ul>' +
             '</div>' +
             '<div class="flex flex-wrap gap-2">' + techItems + '</div>' +
