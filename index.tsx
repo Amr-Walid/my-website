@@ -269,7 +269,7 @@ app.post('/api/contact', async (c) => {
 // ==================== HTML RENDERER ====================
 const renderPage = () => {
   return `<!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -489,14 +489,18 @@ const renderPage = () => {
     }
 
     @media (max-width: 768px) {
-      /* Disable heavy GPU blurs on mobile */
-      .glass, .glass-light, .dark .glass {
+      /* Disable heavy GPU blurs on mobile — use opaque light backgrounds */
+      .glass {
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
-        background: rgba(15, 23, 42, 0.85); /* Darker fallback for readability */
+        background: rgba(255, 255, 255, 0.95) !important;
+        border: 1px solid rgba(0, 0, 0, 0.08) !important;
       }
-      .light .glass, .glass-light {
-        background: rgba(255, 255, 255, 0.95);
+      .glass-light {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(255, 255, 255, 0.98) !important;
+        border: 1px solid rgba(0, 0, 0, 0.08) !important;
       }
       /* Disable expensive background animations on mobile to stop frame drops */
       .grid-bg {
@@ -563,7 +567,7 @@ const renderPage = () => {
   </nav>
 
   <!-- ============ HERO SECTION ============ -->
-  <section id="hero" class="relative min-h-screen flex items-start lg:items-center justify-center hero-gradient overflow-hidden pt-32 lg:pt-0 pb-20">
+  <section id="hero" class="relative min-h-screen flex items-start lg:items-center justify-center hero-gradient overflow-hidden pt-24 sm:pt-28 lg:pt-0 pb-20">
     <div class="grid-bg absolute inset-0 opacity-60"></div>
     
     <!-- Floating Elements -->
@@ -675,7 +679,7 @@ const renderPage = () => {
             I'm a Data Engineer based in Cairo, Egypt, with a deep focus on building and maintaining robust, scalable data pipelines. I specialize in the complete data lifecycle — from extraction and transformation to orchestration and delivery — ensuring data is not only accessible but actionable.
           </p>
           <p class="text-lg text-gray-600 leading-relaxed">
-            My expertise spans <strong class="dark:text-white text-slate-900">ETL/ELT design</strong>, <strong class="dark:text-white text-slate-900">data modeling</strong>, <strong class="dark:text-white text-slate-900">workflow automation</strong>, and <strong class="dark:text-white text-slate-900">cloud-native data architectures</strong>. I combine strong engineering fundamentals with analytical thinking to build systems that turn raw data into strategic business assets.
+            My expertise spans <strong class="text-slate-900">ETL/ELT design</strong>, <strong class="text-slate-900">data modeling</strong>, <strong class="text-slate-900">workflow automation</strong>, and <strong class="text-slate-900">cloud-native data architectures</strong>. I combine strong engineering fundamentals with analytical thinking to build systems that turn raw data into strategic business assets.
           </p>
           <p class="text-lg text-gray-600 leading-relaxed">
             Currently studying Economics at Cairo University's Faculty of Economics & Political Science, I bring a unique perspective that bridges quantitative analysis with modern data infrastructure engineering.
