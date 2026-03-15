@@ -567,7 +567,7 @@ const renderPage = () => {
   </nav>
 
   <!-- ============ HERO SECTION ============ -->
-  <section id="hero" class="relative min-h-screen flex items-start lg:items-center justify-center hero-gradient overflow-hidden pt-24 sm:pt-28 lg:pt-0 pb-20">
+  <section id="hero" class="relative min-h-screen flex items-start lg:items-center justify-center hero-gradient overflow-hidden pt-24 sm:pt-28 lg:pt-32 pb-20">
     <div class="grid-bg absolute inset-0 opacity-60"></div>
     
     <!-- Floating Elements -->
