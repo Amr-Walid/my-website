@@ -66,6 +66,7 @@ const portfolioData = {
       category: "Data Engineering",
       featured: true,
       image: "chart-line",
+      imageUrl: "assets/project-etl.png",
       problem: "Cryptocurrency markets generate massive volumes of real-time price data across multiple exchanges. Manually tracking and recording this data for historical analysis is unreliable, inconsistent, and doesn't scale.",
       solution: "Designed and built a fully automated, cloud-hosted ETL pipeline that extracts live cryptocurrency market data from the CoinGecko API, transforms it using Python and Pandas into a structured schema, and loads it into a continuously growing time-series CSV dataset — all orchestrated by GitHub Actions running on an hourly cron schedule.",
       architecture: "CoinGecko API → Python (requests) → Pandas Transform → CSV Append → GitHub Actions (hourly cron) → Auto-commit to Repository",
@@ -85,6 +86,7 @@ const portfolioData = {
       category: "Data Engineering",
       featured: true,
       image: "database",
+      imageUrl: "assets/project-workflow.png",
       problem: "ETL processes often break due to environment inconsistencies between development, testing, and production. Dependencies, database connections, and configurations differ across machines, making pipelines fragile.",
       solution: "Built a containerized ETL pipeline using Docker and Docker Compose that packages the entire data workflow — extraction, transformation, and loading into PostgreSQL — into reproducible, isolated containers. A single command spins up the full environment.",
       architecture: "Source Data → Python ETL Container → Transform Layer → PostgreSQL Container → Docker Compose Orchestration",
@@ -104,6 +106,7 @@ const portfolioData = {
       category: "Data Analysis",
       featured: true,
       image: "chart-bar",
+      imageUrls: ["assets/project-sales.png", "assets/project-sales-new.png"],
       problem: "A global manufacturing company had thousands of rows of unstructured sales data across multiple dimensions — products, customers, geography, and time — with no unified view for executive decision-making.",
       solution: "Designed and built a comprehensive interactive Excel dashboard using the AdventureWorks dataset. Applied Power Query for data cleaning, built a multi-table data model with proper relationships, and created dynamic PivotTable reports with slicers and timelines for self-service analytics.",
       architecture: "Raw Data → Power Query (Clean & Transform) → Data Model (Relationships) → PivotTables → Interactive Dashboard (Slicers, Timelines, Charts)",
@@ -266,7 +269,7 @@ app.post('/api/contact', async (c) => {
 // ==================== HTML RENDERER ====================
 const renderPage = () => {
   return `<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -367,15 +370,15 @@ const renderPage = () => {
     
     .glass {
       background: rgba(15, 23, 42, 0.6);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(59, 143, 255, 0.1);
     }
     
     .glass-light {
       background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(0, 0, 0, 0.08);
     }
     
@@ -402,8 +405,15 @@ const renderPage = () => {
       transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
+    @keyframes flow {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 0% 100%; }
+    }
+    
     .pipeline-line {
-      background: linear-gradient(180deg, #3b8fff, #38bdf8, #818cf8);
+      background: linear-gradient(180deg, #3b8fff, #38bdf8, #818cf8, #3b8fff);
+      background-size: 100% 200%;
+      animation: flow 3s linear infinite;
     }
     
     .glow {
@@ -420,8 +430,8 @@ const renderPage = () => {
 
     [data-animate] {
       opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateY(40px);
+      transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
     [data-animate].visible {
       opacity: 1;
@@ -464,11 +474,10 @@ const renderPage = () => {
     }
   </style>
 </head>
-<body class="dark bg-slate-950 text-gray-100 font-sans antialiased transition-colors duration-500">
+<body class="bg-white text-slate-900 font-sans antialiased transition-colors duration-500">
   
   <!-- ============ NAVIGATION ============ -->
-  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-2">
       <div class="flex items-center justify-between h-16 lg:h-20">
         <!-- Logo -->
         <a href="#hero" class="flex items-center gap-3 group">
@@ -476,36 +485,26 @@ const renderPage = () => {
             AW
           </div>
           <div class="hidden sm:block">
-            <span class="font-bold text-lg dark:text-white text-slate-900">Amr Walid</span>
+            <span class="font-bold text-lg text-slate-900">Amr Walid</span>
             <span class="block text-xs text-brand-400 font-mono -mt-0.5">Data Engineer</span>
           </div>
         </a>
         
         <!-- Desktop Nav -->
         <div class="hidden md:flex items-center gap-1">
-          <a href="#about" class="nav-link px-4 py-2 text-sm font-medium dark:text-gray-300 text-gray-600 hover:text-brand-400 transition-colors">About</a>
-          <a href="#skills" class="nav-link px-4 py-2 text-sm font-medium dark:text-gray-300 text-gray-600 hover:text-brand-400 transition-colors">Skills</a>
-          <a href="#projects" class="nav-link px-4 py-2 text-sm font-medium dark:text-gray-300 text-gray-600 hover:text-brand-400 transition-colors">Projects</a>
-          <a href="#experience" class="nav-link px-4 py-2 text-sm font-medium dark:text-gray-300 text-gray-600 hover:text-brand-400 transition-colors">Experience</a>
-          <a href="#certifications" class="nav-link px-4 py-2 text-sm font-medium dark:text-gray-300 text-gray-600 hover:text-brand-400 transition-colors">Certifications</a>
-          <a href="#blog" class="nav-link px-4 py-2 text-sm font-medium dark:text-gray-300 text-gray-600 hover:text-brand-400 transition-colors">Blog</a>
+          <a href="#about" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-400 transition-colors">About</a>
+          <a href="#projects" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-400 transition-colors">Projects</a>
+          <a href="#experience" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-400 transition-colors">Experience</a>
+          <a href="#certifications" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-400 transition-colors">Certifications</a>
+          <a href="#blog" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-400 transition-colors">Blog</a>
           <a href="#contact" class="ml-4 px-5 py-2.5 bg-gradient-to-r from-brand-600 to-accent-500 text-white text-sm font-semibold rounded-xl hover:shadow-lg hover:shadow-brand-500/25 transition-all hover:-translate-y-0.5">
             Let's Talk
           </a>
-          <!-- Theme Toggle -->
-          <button id="themeToggle" class="ml-3 w-10 h-10 rounded-xl dark:bg-slate-800 bg-gray-200 flex items-center justify-center dark:text-yellow-400 text-slate-700 hover:scale-110 transition-all" title="Toggle theme">
-            <i class="fas fa-sun text-sm dark:block hidden"></i>
-            <i class="fas fa-moon text-sm dark:hidden block"></i>
-          </button>
         </div>
         
         <!-- Mobile Menu Button -->
         <div class="flex items-center gap-3 md:hidden">
-          <button id="themeToggleMobile" class="w-10 h-10 rounded-xl dark:bg-slate-800 bg-gray-200 flex items-center justify-center dark:text-yellow-400 text-slate-700">
-            <i class="fas fa-sun text-sm dark:block hidden"></i>
-            <i class="fas fa-moon text-sm dark:hidden block"></i>
-          </button>
-          <button id="mobileMenuBtn" class="w-10 h-10 rounded-xl dark:bg-slate-800 bg-gray-200 flex items-center justify-center dark:text-white text-slate-700">
+          <button id="mobileMenuBtn" class="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-slate-700">
             <i class="fas fa-bars"></i>
           </button>
         </div>
@@ -513,21 +512,20 @@ const renderPage = () => {
     </div>
     
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden md:hidden glass dark:glass glass-light animate-slide-down">
+    <div id="mobileMenu" class="hidden md:hidden glass glass-light animate-slide-down">
       <div class="px-4 py-6 space-y-1">
-        <a href="#about" class="block px-4 py-3 rounded-xl dark:text-gray-300 text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">About</a>
-        <a href="#skills" class="block px-4 py-3 rounded-xl dark:text-gray-300 text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Skills</a>
-        <a href="#projects" class="block px-4 py-3 rounded-xl dark:text-gray-300 text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Projects</a>
-        <a href="#experience" class="block px-4 py-3 rounded-xl dark:text-gray-300 text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Experience</a>
-        <a href="#certifications" class="block px-4 py-3 rounded-xl dark:text-gray-300 text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Certifications</a>
-        <a href="#blog" class="block px-4 py-3 rounded-xl dark:text-gray-300 text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Blog</a>
+        <a href="#about" class="block px-4 py-3 rounded-xl text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">About</a>
+        <a href="#projects" class="block px-4 py-3 rounded-xl text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Projects</a>
+        <a href="#experience" class="block px-4 py-3 rounded-xl text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Experience</a>
+        <a href="#certifications" class="block px-4 py-3 rounded-xl text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Certifications</a>
+        <a href="#blog" class="block px-4 py-3 rounded-xl text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Blog</a>
         <a href="#contact" class="block px-4 py-3 mt-4 bg-gradient-to-r from-brand-600 to-accent-500 text-white text-center rounded-xl font-semibold">Let's Talk</a>
       </div>
     </div>
   </nav>
 
   <!-- ============ HERO SECTION ============ -->
-  <section id="hero" class="relative min-h-screen flex items-center justify-center hero-gradient dark:hero-gradient overflow-hidden">
+  <section id="hero" class="relative min-h-screen flex items-center justify-center hero-gradient overflow-hidden pt-24 lg:pt-32">
     <div class="grid-bg absolute inset-0 opacity-60"></div>
     
     <!-- Floating Elements -->
@@ -535,30 +533,30 @@ const renderPage = () => {
     <div class="absolute top-1/3 right-20 w-2 h-2 bg-accent-400 rounded-full animate-float opacity-30" style="animation-delay: 2s"></div>
     <div class="absolute bottom-1/3 left-1/4 w-4 h-4 bg-brand-400/20 rounded-full animate-float" style="animation-delay: 4s"></div>
     
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-0">
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <!-- Left Column -->
         <div class="space-y-8 animate-slide-up">
           <!-- Status Badge -->
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full dark:bg-brand-500/10 bg-brand-500/5 border dark:border-brand-500/20 border-brand-500/10">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-500/5 border border-brand-500/10">
             <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
-            <span class="text-sm font-medium dark:text-brand-300 text-brand-600">Open to Opportunities</span>
+            <span class="text-sm font-medium text-brand-600">Open to Opportunities</span>
           </div>
           
           <!-- Heading -->
           <div>
-            <p class="text-lg sm:text-xl dark:text-gray-400 text-gray-500 font-medium mb-3">Hi, I'm</p>
-            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black leading-tight">
-              <span class="dark:text-white text-slate-900">Amr</span>
+            <p class="text-lg sm:text-xl text-gray-500 font-medium mb-3">Hi, I'm</p>
+            <h1 class="text-[clamp(2.75rem,9vw,4.5rem)] sm:text-6xl lg:text-7xl font-black leading-tight tracking-tight whitespace-nowrap">
+              <span class="text-slate-900">Amr</span>
               <span class="gradient-text"> Walid</span>
             </h1>
-            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold dark:text-gray-300 text-gray-700 mt-3">
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-700 mt-3">
               Data Engineer
             </h2>
           </div>
           
           <!-- Tagline -->
-          <p class="text-lg sm:text-xl dark:text-gray-400 text-gray-500 leading-relaxed max-w-xl">
+          <p class="text-lg sm:text-xl text-gray-500 leading-relaxed max-w-xl">
             I build <span class="text-brand-400 font-semibold">scalable data pipelines</span>, 
             <span class="text-accent-400 font-semibold">automation systems</span>, and 
             <span class="text-purple-400 font-semibold">analytics infrastructure</span> 
@@ -567,12 +565,12 @@ const renderPage = () => {
           
           <!-- Tech Tags -->
           <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1.5 rounded-lg dark:bg-slate-800/80 bg-gray-100 dark:text-gray-300 text-gray-600 text-sm font-mono border dark:border-slate-700 border-gray-200">Python</span>
-            <span class="px-3 py-1.5 rounded-lg dark:bg-slate-800/80 bg-gray-100 dark:text-gray-300 text-gray-600 text-sm font-mono border dark:border-slate-700 border-gray-200">SQL</span>
-            <span class="px-3 py-1.5 rounded-lg dark:bg-slate-800/80 bg-gray-100 dark:text-gray-300 text-gray-600 text-sm font-mono border dark:border-slate-700 border-gray-200">Spark</span>
-            <span class="px-3 py-1.5 rounded-lg dark:bg-slate-800/80 bg-gray-100 dark:text-gray-300 text-gray-600 text-sm font-mono border dark:border-slate-700 border-gray-200">Docker</span>
-            <span class="px-3 py-1.5 rounded-lg dark:bg-slate-800/80 bg-gray-100 dark:text-gray-300 text-gray-600 text-sm font-mono border dark:border-slate-700 border-gray-200">Airflow</span>
-            <span class="px-3 py-1.5 rounded-lg dark:bg-slate-800/80 bg-gray-100 dark:text-gray-300 text-gray-600 text-sm font-mono border dark:border-slate-700 border-gray-200">Power BI</span>
+            <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">Python</span>
+            <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">SQL</span>
+            <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">Spark</span>
+            <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">Docker</span>
+            <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">Airflow</span>
+            <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">Power BI</span>
           </div>
           
           <!-- CTAs -->
@@ -581,100 +579,35 @@ const renderPage = () => {
               View My Work
               <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
             </a>
-            <a href="https://github.com/Amr-Walid" target="_blank" class="px-7 py-3.5 dark:bg-slate-800 bg-white border dark:border-slate-700 border-gray-200 dark:text-gray-300 text-gray-700 font-semibold rounded-2xl hover:border-brand-500/50 transition-all hover:-translate-y-1 flex items-center gap-2 shadow-sm">
+            <a href="https://github.com/Amr-Walid" target="_blank" class="px-7 py-3.5 bg-white border border-gray-200 text-gray-700 font-semibold rounded-2xl hover:border-brand-500/50 transition-all hover:-translate-y-1 flex items-center gap-2 shadow-sm">
               <i class="fab fa-github"></i>
               GitHub
             </a>
-            <a href="https://www.linkedin.com/in/amrwalidmaher" target="_blank" class="px-7 py-3.5 dark:bg-slate-800 bg-white border dark:border-slate-700 border-gray-200 dark:text-gray-300 text-gray-700 font-semibold rounded-2xl hover:border-brand-500/50 transition-all hover:-translate-y-1 flex items-center gap-2 shadow-sm">
+            <a href="https://www.linkedin.com/in/amrwalidmaher" target="_blank" class="px-7 py-3.5 bg-white border border-gray-200 text-gray-700 font-semibold rounded-2xl hover:border-brand-500/50 transition-all hover:-translate-y-1 flex items-center gap-2 shadow-sm">
               <i class="fab fa-linkedin"></i>
               LinkedIn
             </a>
           </div>
         </div>
         
-        <!-- Right Column — Pipeline Visualization -->
-        <div class="hidden lg:block relative">
-          <div class="relative w-full max-w-md mx-auto">
-            <!-- Pipeline Visual -->
-            <div class="space-y-4">
-              <!-- Source -->
-              <div class="glass rounded-2xl p-5 glow card-hover">
-                <div class="flex items-center gap-4">
-                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center">
-                    <i class="fas fa-database text-white text-lg"></i>
-                  </div>
-                  <div>
-                    <p class="font-semibold dark:text-white text-slate-900">Extract</p>
-                    <p class="text-sm dark:text-gray-400 text-gray-500 font-mono">APIs, Databases, Files</p>
-                  </div>
-                  <div class="ml-auto">
-                    <span class="w-2 h-2 bg-emerald-400 rounded-full inline-block animate-pulse"></span>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Arrow -->
-              <div class="flex justify-center">
-                <div class="w-0.5 h-8 pipeline-line rounded-full"></div>
-              </div>
-              
-              <!-- Transform -->
-              <div class="glass rounded-2xl p-5 glow card-hover ml-8">
-                <div class="flex items-center gap-4">
-                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center">
-                    <i class="fas fa-cogs text-white text-lg"></i>
-                  </div>
-                  <div>
-                    <p class="font-semibold dark:text-white text-slate-900">Transform</p>
-                    <p class="text-sm dark:text-gray-400 text-gray-500 font-mono">Python, Spark, dbt</p>
-                  </div>
-                  <div class="ml-auto">
-                    <span class="w-2 h-2 bg-brand-400 rounded-full inline-block animate-pulse" style="animation-delay: 0.5s"></span>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Arrow -->
-              <div class="flex justify-center ml-8">
-                <div class="w-0.5 h-8 pipeline-line rounded-full"></div>
-              </div>
-              
-              <!-- Load -->
-              <div class="glass rounded-2xl p-5 glow card-hover ml-16">
-                <div class="flex items-center gap-4">
-                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center">
-                    <i class="fas fa-warehouse text-white text-lg"></i>
-                  </div>
-                  <div>
-                    <p class="font-semibold dark:text-white text-slate-900">Load</p>
-                    <p class="text-sm dark:text-gray-400 text-gray-500 font-mono">BigQuery, Redshift, DW</p>
-                  </div>
-                  <div class="ml-auto">
-                    <span class="w-2 h-2 bg-purple-400 rounded-full inline-block animate-pulse" style="animation-delay: 1s"></span>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Arrow -->
-              <div class="flex justify-center ml-16">
-                <div class="w-0.5 h-8 pipeline-line rounded-full"></div>
-              </div>
-              
-              <!-- Deliver -->
-              <div class="glass rounded-2xl p-5 glow card-hover ml-8">
-                <div class="flex items-center gap-4">
-                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-accent-500 to-accent-600 flex items-center justify-center">
-                    <i class="fas fa-chart-line text-white text-lg"></i>
-                  </div>
-                  <div>
-                    <p class="font-semibold dark:text-white text-slate-900">Deliver</p>
-                    <p class="text-sm dark:text-gray-400 text-gray-500 font-mono">Dashboards & Insights</p>
-                  </div>
-                  <div class="ml-auto">
-                    <span class="w-2 h-2 bg-accent-400 rounded-full inline-block animate-pulse" style="animation-delay: 1.5s"></span>
-                  </div>
-                </div>
-              </div>
+        <!-- Right Column — Profile Picture -->
+        <div class="hidden lg:block relative flex items-center justify-center">
+          <div class="relative w-72 h-72 xl:w-80 xl:h-80 mx-auto">
+            <!-- Decorative rings -->
+            <div class="absolute inset-0 border border-brand-500/30 rounded-full animate-spin-slow" style="animation-duration: 15s;"></div>
+            <div class="absolute inset-4 border border-accent-500/20 rounded-full animate-[spin_20s_linear_reverse]"></div>
+            
+            <!-- Profile Image Container -->
+            <div class="absolute inset-8 rounded-full overflow-hidden border-4 border-slate-800/80 shadow-2xl shadow-brand-500/20 glass">
+              <img src="/assets/profile.jpg" alt="Amr Walid" class="w-full h-full object-cover object-[center_top]" />
+            </div>
+
+            <!-- Floating tech icons -->
+            <div class="absolute top-0 right-10 w-12 h-12 bg-slate-800 rounded-xl shadow-lg flex items-center justify-center animate-float border border-slate-700 p-2">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-full h-full" />
+            </div>
+            <div class="absolute bottom-10 left-0 w-12 h-12 bg-slate-800 rounded-xl shadow-lg flex items-center justify-center animate-float border border-slate-700 p-2" style="animation-delay: 1.5s;">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" class="w-full h-full" />
             </div>
           </div>
         </div>
@@ -690,145 +623,45 @@ const renderPage = () => {
   </section>
 
   <!-- ============ ABOUT SECTION ============ -->
-  <section id="about" class="py-24 lg:py-32 dark:bg-slate-900/50 bg-gray-50/50">
+  <section id="about" class="py-24 lg:py-32 bg-gray-50/50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-5 gap-16 items-start" data-animate>
         <div class="lg:col-span-3 space-y-6">
           <div>
             <p class="text-brand-400 font-mono text-sm font-semibold mb-2 tracking-wider uppercase">// About Me</p>
-            <h2 class="text-4xl lg:text-5xl font-bold dark:text-white text-slate-900">
+            <h2 class="text-4xl lg:text-5xl font-bold text-slate-900">
               Turning Raw Data Into
               <span class="gradient-text"> Strategic Assets</span>
             </h2>
           </div>
-          <p class="text-lg dark:text-gray-400 text-gray-600 leading-relaxed">
+          <p class="text-lg text-gray-600 leading-relaxed">
             I'm a Data Engineer based in Cairo, Egypt, with a deep focus on building and maintaining robust, scalable data pipelines. I specialize in the complete data lifecycle — from extraction and transformation to orchestration and delivery — ensuring data is not only accessible but actionable.
           </p>
-          <p class="text-lg dark:text-gray-400 text-gray-600 leading-relaxed">
+          <p class="text-lg text-gray-600 leading-relaxed">
             My expertise spans <strong class="dark:text-white text-slate-900">ETL/ELT design</strong>, <strong class="dark:text-white text-slate-900">data modeling</strong>, <strong class="dark:text-white text-slate-900">workflow automation</strong>, and <strong class="dark:text-white text-slate-900">cloud-native data architectures</strong>. I combine strong engineering fundamentals with analytical thinking to build systems that turn raw data into strategic business assets.
           </p>
-          <p class="text-lg dark:text-gray-400 text-gray-600 leading-relaxed">
+          <p class="text-lg text-gray-600 leading-relaxed">
             Currently studying Economics at Cairo University's Faculty of Economics & Political Science, I bring a unique perspective that bridges quantitative analysis with modern data infrastructure engineering.
           </p>
         </div>
         
         <!-- Stats -->
         <div class="lg:col-span-2 grid grid-cols-2 gap-4">
-          <div class="glass dark:glass glass-light rounded-2xl p-6 text-center card-hover">
+          <div class="glass glass-light rounded-2xl p-6 text-center card-hover">
             <div class="text-3xl font-black gradient-text">5+</div>
-            <div class="text-sm dark:text-gray-400 text-gray-500 mt-1 font-medium">Data Projects</div>
+            <div class="text-sm text-gray-500 mt-1 font-medium">Data Projects</div>
           </div>
-          <div class="glass dark:glass glass-light rounded-2xl p-6 text-center card-hover">
+          <div class="glass glass-light rounded-2xl p-6 text-center card-hover">
             <div class="text-3xl font-black gradient-text">10+</div>
-            <div class="text-sm dark:text-gray-400 text-gray-500 mt-1 font-medium">Technologies</div>
+            <div class="text-sm text-gray-500 mt-1 font-medium">Technologies</div>
           </div>
-          <div class="glass dark:glass glass-light rounded-2xl p-6 text-center card-hover">
+          <div class="glass glass-light rounded-2xl p-6 text-center card-hover">
             <div class="text-3xl font-black gradient-text">3+</div>
-            <div class="text-sm dark:text-gray-400 text-gray-500 mt-1 font-medium">ETL Pipelines</div>
+            <div class="text-sm text-gray-500 mt-1 font-medium">ETL Pipelines</div>
           </div>
-          <div class="glass dark:glass glass-light rounded-2xl p-6 text-center card-hover">
+          <div class="glass glass-light rounded-2xl p-6 text-center card-hover">
             <div class="text-3xl font-black gradient-text">1</div>
-            <div class="text-sm dark:text-gray-400 text-gray-500 mt-1 font-medium">Certification</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SKILLS SECTION ============ -->
-  <section id="skills" class="py-24 lg:py-32">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16" data-animate>
-        <p class="text-brand-400 font-mono text-sm font-semibold mb-2 tracking-wider uppercase">// Technical Skills</p>
-        <h2 class="text-4xl lg:text-5xl font-bold dark:text-white text-slate-900">
-          My <span class="gradient-text">Tech Stack</span>
-        </h2>
-        <p class="mt-4 text-lg dark:text-gray-400 text-gray-500 max-w-2xl mx-auto">The modern data stack I use to build end-to-end data solutions.</p>
-      </div>
-      
-      <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6" data-animate>
-        <!-- Data Engineering -->
-        <div class="glass dark:glass glass-light rounded-2xl p-6 card-hover">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center">
-              <i class="fas fa-stream text-white"></i>
-            </div>
-            <h3 class="font-bold text-lg dark:text-white text-slate-900">Data Engineering</h3>
-          </div>
-          <div class="space-y-4">
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">ETL/ELT Pipeline Design</span><span class="text-xs text-brand-400 font-mono">90%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 90%"></div></div></div>
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">Data Modeling</span><span class="text-xs text-brand-400 font-mono">85%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 85%"></div></div></div>
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">Data Warehousing</span><span class="text-xs text-brand-400 font-mono">85%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 85%"></div></div></div>
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">Workflow Orchestration</span><span class="text-xs text-brand-400 font-mono">80%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 80%"></div></div></div>
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">Data Quality & Testing</span><span class="text-xs text-brand-400 font-mono">80%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 80%"></div></div></div>
-          </div>
-        </div>
-        
-        <!-- Languages -->
-        <div class="glass dark:glass glass-light rounded-2xl p-6 card-hover">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center">
-              <i class="fas fa-code text-white"></i>
-            </div>
-            <h3 class="font-bold text-lg dark:text-white text-slate-900">Languages & Frameworks</h3>
-          </div>
-          <div class="space-y-4">
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">Python</span><span class="text-xs text-brand-400 font-mono">92%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 92%"></div></div></div>
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">SQL</span><span class="text-xs text-brand-400 font-mono">90%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 90%"></div></div></div>
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">Pandas</span><span class="text-xs text-brand-400 font-mono">90%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 90%"></div></div></div>
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">PySpark</span><span class="text-xs text-brand-400 font-mono">80%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 80%"></div></div></div>
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">Bash / Shell</span><span class="text-xs text-brand-400 font-mono">75%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 75%"></div></div></div>
-          </div>
-        </div>
-        
-        <!-- Cloud & Infrastructure -->
-        <div class="glass dark:glass glass-light rounded-2xl p-6 card-hover">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center">
-              <i class="fas fa-cloud text-white"></i>
-            </div>
-            <h3 class="font-bold text-lg dark:text-white text-slate-900">Cloud & Infrastructure</h3>
-          </div>
-          <div class="space-y-4">
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">Docker</span><span class="text-xs text-brand-400 font-mono">85%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 85%"></div></div></div>
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">GitHub Actions (CI/CD)</span><span class="text-xs text-brand-400 font-mono">88%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 88%"></div></div></div>
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">Google BigQuery</span><span class="text-xs text-brand-400 font-mono">80%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 80%"></div></div></div>
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">AWS Redshift</span><span class="text-xs text-brand-400 font-mono">75%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 75%"></div></div></div>
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">Microsoft Fabric</span><span class="text-xs text-brand-400 font-mono">70%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 70%"></div></div></div>
-          </div>
-        </div>
-        
-        <!-- Data Platforms -->
-        <div class="glass dark:glass glass-light rounded-2xl p-6 card-hover">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
-              <i class="fas fa-server text-white"></i>
-            </div>
-            <h3 class="font-bold text-lg dark:text-white text-slate-900">Data Platforms & Tools</h3>
-          </div>
-          <div class="space-y-4">
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">Apache Airflow</span><span class="text-xs text-brand-400 font-mono">80%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 80%"></div></div></div>
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">Apache Spark</span><span class="text-xs text-brand-400 font-mono">78%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 78%"></div></div></div>
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">dbt</span><span class="text-xs text-brand-400 font-mono">75%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 75%"></div></div></div>
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">PostgreSQL</span><span class="text-xs text-brand-400 font-mono">85%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 85%"></div></div></div>
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">Git & Version Control</span><span class="text-xs text-brand-400 font-mono">92%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 92%"></div></div></div>
-          </div>
-        </div>
-        
-        <!-- BI & Visualization -->
-        <div class="glass dark:glass glass-light rounded-2xl p-6 card-hover md:col-span-2 xl:col-span-2">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-accent-500 to-accent-600 flex items-center justify-center">
-              <i class="fas fa-chart-pie text-white"></i>
-            </div>
-            <h3 class="font-bold text-lg dark:text-white text-slate-900">BI & Visualization</h3>
-          </div>
-          <div class="grid sm:grid-cols-2 gap-x-8 gap-y-4">
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">Power BI</span><span class="text-xs text-brand-400 font-mono">88%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 88%"></div></div></div>
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">Tableau</span><span class="text-xs text-brand-400 font-mono">78%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 78%"></div></div></div>
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">Looker Studio</span><span class="text-xs text-brand-400 font-mono">75%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 75%"></div></div></div>
-            <div><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">Excel (Advanced)</span><span class="text-xs text-brand-400 font-mono">90%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 90%"></div></div></div>
-            <div class="sm:col-span-2"><div class="flex justify-between mb-1"><span class="text-sm dark:text-gray-300 text-gray-600 font-medium">Power Query</span><span class="text-xs text-brand-400 font-mono">88%</span></div><div class="h-2 dark:bg-slate-700 bg-gray-200 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full" style="width: 88%"></div></div></div>
+            <div class="text-sm text-gray-500 mt-1 font-medium">Certification</div>
           </div>
         </div>
       </div>
@@ -836,14 +669,14 @@ const renderPage = () => {
   </section>
 
   <!-- ============ PROJECTS SECTION ============ -->
-  <section id="projects" class="py-24 lg:py-32 dark:bg-slate-900/50 bg-gray-50/50">
+  <section id="projects" class="py-24 lg:py-32 bg-gray-50/50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16" data-animate>
         <p class="text-brand-400 font-mono text-sm font-semibold mb-2 tracking-wider uppercase">// Featured Work</p>
-        <h2 class="text-4xl lg:text-5xl font-bold dark:text-white text-slate-900">
+        <h2 class="text-4xl lg:text-5xl font-bold text-slate-900">
           Project <span class="gradient-text">Case Studies</span>
         </h2>
-        <p class="mt-4 text-lg dark:text-gray-400 text-gray-500 max-w-2xl mx-auto">Real-world data engineering projects with documented architectures, tech decisions, and measurable impact.</p>
+        <p class="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">Real-world data engineering projects with documented architectures, tech decisions, and measurable impact.</p>
       </div>
       
       <!-- Project Filter -->
@@ -866,7 +699,7 @@ const renderPage = () => {
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16" data-animate>
         <p class="text-brand-400 font-mono text-sm font-semibold mb-2 tracking-wider uppercase">// Career Path</p>
-        <h2 class="text-4xl lg:text-5xl font-bold dark:text-white text-slate-900">
+        <h2 class="text-4xl lg:text-5xl font-bold text-slate-900">
           Experience <span class="gradient-text">Timeline</span>
         </h2>
       </div>
@@ -882,19 +715,19 @@ const renderPage = () => {
               <i class="fas fa-database text-white text-xl"></i>
             </div>
           </div>
-          <div class="flex-1 glass dark:glass glass-light rounded-2xl p-6 lg:p-8 card-hover">
+          <div class="flex-1 glass glass-light rounded-2xl p-6 lg:p-8 card-hover">
             <div class="flex flex-wrap items-center gap-3 mb-3">
               <span class="px-3 py-1 bg-brand-500/10 text-brand-400 text-xs font-bold rounded-lg">2024 — Present</span>
               <span class="sm:hidden w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center"><i class="fas fa-database text-white text-sm"></i></span>
             </div>
-            <h3 class="text-xl font-bold dark:text-white text-slate-900 mb-1">Junior Data Engineer</h3>
+            <h3 class="text-xl font-bold text-slate-900 mb-1">Junior Data Engineer</h3>
             <p class="text-brand-400 font-medium text-sm mb-4">Self-Directed Professional Development</p>
             <p class="dark:text-gray-400 text-gray-600 mb-4">Building production-grade data engineering projects focused on ETL pipeline design, containerization, workflow automation, and cloud-native data architectures.</p>
             <ul class="space-y-2">
-              <li class="flex items-start gap-2 text-sm dark:text-gray-400 text-gray-500"><i class="fas fa-check text-emerald-400 mt-1"></i>Designed automated ETL pipelines with CI/CD using GitHub Actions</li>
-              <li class="flex items-start gap-2 text-sm dark:text-gray-400 text-gray-500"><i class="fas fa-check text-emerald-400 mt-1"></i>Built containerized data workflows with Docker and PostgreSQL</li>
-              <li class="flex items-start gap-2 text-sm dark:text-gray-400 text-gray-500"><i class="fas fa-check text-emerald-400 mt-1"></i>Implemented data modeling and BI solutions with Power BI & Excel</li>
-              <li class="flex items-start gap-2 text-sm dark:text-gray-400 text-gray-500"><i class="fas fa-check text-emerald-400 mt-1"></i>Preparing for Microsoft DP-700 (Fabric Data Engineer) certification</li>
+              <li class="flex items-start gap-2 text-sm text-gray-500"><i class="fas fa-check text-emerald-400 mt-1"></i>Designed automated ETL pipelines with CI/CD using GitHub Actions</li>
+              <li class="flex items-start gap-2 text-sm text-gray-500"><i class="fas fa-check text-emerald-400 mt-1"></i>Built containerized data workflows with Docker and PostgreSQL</li>
+              <li class="flex items-start gap-2 text-sm text-gray-500"><i class="fas fa-check text-emerald-400 mt-1"></i>Implemented data modeling and BI solutions with Power BI & Excel</li>
+              <li class="flex items-start gap-2 text-sm text-gray-500"><i class="fas fa-check text-emerald-400 mt-1"></i>Preparing for Microsoft DP-700 (Fabric Data Engineer) certification</li>
             </ul>
           </div>
         </div>
@@ -906,18 +739,18 @@ const renderPage = () => {
               <i class="fas fa-graduation-cap text-white text-xl"></i>
             </div>
           </div>
-          <div class="flex-1 glass dark:glass glass-light rounded-2xl p-6 lg:p-8 card-hover">
+          <div class="flex-1 glass glass-light rounded-2xl p-6 lg:p-8 card-hover">
             <div class="flex flex-wrap items-center gap-3 mb-3">
               <span class="px-3 py-1 bg-purple-500/10 text-purple-400 text-xs font-bold rounded-lg">2022 — Present</span>
               <span class="sm:hidden w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center"><i class="fas fa-graduation-cap text-white text-sm"></i></span>
             </div>
-            <h3 class="text-xl font-bold dark:text-white text-slate-900 mb-1">Economics Student — Data Engineering Focus</h3>
+            <h3 class="text-xl font-bold text-slate-900 mb-1">Economics Student — Data Engineering Focus</h3>
             <p class="text-purple-400 font-medium text-sm mb-4">Faculty of Economics & Political Science, Cairo University</p>
             <p class="dark:text-gray-400 text-gray-600 mb-4">Pursuing an economics degree with a self-directed specialization in data engineering. Bridging quantitative economic analysis with modern data infrastructure skills.</p>
             <ul class="space-y-2">
-              <li class="flex items-start gap-2 text-sm dark:text-gray-400 text-gray-500"><i class="fas fa-check text-emerald-400 mt-1"></i>Applied statistical analysis to economic datasets</li>
-              <li class="flex items-start gap-2 text-sm dark:text-gray-400 text-gray-500"><i class="fas fa-check text-emerald-400 mt-1"></i>Self-taught Python, SQL, and the modern data stack</li>
-              <li class="flex items-start gap-2 text-sm dark:text-gray-400 text-gray-500"><i class="fas fa-check text-emerald-400 mt-1"></i>Built data-driven projects bridging economics and engineering</li>
+              <li class="flex items-start gap-2 text-sm text-gray-500"><i class="fas fa-check text-emerald-400 mt-1"></i>Applied statistical analysis to economic datasets</li>
+              <li class="flex items-start gap-2 text-sm text-gray-500"><i class="fas fa-check text-emerald-400 mt-1"></i>Self-taught Python, SQL, and the modern data stack</li>
+              <li class="flex items-start gap-2 text-sm text-gray-500"><i class="fas fa-check text-emerald-400 mt-1"></i>Built data-driven projects bridging economics and engineering</li>
             </ul>
           </div>
         </div>
@@ -926,42 +759,27 @@ const renderPage = () => {
   </section>
 
   <!-- ============ CERTIFICATIONS SECTION ============ -->
-  <section id="certifications" class="py-24 lg:py-32 dark:bg-slate-900/50 bg-gray-50/50">
+  <section id="certifications" class="py-24 lg:py-32 bg-gray-50/50">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16" data-animate>
         <p class="text-brand-400 font-mono text-sm font-semibold mb-2 tracking-wider uppercase">// Credentials</p>
-        <h2 class="text-4xl lg:text-5xl font-bold dark:text-white text-slate-900">
+        <h2 class="text-4xl lg:text-5xl font-bold text-slate-900">
           Certifications & <span class="gradient-text">Learning</span>
         </h2>
       </div>
       
       <div class="space-y-6" data-animate>
-        <!-- Cert 1 -->
-        <div class="glass dark:glass glass-light rounded-2xl p-6 lg:p-8 card-hover flex flex-col sm:flex-row gap-6">
+        <!-- Cert 1 (In Progress DP-700) -->
+        <div class="glass glass-light rounded-2xl p-6 lg:p-8 card-hover flex flex-col sm:flex-row gap-6">
           <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center shrink-0 shadow-lg">
             <i class="fab fa-microsoft text-white text-2xl"></i>
           </div>
           <div class="flex-1">
             <div class="flex flex-wrap items-center gap-3 mb-2">
-              <h3 class="font-bold text-lg dark:text-white text-slate-900">Get Started with Lakehouses in Microsoft Fabric</h3>
-              <span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-bold rounded-lg">Completed</span>
-            </div>
-            <p class="text-sm dark:text-gray-400 text-gray-500 mb-2">Microsoft Learn &bull; January 2026</p>
-            <p class="dark:text-gray-400 text-gray-600 text-sm">Training on Microsoft Fabric lakehouse architecture — data ingestion, transformation, and storage patterns in the Microsoft data ecosystem.</p>
-          </div>
-        </div>
-        
-        <!-- Cert 2 -->
-        <div class="glass dark:glass glass-light rounded-2xl p-6 lg:p-8 card-hover flex flex-col sm:flex-row gap-6">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center shrink-0 shadow-lg">
-            <i class="fab fa-microsoft text-white text-2xl"></i>
-          </div>
-          <div class="flex-1">
-            <div class="flex flex-wrap items-center gap-3 mb-2">
-              <h3 class="font-bold text-lg dark:text-white text-slate-900">DP-700: Fabric Data Engineer Associate</h3>
+              <h3 class="font-bold text-lg text-slate-900">DP-700: Fabric Data Engineer Associate</h3>
               <span class="px-3 py-1 bg-amber-500/10 text-amber-400 text-xs font-bold rounded-lg">In Progress</span>
             </div>
-            <p class="text-sm dark:text-gray-400 text-gray-500 mb-2">Microsoft Certified &bull; Expected 2026</p>
+            <p class="text-sm text-gray-500 mb-2">Microsoft Certified &bull; Expected 2026</p>
             <p class="dark:text-gray-400 text-gray-600 text-sm">Preparing for the DP-700 certification — designing and implementing data solutions with Microsoft Fabric, including pipelines, lakehouses, and data warehouses.</p>
           </div>
         </div>
@@ -974,15 +792,15 @@ const renderPage = () => {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16" data-animate>
         <p class="text-brand-400 font-mono text-sm font-semibold mb-2 tracking-wider uppercase">// Insights & Learning</p>
-        <h2 class="text-4xl lg:text-5xl font-bold dark:text-white text-slate-900">
+        <h2 class="text-4xl lg:text-5xl font-bold text-slate-900">
           From the <span class="gradient-text">Blog</span>
         </h2>
-        <p class="mt-4 text-lg dark:text-gray-400 text-gray-500 max-w-2xl mx-auto">Deep dives into data engineering concepts, project retrospectives, and technical insights.</p>
+        <p class="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">Deep dives into data engineering concepts, project retrospectives, and technical insights.</p>
       </div>
       
       <div class="grid md:grid-cols-3 gap-8" data-animate>
         <!-- Blog 1 -->
-        <article class="glass dark:glass glass-light rounded-2xl overflow-hidden card-hover group">
+        <article class="glass glass-light rounded-2xl overflow-hidden card-hover group">
           <div class="h-48 bg-gradient-to-br from-brand-600 to-accent-500 flex items-center justify-center relative overflow-hidden">
             <i class="fas fa-robot text-white/20 text-7xl absolute -right-4 -bottom-4 group-hover:scale-110 transition-transform"></i>
             <div class="relative z-10 text-center">
@@ -992,22 +810,22 @@ const renderPage = () => {
           </div>
           <div class="p-6">
             <div class="flex items-center gap-3 mb-3">
-              <span class="text-xs dark:text-gray-500 text-gray-400 font-mono">Jan 15, 2026</span>
-              <span class="text-xs dark:text-gray-600 text-gray-300">&bull;</span>
+              <span class="text-xs text-gray-400 font-mono">Jan 15, 2026</span>
+              <span class="text-xs text-gray-300">&bull;</span>
               <span class="text-xs text-brand-400 font-medium">8 min read</span>
             </div>
-            <h3 class="font-bold text-lg dark:text-white text-slate-900 mb-2 group-hover:text-brand-400 transition-colors">How I Built a Self-Updating ETL Pipeline with GitHub Actions</h3>
+            <h3 class="font-bold text-lg text-slate-900 mb-2 group-hover:text-brand-400 transition-colors">How I Built a Self-Updating ETL Pipeline with GitHub Actions</h3>
             <p class="dark:text-gray-400 text-gray-600 text-sm leading-relaxed mb-4">A deep dive into designing a fully automated cryptocurrency data pipeline that runs 24/7 without manual intervention.</p>
             <div class="flex flex-wrap gap-2">
-              <span class="tag px-2 py-1 dark:bg-slate-800 bg-gray-100 dark:text-gray-400 text-gray-500 text-xs rounded-md font-mono cursor-default">ETL</span>
-              <span class="tag px-2 py-1 dark:bg-slate-800 bg-gray-100 dark:text-gray-400 text-gray-500 text-xs rounded-md font-mono cursor-default">GitHub Actions</span>
-              <span class="tag px-2 py-1 dark:bg-slate-800 bg-gray-100 dark:text-gray-400 text-gray-500 text-xs rounded-md font-mono cursor-default">Python</span>
+              <span class="tag px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-md font-mono cursor-default">ETL</span>
+              <span class="tag px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-md font-mono cursor-default">GitHub Actions</span>
+              <span class="tag px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-md font-mono cursor-default">Python</span>
             </div>
           </div>
         </article>
         
         <!-- Blog 2 -->
-        <article class="glass dark:glass glass-light rounded-2xl overflow-hidden card-hover group">
+        <article class="glass glass-light rounded-2xl overflow-hidden card-hover group">
           <div class="h-48 bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center relative overflow-hidden">
             <i class="fab fa-docker text-white/20 text-7xl absolute -right-4 -bottom-4 group-hover:scale-110 transition-transform"></i>
             <div class="relative z-10 text-center">
@@ -1017,22 +835,22 @@ const renderPage = () => {
           </div>
           <div class="p-6">
             <div class="flex items-center gap-3 mb-3">
-              <span class="text-xs dark:text-gray-500 text-gray-400 font-mono">Feb 01, 2026</span>
-              <span class="text-xs dark:text-gray-600 text-gray-300">&bull;</span>
+              <span class="text-xs text-gray-400 font-mono">Feb 01, 2026</span>
+              <span class="text-xs text-gray-300">&bull;</span>
               <span class="text-xs text-brand-400 font-medium">6 min read</span>
             </div>
-            <h3 class="font-bold text-lg dark:text-white text-slate-900 mb-2 group-hover:text-brand-400 transition-colors">Why Every Data Engineer Should Containerize Their Pipelines</h3>
+            <h3 class="font-bold text-lg text-slate-900 mb-2 group-hover:text-brand-400 transition-colors">Why Every Data Engineer Should Containerize Their Pipelines</h3>
             <p class="dark:text-gray-400 text-gray-600 text-sm leading-relaxed mb-4">How Docker transforms fragile data pipelines into reproducible, portable systems. A practical guide with real examples.</p>
             <div class="flex flex-wrap gap-2">
-              <span class="tag px-2 py-1 dark:bg-slate-800 bg-gray-100 dark:text-gray-400 text-gray-500 text-xs rounded-md font-mono cursor-default">Docker</span>
-              <span class="tag px-2 py-1 dark:bg-slate-800 bg-gray-100 dark:text-gray-400 text-gray-500 text-xs rounded-md font-mono cursor-default">PostgreSQL</span>
-              <span class="tag px-2 py-1 dark:bg-slate-800 bg-gray-100 dark:text-gray-400 text-gray-500 text-xs rounded-md font-mono cursor-default">DevOps</span>
+              <span class="tag px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-md font-mono cursor-default">Docker</span>
+              <span class="tag px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-md font-mono cursor-default">PostgreSQL</span>
+              <span class="tag px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-md font-mono cursor-default">DevOps</span>
             </div>
           </div>
         </article>
         
         <!-- Blog 3 -->
-        <article class="glass dark:glass glass-light rounded-2xl overflow-hidden card-hover group">
+        <article class="glass glass-light rounded-2xl overflow-hidden card-hover group">
           <div class="h-48 bg-gradient-to-br from-emerald-600 to-teal-700 flex items-center justify-center relative overflow-hidden">
             <i class="fas fa-project-diagram text-white/20 text-7xl absolute -right-4 -bottom-4 group-hover:scale-110 transition-transform"></i>
             <div class="relative z-10 text-center">
@@ -1042,16 +860,16 @@ const renderPage = () => {
           </div>
           <div class="p-6">
             <div class="flex items-center gap-3 mb-3">
-              <span class="text-xs dark:text-gray-500 text-gray-400 font-mono">Jan 28, 2026</span>
-              <span class="text-xs dark:text-gray-600 text-gray-300">&bull;</span>
+              <span class="text-xs text-gray-400 font-mono">Jan 28, 2026</span>
+              <span class="text-xs text-gray-300">&bull;</span>
               <span class="text-xs text-brand-400 font-medium">10 min read</span>
             </div>
-            <h3 class="font-bold text-lg dark:text-white text-slate-900 mb-2 group-hover:text-brand-400 transition-colors">The Data Structures Behind Airflow: Building an Orchestrator from Scratch</h3>
+            <h3 class="font-bold text-lg text-slate-900 mb-2 group-hover:text-brand-400 transition-colors">The Data Structures Behind Airflow: Building an Orchestrator from Scratch</h3>
             <p class="dark:text-gray-400 text-gray-600 text-sm leading-relaxed mb-4">Understanding how Graphs, Topological Sort, and Queues power modern workflow orchestrators like Apache Airflow.</p>
             <div class="flex flex-wrap gap-2">
-              <span class="tag px-2 py-1 dark:bg-slate-800 bg-gray-100 dark:text-gray-400 text-gray-500 text-xs rounded-md font-mono cursor-default">Algorithms</span>
-              <span class="tag px-2 py-1 dark:bg-slate-800 bg-gray-100 dark:text-gray-400 text-gray-500 text-xs rounded-md font-mono cursor-default">Airflow</span>
-              <span class="tag px-2 py-1 dark:bg-slate-800 bg-gray-100 dark:text-gray-400 text-gray-500 text-xs rounded-md font-mono cursor-default">Python</span>
+              <span class="tag px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-md font-mono cursor-default">Algorithms</span>
+              <span class="tag px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-md font-mono cursor-default">Airflow</span>
+              <span class="tag px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-md font-mono cursor-default">Python</span>
             </div>
           </div>
         </article>
@@ -1060,28 +878,28 @@ const renderPage = () => {
   </section>
 
   <!-- ============ GITHUB SECTION ============ -->
-  <section class="py-24 lg:py-32 dark:bg-slate-900/50 bg-gray-50/50">
+  <section class="py-24 lg:py-32 bg-gray-50/50">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="glass dark:glass glass-light rounded-3xl p-8 lg:p-12 text-center card-hover" data-animate>
+      <div class="glass glass-light rounded-3xl p-8 lg:p-12 text-center card-hover" data-animate>
         <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center mx-auto mb-6 shadow-lg">
           <i class="fab fa-github text-white text-4xl"></i>
         </div>
-        <h2 class="text-3xl lg:text-4xl font-bold dark:text-white text-slate-900 mb-4">Explore My Code</h2>
+        <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">Explore My Code</h2>
         <p class="dark:text-gray-400 text-gray-600 mb-8 max-w-xl mx-auto text-lg">All my data engineering projects, ETL pipelines, and automation scripts are open-source on GitHub. Explore the code, architecture, and documentation.</p>
         
         <!-- GitHub Stats -->
         <div class="grid grid-cols-3 gap-4 mb-8 max-w-md mx-auto">
-          <div class="glass dark:glass glass-light rounded-xl p-4">
+          <div class="glass glass-light rounded-xl p-4">
             <div class="text-2xl font-bold gradient-text">5</div>
-            <div class="text-xs dark:text-gray-500 text-gray-400 mt-1">Repositories</div>
+            <div class="text-xs text-gray-400 mt-1">Repositories</div>
           </div>
-          <div class="glass dark:glass glass-light rounded-xl p-4">
+          <div class="glass glass-light rounded-xl p-4">
             <div class="text-2xl font-bold gradient-text">3</div>
-            <div class="text-xs dark:text-gray-500 text-gray-400 mt-1">Languages</div>
+            <div class="text-xs text-gray-400 mt-1">Languages</div>
           </div>
-          <div class="glass dark:glass glass-light rounded-xl p-4">
+          <div class="glass glass-light rounded-xl p-4">
             <div class="text-2xl font-bold gradient-text">CI/CD</div>
-            <div class="text-xs dark:text-gray-500 text-gray-400 mt-1">Automated</div>
+            <div class="text-xs text-gray-400 mt-1">Automated</div>
           </div>
         </div>
         
@@ -1099,76 +917,76 @@ const renderPage = () => {
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16" data-animate>
         <p class="text-brand-400 font-mono text-sm font-semibold mb-2 tracking-wider uppercase">// Get in Touch</p>
-        <h2 class="text-4xl lg:text-5xl font-bold dark:text-white text-slate-900">
+        <h2 class="text-4xl lg:text-5xl font-bold text-slate-900">
           Let's <span class="gradient-text">Connect</span>
         </h2>
-        <p class="mt-4 text-lg dark:text-gray-400 text-gray-500 max-w-xl mx-auto">Have a data challenge? Looking for a data engineer? Or just want to chat about pipelines? Reach out.</p>
+        <p class="mt-4 text-lg text-gray-500 max-w-xl mx-auto">Have a data challenge? Looking for a data engineer? Or just want to chat about pipelines? Reach out.</p>
       </div>
       
       <div class="grid lg:grid-cols-5 gap-8" data-animate>
         <!-- Contact Info -->
         <div class="lg:col-span-2 space-y-4">
-          <a href="mailto:amr.walid2022@feps.edu.eg" class="glass dark:glass glass-light rounded-2xl p-5 flex items-center gap-4 card-hover group">
+          <a href="mailto:amr.walid2022@feps.edu.eg" class="glass glass-light rounded-2xl p-5 flex items-center gap-4 card-hover group">
             <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
               <i class="fas fa-envelope text-white"></i>
             </div>
             <div>
-              <p class="text-sm dark:text-gray-500 text-gray-400">Email</p>
-              <p class="font-medium dark:text-white text-slate-900 text-sm">amr.walid2022@feps.edu.eg</p>
+              <p class="text-sm text-gray-400">Email</p>
+              <p class="font-medium text-slate-900 text-sm">amr.walid2022@feps.edu.eg</p>
             </div>
           </a>
           
-          <a href="https://www.linkedin.com/in/amrwalidmaher" target="_blank" class="glass dark:glass glass-light rounded-2xl p-5 flex items-center gap-4 card-hover group">
+          <a href="https://www.linkedin.com/in/amrwalidmaher" target="_blank" class="glass glass-light rounded-2xl p-5 flex items-center gap-4 card-hover group">
             <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
               <i class="fab fa-linkedin-in text-white"></i>
             </div>
             <div>
-              <p class="text-sm dark:text-gray-500 text-gray-400">LinkedIn</p>
-              <p class="font-medium dark:text-white text-slate-900 text-sm">Amr Walid</p>
+              <p class="text-sm text-gray-400">LinkedIn</p>
+              <p class="font-medium text-slate-900 text-sm">Amr Walid</p>
             </div>
           </a>
           
-          <a href="https://github.com/Amr-Walid" target="_blank" class="glass dark:glass glass-light rounded-2xl p-5 flex items-center gap-4 card-hover group">
+          <a href="https://github.com/Amr-Walid" target="_blank" class="glass glass-light rounded-2xl p-5 flex items-center gap-4 card-hover group">
             <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
               <i class="fab fa-github text-white"></i>
             </div>
             <div>
-              <p class="text-sm dark:text-gray-500 text-gray-400">GitHub</p>
-              <p class="font-medium dark:text-white text-slate-900 text-sm">Amr-Walid</p>
+              <p class="text-sm text-gray-400">GitHub</p>
+              <p class="font-medium text-slate-900 text-sm">Amr-Walid</p>
             </div>
           </a>
           
-          <div class="glass dark:glass glass-light rounded-2xl p-5 flex items-center gap-4">
+          <div class="glass glass-light rounded-2xl p-5 flex items-center gap-4">
             <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shrink-0">
               <i class="fas fa-map-marker-alt text-white"></i>
             </div>
             <div>
-              <p class="text-sm dark:text-gray-500 text-gray-400">Location</p>
-              <p class="font-medium dark:text-white text-slate-900 text-sm">Cairo, Egypt</p>
+              <p class="text-sm text-gray-400">Location</p>
+              <p class="font-medium text-slate-900 text-sm">Cairo, Egypt</p>
             </div>
           </div>
         </div>
         
         <!-- Contact Form -->
         <div class="lg:col-span-3">
-          <form id="contactForm" class="glass dark:glass glass-light rounded-2xl p-6 lg:p-8 space-y-5">
+          <form id="contactForm" class="glass glass-light rounded-2xl p-6 lg:p-8 space-y-5">
             <div class="grid sm:grid-cols-2 gap-5">
               <div>
-                <label class="block text-sm font-medium dark:text-gray-300 text-gray-600 mb-2">Name *</label>
-                <input type="text" name="name" required class="w-full px-4 py-3 rounded-xl dark:bg-slate-800 bg-white border dark:border-slate-700 border-gray-200 dark:text-white text-slate-900 placeholder-gray-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all text-sm" placeholder="Your name">
+                <label class="block text-sm font-medium text-gray-600 mb-2">Name *</label>
+                <input type="text" name="name" required class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-slate-900 placeholder-gray-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all text-sm" placeholder="Your name">
               </div>
               <div>
-                <label class="block text-sm font-medium dark:text-gray-300 text-gray-600 mb-2">Email *</label>
-                <input type="email" name="email" required class="w-full px-4 py-3 rounded-xl dark:bg-slate-800 bg-white border dark:border-slate-700 border-gray-200 dark:text-white text-slate-900 placeholder-gray-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all text-sm" placeholder="you@email.com">
+                <label class="block text-sm font-medium text-gray-600 mb-2">Email *</label>
+                <input type="email" name="email" required class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-slate-900 placeholder-gray-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all text-sm" placeholder="you@email.com">
               </div>
             </div>
             <div>
-              <label class="block text-sm font-medium dark:text-gray-300 text-gray-600 mb-2">Subject</label>
-              <input type="text" name="subject" class="w-full px-4 py-3 rounded-xl dark:bg-slate-800 bg-white border dark:border-slate-700 border-gray-200 dark:text-white text-slate-900 placeholder-gray-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all text-sm" placeholder="What's this about?">
+              <label class="block text-sm font-medium text-gray-600 mb-2">Subject</label>
+              <input type="text" name="subject" class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-slate-900 placeholder-gray-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all text-sm" placeholder="What's this about?">
             </div>
             <div>
-              <label class="block text-sm font-medium dark:text-gray-300 text-gray-600 mb-2">Message *</label>
-              <textarea name="message" required rows="5" class="w-full px-4 py-3 rounded-xl dark:bg-slate-800 bg-white border dark:border-slate-700 border-gray-200 dark:text-white text-slate-900 placeholder-gray-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all text-sm resize-none" placeholder="Tell me about your project or opportunity..."></textarea>
+              <label class="block text-sm font-medium text-gray-600 mb-2">Message *</label>
+              <textarea name="message" required rows="5" class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-slate-900 placeholder-gray-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all text-sm resize-none" placeholder="Tell me about your project or opportunity..."></textarea>
             </div>
             <button type="submit" id="submitBtn" class="w-full py-3.5 bg-gradient-to-r from-brand-600 to-accent-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-brand-500/25 transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2">
               <i class="fas fa-paper-plane"></i>
@@ -1182,30 +1000,30 @@ const renderPage = () => {
   </section>
 
   <!-- ============ FOOTER ============ -->
-  <footer class="dark:bg-slate-900 bg-white border-t dark:border-slate-800 border-gray-200 py-12">
+  <footer class="dark:bg-slate-900 bg-white border-t border-gray-200 py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row items-center justify-between gap-6">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center text-white font-bold text-lg">AW</div>
           <div>
-            <span class="font-bold dark:text-white text-slate-900">Amr Walid</span>
-            <span class="block text-xs dark:text-gray-500 text-gray-400 font-mono">Data Engineer</span>
+            <span class="font-bold text-slate-900">Amr Walid</span>
+            <span class="block text-xs text-gray-400 font-mono">Data Engineer</span>
           </div>
         </div>
         
         <div class="flex items-center gap-4">
-          <a href="https://github.com/Amr-Walid" target="_blank" class="w-10 h-10 rounded-xl dark:bg-slate-800 bg-gray-100 flex items-center justify-center dark:text-gray-400 text-gray-500 hover:text-brand-400 hover:bg-brand-500/10 transition-all">
+          <a href="https://github.com/Amr-Walid" target="_blank" class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-500 hover:text-brand-400 hover:bg-brand-500/10 transition-all">
             <i class="fab fa-github"></i>
           </a>
-          <a href="https://www.linkedin.com/in/amrwalidmaher" target="_blank" class="w-10 h-10 rounded-xl dark:bg-slate-800 bg-gray-100 flex items-center justify-center dark:text-gray-400 text-gray-500 hover:text-brand-400 hover:bg-brand-500/10 transition-all">
+          <a href="https://www.linkedin.com/in/amrwalidmaher" target="_blank" class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-500 hover:text-brand-400 hover:bg-brand-500/10 transition-all">
             <i class="fab fa-linkedin-in"></i>
           </a>
-          <a href="mailto:amr.walid2022@feps.edu.eg" class="w-10 h-10 rounded-xl dark:bg-slate-800 bg-gray-100 flex items-center justify-center dark:text-gray-400 text-gray-500 hover:text-brand-400 hover:bg-brand-500/10 transition-all">
+          <a href="mailto:amr.walid2022@feps.edu.eg" class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-500 hover:text-brand-400 hover:bg-brand-500/10 transition-all">
             <i class="fas fa-envelope"></i>
           </a>
         </div>
         
-        <p class="text-sm dark:text-gray-500 text-gray-400">
+        <p class="text-sm text-gray-400">
           &copy; 2026 Amr Walid. Built with passion.
         </p>
       </div>
@@ -1222,13 +1040,29 @@ const renderPage = () => {
       const grid = document.getElementById('projectsGrid');
       const filtered = filter === 'all' ? projects : projects.filter(p => p.category === filter);
       
-      grid.innerHTML = filtered.map(p => \`
-        <div class="glass dark:glass glass-light rounded-2xl overflow-hidden card-hover group project-card" data-category="\${p.category}">
-          <!-- Header -->
-          <div class="p-6 lg:p-8">
+      grid.innerHTML = filtered.map(p => {
+        const urls = p.imageUrls || (p.imageUrl ? [p.imageUrl] : []);
+        let imageHeader = '';
+        if (urls.length > 0) {
+          imageHeader = \`<div class="w-full h-48 sm:h-56 relative bg-slate-200/50 border-b border-gray-200 flex flex-row overflow-hidden">
+            \${urls.map((url, i) => \`
+              <div class="flex-1 h-full flex items-center justify-center p-2 sm:p-3 relative group/img \${i > 0 ? 'border-l border-gray-300/50' : ''}">
+                <img src="\${url}" alt="\${p.title} - Image \${i + 1}" class="max-w-full max-h-full object-contain rounded shadow-sm group-hover/img:scale-105 transition-transform duration-500" loading="lazy" />
+              </div>
+            \`).join('')}
+          </div>\`;
+        }
+
+        return \`
+        <div class="glass glass-light rounded-2xl overflow-hidden card-hover group project-card flex flex-col h-full" data-category="\${p.category}">
+          <!-- Project Image Header -->
+          \${imageHeader}
+          
+          <!-- Content Body -->
+          <div class="p-6 lg:p-8 flex flex-col flex-grow">
             <div class="flex items-start justify-between mb-4">
               <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center shrink-0">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center shrink-0 shadow-lg">
                   <i class="fas fa-\${p.image} text-white text-lg"></i>
                 </div>
                 <div>
@@ -1236,46 +1070,46 @@ const renderPage = () => {
                   \${p.featured ? '<span class="ml-2 text-xs bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded-md font-bold">Featured</span>' : ''}
                 </div>
               </div>
-              <a href="\${p.github}" target="_blank" class="w-10 h-10 rounded-xl dark:bg-slate-800 bg-gray-100 flex items-center justify-center dark:text-gray-400 text-gray-500 hover:text-brand-400 hover:bg-brand-500/10 transition-all shrink-0">
+              <a href="\${p.github}" target="_blank" class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-500 hover:text-brand-400 hover:bg-brand-500/10 transition-all shrink-0">
                 <i class="fab fa-github"></i>
               </a>
             </div>
             
-            <h3 class="text-xl font-bold dark:text-white text-slate-900 mb-4 group-hover:text-brand-400 transition-colors">\${p.title}</h3>
+            <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-brand-400 transition-colors">\${p.title}</h3>
             
-            <!-- Problem -->
+            <!-- Problem & Solution Section -->
             <div class="mb-4">
               <p class="text-xs font-bold text-red-400 font-mono uppercase tracking-wider mb-1">Problem</p>
-              <p class="text-sm dark:text-gray-400 text-gray-600 leading-relaxed">\${p.problem}</p>
+              <p class="text-sm text-gray-600 leading-relaxed">\${p.problem}</p>
             </div>
             
             <!-- Solution -->
             <div class="mb-4">
               <p class="text-xs font-bold text-emerald-400 font-mono uppercase tracking-wider mb-1">Solution</p>
-              <p class="text-sm dark:text-gray-400 text-gray-600 leading-relaxed">\${p.solution}</p>
+              <p class="text-sm text-gray-600 leading-relaxed">\${p.solution}</p>
             </div>
             
             <!-- Architecture -->
-            <div class="mb-4 p-3 dark:bg-slate-800/50 bg-gray-50 rounded-xl border dark:border-slate-700/50 border-gray-200">
+            <div class="mb-4 p-3 bg-gray-50 rounded-xl border border-gray-200">
               <p class="text-xs font-bold text-purple-400 font-mono uppercase tracking-wider mb-1">Architecture</p>
-              <p class="text-xs dark:text-gray-400 text-gray-500 font-mono leading-relaxed">\${p.architecture}</p>
+              <p class="text-xs text-gray-500 font-mono leading-relaxed">\${p.architecture}</p>
             </div>
             
             <!-- Impact -->
             <div class="mb-5">
               <p class="text-xs font-bold text-accent-400 font-mono uppercase tracking-wider mb-2">Impact</p>
               <ul class="space-y-1.5">
-                \${p.impact.map(i => \`<li class="flex items-start gap-2 text-sm dark:text-gray-400 text-gray-500"><i class="fas fa-check text-emerald-400 mt-0.5 text-xs"></i>\${i}</li>\`).join('')}
+                \${p.impact.map(i => \`<li class="flex items-start gap-2 text-sm text-gray-500"><i class="fas fa-check text-emerald-400 mt-0.5 text-xs"></i>\${i}</li>\`).join('')}
               </ul>
             </div>
             
             <!-- Tech Stack -->
             <div class="flex flex-wrap gap-2">
-              \${p.techStack.map(t => \`<span class="tag px-2.5 py-1 dark:bg-brand-500/10 bg-brand-500/5 text-brand-400 text-xs rounded-lg font-mono font-medium border dark:border-brand-500/20 border-brand-500/10 cursor-default">\${t}</span>\`).join('')}
+              \${p.techStack.map(t => \`<span class="tag px-2.5 py-1 bg-brand-500/5 text-brand-400 text-xs rounded-lg font-mono font-medium border border-brand-500/10 cursor-default">\${t}</span>\`).join('')}
             </div>
           </div>
         </div>
-      \`).join('');
+      \`}).join('');
     }
 
     // ===== PROJECT FILTERS =====
@@ -1293,7 +1127,7 @@ const renderPage = () => {
         if (btn.classList.contains('active')) {
           btn.className = 'filter-btn active px-5 py-2 rounded-xl text-sm font-semibold transition-all bg-gradient-to-r from-brand-600 to-accent-500 text-white shadow-lg shadow-brand-500/25';
         } else {
-          btn.className = 'filter-btn px-5 py-2 rounded-xl text-sm font-semibold transition-all dark:bg-slate-800 bg-gray-100 dark:text-gray-400 text-gray-600 hover:text-brand-400 dark:border-slate-700 border-gray-200 border';
+          btn.className = 'filter-btn px-5 py-2 rounded-xl text-sm font-semibold transition-all bg-gray-100 text-gray-600 hover:text-brand-400 border-gray-200 border';
         }
       });
     }
@@ -1339,36 +1173,6 @@ const renderPage = () => {
       
       setTimeout(() => msg.classList.add('hidden'), 5000);
     });
-
-    // ===== THEME TOGGLE =====
-    function toggleTheme() {
-      const html = document.documentElement;
-      const isDark = html.classList.contains('dark');
-      
-      if (isDark) {
-        html.classList.remove('dark');
-        document.body.classList.remove('bg-slate-950', 'text-gray-100');
-        document.body.classList.add('bg-white', 'text-gray-900');
-        localStorage.setItem('theme', 'light');
-      } else {
-        html.classList.add('dark');
-        document.body.classList.remove('bg-white', 'text-gray-900');
-        document.body.classList.add('bg-slate-950', 'text-gray-100');
-        localStorage.setItem('theme', 'dark');
-      }
-      styleFilters();
-    }
-
-    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-    document.getElementById('themeToggleMobile').addEventListener('click', toggleTheme);
-
-    // Load theme
-    if (localStorage.getItem('theme') === 'light') {
-      document.documentElement.classList.remove('dark');
-      document.body.classList.remove('bg-slate-950', 'text-gray-100');
-      document.body.classList.add('bg-white', 'text-gray-900');
-    }
-
     // ===== MOBILE MENU =====
     document.getElementById('mobileMenuBtn').addEventListener('click', () => {
       const menu = document.getElementById('mobileMenu');
@@ -1382,18 +1186,25 @@ const renderPage = () => {
     });
 
     // ===== NAVBAR SCROLL =====
-    let lastScroll = 0;
+    let tickingNavbar = false;
     window.addEventListener('scroll', () => {
-      const navbar = document.getElementById('navbar');
-      const scroll = window.scrollY;
-      
-      if (scroll > 100) {
-        navbar.classList.add('glass', 'dark:glass', 'glass-light', 'shadow-lg');
-      } else {
-        navbar.classList.remove('glass', 'dark:glass', 'glass-light', 'shadow-lg');
+      if (!tickingNavbar) {
+        window.requestAnimationFrame(() => {
+          const navbar = document.getElementById('navbar');
+          const scroll = window.scrollY;
+          
+          if (scroll > 50) {
+            navbar.classList.add('glass', 'glass-light', 'shadow-lg', 'py-0');
+            navbar.classList.remove('py-2');
+          } else {
+            navbar.classList.remove('glass', 'glass-light', 'shadow-lg', 'py-0');
+            navbar.classList.add('py-2');
+          }
+          tickingNavbar = false;
+        });
+        tickingNavbar = true;
       }
-      lastScroll = scroll;
-    });
+    }, { passive: true });
 
     // ===== SCROLL ANIMATIONS =====
     const observer = new IntersectionObserver((entries) => {
@@ -1408,22 +1219,29 @@ const renderPage = () => {
 
     // ===== ACTIVE NAV LINK =====
     const sections = document.querySelectorAll('section[id]');
+    let tickingNavLinks = false;
     window.addEventListener('scroll', () => {
-      const scroll = window.scrollY + 200;
-      sections.forEach(section => {
-        const top = section.offsetTop;
-        const height = section.offsetHeight;
-        const id = section.getAttribute('id');
-        const link = document.querySelector('a[href="#' + id + '"]');
-        if (link && link.classList.contains('nav-link')) {
-          if (scroll >= top && scroll < top + height) {
-            link.classList.add('active', 'text-brand-400');
-          } else {
-            link.classList.remove('active', 'text-brand-400');
-          }
-        }
-      });
-    });
+      if (!tickingNavLinks) {
+        window.requestAnimationFrame(() => {
+          const scroll = window.scrollY + 200;
+          sections.forEach(section => {
+            const top = section.offsetTop;
+            const height = section.offsetHeight;
+            const id = section.getAttribute('id');
+            const link = document.querySelector('a[href="#' + id + '"]');
+            if (link && link.classList.contains('nav-link')) {
+              if (scroll >= top && scroll < top + height) {
+                link.classList.add('active', 'text-brand-400');
+              } else {
+                link.classList.remove('active', 'text-brand-400');
+              }
+            }
+          });
+          tickingNavLinks = false;
+        });
+        tickingNavLinks = true;
+      }
+    }, { passive: true });
 
     // ===== INIT =====
     renderProjects();
