@@ -23,8 +23,7 @@ export const renderPage = () => {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap">
   
   <!-- Security: Content Security Policy -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https://cdn.jsdelivr.net https://avatars.githubusercontent.com; connect-src 'self';">
@@ -108,8 +107,8 @@ export const renderPage = () => {
       <div class="flex items-center justify-between h-16 lg:h-20">
         <!-- Logo -->
         <a href="#hero" class="flex items-center gap-3 group">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center text-white font-bold text-lg group-hover:scale-110 transition-transform">
-            AW
+          <div class="w-12 h-12 rounded-full bg-white border border-gray-100 flex items-center justify-center overflow-hidden shadow-sm group-hover:scale-110 transition-transform">
+            <img src="/assets/logo.webp" alt="Amr Walid Logo" class="w-full h-full object-cover scale-[1.3] translate-y-[-5%]" />
           </div>
           <div class="hidden sm:block">
             <span class="font-bold text-lg text-slate-900">Amr Walid</span>
@@ -123,7 +122,6 @@ export const renderPage = () => {
           <a href="#projects" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-400 transition-colors">Projects</a>
           <a href="#experience" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-400 transition-colors">Experience</a>
           <a href="#certifications" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-400 transition-colors">Certifications</a>
-          <a href="#blog" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-400 transition-colors">Blog</a>
           <a href="#contact" class="ml-4 px-5 py-2.5 bg-gradient-to-r from-brand-600 to-accent-500 text-white text-sm font-semibold rounded-xl hover:shadow-lg hover:shadow-brand-500/25 transition-all hover:-translate-y-0.5">
             Let's Talk
           </a>
@@ -145,7 +143,6 @@ export const renderPage = () => {
         <a href="#projects" class="block px-4 py-3 rounded-xl text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Projects</a>
         <a href="#experience" class="block px-4 py-3 rounded-xl text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Experience</a>
         <a href="#certifications" class="block px-4 py-3 rounded-xl text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Certifications</a>
-        <a href="#blog" class="block px-4 py-3 rounded-xl text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Blog</a>
         <a href="#contact" class="block px-4 py-3 mt-4 bg-gradient-to-r from-brand-600 to-accent-500 text-white text-center rounded-xl font-semibold">Let's Talk</a>
       </div>
     </div>
@@ -341,11 +338,10 @@ export const renderPage = () => {
         <button class="filter-btn active px-5 py-2 rounded-xl text-sm font-semibold transition-all" data-filter="all">All Projects</button>
         <button class="filter-btn px-5 py-2 rounded-xl text-sm font-semibold transition-all" data-filter="Data Engineering">Data Engineering</button>
         <button class="filter-btn px-5 py-2 rounded-xl text-sm font-semibold transition-all" data-filter="Data Analysis">Data Analysis</button>
-        <button class="filter-btn px-5 py-2 rounded-xl text-sm font-semibold transition-all" data-filter="DevOps">DevOps</button>
       </div>
       
       <!-- Project Cards -->
-      <div id="projectsGrid" class="grid lg:grid-cols-2 gap-8">
+      <div id="projectsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         <!-- Cards injected by JS -->
       </div>
     </div>
@@ -444,95 +440,7 @@ export const renderPage = () => {
     </div>
   </section>
 
-  <!-- ============ BLOG SECTION ============ -->
-  <section id="blog" class="py-24 lg:py-32">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16" data-animate>
-        <p class="text-brand-400 font-mono text-sm font-semibold mb-2 tracking-wider uppercase">// Insights & Learning</p>
-        <h2 class="text-4xl lg:text-5xl font-bold text-slate-900">
-          From the <span class="gradient-text">Blog</span>
-        </h2>
-        <p class="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">Deep dives into data engineering concepts, project retrospectives, and technical insights.</p>
-      </div>
-      
-      <div class="grid md:grid-cols-3 gap-8" data-animate>
-        <!-- Blog 1 -->
-        <article class="glass glass-light rounded-2xl overflow-hidden card-hover group">
-          <div class="h-48 bg-gradient-to-br from-brand-600 to-accent-500 flex items-center justify-center relative overflow-hidden">
-            <i class="fas fa-robot text-white/20 text-7xl absolute -right-4 -bottom-4 group-hover:scale-110 transition-transform"></i>
-            <div class="relative z-10 text-center">
-              <i class="fas fa-cogs text-white text-4xl mb-2"></i>
-              <p class="text-white/80 text-sm font-mono">ETL Automation</p>
-            </div>
-          </div>
-          <div class="p-6">
-            <div class="flex items-center gap-3 mb-3">
-              <span class="text-xs text-gray-400 font-mono">Jan 15, 2026</span>
-              <span class="text-xs text-gray-300">&bull;</span>
-              <span class="text-xs text-brand-400 font-medium">8 min read</span>
-            </div>
-            <h3 class="font-bold text-lg text-slate-900 mb-2 group-hover:text-brand-400 transition-colors">How I Built a Self-Updating ETL Pipeline with GitHub Actions</h3>
-            <p class="dark:text-gray-400 text-gray-600 text-sm leading-relaxed mb-4">A deep dive into designing a fully automated cryptocurrency data pipeline that runs 24/7 without manual intervention.</p>
-            <div class="flex flex-wrap gap-2">
-              <span class="tag px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-md font-mono cursor-default">ETL</span>
-              <span class="tag px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-md font-mono cursor-default">GitHub Actions</span>
-              <span class="tag px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-md font-mono cursor-default">Python</span>
-            </div>
-          </div>
-        </article>
-        
-        <!-- Blog 2 -->
-        <article class="glass glass-light rounded-2xl overflow-hidden card-hover group">
-          <div class="h-48 bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center relative overflow-hidden">
-            <i class="fab fa-docker text-white/20 text-7xl absolute -right-4 -bottom-4 group-hover:scale-110 transition-transform"></i>
-            <div class="relative z-10 text-center">
-              <i class="fab fa-docker text-white text-4xl mb-2"></i>
-              <p class="text-white/80 text-sm font-mono">Containerization</p>
-            </div>
-          </div>
-          <div class="p-6">
-            <div class="flex items-center gap-3 mb-3">
-              <span class="text-xs text-gray-400 font-mono">Feb 01, 2026</span>
-              <span class="text-xs text-gray-300">&bull;</span>
-              <span class="text-xs text-brand-400 font-medium">6 min read</span>
-            </div>
-            <h3 class="font-bold text-lg text-slate-900 mb-2 group-hover:text-brand-400 transition-colors">Why Every Data Engineer Should Containerize Their Pipelines</h3>
-            <p class="dark:text-gray-400 text-gray-600 text-sm leading-relaxed mb-4">How Docker transforms fragile data pipelines into reproducible, portable systems. A practical guide with real examples.</p>
-            <div class="flex flex-wrap gap-2">
-              <span class="tag px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-md font-mono cursor-default">Docker</span>
-              <span class="tag px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-md font-mono cursor-default">PostgreSQL</span>
-              <span class="tag px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-md font-mono cursor-default">DevOps</span>
-            </div>
-          </div>
-        </article>
-        
-        <!-- Blog 3 -->
-        <article class="glass glass-light rounded-2xl overflow-hidden card-hover group">
-          <div class="h-48 bg-gradient-to-br from-emerald-600 to-teal-700 flex items-center justify-center relative overflow-hidden">
-            <i class="fas fa-project-diagram text-white/20 text-7xl absolute -right-4 -bottom-4 group-hover:scale-110 transition-transform"></i>
-            <div class="relative z-10 text-center">
-              <i class="fas fa-sitemap text-white text-4xl mb-2"></i>
-              <p class="text-white/80 text-sm font-mono">Architecture</p>
-            </div>
-          </div>
-          <div class="p-6">
-            <div class="flex items-center gap-3 mb-3">
-              <span class="text-xs text-gray-400 font-mono">Jan 28, 2026</span>
-              <span class="text-xs text-gray-300">&bull;</span>
-              <span class="text-xs text-brand-400 font-medium">10 min read</span>
-            </div>
-            <h3 class="font-bold text-lg text-slate-900 mb-2 group-hover:text-brand-400 transition-colors">The Data Structures Behind Airflow: Building an Orchestrator from Scratch</h3>
-            <p class="dark:text-gray-400 text-gray-600 text-sm leading-relaxed mb-4">Understanding how Graphs, Topological Sort, and Queues power modern workflow orchestrators like Apache Airflow.</p>
-            <div class="flex flex-wrap gap-2">
-              <span class="tag px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-md font-mono cursor-default">Algorithms</span>
-              <span class="tag px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-md font-mono cursor-default">Airflow</span>
-              <span class="tag px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded-md font-mono cursor-default">Python</span>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
+
 
   <!-- ============ GITHUB SECTION ============ -->
   <section class="py-24 lg:py-32 bg-gray-50/50">
@@ -661,7 +569,9 @@ export const renderPage = () => {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row items-center justify-between gap-6">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center text-white font-bold text-lg">AW</div>
+          <div class="w-10 h-10 rounded-full bg-white border border-gray-100 flex items-center justify-center overflow-hidden shadow-sm">
+            <img src="/assets/logo.webp" alt="Amr Walid Logo" class="w-full h-full object-cover scale-[1.3] translate-y-[-5%]" />
+          </div>
           <div>
             <span class="font-bold text-slate-900">Amr Walid</span>
             <span class="block text-xs text-gray-500 font-mono">Data Engineer</span>

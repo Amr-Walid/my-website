@@ -53,6 +53,54 @@ export const portfolioData = {
 
   projects: [
     {
+      id: "sql-server-data-warehouse",
+      title: "Modern SQL Server Data Warehouse",
+      category: "Data Engineering",
+      featured: true,
+      image: "server",
+      imageUrls: [
+        "/assets/sql-architecture.webp",
+        "/assets/sql-data-flow.webp",
+        "/assets/sql-star-schema.webp"
+      ],
+      problem: "Organizations often store data across multiple operational systems such as ERP and CRM platforms. These systems generate valuable information but are typically fragmented, inconsistent, and not optimized for analytical workloads. Building reliable analytics requires transforming this raw operational data into a structured, consistent, and query-efficient format that supports business intelligence and reporting. The challenge was to design and implement a complete end-to-end data warehouse architecture capable of ingesting raw data, transforming it, ensuring data quality, and delivering business-ready datasets for analytics.",
+      solution: "Designed and implemented a modern SQL Server data warehouse using a Medallion architecture to progressively transform raw data into trusted analytical datasets. Developed ETL / ELT pipelines using T-SQL and stored procedures to extract and integrate data from simulated ERP and CRM systems. Implemented multiple transformation stages including data cleaning, standardization, normalization, and enrichment to ensure high-quality datasets ready for analytical consumption. At the final layer, engineered a star schema data mart consisting of fact and dimension tables optimized for business intelligence queries and reporting workloads.",
+      architecture: "Source Systems (ERP / CRM) → Bronze Layer (Raw Data Ingestion) → Silver Layer (Data Cleaning & Transformation) → Gold Layer (Business Data Mart) → Analytics & BI",
+      techStack: ["SQL Server", "T-SQL", "Data Warehousing", "ETL", "Star Schema", "Medallion Architecture", "Git"],
+      impact: [
+        "End-to-end modern data warehouse architecture built from scratch",
+        "Structured Medallion architecture (Bronze → Silver → Gold)",
+        "Star schema data mart optimized for analytical queries",
+        "Robust ETL pipelines for data integration and transformation",
+        "Clear data lineage from source systems to analytical tables",
+        "Production-ready project structure with Git version control"
+      ],
+      github: "https://github.com/Amr-Walid/Sqlserver-DataWarehouse-Project",
+      tags: ["SQL Server", "Data Warehouse", "ETL", "Medallion Architecture"]
+    },
+    {
+      id: "real-time-stock-pipeline",
+      title: "Real-Time Stock Data Pipeline with MongoDB",
+      category: "Data Engineering",
+      featured: true,
+      image: "bolt",
+      imageUrl: "/assets/mongodb-pipeline.webp",
+      problem: "Traditional batch-processing systems introduce delays between data ingestion and analytics, making them unsuitable for real-time financial monitoring. The challenge was to design and build a real-time, event-driven data pipeline capable of ingesting live stock data, processing it instantly, and exposing the analytics through an API.",
+      solution: "Built a real-time data pipeline powered by MongoDB Change Streams and a microservices architecture. The system continuously collects live stock data, processes it as soon as it arrives using aggregation pipelines, and exposes the results through a high-performance FastAPI server.",
+      architecture: "External Stock API → Python Data Ingestor → MongoDB → Change Streams → Aggregation Pipeline → FastAPI → Analytics API",
+      techStack: ["Python", "MongoDB", "FastAPI", "Docker", "Docker Compose", "Change Streams", "Aggregation Framework", "NoSQL Data Modeling"],
+      impact: [
+        "Real-time event-driven data pipeline",
+        "Automatic analytics triggered using MongoDB Change Streams",
+        "Containerized microservices architecture with Docker",
+        "Scalable NoSQL data model optimized for real-time workloads",
+        "High-performance REST API for accessing analytics",
+        "Production-ready deployment using Docker Compose"
+      ],
+      github: "https://github.com/Amr-Walid/real-time-stock-pipeline",
+      tags: ["MongoDB", "Real-Time", "FastAPI", "Docker", "Data Engineering"]
+    },
+    {
       id: "crypto-etl-pipeline",
       title: "Automated Crypto Price ETL Pipeline",
       category: "Data Engineering",
@@ -111,44 +159,6 @@ export const portfolioData = {
       ],
       github: "https://github.com/Amr-Walid/Excel-Dashboard",
       tags: ["BI", "Dashboard", "Excel", "Data Analysis", "Power Query"]
-    },
-    {
-      id: "simple-orchestrator",
-      title: "Simple Task Orchestrator (DAG Engine)",
-      category: "Data Engineering",
-      featured: false,
-      image: "sitemap",
-      problem: "Data pipelines consist of interdependent tasks that must execute in a specific order. Without proper orchestration, managing dependencies, execution order, and failure handling becomes chaotic.",
-      solution: "Built a lightweight task orchestrator from scratch using Python, implementing core computer science concepts: Directed Acyclic Graphs (DAGs) for dependency mapping, Topological Sort for execution ordering, Queues for task scheduling, and Dictionaries for fast state lookups. A miniature Airflow built from first principles.",
-      architecture: "Task Definitions (JSON) → DAG Builder (Graphs) → Topological Sort → Queue-based Executor → State Management (Dictionaries)",
-      techStack: ["Python", "Data Structures", "Algorithms", "Graphs", "Topological Sort", "JSON"],
-      impact: [
-        "Demonstrates deep understanding of orchestration internals",
-        "Implements core Airflow concepts from scratch",
-        "Handles complex task dependencies correctly",
-        "Educational reference for DAG-based pipeline design"
-      ],
-      github: "https://github.com/Amr-Walid",
-      tags: ["Orchestration", "Algorithms", "DAG", "Python", "Architecture"]
-    },
-    {
-      id: "git-mastery",
-      title: "Git & Version Control Mastery",
-      category: "DevOps",
-      featured: false,
-      image: "code-branch",
-      problem: "Many data professionals lack structured version control practices, leading to lost work, merge conflicts, and untracked changes in data pipeline codebases.",
-      solution: "Completed an intensive hands-on project covering the full Git lifecycle: repository initialization, branching strategies, merge conflict resolution, feature branches, atomic commits, and remote synchronization with GitHub.",
-      architecture: "Local Git → Feature Branches → Merge Strategies → Remote GitHub → Collaboration Workflows",
-      techStack: ["Git", "GitHub", "Version Control", "Branching Strategies"],
-      impact: [
-        "Mastered feature-branch workflow used in production teams",
-        "Practiced atomic commits for clean project history",
-        "Resolved merge conflicts in complex branching scenarios",
-        "Foundation for all CI/CD pipeline development"
-      ],
-      github: "https://github.com/Amr-Walid/git-mastery-project",
-      tags: ["Git", "Version Control", "DevOps", "Best Practices"]
     }
   ],
 
@@ -195,36 +205,6 @@ export const portfolioData = {
       icon: "microsoft",
       description: "Preparing for the DP-700 certification exam, focused on designing and implementing data solutions with Microsoft Fabric, including data pipelines, lakehouses, and data warehouses.",
       credential: "Microsoft Certified"
-    }
-  ],
-
-  blogPosts: [
-    {
-      id: "building-automated-etl-pipeline",
-      title: "How I Built a Self-Updating ETL Pipeline with GitHub Actions",
-      excerpt: "A deep dive into designing a fully automated cryptocurrency data pipeline that runs 24/7 without manual intervention, using Python, Pandas, and GitHub Actions as a free orchestration layer.",
-      date: "2026-01-15",
-      readTime: "8 min read",
-      tags: ["ETL", "GitHub Actions", "Python", "Automation"],
-      category: "Data Engineering"
-    },
-    {
-      id: "docker-for-data-engineers",
-      title: "Why Every Data Engineer Should Containerize Their Pipelines",
-      excerpt: "How Docker transforms fragile data pipelines into reproducible, portable systems. A practical guide with real examples from building a Dockerized ETL pipeline with PostgreSQL.",
-      date: "2026-02-01",
-      readTime: "6 min read",
-      tags: ["Docker", "DevOps", "ETL", "PostgreSQL"],
-      category: "Data Engineering"
-    },
-    {
-      id: "data-structures-for-orchestration",
-      title: "The Data Structures Behind Airflow: Building an Orchestrator from Scratch",
-      excerpt: "Understanding how Graphs, Topological Sort, and Queues power modern workflow orchestrators like Apache Airflow — by building a simplified version from first principles.",
-      date: "2026-01-28",
-      readTime: "10 min read",
-      tags: ["Algorithms", "Airflow", "Python", "Architecture"],
-      category: "Engineering Deep Dives"
     }
   ]
 };

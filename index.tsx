@@ -17,11 +17,6 @@ app.get('/api/projects/:id', (c) => {
 app.get('/api/skills', (c) => c.json(portfolioData.skills))
 app.get('/api/experience', (c) => c.json(portfolioData.experience))
 app.get('/api/certifications', (c) => c.json(portfolioData.certifications))
-app.get('/api/blog', (c) => c.json(portfolioData.blogPosts))
-app.get('/api/blog/:id', (c) => {
-  const post = portfolioData.blogPosts.find(p => p.id === c.req.param('id'))
-  return post ? c.json(post) : c.json({ error: 'Post not found' }, 404)
-})
 
 app.post('/api/contact', async (c) => {
   try {

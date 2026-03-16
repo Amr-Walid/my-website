@@ -14,8 +14,7 @@ function renderProjects(filter) {
   var grid = document.getElementById('projectsGrid');
   if (!grid) return;
 
-  // Make grid 3 columns to match the reference better
-  grid.className = "grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6";
+  // Grid layout is handled in template.ts
 
   var filtered = filter === 'all'
     ? projects
@@ -28,49 +27,47 @@ function renderProjects(filter) {
         mainImage = p.imageUrls[0];
     } else if (p.imageUrl) {
         mainImage = p.imageUrl;
-    }
+    }    // --- Background Image Container ---
+    var bgImageDiv = mainImage 
+      ? '<div class="project-card-bg" style="background-image: url(' + mainImage + ');"></div>'
+      : '<div class="project-card-bg" style="background-image: linear-gradient(to bottom, #1e293b, #0f172a);"></div>';
 
-    // --- Background Style ---
-    // Linear gradient overlay + background image if exists
-    var bgStyle = mainImage 
-      ? 'background-image: linear-gradient(to bottom, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.95)), url(' + mainImage + '); background-size: cover; background-position: center;'
-      : 'background-image: linear-gradient(to bottom, #1e293b, #0f172a);'; // Fallback dark gradient
+    // Dark Overlay (Always present)
+    var overlay = '<div class="absolute inset-0 bg-slate-900/70 group-hover:bg-slate-900/40 transition-colors duration-500 z-[1]"></div>';
 
     // --- Featured Badge ---
     var featuredBadge = p.featured
-      ? '<div class="absolute top-4 right-4 text-xs bg-amber-500/20 text-amber-400 px-2 py-1 rounded-md font-bold border border-amber-500/20 backdrop-blur-sm shadow-lg"><i class="fas fa-star text-[10px] mr-1"></i>Featured</div>'
+      ? '<div class="absolute top-4 right-4 text-xs bg-amber-500/20 text-amber-400 px-2 py-1 rounded-md font-bold border border-amber-500/20 backdrop-blur-sm shadow-lg z-20"><i class="fas fa-star text-[10px] mr-1"></i>Featured</div>'
       : '';
 
     // --- Full Simple Square Card ---
     return (
       '<div class="relative overflow-hidden rounded-2xl cursor-pointer group card-hover project-card-square flex flex-col justify-center items-center p-6 text-center border border-slate-700/50 shadow-xl" ' +
-           'style="' + bgStyle + '" ' +
            'onclick="openProjectModal(\'' + p.id + '\')">' +
+        bgImageDiv +
+        overlay +
         featuredBadge +
         
-        // Hover Scale Effect Container
-        '<div class="relative z-10 p-4 transition-transform duration-500 group-hover:scale-110 flex flex-col items-center">' +
+        // Content Container
+        '<div class="project-card-content project-card-text-blur flex flex-col items-center">' +
           // Icon
           '<div class="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-6 shadow-2xl border border-white/10 group-hover:bg-brand-500/20 transition-colors duration-500">' +
             '<i class="fas fa-' + p.image + ' text-white text-2xl group-hover:text-brand-400 transition-colors duration-500 shadow-sm"></i>' +
           '</div>' +
           
           // Title
-          '<h3 class="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-brand-400 group-hover:to-accent-400 transition-all duration-300">' + p.title + '</h3>' +
+          '<h3 class="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-brand-400 group-hover:to-accent-400 transition-all duration-300 px-4">' + p.title + '</h3>' +
           
           // Category
           '<div class="flex items-center gap-2 text-xs font-bold text-slate-300 font-mono uppercase tracking-wider">' +
              '<i class="fas fa-layer-group text-[10px] opacity-70"></i> ' + p.category +
           '</div>' +
-
-          // View Details Hint (Shows on hover)
-          '<div class="absolute -bottom-12 opacity-0 group-hover:bottom-4 group-hover:opacity-100 transition-all duration-500 ease-out text-brand-400 text-sm font-semibold flex items-center gap-2">' +
+ 
+          // View Details Hint
+          '<div class="mt-6 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 text-brand-400 text-sm font-semibold flex items-center gap-2">' +
              'View Details <i class="fas fa-arrow-right text-xs"></i>' +
           '</div>' +
         '</div>' +
-
-        // Extra hover glow effect
-        '<div class="absolute inset-0 bg-brand-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay pointer-events-none"></div>' +
       '</div>'
     );
   }).join('');
