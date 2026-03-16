@@ -7,6 +7,16 @@
 // This script expects `window.PROJECTS` to be set by an inline <script> in the HTML
 // before this file is loaded. See index.tsx renderPage() for the injection point.
 
+// ===== SVG ICON MAP (replaces Font Awesome icons) =====
+var SVG_ICONS = {
+  'server':     '<svg class="w-7 h-7 fill-current" viewBox="0 0 448 512"><path d="M448 80v48c0 44.2-100.3 80-224 80S0 172.2 0 128V80C0 35.8 100.3 0 224 0S448 35.8 448 80zM393.2 214.7c20.8-7.4 39.9-16.9 54.8-28.6V288c0 44.2-100.3 80-224 80S0 332.2 0 288V186.1c14.9 11.8 34 21.2 54.8 28.6C99.7 230.7 159.5 240 224 240s124.3-9.3 169.2-25.3zM0 346.1c14.9 11.8 34 21.2 54.8 28.6C99.7 390.7 159.5 400 224 400s124.3-9.3 169.2-25.3c20.8-7.4 39.9-16.9 54.8-28.6V432c0 44.2-100.3 80-224 80S0 476.2 0 432V346.1z"/></svg>',
+  'bolt':       '<svg class="w-7 h-7 fill-current" viewBox="0 0 448 512"><path d="M349.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224c-10 8.8-13.6 22.9-8.9 35.3S50.7 288 64 288H175.8L98.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7H272.2L349.4 44.6z"/></svg>',
+  'chart-line': '<svg class="w-7 h-7 fill-current" viewBox="0 0 512 512"><path d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 211.3l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L224 206.6l73.4 73.4c12.5 12.5 32.8 12.5 45.3 0l128-128z"/></svg>',
+  'database':   '<svg class="w-7 h-7 fill-current" viewBox="0 0 448 512"><path d="M448 80v48c0 44.2-100.3 80-224 80S0 172.2 0 128V80C0 35.8 100.3 0 224 0S448 35.8 448 80zM393.2 214.7c20.8-7.4 39.9-16.9 54.8-28.6V288c0 44.2-100.3 80-224 80S0 332.2 0 288V186.1c14.9 11.8 34 21.2 54.8 28.6C99.7 230.7 159.5 240 224 240s124.3-9.3 169.2-25.3zM0 346.1c14.9 11.8 34 21.2 54.8 28.6C99.7 390.7 159.5 400 224 400s124.3-9.3 169.2-25.3c20.8-7.4 39.9-16.9 54.8-28.6V432c0 44.2-100.3 80-224 80S0 476.2 0 432V346.1z"/></svg>',
+  'chart-bar':  '<svg class="w-7 h-7 fill-current" viewBox="0 0 512 512"><path d="M32 32c17.7 0 32 14.3 32 32V400c0 8.8 7.2 16 16 16H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H80c-44.2 0-80-35.8-80-80V64C0 46.3 14.3 32 32 32zm96 96c0-17.7 14.3-32 32-32l192 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-192 0c-17.7 0-32-14.3-32-32zm32 64H288c17.7 0 32 14.3 32 32s-14.3 32-32 32H160c-17.7 0-32-14.3-32-32s14.3-32 32-32zm0 96h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H160c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg>',
+  'default':    '<svg class="w-7 h-7 fill-current" viewBox="0 0 512 512"><path d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zm64 0v64h64V96H64zm384 0H192v64H448V96zM64 224v64h64V224H64zm384 0H192v64H448V224zM64 352v64h64V352H64zm384 0H192v64H448V352z"/></svg>'
+};
+
 // ===== RENDER PROJECTS (Simple Square Cards) =====
 function renderProjects(filter) {
   filter = filter || 'all';
@@ -37,7 +47,7 @@ function renderProjects(filter) {
 
     // --- Featured Badge ---
     var featuredBadge = p.featured
-      ? '<div class="absolute top-4 right-4 text-xs bg-amber-500/20 text-amber-400 px-2 py-1 rounded-md font-bold border border-amber-500/20 backdrop-blur-sm shadow-lg z-20"><i class="fas fa-star text-[10px] mr-1"></i>Featured</div>'
+      ? '<div class="absolute top-4 right-4 text-xs bg-amber-500/20 text-amber-400 px-2 py-1 rounded-md font-bold border border-amber-500/20 backdrop-blur-sm shadow-lg z-20 flex items-center gap-1"><svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 576 512"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>Featured</div>'
       : '';
 
     // --- Full Simple Square Card ---
@@ -51,8 +61,8 @@ function renderProjects(filter) {
         // Content Container
         '<div class="project-card-content project-card-text-blur flex flex-col items-center">' +
           // Icon
-          '<div class="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-6 shadow-2xl border border-white/10 group-hover:bg-brand-500/20 transition-colors duration-500">' +
-            '<i class="fas fa-' + p.image + ' text-white text-2xl group-hover:text-brand-400 transition-colors duration-500 shadow-sm"></i>' +
+          '<div class="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-6 shadow-2xl border border-white/10 group-hover:bg-brand-500/20 transition-colors duration-500 text-white group-hover:text-brand-400 transition-colors duration-500">' +
+            (SVG_ICONS[p.image] || SVG_ICONS['default']) +
           '</div>' +
           
           // Title
@@ -60,12 +70,12 @@ function renderProjects(filter) {
           
           // Category
           '<div class="flex items-center gap-2 text-xs font-bold text-slate-300 font-mono uppercase tracking-wider">' +
-             '<i class="fas fa-layer-group text-[10px] opacity-70"></i> ' + p.category +
+             '<svg class="w-3 h-3 fill-current opacity-70" viewBox="0 0 512 512"><path d="M0 80C0 53.5 21.5 32 48 32H176c26.5 0 48 21.5 48 48V208c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80zM0 304c0-26.5 21.5-48 48-48H176c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V304zM288 80c0-26.5 21.5-48 48-48H464c26.5 0 48 21.5 48 48V208c0 26.5-21.5 48-48 48H336c-26.5 0-48-21.5-48-48V80zM288 304c0-26.5 21.5-48 48-48H464c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H336c-26.5 0-48-21.5-48-48V304z"/></svg> ' + p.category +
           '</div>' +
  
           // View Details Hint
           '<div class="mt-6 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 text-brand-400 text-sm font-semibold flex items-center gap-2">' +
-             'View Details <i class="fas fa-arrow-right text-xs"></i>' +
+             'View Details <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>' +
           '</div>' +
         '</div>' +
       '</div>'
@@ -108,32 +118,35 @@ function initContactForm() {
     var btn = document.getElementById('submitBtn');
     var msg = document.getElementById('formMessage');
 
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    btn.innerHTML = '<svg class="w-4 h-4 fill-white animate-spin" viewBox="0 0 512 512"><path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z"/></svg> Sending...';
     btn.disabled = true;
 
     try {
-      var data = Object.fromEntries(new FormData(form));
-      var res = await fetch('/api/contact', {
+      var formData = new FormData(form);
+      // Use Formspree
+      var res = await fetch('https://formspree.io/f/xgonndrg', { 
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
       });
-      var result = await res.json();
-
-      if (result.success) {
+      
+      if (res.ok) {
         msg.textContent = 'Message sent successfully! I will get back to you soon.';
         msg.className = 'text-center text-sm font-medium py-3 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20';
         form.reset();
       } else {
-        throw new Error(result.error);
+        var result = await res.json();
+        throw new Error(result.error || 'Failed to send message.');
       }
     } catch (err) {
-      msg.textContent = (err && err.message) || 'Something went wrong. Please try again.';
+      msg.textContent = 'Oops! There was a problem sending your message. Please try again.';
       msg.className = 'text-center text-sm font-medium py-3 rounded-xl bg-red-500/10 text-red-400 border border-red-500/20';
     }
 
     msg.classList.remove('hidden');
-    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+    btn.innerHTML = '<svg class="w-4 h-4 fill-white" viewBox="0 0 512 512"><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/></svg> Send Message';
     btn.disabled = false;
     setTimeout(function() { msg.classList.add('hidden'); }, 5000);
   });
@@ -256,7 +269,7 @@ function openProjectModal(projectId) {
 
   // Impact List
   var impactHtml = (p.impact || []).map(function(i) {
-    return '<li class="flex items-start gap-2 text-sm text-gray-600"><i class="fas fa-check text-emerald-500 mt-1 flex-shrink-0"></i>' + i + '</li>';
+    return '<li class="flex items-start gap-2 text-sm text-gray-600"><svg class="w-4 h-4 fill-emerald-500 mt-0.5 flex-shrink-0" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>' + i + '</li>';
   }).join('');
   document.getElementById('modalImpact').innerHTML = impactHtml || '<li class="text-sm text-gray-400">No impact metrics described.</li>';
 

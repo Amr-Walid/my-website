@@ -157,34 +157,77 @@ export const portfolioData = {
         "Identifies top-performing products, regions, and seasonal trends",
         "Supports strategic pricing and marketing decisions"
       ],
-      github: "https://github.com/Amr-Walid/Excel-Dashboard",
       tags: ["BI", "Dashboard", "Excel", "Data Analysis", "Power Query"]
     }
   ],
 
   experience: [
     {
+      title: "Data Engineering Instructor",
+      type: "Applied Statistics Lab (ASL)",
+      period: "2026 — Present",
+      description: "Teaching the fundamentals of modern data engineering and helping students transition from data analysis to building scalable data systems.",
+      highlights: [
+        "Teaching SQL, Python, and data pipeline concepts",
+        "Explaining ETL / ELT architecture and data workflow design",
+        "Guiding students through hands-on data engineering projects",
+        "Introducing real-world data engineering practices and tools"
+      ]
+    },
+    {
+      title: "Data Engineer Trainee",
+      type: "Digital Egypt Pioneers Initiative",
+      period: "2025 — Present",
+      description: "Selected for the national Data Engineering program focused on modern data infrastructure and analytics systems.",
+      highlights: [
+        "Building ETL / ELT pipelines using SQL and Python",
+        "Learning data modeling and warehouse design",
+        "Working with real-world data engineering scenarios",
+        "Developing structured data solutions for analytics"
+      ]
+    },
+    {
+      title: "Data Analyst Intern",
+      type: "EMAM Organization for Development and Culture",
+      period: "2025 — 2025",
+      description: "Conducted statistical research focused on environmental data and policy insights.",
+      highlights: [
+        "Collected, cleaned, and analyzed environmental datasets",
+        "Applied regression and hypothesis testing",
+        "Built analytical reports and visualizations"
+      ]
+    },
+    {
+      title: "Statistical Data Trainee",
+      type: "Central Agency for Public Mobilization and Statistics (CAPMAS)",
+      period: "2025 — 2025",
+      description: "Completed a training program at Egypt’s national statistical agency.",
+      highlights: [
+        "Worked with survey datasets and statistical indicators",
+        "Learned official statistics methodologies",
+        "Practiced data reporting and analysis"
+      ]
+    },
+    {
       title: "Junior Data Engineer",
       type: "Self-Directed Professional Development",
       period: "2024 — Present",
-      description: "Building production-grade data engineering projects focused on ETL pipeline design, containerization, workflow automation, and cloud-native data architectures. Actively developing expertise across the modern data stack.",
+      description: "Building production-grade data engineering projects focused on automation and modern data architectures.",
       highlights: [
-        "Designed and deployed automated ETL pipelines with CI/CD using GitHub Actions",
-        "Built containerized data workflows with Docker and PostgreSQL",
-        "Implemented data modeling and BI solutions using Power BI and Excel",
-        "Studying for Microsoft DP-700 (Fabric Data Engineer) certification"
+        "Automated ETL pipelines with CI/CD",
+        "Built containerized workflows with Docker",
+        "Developed data models and analytics dashboards"
       ]
     },
     {
       title: "Economics Student — Data Engineering Focus",
       type: "Faculty of Economics & Political Science, Cairo University",
       period: "2022 — Present",
-      description: "Pursuing an economics degree with a self-directed specialization in data engineering. Combining quantitative economic analysis with modern data infrastructure skills.",
+      description: "Combining economic analysis with modern data infrastructure skills.",
       highlights: [
-        "Applied statistical analysis and data modeling to economic datasets",
-        "Self-taught Python, SQL, and the modern data stack alongside academic studies",
-        "Built data-driven projects that bridge economics and engineering",
-        "Active in data engineering communities and continuous learning"
+        "Applied statistical analysis to economic datasets",
+        "Self-taught Python, SQL, and the modern data stack",
+        "Built data-driven projects bridging economics and engineering"
       ]
     }
   ],

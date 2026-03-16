@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* ============================================================
    Amr Walid Portfolio — Custom Stylesheet
    Separated from index.tsx for clean Separation of Concerns
@@ -66,7 +70,7 @@
 }
 
 /* ---------- Pipeline / Timeline Line ---------- */
-@keyframes flow {
+@keyframes pipeline-flow {
   0%   { transform: translateY(-50%); }
   100% { transform: translateY(0%); }
 }
@@ -80,7 +84,7 @@
   background-size: 100% 200%;
   height: 200%;
   top: -100%;
-  animation: flow 3s linear infinite;
+  animation: pipeline-flow 3s linear infinite;
   will-change: transform;
 }
 
@@ -182,7 +186,8 @@ section {
     animation: none;
   }
   .animate-spin-slow,
-  .animate-\[spin_20s_linear_reverse\] {
+  .animate-\[spin_20s_linear_reverse\],
+  .pipeline-line {
     animation-play-state: paused;
   }
 }
@@ -253,53 +258,56 @@ body.modal-open,
 .data-particle {
   position: absolute;
   top: 50%;
-  left: 0;
-  transform: translateY(-50%);
+  left: 0; /* Base position for transform */
   width: 8px;
   height: 8px;
   background: white;
   border-radius: 50%;
   box-shadow: 0 0 10px 2px rgba(59, 130, 246, 0.8), 0 0 20px 4px rgba(14, 165, 233, 0.4);
   opacity: 0;
+  /* Use translate3d to force hardware acceleration */
+  transform: translate3d(-10px, -50%, 0) scale(0.5);
   animation: flow 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   z-index: 10;
+  will-change: transform, opacity;
 }
 
 .particle-1 { animation-delay: 0s; }
 .particle-2 { animation-delay: 1.3s; }
 .particle-3 { animation-delay: 2.6s; }
 
+/* The container width is roughly 100% of its parent. 
+   We animate from 0% (left) to 100% (right) relative to its container */
 @keyframes flow {
   0% {
-    left: -10px;
     opacity: 0;
-    transform: translateY(-50%) scale(0.5);
+    transform: translate3d(-10px, -50%, 0) scale(0.5);
   }
   15% {
     opacity: 1;
-    transform: translateY(-50%) scale(1);
+    transform: translate3d(20px, -50%, 0) scale(1);
   }
   45% {
-    left: calc(50% - 30px);
     opacity: 1;
+    /* Use percentage-based translation if parent is relative, otherwise fixed px might be better. 
+       Assuming relative parent for translateX logic. */
+    transform: translate3d(calc(50vw - 100px), -50%, 0) scale(1); 
   }
   50% {
-    left: 50%;
-    opacity: 0; /* Disappear into the engine */
-    transform: translateY(-50%) scale(1.5);
+    opacity: 0;
+    transform: translate3d(calc(50vw - 60px), -50%, 0) scale(1.5);
   }
   55% {
-    left: calc(50% + 30px);
     opacity: 1;
-    transform: translateY(-50%) scale(1);
+    transform: translate3d(calc(50vw - 20px), -50%, 0) scale(1);
   }
   85% {
     opacity: 1;
+    transform: translate3d(calc(100vw - 200px), -50%, 0) scale(1);
   }
   100% {
-    left: calc(100% + 10px);
     opacity: 0;
-    transform: translateY(-50%) scale(0.5);
+    transform: translate3d(calc(100vw - 150px), -50%, 0) scale(0.5);
   }
 }
 
