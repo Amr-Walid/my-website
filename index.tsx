@@ -9,9 +9,9 @@ app.use('/api/*', cors())
 const portfolioData = {
   personal: {
     name: "Amr Walid",
-    title: "Data Engineer",
+    title: "Data Engineer & Analyst",
     headline: "Building Scalable Data Pipelines & Analytics Infrastructure",
-    tagline: "I transform raw, chaotic data into structured, reliable assets that power business decisions.",
+    tagline: "From raw extraction to strategic insights. I build scalable ETL pipelines and design dynamic dashboards that drive data-informed decisions.",
     email: "amr.walid2022@feps.edu.eg",
     location: "Cairo, Egypt",
     linkedin: "https://www.linkedin.com/in/amrwalidmaher",
@@ -380,7 +380,7 @@ const renderPage = () => {
           </div>
           <div class="hidden sm:block">
             <span class="font-bold text-lg text-slate-900">Amr Walid</span>
-            <span class="block text-xs text-brand-400 font-mono -mt-0.5">Data Engineer</span>
+            <span class="block text-xs text-brand-400 font-mono -mt-0.5">Data Engineer & Analyst</span>
           </div>
         </a>
         
@@ -441,16 +441,13 @@ const renderPage = () => {
               <span class="gradient-text"> Walid</span>
             </h1>
             <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-700 mt-3">
-              Data Engineer
+              Data Engineer & Analyst
             </h2>
           </div>
           
           <!-- Tagline -->
           <p class="text-lg sm:text-xl text-gray-500 leading-relaxed max-w-xl">
-            I build <span class="text-brand-400 font-semibold">scalable data pipelines</span>, 
-            <span class="text-accent-400 font-semibold">automation systems</span>, and 
-            <span class="text-purple-400 font-semibold">analytics infrastructure</span> 
-            that turn raw data into strategic business assets.
+            From raw extraction to strategic insights. I build <span class="text-brand-400 font-semibold">scalable ETL pipelines</span> and design <span class="text-accent-400 font-semibold">dynamic dashboards</span> that drive data-informed decisions.
           </p>
           
           <!-- Tech Tags -->
