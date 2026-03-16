@@ -7,106 +7,70 @@
 // This script expects `window.PROJECTS` to be set by an inline <script> in the HTML
 // before this file is loaded. See index.tsx renderPage() for the injection point.
 
-// ===== RENDER PROJECTS =====
+// ===== RENDER PROJECTS (Simple Square Cards) =====
 function renderProjects(filter) {
   filter = filter || 'all';
   var projects = window.PROJECTS || [];
   var grid = document.getElementById('projectsGrid');
   if (!grid) return;
 
+  // Make grid 3 columns to match the reference better
+  grid.className = "grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6";
+
   var filtered = filter === 'all'
     ? projects
     : projects.filter(function(p) { return p.category === filter; });
 
   grid.innerHTML = filtered.map(function(p) {
-    // --- Image Header ---
-    var urls = p.imageUrls || (p.imageUrl ? [p.imageUrl] : []);
-    var imageHeader = '';
-    if (urls.length > 0) {
-      var imgParts = urls.map(function(url, i) {
-        var webpUrl = url.replace(/\.(png|jpg|jpeg)$/i, '.webp');
-        var border = i > 0 ? 'border-l border-gray-200' : '';
-        return (
-          '<div class="flex-1 h-full flex items-center justify-center p-3 bg-white ' + border + '" style="min-width:0">' +
-            '<picture style="display:block;width:100%;height:100%;">' +
-              '<source srcset="' + webpUrl + '" type="image/webp">' +
-              '<img src="' + url + '" alt="' + p.title + ' - Image ' + (i + 1) + '" width="400" height="300" ' +
-                   'style="display:block;width:100%;height:100%;object-fit:contain;" loading="lazy" decoding="async" />' +
-            '</picture>' +
-          '</div>'
-        );
-      });
-      imageHeader = (
-        '<div class="w-full h-36 sm:h-44 lg:h-48 bg-white border-b border-gray-200 flex flex-row overflow-hidden">' +
-          imgParts.join('') +
-        '</div>'
-      );
+    // We use the first image as the background
+    var mainImage = '';
+    if (p.imageUrls && p.imageUrls.length > 0) {
+        mainImage = p.imageUrls[0];
+    } else if (p.imageUrl) {
+        mainImage = p.imageUrl;
     }
+
+    // --- Background Style ---
+    // Linear gradient overlay + background image if exists
+    var bgStyle = mainImage 
+      ? 'background-image: linear-gradient(to bottom, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.95)), url(' + mainImage + '); background-size: cover; background-position: center;'
+      : 'background-image: linear-gradient(to bottom, #1e293b, #0f172a);'; // Fallback dark gradient
 
     // --- Featured Badge ---
     var featuredBadge = p.featured
-      ? '<span class="ml-2 text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-md font-bold">Featured</span>'
+      ? '<div class="absolute top-4 right-4 text-xs bg-amber-500/20 text-amber-400 px-2 py-1 rounded-md font-bold border border-amber-500/20 backdrop-blur-sm shadow-lg"><i class="fas fa-star text-[10px] mr-1"></i>Featured</div>'
       : '';
 
-    // --- Impact Items ---
-    var impactItems = (p.impact || []).map(function(item) {
-      return (
-        '<li class="flex items-start gap-2 text-sm text-gray-600">' +
-          '<i class="fas fa-check text-emerald-600 mt-0.5 text-xs" aria-hidden="true"></i>' +
-          item +
-        '</li>'
-      );
-    }).join('');
-
-    // --- Tech Stack Tags ---
-    var techItems = (p.techStack || []).map(function(t) {
-      return (
-        '<span class="tag px-2.5 py-1 bg-brand-50 text-brand-700 text-xs rounded-lg font-mono font-medium border border-brand-200 cursor-default">' +
-          t +
-        '</span>'
-      );
-    }).join('');
-
-    // --- Full Card ---
+    // --- Full Simple Square Card ---
     return (
-      '<div class="glass glass-light rounded-2xl overflow-hidden card-hover group project-card flex flex-col h-full" data-category="' + p.category + '">' +
-        imageHeader +
-        '<div class="p-5 sm:p-6 lg:p-8 flex flex-col flex-grow">' +
-          '<div class="flex items-start justify-between mb-4">' +
-            '<div class="flex items-center gap-3">' +
-              '<div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center shrink-0 shadow-lg">' +
-                '<i class="fas fa-' + p.image + ' text-white text-base sm:text-lg"></i>' +
-              '</div>' +
-              '<div>' +
-                '<span class="text-xs font-bold text-brand-700 font-mono uppercase tracking-wider">' + p.category + '</span>' +
-                featuredBadge +
-              '</div>' +
-            '</div>' +
-            '<a href="' + p.github + '" target="_blank" rel="noopener noreferrer" ' +
-               'aria-label="View ' + p.title + ' source code on GitHub" ' +
-               'class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-600 hover:text-brand-700 hover:bg-brand-100 transition-all shrink-0">' +
-              '<i class="fab fa-github" aria-hidden="true"></i>' +
-            '</a>' +
+      '<div class="relative overflow-hidden rounded-2xl cursor-pointer group card-hover project-card-square flex flex-col justify-center items-center p-6 text-center border border-slate-700/50 shadow-xl" ' +
+           'style="' + bgStyle + '" ' +
+           'onclick="openProjectModal(\'' + p.id + '\')">' +
+        featuredBadge +
+        
+        // Hover Scale Effect Container
+        '<div class="relative z-10 p-4 transition-transform duration-500 group-hover:scale-110 flex flex-col items-center">' +
+          // Icon
+          '<div class="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-6 shadow-2xl border border-white/10 group-hover:bg-brand-500/20 transition-colors duration-500">' +
+            '<i class="fas fa-' + p.image + ' text-white text-2xl group-hover:text-brand-400 transition-colors duration-500 shadow-sm"></i>' +
           '</div>' +
-          '<h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-3 sm:mb-4 group-hover:text-brand-400 transition-colors">' + p.title + '</h3>' +
-          '<div class="mb-3">' +
-            '<p class="text-xs font-bold text-red-700 font-mono uppercase tracking-wider mb-1">Problem</p>' +
-            '<p class="text-sm text-gray-700 leading-relaxed">' + p.problem + '</p>' +
+          
+          // Title
+          '<h3 class="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-brand-400 group-hover:to-accent-400 transition-all duration-300">' + p.title + '</h3>' +
+          
+          // Category
+          '<div class="flex items-center gap-2 text-xs font-bold text-slate-300 font-mono uppercase tracking-wider">' +
+             '<i class="fas fa-layer-group text-[10px] opacity-70"></i> ' + p.category +
           '</div>' +
-          '<div class="mb-3">' +
-            '<p class="text-xs font-bold text-emerald-700 font-mono uppercase tracking-wider mb-1">Solution</p>' +
-            '<p class="text-sm text-gray-700 leading-relaxed">' + p.solution + '</p>' +
+
+          // View Details Hint (Shows on hover)
+          '<div class="absolute -bottom-12 opacity-0 group-hover:bottom-4 group-hover:opacity-100 transition-all duration-500 ease-out text-brand-400 text-sm font-semibold flex items-center gap-2">' +
+             'View Details <i class="fas fa-arrow-right text-xs"></i>' +
           '</div>' +
-          '<div class="mb-3 p-3 bg-gray-50 rounded-xl border border-gray-200">' +
-            '<p class="text-xs font-bold text-purple-700 font-mono uppercase tracking-wider mb-1">Architecture</p>' +
-            '<p class="text-xs text-gray-600 font-mono leading-relaxed">' + p.architecture + '</p>' +
-          '</div>' +
-          '<div class="mb-4">' +
-            '<p class="text-xs font-bold text-sky-700 font-mono uppercase tracking-wider mb-2">Impact</p>' +
-            '<ul class="space-y-1.5">' + impactItems + '</ul>' +
-          '</div>' +
-          '<div class="flex flex-wrap gap-2">' + techItems + '</div>' +
         '</div>' +
+
+        // Extra hover glow effect
+        '<div class="absolute inset-0 bg-brand-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay pointer-events-none"></div>' +
       '</div>'
     );
   }).join('');
@@ -264,6 +228,108 @@ function initActiveNavLinks() {
   sections.forEach(function(sec) { navObserver.observe(sec); });
 }
 
+// ===== MODAL LOGIC =====
+function openProjectModal(projectId) {
+  var p = (window.PROJECTS || []).find(function(proj) { return proj.id === projectId; });
+  if (!p) return;
+
+  var modal = document.getElementById('projectModal');
+  var content = document.getElementById('modalContent');
+  
+  // Populate Data
+  document.getElementById('modalTitle').textContent = p.title;
+  document.getElementById('modalProblem').textContent = p.problem || 'No problem described.';
+  document.getElementById('modalSolution').textContent = p.solution || 'No solution described.';
+  document.getElementById('modalArchitecture').textContent = p.architecture || 'No architecture described.';
+  
+  // Github Link
+  var githubBtn = document.getElementById('modalGithubBtn');
+  if (p.github) {
+    githubBtn.href = p.github;
+    githubBtn.style.display = 'flex';
+  } else {
+    githubBtn.style.display = 'none';
+  }
+
+  // Tech Stack Tags
+  var techHtml = (p.techStack || []).map(function(t) {
+    return '<span class="px-2 py-1 bg-white border border-gray-200 text-gray-600 text-xs rounded-md font-mono shadow-sm">' + t + '</span>';
+  }).join('');
+  document.getElementById('modalTechStack').innerHTML = techHtml || '<span class="text-sm text-gray-400">Not specified</span>';
+
+  // Impact List
+  var impactHtml = (p.impact || []).map(function(i) {
+    return '<li class="flex items-start gap-2 text-sm text-gray-600"><i class="fas fa-check text-emerald-500 mt-1 flex-shrink-0"></i>' + i + '</li>';
+  }).join('');
+  document.getElementById('modalImpact').innerHTML = impactHtml || '<li class="text-sm text-gray-400">No impact metrics described.</li>';
+
+  // Images Header
+  var urls = p.imageUrls || (p.imageUrl ? [p.imageUrl] : []);
+  var imgContainer = document.getElementById('modalImages');
+  if (urls.length > 0) {
+    var imgHtml = urls.map(function(url, i) {
+      var border = i > 0 ? 'border-t sm:border-t-0 sm:border-l border-gray-100' : '';
+      return (
+        '<div class="flex-1 min-h-[200px] flex items-center justify-center p-4 bg-white shadow-inner ' + border + '">' +
+          '<img src="' + url + '" alt="Project Image" class="w-full h-full object-contain max-h-[300px]" loading="lazy" />' +
+        '</div>'
+      );
+    }).join('');
+    imgContainer.innerHTML = imgHtml;
+    imgContainer.style.display = 'flex';
+  } else {
+    imgContainer.style.display = 'none';
+  }
+
+  // Show Modal
+  modal.classList.remove('hidden');
+  document.documentElement.classList.add('modal-open'); // Prevent html scroll
+  document.body.classList.add('modal-open'); // Prevent body scroll
+  
+  // Small delay for scale-in animation
+  setTimeout(function() {
+    modal.classList.remove('opacity-0');
+    content.classList.remove('scale-95');
+    content.classList.add('scale-100');
+  }, 10);
+}
+
+function closeProjectModal() {
+  var modal = document.getElementById('projectModal');
+  var content = document.getElementById('modalContent');
+  
+  // Transition out
+  modal.classList.add('opacity-0');
+  content.classList.remove('scale-100');
+  content.classList.add('scale-95');
+  
+  // Wait for transition to finish before hiding
+  setTimeout(function() {
+    modal.classList.add('hidden');
+    document.documentElement.classList.remove('modal-open');
+    document.body.classList.remove('modal-open');
+  }, 300);
+}
+
+function initModalEvents() {
+  var closeModalBtn = document.getElementById('closeModalBtn');
+  var modalBackdrop = document.getElementById('modalBackdrop');
+  
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', closeProjectModal);
+  }
+  if (modalBackdrop) {
+    modalBackdrop.addEventListener('click', closeProjectModal);
+  }
+
+  // Close with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && !document.getElementById('projectModal').classList.contains('hidden')) {
+      closeProjectModal();
+    }
+  });
+}
+
 // ===== INIT ALL =====
 document.addEventListener('DOMContentLoaded', function() {
   renderProjects();
@@ -274,4 +340,5 @@ document.addEventListener('DOMContentLoaded', function() {
   initNavbarScroll();
   initScrollAnimations();
   initActiveNavLinks();
+  initModalEvents(); // Added modal init
 });
