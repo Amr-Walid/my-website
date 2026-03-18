@@ -234,25 +234,15 @@ export const portfolioData = {
       ]
     },
     {
-      title: "Junior Data Engineer",
-      type: "Self-Directed Professional Development",
-      period: "2024 — Present",
-      description: "Building production-grade data engineering projects focused on automation and modern data architectures.",
-      highlights: [
-        "Automated ETL pipelines with CI/CD",
-        "Built containerized workflows with Docker",
-        "Developed data models and analytics dashboards"
-      ]
-    },
-    {
-      title: "Economics Student — Data Engineering Focus",
+      title: "Economics & Statistics Student",
       type: "Faculty of Economics & Political Science, Cairo University",
       period: "2022 — Present",
-      description: "Combining economic analysis with modern data infrastructure skills.",
+      description: "Combining economic theory with strong statistical and analytical skills to understand and interpret real-world data.",
       highlights: [
-        "Applied statistical analysis to economic datasets",
-        "Self-taught Python, SQL, and the modern data stack",
-        "Built data-driven projects bridging economics and engineering"
+        "Applied econometric and statistical techniques on economic datasets",
+        "Developed solid foundations in probability, statistics, and data analysis",
+        "Worked on projects involving data cleaning, analysis, and visualization",
+        "Built analytical thinking for interpreting economic trends and relationships"
       ]
     }
   ],

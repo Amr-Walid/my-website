@@ -108,7 +108,6 @@ my-web/
 | 2025 — Present | Data Engineer Trainee | Digital Egypt Pioneers Initiative |
 | 2025 | Data Analyst Intern | EMAM Organization for Development and Culture |
 | 2025 | Statistical Data Trainee | Central Agency for Public Mobilization & Statistics (CAPMAS) |
-| 2024 — Present | Junior Data Engineer | Self-Directed Professional Development |
 | 2022 — Present | Economics Student (Data Engineering Focus) | Faculty of Economics & Political Science, Cairo University |
 
 ---
