@@ -158,6 +158,31 @@ export const portfolioData = {
         "Supports strategic pricing and marketing decisions"
       ],
       tags: ["BI", "Dashboard", "Excel", "Data Analysis", "Power Query"]
+    },
+    {
+      id: "payment-bg-analytics-dashboard",
+      title: "Payment Performance & Bank Guarantee Analytics Dashboard",
+      category: "Data Analysis",
+      featured: true,
+      image: "chart-bar",
+      imageUrls: [
+        "/assets/payment-dashboard-1.webp",
+        "/assets/payment-dashboard-2.webp"
+      ],
+      problem: "A finance department was handling large volumes of payment and bank guarantee (BG) data across multiple vendors, banks, and contract types. The data lacked a centralized structure, making it difficult to track payment performance and delays, monitor vendor efficiency, analyze financial exposure across banks, and identify critical risks and upcoming obligations.",
+      solution: "Developed two fully interactive dashboards in Excel: a Payment Performance Dashboard and a Bank Guarantee (BG) Dashboard. Used Power Query for data cleaning and transformation, and built a robust data model connecting invoices, vendors, banks, and guarantees. Implemented DAX measures to calculate KPIs such as payment cycle, approval duration, exposure, and risk levels. Designed dynamic dashboards with slicers, filters, and drill-down capabilities to enable real-time financial analysis.",
+      architecture: "Raw Data → Power Query (ETL) → Data Model (Fact & Dimension Tables) → DAX Measures → Interactive Dashboards",
+      techStack: ["Excel", "Power Query", "Power Pivot", "DAX", "Data Modeling", "Business Intelligence"],
+      impact: [
+        "Centralized financial visibility across payments and guarantees",
+        "Payment cycle, approval duration, and hold/delay KPIs tracked in real-time",
+        "Vendor performance analysis based on processing time",
+        "Risk classification: Critical, Warning, Valid, and Expired guarantees",
+        "90-day maturity risk planning for bank guarantees",
+        "Exposure analysis by bank and BG type (Advance, Financial, Performance, Initial)",
+        "Enabled finance team to shift from manual reporting to self-service analytics"
+      ],
+      tags: ["Excel", "DAX", "Power Query", "BI Dashboard", "Finance Analytics"]
     }
   ],
 
