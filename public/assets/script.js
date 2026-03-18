@@ -197,6 +197,8 @@ function initNavbarScroll() {
 
 // ===== SCROLL ANIMATIONS =====
 function initScrollAnimations() {
+  var elements = document.querySelectorAll('[data-animate]');
+
   var observer = new IntersectionObserver(function(entries, obs) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
@@ -204,11 +206,19 @@ function initScrollAnimations() {
         obs.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
 
-  document.querySelectorAll('[data-animate]').forEach(function(el) {
+  elements.forEach(function(el) {
     observer.observe(el);
   });
+
+  // Fallback: force all elements visible after 300ms
+  // (handles cases where observer fires before scroll or element is already in viewport)
+  setTimeout(function() {
+    elements.forEach(function(el) {
+      el.classList.add('visible');
+    });
+  }, 300);
 }
 
 // ===== ACTIVE NAV LINK =====

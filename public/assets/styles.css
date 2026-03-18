@@ -155,13 +155,8 @@
 }
 
 /* ---------- Performance: Content Visibility ---------- */
-section {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 600px;
-}
-#hero {
-  content-visibility: visible;
-}
+/* NOTE: content-visibility:auto was removed — it interferes with IntersectionObserver
+   causing data-animate elements to stay hidden when the observer fires too early. */
 
 /* ---------- Mobile Optimizations ---------- */
 @media (max-width: 768px) {
