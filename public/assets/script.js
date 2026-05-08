@@ -317,15 +317,17 @@ function openProjectModal(projectId) {
   document.documentElement.classList.add('modal-open'); // Prevent html scroll
   document.body.classList.add('modal-open'); // Prevent body scroll
   
-  // Force scroll to top on all scrollable containers immediately and after slight delay (for images loading)
+  // Force scroll to top on all scrollable containers
   function resetScroll() {
-    var containers = modal.querySelectorAll('.overflow-y-auto, .lg\\:overflow-y-auto, .custom-scrollbar');
+    var sc = document.getElementById('modalScrollContainer');
+    if (sc) sc.scrollTop = 0;
+    var containers = modal.querySelectorAll('.lg\\:overflow-y-auto');
     containers.forEach(function(c) { c.scrollTop = 0; });
   }
   
   resetScroll();
 
-  // Small delay for scale-in animation and image loading push-down
+  // Small delay for scale-in animation
   setTimeout(function() {
     modal.classList.remove('opacity-0');
     content.classList.remove('scale-95');

@@ -528,10 +528,11 @@ export const renderPage = () => {
       </div>
 
       <!-- Split Layout Container (Scrollable on mobile, Split on desktop) -->
-      <div class="flex flex-col-reverse lg:flex-row h-full w-full overflow-y-auto lg:overflow-hidden custom-scrollbar">
+      <!-- Split Layout Container (Scrollable on mobile, Split on desktop) -->
+      <div id="modalScrollContainer" class="flex flex-col lg:flex-row h-full w-full overflow-y-auto lg:overflow-hidden custom-scrollbar">
         
-        <!-- Left Side: Text Content -->
-        <div class="w-full lg:w-5/12 h-auto lg:h-full lg:overflow-y-auto p-6 sm:p-8 lg:p-12 xl:p-14 bg-white/60 border-t lg:border-t-0 lg:border-r border-gray-200/60 custom-scrollbar z-20">
+        <!-- Left Side: Text Content (Order 2 on mobile, Order 1 on desktop) -->
+        <div class="order-2 lg:order-1 w-full lg:w-5/12 h-auto lg:h-full lg:overflow-y-auto p-6 sm:p-8 lg:p-12 xl:p-14 bg-white/60 border-t lg:border-t-0 lg:border-r border-gray-200/60 custom-scrollbar z-20">
           
           <!-- Title -->
           <h2 id="modalTitle" class="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-slate-900 mb-4 sm:mb-6 leading-tight tracking-tight mt-4 lg:mt-0">Project Title</h2>
@@ -580,8 +581,8 @@ export const renderPage = () => {
 
         </div>
 
-        <!-- Right Side: Images (Top on mobile) -->
-        <div class="w-full lg:w-7/12 h-auto lg:h-full lg:overflow-y-auto bg-[#f8f9fa] p-6 pt-16 sm:p-8 sm:pt-20 lg:p-12 relative custom-scrollbar z-10 shrink-0">
+        <!-- Right Side: Images (Order 1 on mobile, Order 2 on desktop) -->
+        <div class="order-1 lg:order-2 w-full lg:w-7/12 h-auto lg:h-full lg:overflow-y-auto bg-[#f8f9fa] p-6 pt-16 sm:p-8 sm:pt-20 lg:p-12 relative custom-scrollbar z-10 shrink-0">
           <!-- Background Grid Pattern for style -->
           <div class="absolute inset-0 grid-bg opacity-40 pointer-events-none hidden lg:block"></div>
           
