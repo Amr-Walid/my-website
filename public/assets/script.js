@@ -52,30 +52,30 @@ function renderProjects(filter) {
 
     // --- Full Simple Square Card ---
     return (
-      '<div class="relative overflow-hidden rounded-2xl cursor-pointer group card-hover project-card-square flex flex-col justify-center items-center p-6 text-center border border-slate-700/50 shadow-xl" ' +
+      '<div class="relative overflow-hidden rounded-2xl cursor-pointer group card-hover project-card-square flex flex-col justify-center items-center p-4 sm:p-6 text-center border border-slate-700/50 shadow-xl" ' +
            'onclick="openProjectModal(\'' + p.id + '\')">' +
         bgImageDiv +
         overlay +
         featuredBadge +
         
         // Content Container
-        '<div class="project-card-content project-card-text-blur flex flex-col items-center">' +
+        '<div class="project-card-content project-card-text-blur flex flex-col items-center justify-center w-full">' +
           // Icon
-          '<div class="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-6 shadow-2xl border border-white/10 group-hover:bg-brand-500/20 transition-colors duration-500 text-white group-hover:text-brand-400 transition-colors duration-500">' +
+          '<div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-3 sm:mb-4 shadow-2xl border border-white/10 group-hover:bg-brand-500/20 transition-colors duration-500 text-white group-hover:text-brand-400">' +
             (SVG_ICONS[p.image] || SVG_ICONS['default']) +
           '</div>' +
           
           // Title
-          '<h3 class="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-brand-400 group-hover:to-accent-400 transition-all duration-300 px-4">' + p.title + '</h3>' +
+          '<h3 class="text-sm sm:text-lg font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-brand-400 group-hover:to-accent-400 transition-all duration-300 px-2 line-clamp-3">' + p.title + '</h3>' +
           
           // Category
-          '<div class="flex items-center gap-2 text-xs font-bold text-slate-300 font-mono uppercase tracking-wider">' +
-             '<svg class="w-3 h-3 fill-current opacity-70" viewBox="0 0 512 512"><path d="M0 80C0 53.5 21.5 32 48 32H176c26.5 0 48 21.5 48 48V208c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80zM0 304c0-26.5 21.5-48 48-48H176c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V304zM288 80c0-26.5 21.5-48 48-48H464c26.5 0 48 21.5 48 48V208c0 26.5-21.5 48-48 48H336c-26.5 0-48-21.5-48-48V80zM288 304c0-26.5 21.5-48 48-48H464c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H336c-26.5 0-48-21.5-48-48V304z"/></svg> ' + p.category +
+          '<div class="flex items-center gap-1.5 text-[10px] font-bold text-slate-300 font-mono uppercase tracking-wider opacity-80">' +
+             '<svg class="w-2.5 h-2.5 fill-current opacity-70" viewBox="0 0 512 512"><path d="M0 80C0 53.5 21.5 32 48 32H176c26.5 0 48 21.5 48 48V208c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80zM0 304c0-26.5 21.5-48 48-48H176c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V304zM288 80c0-26.5 21.5-48 48-48H464c26.5 0 48 21.5 48 48V208c0 26.5-21.5 48-48 48H336c-26.5 0-48-21.5-48-48V80zM288 304c0-26.5 21.5-48 48-48H464c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H336c-26.5 0-48-21.5-48-48V304z"/></svg> ' + p.category +
           '</div>' +
  
-          // View Details Hint
-          '<div class="mt-6 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 text-brand-400 text-sm font-semibold flex items-center gap-2">' +
-             'View Details <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>' +
+          // View Details Button (Sleek CTA)
+          '<div class="mt-4 sm:mt-6 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg text-white text-[10px] font-bold flex items-center gap-2 group-hover:bg-brand-600 group-hover:border-brand-500 group-hover:scale-105 transition-all duration-300 shadow-lg">' +
+             'View Case Study <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>' +
           '</div>' +
         '</div>' +
       '</div>'
