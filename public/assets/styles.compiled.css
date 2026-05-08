@@ -1696,6 +1696,11 @@ video {
   background-color: rgb(59 143 255 / 0.1);
 }
 
+.bg-brand-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(27 111 245 / var(--tw-bg-opacity, 1));
+}
+
 .bg-emerald-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(16 185 129 / var(--tw-bg-opacity, 1));
@@ -2923,6 +2928,11 @@ body.modal-open,
 
 .hover\:bg-brand-500\/10:hover {
   background-color: rgb(59 143 255 / 0.1);
+}
+
+.hover\:bg-brand-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(20 89 225 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:bg-slate-800:hover {

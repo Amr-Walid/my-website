@@ -53,6 +53,30 @@ export const portfolioData = {
 
   projects: [
     {
+      id: "ai-powered-nextjs-dashboard",
+      title: "AI-Powered Enterprise Analytics Dashboard",
+      category: "Data Analysis",
+      featured: true,
+      image: "chart-bar",
+      imageUrls: [
+        "/assets/nextjs-dashboard-1.webp",
+        "/assets/nextjs-dashboard-2.webp",
+        "/assets/nextjs-dashboard-3.webp"
+      ],
+      problem: "Modern enterprises struggle with large volumes of unstructured sales data. Traditional dashboards require users to manually filter and interpret complex charts, lacking an interactive way to query data instantly in their native language.",
+      solution: "Developed a full-stack, enterprise-grade analytics dashboard using Next.js and React 19. Integrated a real-time AI Assistant using Vercel AI SDK and Google's Gemini Flash Lite. The AI can analyze the entire underlying dataset and provide instant, accurate, streaming insights in Arabic. The UI features highly interactive, scalable charts built with Recharts and Tailwind CSS with full RTL support.",
+      architecture: "Next.js App Router → Vercel AI SDK (Streaming) → Gemini Model → Recharts (Frontend Visualization)",
+      techStack: ["Next.js 16", "React 19", "Tailwind CSS", "Vercel AI SDK", "Google Gemini AI", "Recharts", "TypeScript"],
+      impact: [
+        "Integrated AI-driven insights directly into the reporting workflow.",
+        "Resolved long-context payload timeouts using optimized data summarization and stream rendering.",
+        "Built a fully localized Arabic (RTL) enterprise dashboard interface.",
+        "Implemented interactive data visualizations for sales, demographics, and regional performance."
+      ],
+      website: "https://dashboard.amrw.me/",
+      tags: ["Next.js", "AI Integration", "Dashboard", "React", "Data Analytics"]
+    },
+    {
       id: "sql-server-data-warehouse",
       title: "Modern SQL Server Data Warehouse",
       category: "Data Engineering",

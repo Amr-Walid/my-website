@@ -266,9 +266,20 @@ function openProjectModal(projectId) {
   var githubBtn = document.getElementById('modalGithubBtn');
   if (p.github) {
     githubBtn.href = p.github;
-    githubBtn.style.display = 'flex';
+    githubBtn.style.display = 'inline-flex';
   } else {
     githubBtn.style.display = 'none';
+  }
+
+  // Live Demo Link
+  var liveBtn = document.getElementById('modalLiveBtn');
+  if (liveBtn) {
+    if (p.website) {
+      liveBtn.href = p.website;
+      liveBtn.style.display = 'inline-flex';
+    } else {
+      liveBtn.style.display = 'none';
+    }
   }
 
   // Tech Stack Tags
@@ -311,6 +322,10 @@ function openProjectModal(projectId) {
     modal.classList.remove('opacity-0');
     content.classList.remove('scale-95');
     content.classList.add('scale-100');
+    
+    // Force scroll to top for the split layout to prevent flex-col-reverse from scrolling to bottom
+    var splitLayout = modal.querySelector('.flex-col-reverse');
+    if (splitLayout) splitLayout.scrollTop = 0;
   }, 10);
 }
 
