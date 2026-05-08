@@ -317,16 +317,24 @@ function openProjectModal(projectId) {
   document.documentElement.classList.add('modal-open'); // Prevent html scroll
   document.body.classList.add('modal-open'); // Prevent body scroll
   
-  // Small delay for scale-in animation
+  // Force scroll to top on all scrollable containers immediately and after slight delay (for images loading)
+  function resetScroll() {
+    var containers = modal.querySelectorAll('.overflow-y-auto, .lg\\:overflow-y-auto, .custom-scrollbar');
+    containers.forEach(function(c) { c.scrollTop = 0; });
+  }
+  
+  resetScroll();
+
+  // Small delay for scale-in animation and image loading push-down
   setTimeout(function() {
     modal.classList.remove('opacity-0');
     content.classList.remove('scale-95');
     content.classList.add('scale-100');
-    
-    // Force scroll to top for the split layout to prevent flex-col-reverse from scrolling to bottom
-    var splitLayout = modal.querySelector('.flex-col-reverse');
-    if (splitLayout) splitLayout.scrollTop = 0;
+    resetScroll();
   }, 10);
+  
+  // Extra safeguard for slow image loading causing Scroll Anchoring to jump
+  setTimeout(resetScroll, 150);
 }
 
 function closeProjectModal() {
