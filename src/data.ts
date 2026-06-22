@@ -53,6 +53,35 @@ export const portfolioData = {
 
   projects: [
     {
+      id: "m365-project-management-system",
+      title: "M365 Automated Project Management & Attendance System",
+      category: "Data Engineering",
+      featured: true,
+      image: "chart-bar",
+      imageUrls: [
+        "/assets/m365-architecture.webp",
+        "/assets/m365-dashboard.webp",
+        "/assets/m365-flow-attendance-sync.webp",
+        "/assets/m365-flow-project-update.webp",
+        "/assets/m365-flow-email-alert.webp"
+      ],
+      problem: "A staffing and recruitment company was managing multiple active projects, recruiter workloads, daily attendance, and candidate pipelines through disconnected spreadsheets and manual processes. There was no centralized system to track project status in real-time, validate recruiter submissions, prevent duplicate attendance records, or surface performance analytics to management — leading to inefficiencies, data errors, and delayed reporting.",
+      solution: "Designed and built a fully automated, end-to-end project management and attendance tracking system using the Microsoft 365 ecosystem. The system uses Microsoft Forms as the data entry layer (three forms: Project Master Creation, Daily Project Updates, and Daily Attendance). Power Automate flows handle all backend logic — validating project IDs, syncing cumulative totals, detecting duplicate check-ins, and triggering email alerts to managers and employees. All data is persisted to SharePoint Lists as the backend database. An Excel Online dashboard connected via Power Query and a DAX-driven data model surfaces real-time KPIs including active projects, team productivity scores, workload distribution, daily effort trends, and an automated Employee of the Month calculation.",
+      architecture: "M365 Forms (3 Forms) → Power Automate (4 Flows: Project Sync, Daily Update Validation, Attendance Sync, Project Master Creation) → SharePoint Lists (Project Master Tracker + Employee Activity Log) → Power Query / Excel Data Model → DAX Measures → Excel Online Management Dashboard",
+      techStack: ["Microsoft 365", "Power Automate", "SharePoint", "Microsoft Forms", "Excel Online", "Power Query", "DAX", "Power Pivot", "Business Intelligence"],
+      impact: [
+        "Fully automated project lifecycle management from creation to closure",
+        "Real-time validation of Project IDs and duplicate attendance prevention",
+        "Automated email alerts for managers on project status changes (Closed / On-Hold / Rejected)",
+        "Automated employee email notifications on new check-ins and data errors",
+        "Live KPI dashboard: Active Projects, Profiles Submitted, Shortlisted, Attendance %, Team Productivity",
+        "Automated Employee of the Month & Top Performer calculation based on productivity scores",
+        "Workload distribution and daily effort trend visualizations per recruiter",
+        "Zero manual data consolidation — all reporting driven by live SharePoint data"
+      ],
+      tags: ["Microsoft 365", "Power Automate", "SharePoint", "Excel Dashboard", "Automation", "BI"]
+    },
+    {
       id: "ai-powered-nextjs-dashboard",
       title: "AI-Powered Enterprise Analytics Dashboard",
       category: "Data Analysis",
