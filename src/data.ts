@@ -1,16 +1,16 @@
 export const portfolioData = {
   personal: {
     name: "Amr Walid",
-    title: "Data Engineer & Analyst",
-    headline: "Building Scalable Data Pipelines & Analytics Infrastructure",
-    tagline: "From raw extraction to strategic insights. I build scalable ETL pipelines and design dynamic dashboards that drive data-informed decisions.",
+    title: "Data Engineer & Full-Stack Developer",
+    headline: "Data Pipelines, Business Systems & Automation — End to End",
+    tagline: "I build the full stack of data-driven products: scalable ETL pipelines, production business systems (POS, CRM, asset tracking), and marketing automation — from the database to the dashboard.",
     email: "amr.walid2022@feps.edu.eg",
     location: "Cairo, Egypt",
     linkedin: "https://www.linkedin.com/in/amrwalidmaher",
     github: "https://github.com/Amr-Walid",
     avatar: "https://avatars.githubusercontent.com/u/Amr-Walid"
   },
-  summary: `Data Engineer with a deep focus on building and maintaining robust, scalable data pipelines. I specialize in the complete data lifecycle — from extraction and transformation to orchestration and delivery — ensuring data is not only accessible but actionable. My expertise spans ETL/ELT design, data modeling, workflow automation, and cloud-native data architectures. I combine strong engineering fundamentals with analytical thinking to build systems that turn raw data into strategic business assets.`,
+  summary: `Data Engineer and Full-Stack developer who ships complete, production-grade systems — not just prototypes. I design and build across the entire stack: robust ETL/ELT pipelines and data warehouses on one end, and full business applications (POS, CRM, asset & support tracking, marketing automation) on the other. My toolbox spans Python and SQL for data, ASP.NET Core 8 / C# and Next.js / React for applications, and Docker, CI/CD, and clean layered architecture for delivery. I combine data-engineering rigor with real software-engineering discipline — validation, testing, audit logging, and security — to turn business problems into reliable systems that run in production.`,
 
   skills: {
     "Data Engineering": [
@@ -21,37 +21,143 @@ export const portfolioData = {
       { name: "Data Quality & Testing", level: 80 },
       { name: "Stream Processing", level: 75 }
     ],
+    "Backend & Full-Stack": [
+      { name: "ASP.NET Core 8 / C#", level: 88 },
+      { name: "Clean / Layered Architecture", level: 85 },
+      { name: "EF Core & SQL Server", level: 85 },
+      { name: "REST API Design", level: 87 },
+      { name: "Next.js / React", level: 82 },
+      { name: "Auth, Roles & Multi-Tenancy", level: 83 }
+    ],
     "Languages & Frameworks": [
       { name: "Python", level: 92 },
-      { name: "SQL", level: 90 },
-      { name: "PySpark", level: 80 },
-      { name: "Pandas", level: 90 },
-      { name: "Bash / Shell", level: 75 }
+      { name: "SQL / T-SQL", level: 90 },
+      { name: "C#", level: 86 },
+      { name: "TypeScript / JavaScript", level: 82 },
+      { name: "Pandas / PySpark", level: 88 }
+    ],
+    "Automation & Integrations": [
+      { name: "Marketing Automation (WhatsApp)", level: 85 },
+      { name: "RFM Customer Segmentation", level: 82 },
+      { name: "Power Automate / M365", level: 85 },
+      { name: "Web Automation (Playwright)", level: 80 },
+      { name: "GitHub Actions (CI/CD)", level: 88 }
     ],
     "Cloud & Infrastructure": [
-      { name: "Docker", level: 85 },
-      { name: "GitHub Actions (CI/CD)", level: 88 },
-      { name: "Google BigQuery", level: 80 },
-      { name: "AWS Redshift", level: 75 },
-      { name: "Microsoft Fabric", level: 70 }
-    ],
-    "Data Platforms & Tools": [
-      { name: "Apache Airflow", level: 80 },
-      { name: "Apache Spark", level: 78 },
-      { name: "dbt", level: 75 },
-      { name: "PostgreSQL", level: 85 },
-      { name: "Git & Version Control", level: 92 }
+      { name: "Docker & Docker Compose", level: 85 },
+      { name: "PostgreSQL / SQL Server", level: 86 },
+      { name: "MongoDB", level: 80 },
+      { name: "Google BigQuery", level: 78 },
+      { name: "Microsoft Fabric", level: 72 }
     ],
     "BI & Visualization": [
       { name: "Power BI", level: 88 },
-      { name: "Tableau", level: 78 },
-      { name: "Looker Studio", level: 75 },
-      { name: "Excel (Advanced)", level: 90 },
-      { name: "Power Query", level: 88 }
+      { name: "Excel (Advanced) / DAX", level: 90 },
+      { name: "Power Query", level: 88 },
+      { name: "Tableau", level: 76 },
+      { name: "Looker Studio", level: 75 }
     ]
   },
 
   projects: [
+    {
+      id: "retail-pos-system",
+      title: "Retail POS & Reporting System",
+      category: "Full-Stack",
+      featured: true,
+      image: "cash-register",
+      imageUrls: [
+        "/assets/pos-05_admin_dashboard.webp",
+        "/assets/pos-03_pos_modal.webp",
+        "/assets/pos-06_admin_reports.webp",
+        "/assets/pos-07_products.webp",
+        "/assets/pos-12_receipt.webp"
+      ],
+      problem: "Small retailers needed a real point-of-sale system — not a spreadsheet — to sell fast at the counter, control stock, apply discount codes, print receipts and barcode labels, and give the owner trustworthy sales reports. Off-the-shelf tools were either too expensive, English-only, or missing the Arabic RTL workflow and role separation (owner vs. sales agent) that Egyptian shops actually need.",
+      solution: "Designed and built a complete, production-grade POS and reporting system in ASP.NET Core 8 MVC with SQL Server via EF Core, fully Arabic (RTL) with role-based access (Admin & Agent) on ASP.NET Core Identity. Agents sell through a fast pop-up POS supporting barcode scanners, the device camera (ZXing), or manual entry, with percentage discount codes, optional customer records, and full/partial returns that restock inventory. Admins manage brands, categories, products (with printable CODE-128 barcode labels), discount codes, and users, and get a live dashboard plus daily/weekly/monthly reports with CSV export (UTF-8 BOM for Arabic Excel). Every action is captured in an audit log. The suite ships with 179/179 passing tests and a 0-error build.",
+      architecture: "Browser (Razor + RTL UI) → ASP.NET Core 8 MVC Controllers → Identity (Admin/Agent roles) → Service Layer (Sales, Inventory, Discounts, Returns, Audit) → EF Core → SQL Server. Barcode: ZXing camera scan + CODE-128 SVG label printing. Thermal 80mm receipt print.",
+      techStack: ["ASP.NET Core 8", "C#", "EF Core", "SQL Server", "ASP.NET Identity", "Razor / RTL UI", "ZXing Barcode", "xUnit"],
+      impact: [
+        "Complete counter-to-management workflow: sell, return, restock, report",
+        "Barcode scanning via hardware scanner OR device camera — no manual focus needed",
+        "Percentage discount codes with usage limits and validity windows",
+        "Printable CODE-128 barcode labels (vectorial SVG) per product",
+        "Thermal 80mm receipt printing / PDF export",
+        "Role separation: agents see only their own sales; admins see everything",
+        "Full audit log (login, sales, CRUD) with real names and IP addresses",
+        "CSV export with UTF-8 BOM — opens correctly in Arabic Excel",
+        "179/179 automated tests passing, 0 build errors"
+      ],
+      github: "https://github.com/Amr-Walid/invoice",
+      tags: ["ASP.NET Core", "POS", "SQL Server", "C#", "Business System", "RTL"]
+    },
+    {
+      id: "unigroup-crm",
+      title: "UniGroup CRM — Multi-Tenant Customer Platform",
+      category: "Full-Stack",
+      featured: true,
+      image: "users",
+      imageUrls: ["/assets/sql-architecture.webp"],
+      problem: "A group operating several business units needed one CRM to manage customers, leads, and company data across departments — with strict data isolation between units, clear role-based permissions, and a codebase that could grow without turning into spaghetti.",
+      solution: "Built a CRM on ASP.NET Core with C# following Clean Architecture (Domain / Application / Infrastructure / Web) to keep business rules independent of frameworks and databases. Implemented role-based access control and a multi-tenant company structure so each business unit's data stays isolated, with localization support and a Docker-based setup for reproducible deployment. The project is backed by detailed design docs (requirements, database design, clean-architecture guide, implementation plan).",
+      architecture: "Web (Controllers / Views) → Application (Use Cases, Interfaces) → Domain (Entities, Business Rules) → Infrastructure (EF Core, Identity, Persistence). Multi-tenant isolation + role-based authorization. Containerized with Docker.",
+      techStack: ["ASP.NET Core", "C#", "Clean Architecture", "EF Core", "SQL Server", "Docker", "Identity / RBAC"],
+      impact: [
+        "Clean Architecture keeps business logic independent and testable",
+        "Multi-tenant design isolates each business unit's data",
+        "Role-based access control across modules",
+        "Localization-ready (Arabic / English)",
+        "Documented end-to-end: requirements, DB design, implementation plan",
+        "Containerized for reproducible deployment"
+      ],
+      github: "https://github.com/Amr-Walid/crm",
+      tags: ["CRM", "ASP.NET Core", "Clean Architecture", "Multi-Tenant", "C#"]
+    },
+    {
+      id: "whatsapp-marketing-system",
+      title: "WhatsApp Marketing & Customer Analytics System",
+      category: "Automation",
+      featured: true,
+      image: "bullhorn",
+      imageUrls: ["/assets/mongodb-pipeline.webp"],
+      problem: "A business wanted to run WhatsApp marketing campaigns to thousands of customers without getting numbers banned, and without blindly blasting everyone. They needed to understand who their best customers are, segment them, and send the right message to the right segment — safely and measurably.",
+      solution: "Built a hybrid WhatsApp marketing system (C# / .NET core services with JavaScript automation and a SQL data layer) that combines customer data analysis, RFM segmentation (Recency, Frequency, Monetary), and automated, throttled campaign sending. The design is documented as a full playbook — data analysis, infrastructure, an 'anti-ban bible', architecture, order funnel, implementation, and legal/risk — so campaigns respect rate limits and platform rules while targeting high-value segments first.",
+      architecture: "Customer Data (SQL) → Data Analysis & RFM Segmentation → Campaign Orchestrator (throttling / anti-ban rules) → WhatsApp Sending Layer → Delivery & Response Tracking → Order Funnel Analytics",
+      techStack: ["C# / .NET", "JavaScript", "SQL", "RFM Segmentation", "Marketing Automation", "Data Analysis"],
+      impact: [
+        "RFM segmentation targets high-value customers instead of blind blasting",
+        "Anti-ban strategy: throttling and safe sending patterns to protect numbers",
+        "Automated, repeatable campaign workflow",
+        "Order-funnel tracking to measure campaign impact",
+        "Documented playbook covering data, infra, risk and legal considerations",
+        "Hybrid design combining .NET services with web automation"
+      ],
+      github: "https://github.com/Amr-Walid/whatsapp_marketing",
+      tags: ["Automation", "WhatsApp", "Marketing", "RFM", "C#", "Data Analysis"]
+    },
+    {
+      id: "asset-tracking-system",
+      title: "Asset Tracking & Technical Support System (ATS)",
+      category: "Full-Stack",
+      featured: true,
+      image: "boxes-stacked",
+      imageUrls: ["/assets/sql-data-flow.webp"],
+      problem: "Organizations lose track of fixed assets, personal custody items, preventive maintenance schedules, and IT support tickets when everything lives in scattered spreadsheets. They needed one system to follow each asset's full lifecycle — from purchase to disposal — with maintenance, custody, and a support desk, isolated per company.",
+      solution: "Built an integrated Asset Tracking & Technical Support system in ASP.NET Core 8 (MVC + Razor) with a clean 4-layer architecture. It manages the full asset lifecycle, personal custody, preventive maintenance, support tickets, periodic inventory, and reporting — with per-company data isolation enforced at the database level via EF Core Global Query Filters. Background jobs run on Hangfire, real-time notifications use SignalR, QR codes identify assets, and Arabic Excel reports export via ClosedXML. Validation (FluentValidation), structured logging (Serilog), and email (MailKit) round out a production-ready stack.",
+      architecture: "Web (Controllers / Razor) → Application (Interfaces, Result<T>) → Infrastructure (EF Core, Identity, Services, Migrations) → Domain (Entities). Company isolation via EF Core Global Query Filters. Hangfire background jobs + SignalR notifications + QR asset tags.",
+      techStack: ["ASP.NET Core 8", "C#", "EF Core", "SQL Server / SQLite", "Hangfire", "SignalR", "QRCoder", "Serilog", "ClosedXML"],
+      impact: [
+        "Tracks the full asset lifecycle from purchase to disposal",
+        "Database-level company isolation via EF Core Global Query Filters",
+        "Preventive maintenance scheduling + technical support tickets",
+        "Real-time notifications with SignalR",
+        "Background jobs on Hangfire (admin-only dashboard)",
+        "QR-code asset tagging and Arabic (RTL) Excel report export",
+        "Clean layered architecture with FluentValidation and Serilog logging"
+      ],
+      github: "https://github.com/Amr-Walid/assets_tracking",
+      tags: ["ASP.NET Core", "Asset Management", "Clean Architecture", "SignalR", "C#"]
+    },
     {
       id: "m365-project-management-system",
       title: "M365 Automated Project Management & Attendance System",

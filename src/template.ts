@@ -6,14 +6,14 @@ export const renderPage = () => {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Amr Walid | Data Engineer — Pipelines, Automation & Analytics</title>
-  <meta name="description" content="Data Engineer specializing in building scalable data pipelines, ETL automation, and analytics infrastructure. Python, SQL, Spark, Docker, Airflow.">
-  <meta name="keywords" content="Data Engineer, ETL, Data Pipeline, Python, SQL, Spark, Airflow, Docker, Power BI, Portfolio">
+  <title>Amr Walid | Data Engineer & Full-Stack Developer — Systems, Pipelines & Automation</title>
+  <meta name="description" content="Data Engineer & Full-Stack developer in Cairo. I build production business systems (POS, CRM, asset tracking), scalable data pipelines, and marketing automation. ASP.NET Core, C#, Python, SQL, Next.js, Docker.">
+  <meta name="keywords" content="Data Engineer, Full-Stack Developer, ASP.NET Core, C#, POS System, CRM, ETL, Data Pipeline, Automation, Python, SQL, Next.js, Docker, Power BI, Egypt, Portfolio">
   <meta name="author" content="Amr Walid">
   
   <!-- Open Graph -->
-  <meta property="og:title" content="Amr Walid | Data Engineer">
-  <meta property="og:description" content="Building scalable data pipelines, automation systems, and analytics infrastructure.">
+  <meta property="og:title" content="Amr Walid | Data Engineer & Full-Stack Developer">
+  <meta property="og:description" content="Production business systems (POS, CRM, asset tracking), scalable data pipelines, and marketing automation — end to end.">
   <meta property="og:type" content="website">
   
   <!-- Favicon -->
@@ -47,7 +47,7 @@ export const renderPage = () => {
           </div>
           <div class="hidden sm:block">
             <span class="font-bold text-lg text-slate-900">Amr Walid</span>
-            <span class="block text-xs text-brand-400 font-mono -mt-0.5">Data Engineer & Analyst</span>
+            <span class="block text-xs text-brand-400 font-mono -mt-0.5">Data Engineer & Full-Stack Dev</span>
           </div>
         </a>
         
@@ -55,6 +55,7 @@ export const renderPage = () => {
         <div class="hidden md:flex items-center gap-1">
           <a href="#about" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-400 transition-colors">About</a>
           <a href="#projects" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-400 transition-colors">Projects</a>
+          <a href="#services" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-400 transition-colors">Services</a>
           <a href="#experience" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-400 transition-colors">Experience</a>
           <a href="#certifications" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-400 transition-colors">Certifications</a>
           <a href="#contact" class="ml-4 px-5 py-2.5 bg-gradient-to-r from-brand-600 to-accent-500 text-white text-sm font-semibold rounded-xl hover:shadow-lg hover:shadow-brand-500/25 transition-all hover:-translate-y-0.5">
@@ -76,6 +77,7 @@ export const renderPage = () => {
       <div class="px-4 py-6 space-y-1">
         <a href="#about" class="block px-4 py-3 rounded-xl text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">About</a>
         <a href="#projects" class="block px-4 py-3 rounded-xl text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Projects</a>
+        <a href="#services" class="block px-4 py-3 rounded-xl text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Services</a>
         <a href="#experience" class="block px-4 py-3 rounded-xl text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Experience</a>
         <a href="#certifications" class="block px-4 py-3 rounded-xl text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Certifications</a>
         <a href="#contact" class="block px-4 py-3 mt-4 bg-gradient-to-r from-brand-600 to-accent-500 text-white text-center rounded-xl font-semibold">Let's Talk</a>
@@ -106,23 +108,23 @@ export const renderPage = () => {
               <span class="gradient-text"> Walid</span>
             </h1>
             <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-700 mt-3">
-              Data Engineer & Analyst
+              Data Engineer & Full-Stack Developer
             </h2>
           </div>
           
           <!-- Tagline -->
           <p class="text-lg sm:text-xl text-gray-500 leading-relaxed max-w-xl">
-            From raw extraction to strategic insights. I build <span class="text-brand-400 font-semibold">scalable ETL pipelines</span> and design <span class="text-accent-400 font-semibold">dynamic dashboards</span> that drive data-informed decisions.
+            End to end, from the database to the dashboard. I build <span class="text-brand-400 font-semibold">scalable data pipelines</span>, <span class="text-accent-400 font-semibold">production business systems</span> (POS, CRM, asset tracking) and <span class="text-brand-400 font-semibold">marketing automation</span>.
           </p>
           
           <!-- Tech Tags -->
           <div class="flex flex-wrap gap-2">
             <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">Python</span>
             <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">SQL</span>
-            <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">Spark</span>
+            <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">ASP.NET Core</span>
+            <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">C#</span>
+            <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">Next.js</span>
             <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">Docker</span>
-            <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">Airflow</span>
-            <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">Power BI</span>
           </div>
           
           <!-- CTAs -->
@@ -191,18 +193,18 @@ export const renderPage = () => {
           <div>
             <p class="text-brand-400 font-mono text-sm font-semibold mb-2 tracking-wider uppercase">// About Me</p>
             <h2 class="text-4xl lg:text-5xl font-bold text-slate-900">
-              Turning Raw Data Into
-              <span class="gradient-text"> Strategic Assets</span>
+              From Data Pipelines To
+              <span class="gradient-text"> Production Systems</span>
             </h2>
           </div>
           <p class="text-lg text-gray-600 leading-relaxed">
-            I'm a Data Engineer based in Cairo, Egypt, with a deep focus on building and maintaining robust, scalable data pipelines. I specialize in the complete data lifecycle — from extraction and transformation to orchestration and delivery — ensuring data is not only accessible but actionable.
+            I'm a Data Engineer and Full-Stack developer based in Cairo, Egypt. I build complete, production-grade systems end to end — robust data pipelines and warehouses on one side, and full business applications on the other: point-of-sale, CRM, asset tracking, and marketing automation.
           </p>
           <p class="text-lg text-gray-600 leading-relaxed">
-            My expertise spans <strong class="text-slate-900">ETL/ELT design</strong>, <strong class="text-slate-900">data modeling</strong>, <strong class="text-slate-900">workflow automation</strong>, and <strong class="text-slate-900">cloud-native data architectures</strong>. I combine strong engineering fundamentals with analytical thinking to build systems that turn raw data into strategic business assets.
+            My work spans <strong class="text-slate-900">ETL/ELT & data modeling</strong> (Python, SQL), <strong class="text-slate-900">backend engineering</strong> (ASP.NET Core 8, C#, EF Core) with <strong class="text-slate-900">clean architecture</strong>, and <strong class="text-slate-900">automation</strong>. I ship with real software discipline — validation, testing, audit logging, roles, and security — so systems actually run in production.
           </p>
           <p class="text-lg text-gray-600 leading-relaxed">
-            Currently studying Economics at Cairo University's Faculty of Economics & Political Science, I bring a unique perspective that bridges quantitative analysis with modern data infrastructure engineering.
+            Currently studying Economics at Cairo University's Faculty of Economics & Political Science, I bring a perspective that bridges quantitative analysis with modern software and data engineering.
           </p>
         </div>
         
@@ -226,8 +228,8 @@ export const renderPage = () => {
             <div class="data-particle particle-3"></div>
           </div>
 
-          <svg class="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-20" preserveAspectRatio="none">
-             <path d="M 80 100 Q 150 150 50vw 150 T right-80 150" fill="transparent" stroke="url(#gradient)" stroke-width="2" stroke-dasharray="4 4"/>
+          <svg class="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-20" viewBox="0 0 400 300" preserveAspectRatio="none">
+             <path d="M 60 150 Q 200 90 340 150" fill="transparent" stroke="url(#gradient)" stroke-width="2" stroke-dasharray="4 4"/>
              <defs>
                <linearGradient id="gradient" x1="0" y1="0" x2="1" y2="0">
                  <stop offset="0%" stop-color="#3b8fff" />
@@ -271,12 +273,14 @@ export const renderPage = () => {
         <h2 class="text-4xl lg:text-5xl font-bold text-slate-900">
           Project <span class="gradient-text">Case Studies</span>
         </h2>
-        <p class="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">Real-world data engineering projects with documented architectures, tech decisions, and measurable impact.</p>
+        <p class="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">Real-world systems — data pipelines, business applications, and automation — with documented architectures, tech decisions, and measurable impact.</p>
       </div>
       
       <!-- Project Filter -->
       <div class="flex flex-wrap justify-center gap-3 mb-12" data-animate>
         <button class="filter-btn active px-5 py-2 rounded-xl text-sm font-semibold transition-all" data-filter="all">All Projects</button>
+        <button class="filter-btn px-5 py-2 rounded-xl text-sm font-semibold transition-all" data-filter="Full-Stack">Full-Stack Systems</button>
+        <button class="filter-btn px-5 py-2 rounded-xl text-sm font-semibold transition-all" data-filter="Automation">Automation</button>
         <button class="filter-btn px-5 py-2 rounded-xl text-sm font-semibold transition-all" data-filter="Data Engineering">Data Engineering</button>
         <button class="filter-btn px-5 py-2 rounded-xl text-sm font-semibold transition-all" data-filter="Data Analysis">Data Analysis</button>
       </div>
@@ -284,6 +288,104 @@ export const renderPage = () => {
       <!-- Project Cards -->
       <div id="projectsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         <!-- Cards injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES SECTION ============ -->
+  <section id="services" class="py-24 lg:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16" data-animate>
+        <p class="text-brand-400 font-mono text-sm font-semibold mb-2 tracking-wider uppercase">// How I Can Help</p>
+        <h2 class="text-4xl lg:text-5xl font-bold text-slate-900">
+          Services for <span class="gradient-text">Businesses</span>
+        </h2>
+        <p class="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">I help companies turn manual, spreadsheet-driven work into reliable software — from the website all the way to the database and the automations behind it.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-animate>
+        <!-- Service 1: Websites & Web Apps -->
+        <article class="service-card group relative rounded-2xl glass glass-light p-7 border border-white/40 shadow-xl hover:-translate-y-1 transition-all">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 text-white flex items-center justify-center mb-5 shadow-lg shadow-brand-500/20">
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 512 512"><path d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM64 96v64H448V96H64zm0 128V416H448V224H64z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-2">Websites & Web Apps</h3>
+          <p class="text-gray-600 leading-relaxed text-sm">Fast, responsive, bilingual (Arabic RTL / English) websites and web applications — company sites, portals, and internal tools built to load quickly and work on every device.</p>
+          <ul class="mt-4 space-y-1.5 text-sm text-gray-500">
+            <li class="flex items-center gap-2"><span class="text-brand-500">&#10003;</span> Landing pages & company sites</li>
+            <li class="flex items-center gap-2"><span class="text-brand-500">&#10003;</span> Admin dashboards & portals</li>
+            <li class="flex items-center gap-2"><span class="text-brand-500">&#10003;</span> Next.js / React &amp; ASP.NET Core</li>
+          </ul>
+        </article>
+
+        <!-- Service 2: Business Systems -->
+        <article class="service-card group relative rounded-2xl glass glass-light p-7 border border-white/40 shadow-xl hover:-translate-y-1 transition-all">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-accent-500 to-accent-600 text-white flex items-center justify-center mb-5 shadow-lg shadow-accent-500/20">
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 576 512"><path d="M64 32C28.7 32 0 60.7 0 96v64c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm280 72a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm48 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zM64 288c-35.3 0-64 28.7-64 64v64c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V352c0-35.3-28.7-64-64-64H64zm280 72a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm56 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-2">Business Systems</h3>
+          <p class="text-gray-600 leading-relaxed text-sm">Production-grade internal systems that replace scattered spreadsheets: point-of-sale, CRM, inventory &amp; asset tracking, invoicing, and support desks — with roles, reports, and audit logs.</p>
+          <ul class="mt-4 space-y-1.5 text-sm text-gray-500">
+            <li class="flex items-center gap-2"><span class="text-accent-500">&#10003;</span> POS, CRM &amp; inventory</li>
+            <li class="flex items-center gap-2"><span class="text-accent-500">&#10003;</span> Role-based access &amp; audit logs</li>
+            <li class="flex items-center gap-2"><span class="text-accent-500">&#10003;</span> Reports &amp; Excel/CSV export</li>
+          </ul>
+        </article>
+
+        <!-- Service 3: Automation -->
+        <article class="service-card group relative rounded-2xl glass glass-light p-7 border border-white/40 shadow-xl hover:-translate-y-1 transition-all">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-accent-500 text-white flex items-center justify-center mb-5 shadow-lg shadow-brand-500/20">
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 512 512"><path d="M234.7 42.7L197 56.8c-3 1.1-5 4-5 7.2s2 6.1 5 7.2l37.7 14.1L248.8 123c1.1 3 4 5 7.2 5s6.1-2 7.2-5l14.1-37.7L315 71.2c3-1.1 5-4 5-7.2s-2-6.1-5-7.2L277.3 42.7 263.2 5c-1.1-3-4-5-7.2-5s-6.1 2-7.2 5L234.7 42.7zM46.1 395.4c-18.7 18.7-18.7 49.1 0 67.9l34.6 34.6c18.7 18.7 49.1 18.7 67.9 0L529.9 116.5c18.7-18.7 18.7-49.1 0-67.9L495.3 14.1c-18.7-18.7-49.1-18.7-67.9 0L46.1 395.4zM484.6 82.6l-105 105-23.3-23.3 105-105 23.3 23.3zM7.5 117.2C3 118.9 0 123.2 0 128s3 9.1 7.5 10.8L64 160l21.2 56.5c1.7 4.5 6 7.5 10.8 7.5s9.1-3 10.8-7.5L128 160l56.5-21.2c4.5-1.7 7.5-6 7.5-10.8s-3-9.1-7.5-10.8L128 96 106.8 39.5C105.1 35 100.8 32 96 32s-9.1 3-10.8 7.5L64 96 7.5 117.2zm352 256c-4.5 1.7-7.5 6-7.5 10.8s3 9.1 7.5 10.8L416 416l21.2 56.5c1.7 4.5 6 7.5 10.8 7.5s9.1-3 10.8-7.5L480 416l56.5-21.2c4.5-1.7 7.5-6 7.5-10.8s-3-9.1-7.5-10.8L480 352l-21.2-56.5c-1.7-4.5-6-7.5-10.8-7.5s-9.1 3-10.8 7.5L416 352l-56.5 21.2z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-2">Automation & Integrations</h3>
+          <p class="text-gray-600 leading-relaxed text-sm">Automate the repetitive work: marketing campaigns, customer segmentation (RFM), scheduled reports, data syncing between tools, and workflow automation with Power Automate / Microsoft 365.</p>
+          <ul class="mt-4 space-y-1.5 text-sm text-gray-500">
+            <li class="flex items-center gap-2"><span class="text-brand-500">&#10003;</span> Marketing &amp; WhatsApp campaigns</li>
+            <li class="flex items-center gap-2"><span class="text-brand-500">&#10003;</span> Customer segmentation (RFM)</li>
+            <li class="flex items-center gap-2"><span class="text-brand-500">&#10003;</span> Scheduled reports &amp; data sync</li>
+          </ul>
+        </article>
+
+        <!-- Service 4: Data Engineering -->
+        <article class="service-card group relative rounded-2xl glass glass-light p-7 border border-white/40 shadow-xl hover:-translate-y-1 transition-all">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-accent-500 to-brand-500 text-white flex items-center justify-center mb-5 shadow-lg shadow-accent-500/20">
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 448 512"><path d="M448 80v48c0 44.2-100.3 80-224 80S0 172.2 0 128V80C0 35.8 100.3 0 224 0S448 35.8 448 80zM393.2 214.7c20.8-7.4 39.9-16.9 54.8-28.6V288c0 44.2-100.3 80-224 80S0 332.2 0 288V186.1c14.9 11.8 34 21.2 54.8 28.6C99.7 230.7 159.5 240 224 240s124.3-9.3 169.2-25.3zM0 346.1c14.9 11.8 34 21.2 54.8 28.6C99.7 390.7 159.5 400 224 400s124.3-9.3 169.2-25.3c20.8-7.4 39.9-16.9 54.8-28.6V432c0 44.2-100.3 80-224 80S0 476.2 0 432V346.1z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-2">Data Engineering & ETL</h3>
+          <p class="text-gray-600 leading-relaxed text-sm">Clean, model, and pipeline your data: automated ETL/ELT pipelines, data warehouses, and integrations that consolidate scattered sources into one reliable, query-ready foundation.</p>
+          <ul class="mt-4 space-y-1.5 text-sm text-gray-500">
+            <li class="flex items-center gap-2"><span class="text-accent-500">&#10003;</span> ETL/ELT pipelines (Python, SQL)</li>
+            <li class="flex items-center gap-2"><span class="text-accent-500">&#10003;</span> Data warehouses &amp; modeling</li>
+            <li class="flex items-center gap-2"><span class="text-accent-500">&#10003;</span> Dockerized & scheduled</li>
+          </ul>
+        </article>
+
+        <!-- Service 5: Dashboards & BI -->
+        <article class="service-card group relative rounded-2xl glass glass-light p-7 border border-white/40 shadow-xl hover:-translate-y-1 transition-all">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-600 to-accent-500 text-white flex items-center justify-center mb-5 shadow-lg shadow-brand-500/20">
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 512 512"><path d="M32 32c17.7 0 32 14.3 32 32V400c0 8.8 7.2 16 16 16H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H80c-44.2 0-80-35.8-80-80V64C0 46.3 14.3 32 32 32zM160 224c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V256c0-17.7 14.3-32 32-32zm128-64V320c0 17.7-14.3 32-32 32s-32-14.3-32-32V160c0-17.7 14.3-32 32-32s32 14.3 32 32zm64 32c17.7 0 32 14.3 32 32v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32zM480 96V320c0 17.7-14.3 32-32 32s-32-14.3-32-32V96c0-17.7 14.3-32 32-32s32 14.3 32 32z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-2">Dashboards & BI</h3>
+          <p class="text-gray-600 leading-relaxed text-sm">See your business clearly: interactive dashboards and KPI reporting in Power BI and Excel (Power Query / DAX), plus custom web dashboards with live data and AI-assisted insights.</p>
+          <ul class="mt-4 space-y-1.5 text-sm text-gray-500">
+            <li class="flex items-center gap-2"><span class="text-accent-500">&#10003;</span> Power BI &amp; Excel dashboards</li>
+            <li class="flex items-center gap-2"><span class="text-accent-500">&#10003;</span> KPI &amp; performance reporting</li>
+            <li class="flex items-center gap-2"><span class="text-accent-500">&#10003;</span> Custom web dashboards</li>
+          </ul>
+        </article>
+
+        <!-- Service 6: Consulting / Build-with-you -->
+        <article class="service-card group relative rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 p-7 border border-slate-700 shadow-xl hover:-translate-y-1 transition-all text-white flex flex-col">
+          <div class="w-12 h-12 rounded-xl bg-white/10 text-white flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Not sure what you need?</h3>
+          <p class="text-gray-300 leading-relaxed text-sm flex-1">Tell me the problem — the manual process, the messy data, the report that takes days — and I'll propose the simplest system that solves it. From first idea to a running solution.</p>
+          <a href="#contact" class="mt-5 inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-brand-500 to-accent-500 text-white font-semibold rounded-xl hover:-translate-y-0.5 transition-all w-full">
+            Start a conversation
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
+          </a>
+        </article>
       </div>
     </div>
   </section>

@@ -1,7 +1,7 @@
-# 🚀 Amr Walid — Data Engineer Portfolio
+# 🚀 Amr Walid — Data Engineer & Full-Stack Developer Portfolio
 
-> **"From raw extraction to strategic insights."**
-> Building scalable ETL pipelines and dynamic dashboards that drive data-informed decisions.
+> **"From the database to the dashboard — end to end."**
+> Building scalable data pipelines, production business systems (POS, CRM, asset tracking), and marketing automation.
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-amrwalidmaher-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/amrwalidmaher)
 [![GitHub](https://img.shields.io/badge/GitHub-Amr--Walid-black?style=flat&logo=github)](https://github.com/Amr-Walid)
@@ -11,7 +11,7 @@
 
 ## 📋 About This Project
 
-A production-ready personal portfolio website for **Amr Walid**, a Data Engineer & Analyst based in Cairo, Egypt. The site showcases case-study-style projects, professional experience, skills, and certifications — all served through a lightweight Hono server with a REST API and dynamic HTML rendering.
+A production-ready personal portfolio website for **Amr Walid**, a Data Engineer & Full-Stack developer based in Cairo, Egypt. The site showcases case-study-style projects (data pipelines, full-stack business systems, and automation), a Services section aimed at businesses, professional experience, skills, and certifications — all served through a lightweight Hono server with a REST API and dynamic HTML rendering.
 
 ---
 
@@ -70,21 +70,47 @@ my-web/
 
 ## 💼 Projects Showcased
 
+### 🏢 Full-Stack Business Systems
+
+| # | Project | Tech Stack | GitHub |
+|---|---------|-----------|--------|
+| 1 | **Retail POS & Reporting System** | ASP.NET Core 8, C#, EF Core, SQL Server, ZXing Barcode | [↗](https://github.com/Amr-Walid/invoice) |
+| 2 | **UniGroup CRM (Multi-Tenant)** | ASP.NET Core, C#, Clean Architecture, EF Core, Docker | [↗](https://github.com/Amr-Walid/crm) |
+| 3 | **Asset Tracking & Support System (ATS)** | ASP.NET Core 8, EF Core, Hangfire, SignalR, QRCoder | [↗](https://github.com/Amr-Walid/assets_tracking) |
+
+### 🤖 Automation
+
+| # | Project | Tech Stack | GitHub |
+|---|---------|-----------|--------|
+| 4 | **WhatsApp Marketing & Customer Analytics** | C#/.NET, JavaScript, SQL, RFM Segmentation | [↗](https://github.com/Amr-Walid/whatsapp_marketing) |
+| 5 | **M365 Project Management & Attendance System** | Power Automate, SharePoint, Forms, Excel, DAX | — |
+
 ### 🔧 Data Engineering
 
 | # | Project | Tech Stack | GitHub |
 |---|---------|-----------|--------|
-| 1 | **Modern SQL Server Data Warehouse** | SQL Server, T-SQL, Medallion Architecture, Star Schema | [↗](https://github.com/Amr-Walid/Sqlserver-DataWarehouse-Project) |
-| 2 | **Real-Time Stock Data Pipeline with MongoDB** | Python, MongoDB, FastAPI, Docker, Change Streams | [↗](https://github.com/Amr-Walid/real-time-stock-pipeline) |
-| 3 | **Automated Crypto Price ETL Pipeline** | Python, Pandas, GitHub Actions, CI/CD | [↗](https://github.com/Amr-Walid/crypto-price-analyzer) |
-| 4 | **Dockerized ETL Pipeline with PostgreSQL** | Python, Docker, Docker Compose, PostgreSQL | [↗](https://github.com/Amr-Walid/docker-etl-pipeline) |
+| 6 | **Modern SQL Server Data Warehouse** | SQL Server, T-SQL, Medallion Architecture, Star Schema | [↗](https://github.com/Amr-Walid/Sqlserver-DataWarehouse-Project) |
+| 7 | **Real-Time Stock Data Pipeline with MongoDB** | Python, MongoDB, FastAPI, Docker, Change Streams | [↗](https://github.com/Amr-Walid/real-time-stock-pipeline) |
+| 8 | **Automated Crypto Price ETL Pipeline** | Python, Pandas, GitHub Actions, CI/CD | [↗](https://github.com/Amr-Walid/crypto-price-analyzer) |
+| 9 | **Dockerized ETL Pipeline with PostgreSQL** | Python, Docker, Docker Compose, PostgreSQL | [↗](https://github.com/Amr-Walid/docker-etl-pipeline) |
 
 ### 📊 Data Analysis
 
 | # | Project | Tech Stack |
 |---|---------|-----------|
-| 5 | **AdventureWorks Sales Analytics Dashboard** | Excel, Power Query, PivotTables, Data Modeling |
-| 6 | **Payment Performance & Bank Guarantee Analytics Dashboard** | Excel, Power Query, Power Pivot, DAX, Business Intelligence |
+| 10 | **AI-Powered Enterprise Analytics Dashboard** | Next.js 16, React 19, Vercel AI SDK, Gemini, Recharts |
+| 11 | **AdventureWorks Sales Analytics Dashboard** | Excel, Power Query, PivotTables, Data Modeling |
+| 12 | **Payment Performance & Bank Guarantee Dashboard** | Excel, Power Query, Power Pivot, DAX, BI |
+
+## 🧩 Services (for Businesses)
+
+The site includes a **Services** section aimed at companies:
+
+1. **Websites & Web Apps** — bilingual (Arabic RTL / English) sites, portals, dashboards
+2. **Business Systems** — POS, CRM, inventory & asset tracking, invoicing, support desks
+3. **Automation & Integrations** — marketing/WhatsApp campaigns, RFM segmentation, scheduled reports, M365/Power Automate
+4. **Data Engineering & ETL** — pipelines, warehouses, data integration
+5. **Dashboards & BI** — Power BI, Excel (DAX/Power Query), custom web dashboards
 
 ---
 
@@ -192,4 +218,4 @@ Or push to GitHub — Vercel auto-deploys on every commit.
 
 ---
 
-*Last updated: March 2026 | Built with Hono + Vite + Tailwind CSS | Deployed on Vercel*
+*Last updated: September 2026 | Built with Hono + Vite + Tailwind CSS | Deployed on Vercel*
