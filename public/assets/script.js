@@ -42,9 +42,17 @@ function renderProjects(filter) {
     } else if (p.imageUrl) {
         mainImage = p.imageUrl;
     }    // --- Background Image Container ---
+    // Category-based gradient fallback so image-less cards still look intentional & premium
+    var gradients = {
+      'Full-Stack':       'linear-gradient(135deg, #0b3a6b 0%, #0f172a 60%, #082f49 100%)',
+      'Automation':       'linear-gradient(135deg, #0e4a5e 0%, #0f172a 55%, #14532d 120%)',
+      'Data Engineering': 'linear-gradient(135deg, #1e293b 0%, #0f172a 70%)',
+      'Data Analysis':    'linear-gradient(135deg, #1e293b 0%, #0f172a 70%)'
+    };
+    var fallbackBg = gradients[p.category] || 'linear-gradient(to bottom, #1e293b, #0f172a)';
     var bgImageDiv = mainImage 
       ? '<div class="project-card-bg" style="background-image: url(' + mainImage + ');"></div>'
-      : '<div class="project-card-bg" style="background-image: linear-gradient(to bottom, #1e293b, #0f172a);"></div>';
+      : '<div class="project-card-bg" style="background-image: ' + fallbackBg + ';"></div>';
 
     // Dark Overlay (Always present)
     var overlay = '<div class="absolute inset-0 bg-slate-900/70 group-hover:bg-slate-900/40 transition-colors duration-500 z-[1]"></div>';

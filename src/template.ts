@@ -41,9 +41,20 @@ export const renderPage = () => {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 lg:h-20">
         <!-- Logo -->
-        <a href="#hero" class="flex items-center gap-3 group">
-          <div class="w-12 h-12 rounded-full bg-white border border-gray-100 flex items-center justify-center overflow-hidden shadow-sm group-hover:scale-110 transition-transform">
-            <img src="/assets/logo.webp" alt="Amr Walid Logo" class="w-full h-full object-cover scale-[1.3] translate-y-[-5%]" />
+        <a href="#hero" class="flex items-center gap-3 group" aria-label="Amr Walid — home">
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg shadow-brand-500/25 group-hover:scale-105 group-hover:shadow-brand-500/40 transition-all overflow-hidden">
+            <svg class="w-full h-full" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AW monogram">
+              <defs>
+                <linearGradient id="awLogoGrad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#3b8fff"/>
+                  <stop offset="1" stop-color="#0ea5e9"/>
+                </linearGradient>
+              </defs>
+              <rect width="48" height="48" rx="13" fill="url(#awLogoGrad)"/>
+              <path d="M8 34 L15 15 L22 34" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <path d="M11.5 28 H18.5" stroke="white" stroke-width="3.2" stroke-linecap="round"/>
+              <path d="M25 15 L29 34 L33 22 L37 34 L41 15" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.92"/>
+            </svg>
           </div>
           <div class="hidden sm:block">
             <span class="font-bold text-lg text-slate-900">Amr Walid</span>
@@ -554,12 +565,23 @@ export const renderPage = () => {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row items-center justify-between gap-6">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-white border border-gray-100 flex items-center justify-center overflow-hidden shadow-sm">
-            <img src="/assets/logo.webp" alt="Amr Walid Logo" class="w-full h-full object-cover scale-[1.3] translate-y-[-5%]" />
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-md shadow-brand-500/20 overflow-hidden">
+            <svg class="w-full h-full" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AW monogram">
+              <defs>
+                <linearGradient id="awLogoGradF" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#3b8fff"/>
+                  <stop offset="1" stop-color="#0ea5e9"/>
+                </linearGradient>
+              </defs>
+              <rect width="48" height="48" rx="13" fill="url(#awLogoGradF)"/>
+              <path d="M8 34 L15 15 L22 34" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <path d="M11.5 28 H18.5" stroke="white" stroke-width="3.2" stroke-linecap="round"/>
+              <path d="M25 15 L29 34 L33 22 L37 34 L41 15" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.92"/>
+            </svg>
           </div>
           <div>
             <span class="font-bold text-slate-900">Amr Walid</span>
-            <span class="block text-xs text-gray-500 font-mono">Data Engineer</span>
+            <span class="block text-xs text-gray-500 font-mono">Data Engineer & Full-Stack Developer</span>
           </div>
         </div>
         
