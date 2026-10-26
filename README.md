@@ -34,7 +34,8 @@ A production-ready personal portfolio website for **Amr Walid**, a Data Engineer
 my-web/
 ├── index.tsx                  # Hono app — all routes & API endpoints
 ├── src/
-│   ├── data.ts                # All portfolio content (projects, experience, skills, certs)
+│   ├── data.ts                # All portfolio content (projects, experience, skills, certs, order, summaries)
+│   ├── icons.ts               # Inline SVG icon set
 │   └── template.ts            # HTML rendering logic (server-side templating)
 ├── public/
 │   └── assets/
@@ -77,6 +78,8 @@ my-web/
 | 1 | **Retail POS & Reporting System** | ASP.NET Core 8, C#, EF Core, SQL Server, ZXing Barcode | [↗](https://github.com/Amr-Walid/invoice) |
 | 2 | **UniGroup CRM (Multi-Tenant)** | ASP.NET Core, C#, Clean Architecture, EF Core, Docker | [↗](https://github.com/Amr-Walid/crm) |
 | 3 | **Asset Tracking & Support System (ATS)** | ASP.NET Core 8, EF Core, Hangfire, SignalR, QRCoder | [↗](https://github.com/Amr-Walid/assets_tracking) |
+| 4 | **FTD TechZone — E-Commerce & Corporate CMS** | ASP.NET Core MVC, EF Core, SQL Server, Identity | [↗](https://github.com/Amr-Walid/ftd) |
+| 5 | **Fleet Pulse — Driver Tracking (System Design)** | PostGIS, TimescaleDB, Redis, Android, React | [↗](https://github.com/Amr-Walid/tracking_car) |
 
 ### 🤖 Automation
 
@@ -84,11 +87,13 @@ my-web/
 |---|---------|-----------|--------|
 | 4 | **WhatsApp Marketing & Customer Analytics** | C#/.NET, JavaScript, SQL, RFM Segmentation | [↗](https://github.com/Amr-Walid/whatsapp_marketing) |
 | 5 | **M365 Project Management & Attendance System** | Power Automate, SharePoint, Forms, Excel, DAX | — |
+| 6 | **Social Media Governance Command Center** | PostgreSQL, n8n, Metabase, Docker Compose, Flask | [↗](https://github.com/Amr-Walid/marketing_acc) |
 
 ### 🔧 Data Engineering
 
 | # | Project | Tech Stack | GitHub |
 |---|---------|-----------|--------|
+| 0 | **CryptoPulse — Real-Time Crypto Lakehouse on Azure** | Kafka, Spark, Delta Lake, ADLS Gen2, Airflow, dbt, FastAPI | [↗](https://github.com/Amr-Walid/Depi-Project) |
 | 6 | **Modern SQL Server Data Warehouse** | SQL Server, T-SQL, Medallion Architecture, Star Schema | [↗](https://github.com/Amr-Walid/Sqlserver-DataWarehouse-Project) |
 | 7 | **Real-Time Stock Data Pipeline with MongoDB** | Python, MongoDB, FastAPI, Docker, Change Streams | [↗](https://github.com/Amr-Walid/real-time-stock-pipeline) |
 | 8 | **Automated Crypto Price ETL Pipeline** | Python, Pandas, GitHub Actions, CI/CD | [↗](https://github.com/Amr-Walid/crypto-price-analyzer) |
@@ -101,6 +106,15 @@ my-web/
 | 10 | **AI-Powered Enterprise Analytics Dashboard** | Next.js 16, React 19, Vercel AI SDK, Gemini, Recharts |
 | 11 | **AdventureWorks Sales Analytics Dashboard** | Excel, Power Query, PivotTables, Data Modeling |
 | 12 | **Payment Performance & Bank Guarantee Dashboard** | Excel, Power Query, Power Pivot, DAX, BI |
+
+### 🌐 Web & WordPress
+
+| # | Project | Tech Stack | GitHub |
+|---|---------|-----------|--------|
+| 13 | **Greenio — Renewable Energy WordPress Theme** | WordPress, PHP, Carbon Fields | [↗](https://github.com/Amr-Walid/wordpress-project1) |
+| 14 | **Greenio Honey & Teas — Organic Store Theme** | WordPress, CPT, Carbon Fields | [↗](https://github.com/Amr-Walid/wordpress2) |
+| 15 | **AeroWind Energy — Wind Turbines Theme** | WordPress, CPT, Lead Forms | [↗](https://github.com/Amr-Walid/wordpress3) |
+| 16 | **QRCard Pro — Digital Business Card** | HTML, JS, QR, GitHub Pages | [↗](https://github.com/Amr-Walid/qrhtml) |
 
 ## 🧩 Services (for Businesses)
 
@@ -198,14 +212,14 @@ Or push to GitHub — Vercel auto-deploys on every commit.
 
 ## ✨ UI Features
 
-- 🌙 **Dark / Light mode** toggle with `localStorage` persistence
-- 📱 **Fully responsive** — mobile, tablet, desktop
-- 🎨 **Glassmorphism UI** with smooth scroll animations
-- 🔍 **Project filtering** by category (All / Data Engineering / Data Analysis)
-- 📸 **Image carousel** for project screenshots
-- 📬 **Contact form** with backend API validation
-- ⚡ **Intersection Observer** for scroll-triggered animations
-- 🧭 **Active nav link** highlighting on scroll
+- 🌗 **Dark / Light theme** (no flash on load, saved in `localStorage`)
+- 🧱 **Server-side rendered** project cards (SEO-friendly) + JSON-LD Person schema & Open Graph tags
+- 🎞️ **Animations**: staggered scroll reveals, animated hero network canvas, aurora gradients, typed roles, count-up stats, tech marquee, 3D card tilt, spotlight hover, magnetic buttons, scroll-progress bar, timeline progress line
+- 🔍 **Project filters** with counts + "Show all" (5 categories, 20 projects)
+- 🗂️ **Case-study modal** — gallery with thumbnails, full-screen lightbox, architecture flow, prev/next (keyboard ← → + swipe), deep links (`#project=<id>`), focus trap
+- 📬 **Contact form** (Formspree) with validation, topic chips, honeypot, copy-email button, live Cairo time
+- ♿ **Accessible**: skip link, keyboard-operable cards, ARIA, `prefers-reduced-motion` support
+- 📱 **Fully responsive**, lighter effects on mobile
 
 ---
 
@@ -218,4 +232,4 @@ Or push to GitHub — Vercel auto-deploys on every commit.
 
 ---
 
-*Last updated: September 2026 | Built with Hono + Vite + Tailwind CSS | Deployed on Vercel*
+*Last updated: October 2026 | Built with Hono + Vite + Tailwind CSS | Deployed on Vercel*

@@ -1,695 +1,630 @@
 import { portfolioData } from './data';
+import { icon, projectIcon } from './icons';
 
-export const renderPage = () => {
-  return `<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Amr Walid | Data Engineer & Full-Stack Developer — Systems, Pipelines & Automation</title>
-  <meta name="description" content="Data Engineer & Full-Stack developer in Cairo. I build production business systems (POS, CRM, asset tracking), scalable data pipelines, and marketing automation. ASP.NET Core, C#, Python, SQL, Next.js, Docker.">
-  <meta name="keywords" content="Data Engineer, Full-Stack Developer, ASP.NET Core, C#, POS System, CRM, ETL, Data Pipeline, Automation, Python, SQL, Next.js, Docker, Power BI, Egypt, Portfolio">
-  <meta name="author" content="Amr Walid">
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content="Amr Walid | Data Engineer & Full-Stack Developer">
-  <meta property="og:description" content="Production business systems (POS, CRM, asset tracking), scalable data pipelines, and marketing automation — end to end.">
-  <meta property="og:type" content="website">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9881;</text></svg>">
-  
-  <!-- Fonts: async load to avoid render-blocking -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap">
-  
-  <!-- Security: Content Security Policy -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://avatars.githubusercontent.com; connect-src 'self' https://formspree.io;">
+const d: any = portfolioData;
+const p = d.personal;
 
-  <!-- Icons are now inline SVGs for performance -->
-  
-  <!-- Tailwind is now compiled locally via Vite/PostCSS -->
-  <!-- Custom Styles (separated for clean Separation of Concerns) -->
-  <link rel="stylesheet" href="/assets/styles.compiled.css">
-</head>
-<body class="bg-white text-slate-900 font-sans antialiased transition-colors duration-500">
-  
-  <!-- ============ NAVIGATION ============ -->
-  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-2">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16 lg:h-20">
-        <!-- Logo -->
+/** Escape text for safe HTML interpolation. */
+const esc = (s: unknown = ''): string =>
+  String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+
+const SITE_URL = 'https://amrw.me';
+
+const navLinks = [
+  ['about', 'About'],
+  ['projects', 'Work'],
+  ['services', 'Services'],
+  ['experience', 'Experience'],
+  ['contact', 'Contact']
+];
+
+const categoryIcon: Record<string, string> = {
+  'Full-Stack': 'monitor',
+  'Data Engineering': 'database',
+  Automation: 'workflow',
+  'Data Analysis': 'chartBar',
+  'Web & WordPress': 'globe'
+};
+
+const categoryHue: Record<string, string> = {
+  'Full-Stack': 'from-sky-500/30 via-blue-600/20 to-indigo-700/30',
+  'Data Engineering': 'from-cyan-400/30 via-teal-500/20 to-blue-700/30',
+  Automation: 'from-violet-500/30 via-fuchsia-500/20 to-sky-600/30',
+  'Data Analysis': 'from-amber-400/30 via-orange-500/20 to-rose-600/30',
+  'Web & WordPress': 'from-emerald-400/30 via-green-500/20 to-cyan-600/30'
+};
+
+const projectImages = (pr: any): string[] => pr.imageUrls || (pr.imageUrl ? [pr.imageUrl] : []);
+
+// ---------------------------------------------------------------- sections
+
+const renderNav = () => `
+  <div id="scrollProgress" class="fixed top-0 left-0 h-[3px] w-0 z-[70] bg-gradient-to-r from-brand-500 via-accent-400 to-violet-500"></div>
+  <header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-500">
+    <nav class="nav-shell mx-auto mt-3 max-w-6xl px-3 sm:px-4" aria-label="Main">
+      <div class="nav-inner flex items-center justify-between gap-3 rounded-2xl px-3 sm:px-4 h-16 transition-all duration-500">
         <a href="#hero" class="flex items-center gap-3 group" aria-label="Amr Walid — home">
-          <div class="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg shadow-brand-500/25 group-hover:scale-105 group-hover:shadow-brand-500/40 transition-all overflow-hidden">
-            <svg class="w-full h-full" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AW monogram">
-              <defs>
-                <linearGradient id="awLogoGrad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#3b8fff"/>
-                  <stop offset="1" stop-color="#0ea5e9"/>
-                </linearGradient>
-              </defs>
-              <rect width="48" height="48" rx="13" fill="url(#awLogoGrad)"/>
-              <path d="M8 34 L15 15 L22 34" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              <path d="M11.5 28 H18.5" stroke="white" stroke-width="3.2" stroke-linecap="round"/>
-              <path d="M25 15 L29 34 L33 22 L37 34 L41 15" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.92"/>
-            </svg>
-          </div>
-          <div class="hidden sm:block">
-            <span class="font-bold text-lg text-slate-900">Amr Walid</span>
-            <span class="block text-xs text-brand-400 font-mono -mt-0.5">Data Engineer & Full-Stack Dev</span>
-          </div>
+          <span class="logo-mark grid place-items-center w-10 h-10 rounded-xl font-black text-white text-sm tracking-tight">AW</span>
+          <span class="hidden sm:block leading-tight">
+            <span class="block font-bold text-fg">Amr Walid</span>
+            <span class="block text-[11px] font-mono text-muted">data · systems · automation</span>
+          </span>
         </a>
-        
-        <!-- Desktop Nav -->
         <div class="hidden md:flex items-center gap-1">
-          <a href="#about" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-400 transition-colors">About</a>
-          <a href="#projects" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-400 transition-colors">Projects</a>
-          <a href="#services" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-400 transition-colors">Services</a>
-          <a href="#experience" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-400 transition-colors">Experience</a>
-          <a href="#certifications" class="nav-link px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-400 transition-colors">Certifications</a>
-          <a href="#contact" class="ml-4 px-5 py-2.5 bg-gradient-to-r from-brand-600 to-accent-500 text-white text-sm font-semibold rounded-xl hover:shadow-lg hover:shadow-brand-500/25 transition-all hover:-translate-y-0.5">
-            Let's Talk
-          </a>
+          ${navLinks.map(([id, label]) => `<a href="#${id}" class="nav-link" data-nav="${id}">${label}</a>`).join('')}
         </div>
-        
-        <!-- Mobile Menu Button -->
-        <div class="flex items-center gap-3 md:hidden">
-          <button id="mobileMenuBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu" class="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-slate-700">
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 448 512" aria-hidden="true"><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
+        <div class="flex items-center gap-2">
+          <button id="themeToggle" class="icon-btn" aria-label="Toggle color theme">
+            <span class="theme-icon-dark">${icon('moon', 'w-[18px] h-[18px]')}</span>
+            <span class="theme-icon-light">${icon('sun', 'w-[18px] h-[18px]')}</span>
+          </button>
+          <a href="#contact" class="hidden sm:inline-flex btn-primary btn-sm magnetic">Hire me ${icon('arrowUpRight', 'w-4 h-4')}</a>
+          <button id="mobileMenuBtn" class="icon-btn md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+            <span class="menu-open">${icon('menu', 'w-5 h-5')}</span>
+            <span class="menu-close hidden">${icon('x', 'w-5 h-5')}</span>
           </button>
         </div>
       </div>
-    </div>
-    
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden md:hidden glass glass-light animate-slide-down">
-      <div class="px-4 py-6 space-y-1">
-        <a href="#about" class="block px-4 py-3 rounded-xl text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">About</a>
-        <a href="#projects" class="block px-4 py-3 rounded-xl text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Projects</a>
-        <a href="#services" class="block px-4 py-3 rounded-xl text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Services</a>
-        <a href="#experience" class="block px-4 py-3 rounded-xl text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Experience</a>
-        <a href="#certifications" class="block px-4 py-3 rounded-xl text-gray-600 hover:bg-brand-500/10 hover:text-brand-400 transition-colors font-medium">Certifications</a>
-        <a href="#contact" class="block px-4 py-3 mt-4 bg-gradient-to-r from-brand-600 to-accent-500 text-white text-center rounded-xl font-semibold">Let's Talk</a>
+      <div id="mobileMenu" class="md:hidden hidden mt-2 rounded-2xl surface p-3">
+        ${navLinks.map(([id, label]) => `<a href="#${id}" class="block px-4 py-3 rounded-xl text-fg/80 hover:bg-fg/5 hover:text-fg font-medium">${label}</a>`).join('')}
+        <a href="#contact" class="group btn-primary w-full justify-center mt-2">Hire me ${icon('arrowUpRight', 'w-4 h-4')}</a>
+      </div>
+    </nav>
+  </header>`;
+
+const renderHero = () => `
+  <section id="hero" class="relative min-h-[min(100svh,960px)] flex items-center overflow-hidden pt-28 pb-20">
+    <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="hero-grid absolute inset-0" aria-hidden="true"></div>
+    <canvas id="heroCanvas" class="absolute inset-0 w-full h-full opacity-60" aria-hidden="true"></canvas>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-6 w-full">
+      <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-14 lg:gap-10 items-center">
+        <div class="order-2 lg:order-1">
+          <div class="hero-in inline-flex items-center gap-2 rounded-full border border-line/10 bg-fg/[0.03] px-3 py-1.5 text-xs font-medium text-muted backdrop-blur" style="--d:0ms">
+            <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span></span>
+            Available for freelance &amp; full-time roles
+          </div>
+
+          <h1 class="mt-6 font-display font-extrabold tracking-tight leading-[0.95] text-[clamp(2.9rem,8vw,5.6rem)]">
+            <span class="hero-in block text-fg" style="--d:80ms">Amr Walid</span>
+            <span class="hero-in block gradient-text pb-2" style="--d:160ms">builds systems</span>
+          </h1>
+
+          <p class="hero-in mt-5 text-xl sm:text-2xl font-semibold text-fg/90" style="--d:240ms">
+            <span class="text-muted font-normal">I'm <span id="typedArticle">a</span></span>
+            <span id="typedRole" class="typed text-fg">Data Engineer</span><span class="caret" aria-hidden="true"></span>
+          </p>
+
+          <p class="hero-in mt-5 max-w-xl text-base sm:text-lg leading-relaxed text-muted" style="--d:320ms">
+            End to end — from the database to the dashboard. I ship <span class="text-fg font-medium">real-time data pipelines</span>,
+            <span class="text-fg font-medium">production business systems</span> (POS, CRM, e-commerce, asset tracking) and
+            <span class="text-fg font-medium">automation</span> that replaces spreadsheets and manual work.
+          </p>
+
+          <div class="hero-in mt-8 flex flex-wrap items-center gap-3" style="--d:400ms">
+            <a href="#projects" class="group btn-primary magnetic">View my work ${icon('arrowRight', 'w-4 h-4 transition-transform group-hover:translate-x-1')}</a>
+            <a href="#contact" class="btn-ghost magnetic">Start a project</a>
+            <div class="flex items-center gap-2 ml-1">
+              <a href="${p.github}" target="_blank" rel="noopener" class="icon-btn" aria-label="GitHub">${icon('github', 'w-[18px] h-[18px]')}</a>
+              <a href="${p.linkedin}" target="_blank" rel="noopener" class="icon-btn" aria-label="LinkedIn">${icon('linkedin', 'w-[18px] h-[18px]')}</a>
+              <a href="mailto:${p.email}" class="icon-btn" aria-label="Email">${icon('mail', 'w-[18px] h-[18px]')}</a>
+            </div>
+          </div>
+
+          <dl class="hero-in mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-xl" style="--d:480ms">
+            ${d.stats
+              .map(
+                (s: any) => `
+              <div class="stat">
+                <dt class="sr-only">${esc(s.label)}</dt>
+                <dd class="text-3xl font-display font-bold text-fg tabular-nums"><span data-count="${s.value}">0</span>${s.suffix}</dd>
+                <p class="mt-1 text-xs leading-snug text-muted">${esc(s.label)}</p>
+              </div>`
+              )
+              .join('')}
+          </dl>
+        </div>
+
+        <div class="order-1 lg:order-2 relative flex justify-center">
+          <div class="hero-in portrait relative w-60 h-60 sm:w-72 sm:h-72 lg:w-[22rem] lg:h-[22rem]" style="--d:120ms" data-parallax>
+            <div class="portrait-ring ring-1"></div>
+            <div class="portrait-ring ring-2"></div>
+            <div class="portrait-glow"></div>
+            <div class="absolute inset-6 sm:inset-8 rounded-full overflow-hidden border border-line/10 bg-base-2 shadow-2xl">
+              <img src="/assets/profile.webp" alt="Portrait of Amr Walid" width="320" height="320" fetchpriority="high" decoding="async" class="w-full h-full object-cover object-[center_20%]">
+            </div>
+            <div class="float-chip top-4 -left-2 sm:-left-6" style="--fd:0s">${icon('database', 'w-4 h-4 text-accent-400')}<span>Pipelines</span></div>
+            <div class="float-chip top-1/2 -right-4 sm:-right-10" style="--fd:1.2s">${icon('monitor', 'w-4 h-4 text-brand-400')}<span>Systems</span></div>
+            <div class="float-chip bottom-6 left-0 sm:-left-4" style="--fd:2.4s">${icon('workflow', 'w-4 h-4 text-violet-400')}<span>Automation</span></div>
+            <div class="code-card hidden sm:block -bottom-10 right-0 sm:-right-6">
+              <div class="flex gap-1.5 mb-2"><i class="bg-rose-400"></i><i class="bg-amber-400"></i><i class="bg-emerald-400"></i></div>
+              <code><span class="text-violet-400">SELECT</span> impact<br><span class="text-violet-400">FROM</span> raw_data<br><span class="text-violet-400">WHERE</span> manual = <span class="text-emerald-400">false</span>;</code>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </nav>
 
-  <!-- ============ HERO SECTION ============ -->
-  <section id="hero" class="relative min-h-screen flex items-start lg:items-center justify-center hero-gradient overflow-hidden pt-24 sm:pt-28 lg:pt-32 pb-20">
-    <div class="grid-bg absolute inset-0 opacity-60"></div>
-    
-    <!-- Floating Elements -->
-    <div class="absolute top-1/4 left-10 w-3 h-3 bg-brand-500 rounded-full animate-float opacity-40"></div>
-    <div class="absolute top-1/3 right-20 w-2 h-2 bg-accent-400 rounded-full animate-float opacity-30" style="animation-delay: 2s"></div>
-    <div class="absolute bottom-1/3 left-1/4 w-4 h-4 bg-brand-400/20 rounded-full animate-float" style="animation-delay: 4s"></div>
-    
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-        <!-- Left Column -->
-        <div class="space-y-8 animate-slide-up order-last lg:order-first">
+    <a href="#about" class="scroll-cue absolute bottom-6 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-[11px] font-mono uppercase tracking-[0.2em] text-muted hover:text-fg" aria-label="Scroll to About">
+      <span class="mouse"><span></span></span>scroll
+    </a>
+  </section>`;
 
-          
-          <!-- Heading -->
+const renderMarquee = () => {
+  const items = d.techMarquee.map((t: string) => `<li>${esc(t)}</li>`).join('');
+  return `
+  <section class="relative py-8 border-y border-line/[0.07] bg-base-2/50" aria-label="Technologies I work with">
+    <div class="marquee">
+      <ul class="marquee-track">${items}${items}</ul>
+    </div>
+  </section>`;
+};
+
+const sectionHead = (eyebrow: string, title: string, sub = '', center = true) => `
+  <div class="${center ? 'text-center mx-auto' : ''} max-w-2xl mb-14" data-reveal>
+    <p class="eyebrow ${center ? 'justify-center' : ''}">${eyebrow}</p>
+    <h2 class="mt-3 font-display font-bold tracking-tight text-fg text-4xl sm:text-5xl leading-[1.05]">${title}</h2>
+    ${sub ? `<p class="mt-4 text-lg text-muted leading-relaxed">${sub}</p>` : ''}
+  </div>`;
+
+const renderAbout = () => {
+  const skillGroups = Object.entries(d.skills) as [string, { name: string; level: number }[]][];
+  const pillars = [
+    ['database', 'Data Engineering', 'Kafka, Spark, Delta Lake, Airflow, dbt, SQL Server warehouses and ETL that runs on schedule.'],
+    ['monitor', 'Full-Stack Systems', 'ASP.NET Core 8 / C#, EF Core, Next.js — POS, CRM, e-commerce and support desks in production.'],
+    ['workflow', 'Automation', 'WhatsApp campaigns, Power Automate, n8n and GitHub Actions that remove repetitive work.'],
+    ['chartBar', 'Analytics & BI', 'Power BI, Excel / DAX and custom web dashboards with AI-assisted insights.']
+  ];
+  return `
+  <section id="about" class="relative py-28 lg:py-36">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6">
+      <div class="grid lg:grid-cols-[1fr_1.1fr] gap-14 lg:gap-20 items-start">
+        <div data-reveal>
+          <p class="eyebrow">About me</p>
+          <h2 class="mt-3 font-display font-bold tracking-tight text-fg text-4xl sm:text-5xl leading-[1.05]">From raw data to <span class="gradient-text">production systems</span>.</h2>
+          <div class="mt-6 space-y-5 text-lg leading-relaxed text-muted">
+            <p>I'm a Data Engineer and Full-Stack developer based in ${esc(p.location)}. I don't stop at prototypes — I design, build and ship complete systems that people use every day.</p>
+            <p>On the data side I build streaming and batch pipelines, lakehouses and warehouses. On the application side I build business software with <span class="text-fg">clean architecture, roles, validation, audit logs and tests</span> — so it keeps running after launch.</p>
+            <p>I study Economics &amp; Political Science at Cairo University, which keeps me focused on the question that matters: <span class="text-fg">what decision does this data or system make better?</span></p>
+          </div>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="${p.github}" target="_blank" rel="noopener" class="btn-ghost btn-sm">${icon('github', 'w-4 h-4')} github.com/Amr-Walid</a>
+            <a href="${p.linkedin}" target="_blank" rel="noopener" class="btn-ghost btn-sm">${icon('linkedin', 'w-4 h-4')} LinkedIn</a>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4" data-reveal-group>
+          ${pillars
+            .map(
+              ([ic, t, txt]) => `
+            <article class="pillar spotlight" data-reveal>
+              <span class="pillar-icon">${icon(ic, 'w-5 h-5')}</span>
+              <h3 class="mt-4 font-semibold text-fg text-lg">${t}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted">${txt}</p>
+            </article>`
+            )
+            .join('')}
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div class="mt-24" data-reveal>
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8">
           <div>
-            <p class="text-lg sm:text-xl text-gray-500 font-medium mb-3">Hi, I'm</p>
-            <h1 class="text-[clamp(2.75rem,9vw,4.5rem)] sm:text-6xl lg:text-7xl font-black leading-tight tracking-tight whitespace-nowrap">
-              <span class="text-slate-900">Amr</span>
-              <span class="gradient-text"> Walid</span>
-            </h1>
-            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-700 mt-3">
-              Data Engineer & Full-Stack Developer
-            </h2>
+            <p class="eyebrow">Toolbox</p>
+            <h3 class="mt-3 font-display font-bold text-fg text-3xl sm:text-4xl tracking-tight">Skills &amp; technologies</h3>
           </div>
-          
-          <!-- Tagline -->
-          <p class="text-lg sm:text-xl text-gray-500 leading-relaxed max-w-xl">
-            End to end, from the database to the dashboard. I build <span class="text-brand-400 font-semibold">scalable data pipelines</span>, <span class="text-accent-400 font-semibold">production business systems</span> (POS, CRM, asset tracking) and <span class="text-brand-400 font-semibold">marketing automation</span>.
-          </p>
-          
-          <!-- Tech Tags -->
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">Python</span>
-            <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">SQL</span>
-            <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">ASP.NET Core</span>
-            <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">C#</span>
-            <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">Next.js</span>
-            <span class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm font-mono border border-gray-200">Docker</span>
-          </div>
-          
-          <!-- CTAs -->
-          <div class="flex flex-wrap gap-4">
-            <a href="#projects" class="group px-7 py-3.5 bg-gradient-to-r from-brand-600 to-accent-500 text-white font-semibold rounded-2xl hover:shadow-lg hover:shadow-brand-500/25 transition-all hover:-translate-y-1 flex items-center gap-2">
-              View My Work
-              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform fill-current" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
-            </a>
-            <a href="https://github.com/Amr-Walid" target="_blank" class="px-7 py-3.5 bg-white border border-gray-200 text-gray-700 font-semibold rounded-2xl hover:border-brand-500/50 transition-all hover:-translate-y-1 flex items-center gap-2 shadow-sm">
-              <svg class="w-5 h-5 fill-current" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
-              GitHub
-            </a>
-            <a href="https://www.linkedin.com/in/amrwalidmaher" target="_blank" class="px-7 py-3.5 bg-white border border-gray-200 text-gray-700 font-semibold rounded-2xl hover:border-brand-500/50 transition-all hover:-translate-y-1 flex items-center gap-2 shadow-sm">
-              <svg class="w-5 h-5 fill-current" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zM384 416h-66.5V310.2c0-25.2-.5-57.6-35.1-57.6-35.1 0-40.5 27.5-40.5 55.8V416h-66.5V202.2h63.8v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
-              LinkedIn
-            </a>
+          <div class="skill-tabs flex flex-wrap gap-2" role="tablist">
+            ${skillGroups
+              .map(
+                ([g], i) =>
+                  `<button role="tab" class="chip-tab${i === 0 ? ' active' : ''}" data-skill-tab="${i}" aria-selected="${i === 0}">${esc(g)}</button>`
+              )
+              .join('')}
           </div>
         </div>
-        
-        <!-- Right Column — Profile Picture -->
-        <div class="relative flex items-center justify-center order-first lg:order-last mb-8 lg:mb-0">
-          <div class="relative w-44 h-44 sm:w-52 sm:h-52 lg:w-60 lg:h-60 xl:w-64 xl:h-64 mx-auto">
-            <!-- Decorative rings -->
-            <div class="absolute inset-0 border border-brand-500/30 rounded-full animate-spin-slow" style="animation-duration: 15s;"></div>
-            <div class="absolute inset-4 border border-accent-500/20 rounded-full animate-[spin_20s_linear_reverse]"></div>
-            
-            <!-- Profile Image Container -->
-            <div class="absolute inset-6 sm:inset-8 rounded-full overflow-hidden border-4 border-slate-800/80 shadow-2xl shadow-brand-500/20 glass bg-slate-100 flex items-center justify-center">
-              <img 
-                src="/assets/profile.webp" 
-                srcset="/assets/profile.webp 320w"
-                sizes="(max-width: 640px) 126px, (max-width: 1024px) 160px, 176px"
-                alt="Amr Walid Profile" 
-                width="176" 
-                height="176" 
-                fetchpriority="high" 
-                decoding="async" 
-                class="w-full h-full object-cover object-[center_20%]" />
-            </div>
-
-            <!-- Floating tech icons -->
-            <div class="absolute top-0 right-10 w-12 h-12 bg-slate-800 rounded-xl shadow-lg flex items-center justify-center animate-float border border-slate-700 p-2">
-              <img src="/assets/python-original.svg" alt="Python" class="w-full h-full" />
-            </div>
-            <div class="absolute bottom-10 left-0 w-12 h-12 bg-slate-800 rounded-xl shadow-lg flex items-center justify-center animate-float border border-slate-700 p-2" style="animation-delay: 1.5s;">
-              <img src="/assets/postgresql-original.svg" alt="PostgreSQL" class="w-full h-full" />
-            </div>
-          </div>
+        <div class="surface rounded-3xl p-6 sm:p-8">
+          ${skillGroups
+            .map(
+              ([, list], i) => `
+            <div class="skill-panel grid sm:grid-cols-2 gap-x-10 gap-y-6${i === 0 ? '' : ' hidden'}" data-skill-panel="${i}">
+              ${list
+                .map(
+                  (s) => `
+                <div>
+                  <div class="flex justify-between text-sm mb-2"><span class="font-medium text-fg">${esc(s.name)}</span><span class="font-mono text-muted tabular-nums">${s.level}%</span></div>
+                  <div class="h-2 rounded-full bg-fg/[0.06] overflow-hidden"><div class="skill-fill h-full rounded-full" style="--w:${s.level}%"></div></div>
+                </div>`
+                )
+                .join('')}
+            </div>`
+            )
+            .join('')}
         </div>
       </div>
     </div>
-    
-    <!-- Scroll Indicator -->
-    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-      <a href="#about" aria-label="Scroll to About section" class="text-gray-500 hover:text-brand-400 transition-colors">
-        <svg class="w-6 h-6 fill-current" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
-      </a>
-    </div>
-  </section>
+  </section>`;
+};
 
-  <!-- ============ ABOUT SECTION ============ -->
-  <section id="about" class="py-24 lg:py-32 bg-gray-50/50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid lg:grid-cols-5 gap-16 items-start" data-animate>
-        <div class="lg:col-span-3 space-y-6">
-          <div>
-            <p class="text-brand-400 font-mono text-sm font-semibold mb-2 tracking-wider uppercase">// About Me</p>
-            <h2 class="text-4xl lg:text-5xl font-bold text-slate-900">
-              From Data Pipelines To
-              <span class="gradient-text"> Production Systems</span>
-            </h2>
-          </div>
-          <p class="text-lg text-gray-600 leading-relaxed">
-            I'm a Data Engineer and Full-Stack developer based in Cairo, Egypt. I build complete, production-grade systems end to end — robust data pipelines and warehouses on one side, and full business applications on the other: point-of-sale, CRM, asset tracking, and marketing automation.
-          </p>
-          <p class="text-lg text-gray-600 leading-relaxed">
-            My work spans <strong class="text-slate-900">ETL/ELT & data modeling</strong> (Python, SQL), <strong class="text-slate-900">backend engineering</strong> (ASP.NET Core 8, C#, EF Core) with <strong class="text-slate-900">clean architecture</strong>, and <strong class="text-slate-900">automation</strong>. I ship with real software discipline — validation, testing, audit logging, roles, and security — so systems actually run in production.
-          </p>
-          <p class="text-lg text-gray-600 leading-relaxed">
-            Currently studying Economics at Cairo University's Faculty of Economics & Political Science, I bring a perspective that bridges quantitative analysis with modern software and data engineering.
-          </p>
-        </div>
-        
-        <!-- Interactive ETL Diagram -->
-        <div class="lg:col-span-2 relative h-[300px] w-full rounded-3xl glass glass-light p-6 overflow-hidden flex items-center justify-center border border-white/40 shadow-xl" id="etlDiagram">
-          <!-- Data Sources -->
-          <div class="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 flex flex-col gap-4 sm:gap-6 z-10">
-            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-xl shadow-lg border border-gray-100 flex items-center justify-center text-brand-500 animate-float" style="animation-delay: 0s;">
-              <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-current" viewBox="0 0 448 512"><path d="M448 80v48c0 44.2-100.3 80-224 80S0 172.2 0 128V80C0 35.8 100.3 0 224 0S448 35.8 448 80zM393.2 214.7c20.8-7.4 39.9-16.9 54.8-28.6V288c0 44.2-100.3 80-224 80S0 332.2 0 288V186.1c14.9 11.8 34 21.2 54.8 28.6C99.7 230.7 159.5 240 224 240s124.3-9.3 169.2-25.3zM0 346.1c14.9 11.8 34 21.2 54.8 28.6C99.7 390.7 159.5 400 224 400s124.3-9.3 169.2-25.3c20.8-7.4 39.9-16.9 54.8-28.6V432c0 44.2-100.3 80-224 80S0 476.2 0 432V346.1z"/></svg>
-            </div>
-            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-xl shadow-lg border border-gray-100 flex items-center justify-center text-accent-500 animate-float" style="animation-delay: 1s;">
-              <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-current" viewBox="0 0 640 512"><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg>
-            </div>
-          </div>
-
-          <!-- ETL Pipeline Path -->
-          <div class="absolute left-14 sm:left-20 right-14 sm:right-20 top-1/2 -translate-y-1/2 h-1 bg-gray-200/50 rounded-full z-0 overflow-hidden">
-            <!-- Flowing Data Particles -->
-            <div class="data-particle particle-1"></div>
-            <div class="data-particle particle-2"></div>
-            <div class="data-particle particle-3"></div>
-          </div>
-
-          <svg class="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-20" viewBox="0 0 400 300" preserveAspectRatio="none">
-             <path d="M 60 150 Q 200 90 340 150" fill="transparent" stroke="url(#gradient)" stroke-width="2" stroke-dasharray="4 4"/>
-             <defs>
-               <linearGradient id="gradient" x1="0" y1="0" x2="1" y2="0">
-                 <stop offset="0%" stop-color="#3b8fff" />
-                 <stop offset="100%" stop-color="#0ea5e9" />
-               </linearGradient>
-             </defs>
-          </svg>
-
-          <!-- ETL Engine (Middle) -->
-          <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 mt-1 sm:mt-0">
-             <div class="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-slate-700 shadow-2xl flex items-center justify-center group overflow-hidden">
-                <div class="absolute inset-0 bg-brand-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div class="absolute inset-0 flex items-center justify-center">
-                   <div class="w-12 h-12 sm:w-16 sm:h-16 border-2 border-brand-400/30 rounded-full animate-spin-slow"></div>
-                </div>
-                <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white animate-pulse-slow fill-current" viewBox="0 0 512 512"><path d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336c44.2 0 80-35.8 80-80s-35.8-80-80-80s-80 35.8-80 80s35.8 80 80 80z"/></svg>
-             </div>
-             <p class="text-center mt-2 sm:mt-3 text-[9px] sm:text-xs font-bold font-mono tracking-widest uppercase text-gray-500">Transform</p>
-          </div>
-
-          <!-- Destination Warehouse & Dashboard -->
-          <div class="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 flex flex-col gap-4 sm:gap-6 z-10">
-            <div class="w-10 h-10 sm:w-14 sm:h-14 bg-gradient-to-br from-brand-500 to-brand-600 rounded-xl shadow-lg shadow-brand-500/20 text-white flex items-center justify-center animate-pulse-slow" style="animation-duration: 3s;">
-               <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-current" viewBox="0 0 512 512"><path d="M64 48c0-26.5 21.5-48 48-48H400c26.5 0 48 21.5 48 48V160c0 26.5-21.5 48-48 48H112c-26.5 0-48-21.5-48-48V48zm88 48c-8.8 0-16 7.2-16 16s7.2 16 16 16h80c8.8 0 16-7.2 16-16s-7.2-16-16-16H152zm144 16c0 13.3 10.7 24 24 24h32c13.3 0 24-10.7 24-24s-10.7-24-24-24H320c-13.3 0-24 10.7-24 24zM64 352c0-26.5 21.5-48 48-48H400c26.5 0 48 21.5 48 48V464c0 26.5-21.5 48-48 48H112c-26.5 0-48-21.5-48-48V352zm88 48c-8.8 0-16 7.2-16 16s7.2 16 16 16h80c8.8 0 16-7.2 16-16s-7.2-16-16-16H152zm144 16c0 13.3 10.7 24 24 24h32c13.3 0 24-10.7 24-24s-10.7-24-24-24H320c-13.3 0-24 10.7-24 24z"/></svg>
-            </div>
-            <div class="w-10 h-10 sm:w-14 sm:h-14 bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl shadow-lg shadow-accent-500/20 text-white flex items-center justify-center animate-pulse-slow" style="animation-duration: 4s;">
-               <svg class="w-5 h-5 sm:w-6 sm:h-6 fill-current" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></svg>
-            </div>
-          </div>
+const renderProjectCard = (pr: any, i: number) => {
+  const imgs = projectImages(pr);
+  const ic = projectIcon[pr.image] || categoryIcon[pr.category] || 'code';
+  const hue = categoryHue[pr.category] || categoryHue['Full-Stack'];
+  const media = imgs.length
+    ? `<img src="${imgs[0]}" alt="${esc(pr.title)} preview" loading="lazy" decoding="async" class="card-img">`
+    : `<div class="card-art bg-gradient-to-br ${hue}">
+         <div class="card-art-grid"></div>
+         <span class="card-art-icon">${icon(ic, 'w-10 h-10')}</span>
+         <span class="card-art-label">${esc(pr.techStack[0] || pr.category)}</span>
+       </div>`;
+  const chips = (pr.techStack || []).slice(0, 4).map((t: string) => `<li>${esc(t)}</li>`).join('');
+  return `
+    <article class="project-card group" data-category="${esc(pr.category)}" data-index="${i}" data-reveal tabindex="0" role="button" aria-label="Open case study: ${esc(pr.title)}" data-project="${pr.id}">
+      <div class="card-media">
+        ${media}
+        <div class="card-media-overlay"></div>
+        <span class="card-cat">${icon(categoryIcon[pr.category] || 'code', 'w-3.5 h-3.5')} ${esc(pr.category)}</span>
+        ${pr.status ? `<span class="card-status">${esc(pr.status)}</span>` : pr.website ? `<span class="card-status live"><i></i>Live</span>` : ''}
+        ${imgs.length > 1 ? `<span class="card-count">${icon('image', 'w-3.5 h-3.5')} ${imgs.length}</span>` : ''}
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">${esc(pr.title)}</h3>
+        <p class="card-summary">${esc(pr.summary)}</p>
+        <ul class="card-chips">${chips}</ul>
+        <div class="card-foot">
+          <span class="card-cta">Case study ${icon('arrowRight', 'w-4 h-4')}</span>
+          <span class="flex items-center gap-1.5">
+            ${pr.github ? `<a href="${pr.github}" target="_blank" rel="noopener" class="mini-link" aria-label="Source code" data-stop>${icon('github', 'w-4 h-4')}</a>` : ''}
+            ${pr.website ? `<a href="${pr.website}" target="_blank" rel="noopener" class="mini-link" aria-label="Live demo" data-stop>${icon('arrowUpRight', 'w-4 h-4')}</a>` : ''}
+          </span>
         </div>
       </div>
-    </div>
-  </section>
+    </article>`;
+};
 
+const renderProjects = () => {
+  const counts: Record<string, number> = {};
+  d.projects.forEach((pr: any) => (counts[pr.category] = (counts[pr.category] || 0) + 1));
+  return `
+  <section id="projects" class="relative py-28 lg:py-36 bg-base-2/40 border-y border-line/[0.06]">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6">
+      ${sectionHead(
+        'Selected work',
+        `Projects &amp; <span class="gradient-text">case studies</span>`,
+        `${d.projects.length} real projects across data engineering, business systems, automation and the web — each with the problem, the architecture and the impact.`
+      )}
 
-  <!-- ============ PROJECTS SECTION ============ -->
-  <section id="projects" class="py-24 lg:py-32 bg-gray-50/50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16" data-animate>
-        <p class="text-brand-400 font-mono text-sm font-semibold mb-2 tracking-wider uppercase">// Featured Work</p>
-        <h2 class="text-4xl lg:text-5xl font-bold text-slate-900">
-          Project <span class="gradient-text">Case Studies</span>
-        </h2>
-        <p class="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">Real-world systems — data pipelines, business applications, and automation — with documented architectures, tech decisions, and measurable impact.</p>
-      </div>
-      
-      <!-- Project Filter -->
-      <div class="flex flex-wrap justify-center gap-3 mb-12" data-animate>
-        <button class="filter-btn active px-5 py-2 rounded-xl text-sm font-semibold transition-all" data-filter="all">All Projects</button>
-        <button class="filter-btn px-5 py-2 rounded-xl text-sm font-semibold transition-all" data-filter="Full-Stack">Full-Stack Systems</button>
-        <button class="filter-btn px-5 py-2 rounded-xl text-sm font-semibold transition-all" data-filter="Automation">Automation</button>
-        <button class="filter-btn px-5 py-2 rounded-xl text-sm font-semibold transition-all" data-filter="Data Engineering">Data Engineering</button>
-        <button class="filter-btn px-5 py-2 rounded-xl text-sm font-semibold transition-all" data-filter="Data Analysis">Data Analysis</button>
-      </div>
-      
-      <!-- Project Cards -->
-      <div id="projectsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        <!-- Cards injected by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SERVICES SECTION ============ -->
-  <section id="services" class="py-24 lg:py-32">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16" data-animate>
-        <p class="text-brand-400 font-mono text-sm font-semibold mb-2 tracking-wider uppercase">// How I Can Help</p>
-        <h2 class="text-4xl lg:text-5xl font-bold text-slate-900">
-          Services for <span class="gradient-text">Businesses</span>
-        </h2>
-        <p class="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">I help companies turn manual, spreadsheet-driven work into reliable software — from the website all the way to the database and the automations behind it.</p>
+      <div class="flex flex-wrap justify-center gap-2 mb-12" role="tablist" aria-label="Filter projects" data-reveal>
+        <button class="chip-tab active" data-filter="all" role="tab" aria-selected="true">All <span class="chip-count">${d.projects.length}</span></button>
+        ${d.categories
+          .map(
+            (c: string) =>
+              `<button class="chip-tab" data-filter="${esc(c)}" role="tab" aria-selected="false">${icon(categoryIcon[c], 'w-4 h-4')} ${esc(c)} <span class="chip-count">${counts[c] || 0}</span></button>`
+          )
+          .join('')}
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-animate>
-        <!-- Service 1: Websites & Web Apps -->
-        <article class="service-card group relative rounded-2xl glass glass-light p-7 border border-white/40 shadow-xl hover:-translate-y-1 transition-all">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 text-white flex items-center justify-center mb-5 shadow-lg shadow-brand-500/20">
-            <svg class="w-6 h-6 fill-current" viewBox="0 0 512 512"><path d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM64 96v64H448V96H64zm0 128V416H448V224H64z"/></svg>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">Websites & Web Apps</h3>
-          <p class="text-gray-600 leading-relaxed text-sm">Fast, responsive, bilingual (Arabic RTL / English) websites and web applications — company sites, portals, and internal tools built to load quickly and work on every device.</p>
-          <ul class="mt-4 space-y-1.5 text-sm text-gray-500">
-            <li class="flex items-center gap-2"><span class="text-brand-500">&#10003;</span> Landing pages & company sites</li>
-            <li class="flex items-center gap-2"><span class="text-brand-500">&#10003;</span> Admin dashboards & portals</li>
-            <li class="flex items-center gap-2"><span class="text-brand-500">&#10003;</span> Next.js / React &amp; ASP.NET Core</li>
-          </ul>
-        </article>
+      <div id="projectsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        ${d.projects.map(renderProjectCard).join('')}
+      </div>
 
-        <!-- Service 2: Business Systems -->
-        <article class="service-card group relative rounded-2xl glass glass-light p-7 border border-white/40 shadow-xl hover:-translate-y-1 transition-all">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-accent-500 to-accent-600 text-white flex items-center justify-center mb-5 shadow-lg shadow-accent-500/20">
-            <svg class="w-6 h-6 fill-current" viewBox="0 0 576 512"><path d="M64 32C28.7 32 0 60.7 0 96v64c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm280 72a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm48 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zM64 288c-35.3 0-64 28.7-64 64v64c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V352c0-35.3-28.7-64-64-64H64zm280 72a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm56 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"/></svg>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">Business Systems</h3>
-          <p class="text-gray-600 leading-relaxed text-sm">Production-grade internal systems that replace scattered spreadsheets: point-of-sale, CRM, inventory &amp; asset tracking, invoicing, and support desks — with roles, reports, and audit logs.</p>
-          <ul class="mt-4 space-y-1.5 text-sm text-gray-500">
-            <li class="flex items-center gap-2"><span class="text-accent-500">&#10003;</span> POS, CRM &amp; inventory</li>
-            <li class="flex items-center gap-2"><span class="text-accent-500">&#10003;</span> Role-based access &amp; audit logs</li>
-            <li class="flex items-center gap-2"><span class="text-accent-500">&#10003;</span> Reports &amp; Excel/CSV export</li>
-          </ul>
-        </article>
-
-        <!-- Service 3: Automation -->
-        <article class="service-card group relative rounded-2xl glass glass-light p-7 border border-white/40 shadow-xl hover:-translate-y-1 transition-all">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-accent-500 text-white flex items-center justify-center mb-5 shadow-lg shadow-brand-500/20">
-            <svg class="w-6 h-6 fill-current" viewBox="0 0 512 512"><path d="M234.7 42.7L197 56.8c-3 1.1-5 4-5 7.2s2 6.1 5 7.2l37.7 14.1L248.8 123c1.1 3 4 5 7.2 5s6.1-2 7.2-5l14.1-37.7L315 71.2c3-1.1 5-4 5-7.2s-2-6.1-5-7.2L277.3 42.7 263.2 5c-1.1-3-4-5-7.2-5s-6.1 2-7.2 5L234.7 42.7zM46.1 395.4c-18.7 18.7-18.7 49.1 0 67.9l34.6 34.6c18.7 18.7 49.1 18.7 67.9 0L529.9 116.5c18.7-18.7 18.7-49.1 0-67.9L495.3 14.1c-18.7-18.7-49.1-18.7-67.9 0L46.1 395.4zM484.6 82.6l-105 105-23.3-23.3 105-105 23.3 23.3zM7.5 117.2C3 118.9 0 123.2 0 128s3 9.1 7.5 10.8L64 160l21.2 56.5c1.7 4.5 6 7.5 10.8 7.5s9.1-3 10.8-7.5L128 160l56.5-21.2c4.5-1.7 7.5-6 7.5-10.8s-3-9.1-7.5-10.8L128 96 106.8 39.5C105.1 35 100.8 32 96 32s-9.1 3-10.8 7.5L64 96 7.5 117.2zm352 256c-4.5 1.7-7.5 6-7.5 10.8s3 9.1 7.5 10.8L416 416l21.2 56.5c1.7 4.5 6 7.5 10.8 7.5s9.1-3 10.8-7.5L480 416l56.5-21.2c4.5-1.7 7.5-6 7.5-10.8s-3-9.1-7.5-10.8L480 352l-21.2-56.5c-1.7-4.5-6-7.5-10.8-7.5s-9.1 3-10.8 7.5L416 352l-56.5 21.2z"/></svg>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">Automation & Integrations</h3>
-          <p class="text-gray-600 leading-relaxed text-sm">Automate the repetitive work: marketing campaigns, customer segmentation (RFM), scheduled reports, data syncing between tools, and workflow automation with Power Automate / Microsoft 365.</p>
-          <ul class="mt-4 space-y-1.5 text-sm text-gray-500">
-            <li class="flex items-center gap-2"><span class="text-brand-500">&#10003;</span> Marketing &amp; WhatsApp campaigns</li>
-            <li class="flex items-center gap-2"><span class="text-brand-500">&#10003;</span> Customer segmentation (RFM)</li>
-            <li class="flex items-center gap-2"><span class="text-brand-500">&#10003;</span> Scheduled reports &amp; data sync</li>
-          </ul>
-        </article>
-
-        <!-- Service 4: Data Engineering -->
-        <article class="service-card group relative rounded-2xl glass glass-light p-7 border border-white/40 shadow-xl hover:-translate-y-1 transition-all">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-accent-500 to-brand-500 text-white flex items-center justify-center mb-5 shadow-lg shadow-accent-500/20">
-            <svg class="w-6 h-6 fill-current" viewBox="0 0 448 512"><path d="M448 80v48c0 44.2-100.3 80-224 80S0 172.2 0 128V80C0 35.8 100.3 0 224 0S448 35.8 448 80zM393.2 214.7c20.8-7.4 39.9-16.9 54.8-28.6V288c0 44.2-100.3 80-224 80S0 332.2 0 288V186.1c14.9 11.8 34 21.2 54.8 28.6C99.7 230.7 159.5 240 224 240s124.3-9.3 169.2-25.3zM0 346.1c14.9 11.8 34 21.2 54.8 28.6C99.7 390.7 159.5 400 224 400s124.3-9.3 169.2-25.3c20.8-7.4 39.9-16.9 54.8-28.6V432c0 44.2-100.3 80-224 80S0 476.2 0 432V346.1z"/></svg>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">Data Engineering & ETL</h3>
-          <p class="text-gray-600 leading-relaxed text-sm">Clean, model, and pipeline your data: automated ETL/ELT pipelines, data warehouses, and integrations that consolidate scattered sources into one reliable, query-ready foundation.</p>
-          <ul class="mt-4 space-y-1.5 text-sm text-gray-500">
-            <li class="flex items-center gap-2"><span class="text-accent-500">&#10003;</span> ETL/ELT pipelines (Python, SQL)</li>
-            <li class="flex items-center gap-2"><span class="text-accent-500">&#10003;</span> Data warehouses &amp; modeling</li>
-            <li class="flex items-center gap-2"><span class="text-accent-500">&#10003;</span> Dockerized & scheduled</li>
-          </ul>
-        </article>
-
-        <!-- Service 5: Dashboards & BI -->
-        <article class="service-card group relative rounded-2xl glass glass-light p-7 border border-white/40 shadow-xl hover:-translate-y-1 transition-all">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-600 to-accent-500 text-white flex items-center justify-center mb-5 shadow-lg shadow-brand-500/20">
-            <svg class="w-6 h-6 fill-current" viewBox="0 0 512 512"><path d="M32 32c17.7 0 32 14.3 32 32V400c0 8.8 7.2 16 16 16H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H80c-44.2 0-80-35.8-80-80V64C0 46.3 14.3 32 32 32zM160 224c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V256c0-17.7 14.3-32 32-32zm128-64V320c0 17.7-14.3 32-32 32s-32-14.3-32-32V160c0-17.7 14.3-32 32-32s32 14.3 32 32zm64 32c17.7 0 32 14.3 32 32v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32zM480 96V320c0 17.7-14.3 32-32 32s-32-14.3-32-32V96c0-17.7 14.3-32 32-32s32 14.3 32 32z"/></svg>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">Dashboards & BI</h3>
-          <p class="text-gray-600 leading-relaxed text-sm">See your business clearly: interactive dashboards and KPI reporting in Power BI and Excel (Power Query / DAX), plus custom web dashboards with live data and AI-assisted insights.</p>
-          <ul class="mt-4 space-y-1.5 text-sm text-gray-500">
-            <li class="flex items-center gap-2"><span class="text-accent-500">&#10003;</span> Power BI &amp; Excel dashboards</li>
-            <li class="flex items-center gap-2"><span class="text-accent-500">&#10003;</span> KPI &amp; performance reporting</li>
-            <li class="flex items-center gap-2"><span class="text-accent-500">&#10003;</span> Custom web dashboards</li>
-          </ul>
-        </article>
-
-        <!-- Service 6: Consulting / Build-with-you -->
-        <article class="service-card group relative rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 p-7 border border-slate-700 shadow-xl hover:-translate-y-1 transition-all text-white flex flex-col">
-          <div class="w-12 h-12 rounded-xl bg-white/10 text-white flex items-center justify-center mb-5">
-            <svg class="w-6 h-6 fill-current" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>
-          </div>
-          <h3 class="text-xl font-bold mb-2">Not sure what you need?</h3>
-          <p class="text-gray-300 leading-relaxed text-sm flex-1">Tell me the problem — the manual process, the messy data, the report that takes days — and I'll propose the simplest system that solves it. From first idea to a running solution.</p>
-          <a href="#contact" class="mt-5 inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-brand-500 to-accent-500 text-white font-semibold rounded-xl hover:-translate-y-0.5 transition-all w-full">
-            Start a conversation
-            <svg class="w-4 h-4 fill-current" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
-          </a>
-        </article>
+      <div class="mt-12 flex justify-center">
+        <button id="showMoreBtn" class="btn-ghost">${icon('chevronDown', 'w-4 h-4')} <span>Show all projects</span></button>
       </div>
     </div>
-  </section>
+  </section>`;
+};
 
-  <!-- ============ EXPERIENCE SECTION ============ -->
-  <section id="experience" class="py-24 lg:py-32">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16" data-animate>
-        <p class="text-brand-400 font-mono text-sm font-semibold mb-2 tracking-wider uppercase">// Career Path</p>
-        <h2 class="text-4xl lg:text-5xl font-bold text-slate-900">
-          Experience <span class="gradient-text">Timeline</span>
-        </h2>
-      </div>
-      
-      <div class="grid md:grid-cols-2 gap-6" data-animate>
-        ${portfolioData.experience.map((exp, idx) => `
-          <div class="glass glass-light rounded-2xl p-5 card-hover flex flex-col h-full border border-gray-100 shadow-sm">
-            <div class="flex items-center justify-between mb-3">
-              <span class="px-2.5 py-1 bg-brand-500/10 text-brand-500 text-[10px] font-bold rounded-lg uppercase tracking-wider">${exp.period}</span>
-              <div class="w-8 h-8 rounded-lg bg-gradient-to-br ${idx % 2 === 0 ? 'from-brand-500 to-accent-500' : 'from-purple-500 to-purple-600'} flex items-center justify-center shadow-sm">
-                ${idx === 0 ? '<svg class="w-3.5 h-3.5 fill-white" viewBox="0 0 640 512"><path d="M192 96a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm-8 384V352h16V480c0 17.7 14.3 32 32 32s32-14.3 32-32V192h56 64 16c17.7 0 32-14.3 32-32s-14.3-32-32-32H368 288 184c-39.8 0-72 32.2-72 72v280c0 17.7 14.3 32 32 32s32-14.3 32-32V352h16V480c0 17.7 14.3 32 32 32s32-14.3 32-32zM480 320h48c26.5 0 48-21.5 48-48V144c0-26.5-21.5-48-48-48H448c-26.5 0-48 21.5-48 48v22.4L440 200V144c0-4.4 3.6-8 8-8h80c4.4 0 8 3.6 8 8v128c0 4.4-3.6 8-8 8H480v40z"/></svg>' :
-      idx === 1 ? '<svg class="w-3.5 h-3.5 fill-white" viewBox="0 0 384 512"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm160-14.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9zM152 440c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm-16-160c0 8.8-7.2 16-16 16H88c-8.8 0-16-7.2-16-16v-64c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v64zm128 0c0 8.8-7.2 16-16 16h-32c-8.8 0-16-7.2-16-16v-64c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v64z"/></svg>' :
-        idx === 2 ? '<svg class="w-3.5 h-3.5 fill-white" viewBox="0 0 512 512"><path d="M32 32c17.7 0 32 14.3 32 32V400c0 8.8 7.2 16 16 16H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H80c-44.2 0-80-35.8-80-80V64C0 46.3 14.3 32 32 32zM160 224c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V256c0-17.7 14.3-32 32-32zm128-64c17.7 0 32 14.3 32 32v128c0 17.7-14.3 32-32 32s-32-14.3-32-32V192c0-17.7 14.3-32 32-32zm128-64c17.7 0 32 14.3 32 32v192c0 17.7-14.3 32-32 32s-32-14.3-32-32V128c0-17.7 14.3-32 32-32z"/></svg>' :
-          '<svg class="w-3.5 h-3.5 fill-white" viewBox="0 0 512 512"><path d="M256 0c17.7 0 32 14.3 32 32V66.7C368.4 80.1 431.9 143.6 445.3 224H512c17.7 0 32 14.3 32 32s-14.3 32-32 32H445.3C431.9 368.4 368.4 431.9 288 445.3V512c0 17.7-14.3 32-32 32s-32-14.3-32-32V445.3C143.6 431.9 80.1 368.4 66.7 288H0c-17.7 0-32-14.3-32-32s14.3-32 32-32H66.7C80.1 143.6 143.6 80.1 224 66.7V32c0-17.7 14.3-32 32-32zM128 256a128 128 0 1 0 256 0 128 128 0 1 0 -256 0zm128-80a80 80 0 1 1 0 160 80 80 0 1 1 0-160z"/></svg>'}
-              </div>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900 mb-0.5">${exp.title}</h3>
-            <p class="text-brand-400 font-semibold text-xs mb-3 font-mono uppercase tracking-tight">${exp.type}</p>
-            <p class="text-gray-500 text-sm mb-4 leading-relaxed">${exp.description}</p>
-            <ul class="space-y-1.5 mt-auto border-t border-gray-50 pt-3">
-              ${exp.highlights.map(h => `
-                <li class="flex items-start gap-2 text-xs text-gray-500">
-                  <svg class="w-3.5 h-3.5 fill-emerald-400 mt-0.5 shrink-0" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
-                  <span>${h}</span>
-                </li>
-              `).join('')}
+const renderServices = () => {
+  const services = [
+    ['globe', 'Websites & Web Apps', 'Fast, bilingual (Arabic RTL / English) sites, portals and internal tools — custom code or WordPress themes your team can edit.', ['Company sites & landing pages', 'Custom WordPress themes', 'Next.js / ASP.NET Core apps']],
+    ['monitor', 'Business Systems', 'Replace scattered spreadsheets with real software: POS, CRM, e-commerce, inventory & asset tracking, support desks.', ['Roles, permissions & audit logs', 'Reports with Excel / CSV export', 'Clean, tested architecture']],
+    ['workflow', 'Automation & Integrations', 'Automate the repetitive work: marketing campaigns, RFM segmentation, scheduled reports and data syncing between tools.', ['WhatsApp & marketing automation', 'Power Automate / n8n flows', 'Scheduled jobs & alerts']],
+    ['database', 'Data Engineering & ETL', 'Batch and streaming pipelines, lakehouses and warehouses that turn scattered sources into one reliable foundation.', ['Kafka / Spark / Airflow / dbt', 'SQL Server & PostgreSQL warehouses', 'Dockerized & monitored']],
+    ['chartBar', 'Dashboards & BI', 'See your business clearly with KPI dashboards in Power BI, Excel (Power Query / DAX) or custom web apps with AI insights.', ['Power BI & Excel dashboards', 'KPI & performance reporting', 'AI-assisted web dashboards']]
+  ];
+  return `
+  <section id="services" class="relative py-28 lg:py-36">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6">
+      ${sectionHead(
+        'How I can help',
+        `Services for <span class="gradient-text">businesses</span>`,
+        'I turn manual, spreadsheet-driven work into reliable software — from the website down to the database and the automations behind it.'
+      )}
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        ${services
+          .map(
+            ([ic, t, txt, bullets]: any) => `
+          <article class="service-card spotlight" data-reveal>
+            <span class="pillar-icon">${icon(ic, 'w-5 h-5')}</span>
+            <h3 class="mt-5 font-semibold text-xl text-fg">${t}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">${txt}</p>
+            <ul class="mt-5 space-y-2 text-sm">
+              ${bullets.map((b: string) => `<li class="flex items-start gap-2 text-fg/80">${icon('check', 'w-4 h-4 mt-0.5 text-accent-400 shrink-0')}${b}</li>`).join('')}
             </ul>
-          </div>
-        `).join('')}
+          </article>`
+          )
+          .join('')}
+        <article class="service-card cta-card" data-reveal>
+          <span class="pillar-icon bg-white/15 text-white">${icon('sparkles', 'w-5 h-5')}</span>
+          <h3 class="mt-5 font-semibold text-xl text-white">Not sure what you need?</h3>
+          <p class="mt-2 text-sm leading-relaxed text-white/80">Tell me about the manual process, the messy data or the report that takes days — I'll propose the simplest system that solves it.</p>
+          <a href="#contact" class="mt-6 inline-flex items-center gap-2 rounded-xl bg-white text-slate-900 font-semibold px-5 py-3 text-sm hover:-translate-y-0.5 transition-transform">Start a conversation ${icon('arrowRight', 'w-4 h-4')}</a>
+        </article>
       </div>
-    </div>
-  </section>
 
-  <!-- ============ CERTIFICATIONS SECTION (Hidden) ============ -->
-  <!--
-  <section id="certifications" class="py-24 lg:py-32 bg-gray-50/50">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16" data-animate>
-        <p class="text-brand-400 font-mono text-sm font-semibold mb-2 tracking-wider uppercase">// Credentials</p>
-        <h2 class="text-4xl lg:text-5xl font-bold text-slate-900">
-          Certifications & <span class="gradient-text">Learning</span>
-        </h2>
+      <!-- Process -->
+      <div class="mt-24" data-reveal>
+        <p class="eyebrow justify-center text-center">Process</p>
+        <h3 class="mt-3 text-center font-display font-bold text-fg text-3xl sm:text-4xl tracking-tight">How a project runs</h3>
       </div>
-      
-      <div class="space-y-6" data-animate>
-        <div class="glass glass-light rounded-2xl p-6 lg:p-8 card-hover flex flex-col sm:flex-row gap-6">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center shrink-0 shadow-lg">
-            <i class="fab fa-microsoft text-white text-2xl"></i>
-          </div>
-          <div class="flex-1">
-            <div class="flex flex-wrap items-center gap-3 mb-2">
-              <h3 class="font-bold text-lg text-slate-900">DP-700: Fabric Data Engineer Associate</h3>
-              <span class="px-3 py-1 bg-amber-500/10 text-amber-400 text-xs font-bold rounded-lg">In Progress</span>
-            </div>
-            <p class="text-sm text-gray-500 mb-2">Microsoft Certified &bull; Expected 2026</p>
-            <p class="dark:text-gray-400 text-gray-600 text-sm">Preparing for the DP-700 certification — designing and implementing data solutions with Microsoft Fabric, including pipelines, lakehouses, and data warehouses.</p>
+      <ol class="process mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        ${d.process
+          .map(
+            (s: any, i: number) => `
+          <li class="process-step" data-reveal style="--i:${i}">
+            <span class="process-num">${s.step}</span>
+            <h4 class="mt-4 font-semibold text-lg text-fg">${esc(s.title)}</h4>
+            <p class="mt-2 text-sm text-muted leading-relaxed">${esc(s.text)}</p>
+          </li>`
+          )
+          .join('')}
+      </ol>
+    </div>
+  </section>`;
+};
+
+const renderExperience = () => `
+  <section id="experience" class="relative py-28 lg:py-36 bg-base-2/40 border-y border-line/[0.06]">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6">
+      <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-14">
+        <div class="lg:sticky lg:top-28 self-start" data-reveal>
+          <p class="eyebrow">Career path</p>
+          <h2 class="mt-3 font-display font-bold tracking-tight text-fg text-4xl sm:text-5xl leading-[1.05]">Experience &amp; <span class="gradient-text">education</span></h2>
+          <p class="mt-4 text-lg text-muted leading-relaxed">Teaching, national training programmes and real client work — alongside an economics degree that sharpens how I think about data.</p>
+
+          <div class="mt-10 space-y-3">
+            <p class="text-xs font-mono uppercase tracking-[0.2em] text-muted">Certifications</p>
+            ${d.certifications
+              .map(
+                (c: any) => `
+              <div class="cert">
+                <span class="cert-icon">${icon('award', 'w-5 h-5')}</span>
+                <div class="min-w-0">
+                  <p class="font-semibold text-fg text-sm leading-snug">${esc(c.title)}</p>
+                  <p class="text-xs text-muted mt-0.5">${esc(c.issuer)} · ${esc(c.credential)}</p>
+                </div>
+                <span class="cert-badge ${c.date === 'In Progress' ? 'progress' : ''}">${esc(c.date)}</span>
+              </div>`
+              )
+              .join('')}
           </div>
         </div>
+
+        <ol class="timeline relative">
+          <span class="timeline-line" aria-hidden="true"><span id="timelineFill"></span></span>
+          ${d.experience
+            .map(
+              (e: any, i: number) => `
+            <li class="timeline-item" data-reveal>
+              <span class="timeline-dot">${icon(i === d.experience.length - 1 ? 'graduation' : 'briefcase', 'w-4 h-4')}</span>
+              <div class="timeline-card spotlight">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="period">${esc(e.period)}</span>
+                  ${i === 0 ? '<span class="text-[11px] font-semibold text-emerald-400 flex items-center gap-1.5"><i class="w-1.5 h-1.5 rounded-full bg-emerald-400"></i>Current</span>' : ''}
+                </div>
+                <h3 class="mt-3 text-xl font-semibold text-fg">${esc(e.title)}</h3>
+                <p class="mt-1 text-sm font-medium text-accent-400">${esc(e.type)}</p>
+                <p class="mt-3 text-sm leading-relaxed text-muted">${esc(e.description)}</p>
+                <ul class="mt-4 grid sm:grid-cols-2 gap-x-6 gap-y-2">
+                  ${e.highlights.map((h: string) => `<li class="flex items-start gap-2 text-sm text-fg/75">${icon('check', 'w-4 h-4 mt-0.5 text-accent-400 shrink-0')}${esc(h)}</li>`).join('')}
+                </ul>
+              </div>
+            </li>`
+            )
+            .join('')}
+        </ol>
       </div>
     </div>
-  </section>
-  -->
+  </section>`;
 
+const renderContact = () => `
+  <section id="contact" class="relative py-28 lg:py-36 overflow-hidden">
+    <div class="aurora aurora-soft" aria-hidden="true"><span></span><span></span></div>
+    <div class="relative max-w-6xl mx-auto px-5 sm:px-6">
+      <div class="contact-shell rounded-[2rem] p-6 sm:p-10 lg:p-14" data-reveal>
+        <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-12">
+          <div>
+            <p class="eyebrow">Get in touch</p>
+            <h2 class="mt-3 font-display font-bold tracking-tight text-fg text-4xl sm:text-5xl leading-[1.05]">Let's build something <span class="gradient-text">that works</span>.</h2>
+            <p class="mt-4 text-lg text-muted leading-relaxed">A data challenge, a system to replace spreadsheets, a website, or a role on your team — tell me about it. I usually reply within 24 hours.</p>
 
-
-
-  <!-- ============ CONTACT SECTION ============ -->
-  <section id="contact" class="py-24 lg:py-32">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16" data-animate>
-        <p class="text-brand-400 font-mono text-sm font-semibold mb-2 tracking-wider uppercase">// Get in Touch</p>
-        <h2 class="text-4xl lg:text-5xl font-bold text-slate-900">
-          Let's <span class="gradient-text">Connect</span>
-        </h2>
-        <p class="mt-4 text-lg text-gray-500 max-w-xl mx-auto">Have a data challenge? Looking for a data engineer? Or just want to chat about pipelines? Reach out.</p>
-      </div>
-      
-      <div class="grid lg:grid-cols-5 gap-8" data-animate>
-        <!-- Contact Info -->
-        <div class="lg:col-span-2 space-y-4">
-          <a href="mailto:amr.walid2022@feps.edu.eg" class="glass glass-light rounded-2xl p-5 flex items-center gap-4 card-hover group">
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-              <svg class="w-5 h-5 fill-white" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg>
-            </div>
-            <div>
-              <p class="text-sm text-gray-400">Email</p>
-              <p class="font-medium text-slate-900 text-sm">amr.walid2022@feps.edu.eg</p>
-            </div>
-          </a>
-          
-          <a href="https://www.linkedin.com/in/amrwalidmaher" target="_blank" class="glass glass-light rounded-2xl p-5 flex items-center gap-4 card-hover group">
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-              <svg class="w-5 h-5 fill-white" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zM384 416h-66.5V310.2c0-25.2-.5-57.6-35.1-57.6-35.1 0-40.5 27.5-40.5 55.8V416h-66.5V202.2h63.8v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
-            </div>
-            <div>
-              <p class="text-sm text-gray-400">LinkedIn</p>
-              <p class="font-medium text-slate-900 text-sm">Amr Walid</p>
-            </div>
-          </a>
-          
-          <a href="https://github.com/Amr-Walid" target="_blank" class="glass glass-light rounded-2xl p-5 flex items-center gap-4 card-hover group">
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-              <svg class="w-5 h-5 fill-white" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
-            </div>
-            <div>
-              <p class="text-sm text-gray-400">GitHub</p>
-              <p class="font-medium text-slate-900 text-sm">Amr-Walid</p>
-            </div>
-          </a>
-          
-          <div class="glass glass-light rounded-2xl p-5 flex items-center gap-4">
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5 fill-white" viewBox="0 0 384 512"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
-            </div>
-            <div>
-              <p class="text-sm text-gray-400">Location</p>
-              <p class="font-medium text-slate-900 text-sm">Cairo, Egypt</p>
+            <div class="mt-8 space-y-3">
+              <div class="contact-row">
+                <span class="pillar-icon">${icon('mail', 'w-5 h-5')}</span>
+                <a href="mailto:${p.email}" class="min-w-0 flex-1"><span class="block text-xs text-muted">Email</span><span class="block font-medium text-fg truncate">${esc(p.email)}</span></a>
+                <button class="icon-btn" id="copyEmail" data-email="${esc(p.email)}" aria-label="Copy email">${icon('copy', 'w-4 h-4')}</button>
+              </div>
+              <a href="${p.linkedin}" target="_blank" rel="noopener" class="contact-row">
+                <span class="pillar-icon">${icon('linkedin', 'w-5 h-5')}</span>
+                <span class="flex-1"><span class="block text-xs text-muted">LinkedIn</span><span class="block font-medium text-fg">in/amrwalidmaher</span></span>
+                ${icon('arrowUpRight', 'w-4 h-4 text-muted')}
+              </a>
+              <a href="${p.github}" target="_blank" rel="noopener" class="contact-row">
+                <span class="pillar-icon">${icon('github', 'w-5 h-5')}</span>
+                <span class="flex-1"><span class="block text-xs text-muted">GitHub</span><span class="block font-medium text-fg">Amr-Walid</span></span>
+                ${icon('arrowUpRight', 'w-4 h-4 text-muted')}
+              </a>
+              <div class="contact-row">
+                <span class="pillar-icon">${icon('pin', 'w-5 h-5')}</span>
+                <span class="flex-1"><span class="block text-xs text-muted">Location</span><span class="block font-medium text-fg">${esc(p.location)} · Remote friendly</span></span>
+                <span class="text-xs font-mono text-muted" id="localTime"></span>
+              </div>
             </div>
           </div>
-        </div>
-        
-        <!-- Contact Form -->
-        <div class="lg:col-span-3">
-          <form id="contactForm" class="glass glass-light rounded-2xl p-6 lg:p-8 space-y-5">
-            <div class="grid sm:grid-cols-2 gap-5">
-              <div>
-                <label class="block text-sm font-medium text-gray-600 mb-2">Name *</label>
-                <input type="text" name="name" required class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-slate-900 placeholder-gray-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all text-sm" placeholder="Your name">
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-600 mb-2">Email *</label>
-                <input type="email" name="email" required class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-slate-900 placeholder-gray-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all text-sm" placeholder="you@email.com">
-              </div>
+
+          <form id="contactForm" class="space-y-4" novalidate>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <label class="field"><span>Name *</span><input type="text" name="name" required autocomplete="name" placeholder="Your name"></label>
+              <label class="field"><span>Email *</span><input type="email" name="email" required autocomplete="email" placeholder="you@company.com"></label>
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-600 mb-2">Subject</label>
-              <input type="text" name="subject" class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-slate-900 placeholder-gray-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all text-sm" placeholder="What's this about?">
+              <span class="block text-sm font-medium text-fg/80 mb-2">I'm interested in</span>
+              <div class="flex flex-wrap gap-2" id="topicChips">
+                ${['Website / Web app', 'Business system', 'Automation', 'Data pipeline', 'Dashboard / BI', 'Job opportunity']
+                  .map((t, i) => `<label class="topic-chip"><input type="radio" name="subject" value="${t}" ${i === 0 ? 'checked' : ''}><span>${t}</span></label>`)
+                  .join('')}
+              </div>
             </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-600 mb-2">Message *</label>
-              <textarea name="message" required rows="5" class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-slate-900 placeholder-gray-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all text-sm resize-none" placeholder="Tell me about your project or opportunity..."></textarea>
-            </div>
-            <button type="submit" id="submitBtn" class="w-full py-3.5 bg-gradient-to-r from-brand-600 to-accent-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-brand-500/25 transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2">
-              <svg class="w-4 h-4 fill-white" viewBox="0 0 512 512"><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/></svg>
-              Send Message
-            </button>
-            <div id="formMessage" class="hidden text-center text-sm font-medium py-3 rounded-xl"></div>
+            <label class="field"><span>Message *</span><textarea name="message" rows="5" required placeholder="Tell me about your project, timeline and goals…"></textarea></label>
+            <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off">
+            <button type="submit" id="submitBtn" class="group btn-primary w-full justify-center py-4 text-base">${icon('send', 'w-4 h-4')} <span>Send message</span></button>
+            <p id="formMessage" class="hidden text-sm font-medium rounded-xl px-4 py-3" role="status"></p>
           </form>
         </div>
       </div>
     </div>
-  </section>
+  </section>`;
 
-  <!-- ============ FOOTER ============ -->
-  <footer class="bg-white border-t border-gray-200 py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-md shadow-brand-500/20 overflow-hidden">
-            <svg class="w-full h-full" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AW monogram">
-              <defs>
-                <linearGradient id="awLogoGradF" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#3b8fff"/>
-                  <stop offset="1" stop-color="#0ea5e9"/>
-                </linearGradient>
-              </defs>
-              <rect width="48" height="48" rx="13" fill="url(#awLogoGradF)"/>
-              <path d="M8 34 L15 15 L22 34" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              <path d="M11.5 28 H18.5" stroke="white" stroke-width="3.2" stroke-linecap="round"/>
-              <path d="M25 15 L29 34 L33 22 L37 34 L41 15" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.92"/>
-            </svg>
-          </div>
-          <div>
-            <span class="font-bold text-slate-900">Amr Walid</span>
-            <span class="block text-xs text-gray-500 font-mono">Data Engineer & Full-Stack Developer</span>
-          </div>
+const renderFooter = () => `
+  <footer class="border-t border-line/[0.07] py-10">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <span class="logo-mark grid place-items-center w-9 h-9 rounded-xl font-black text-white text-xs">AW</span>
+        <div class="leading-tight">
+          <p class="font-semibold text-fg">Amr Walid</p>
+          <p class="text-xs text-muted">${esc(p.title)}</p>
         </div>
-        
-        <div class="flex flex-wrap items-center gap-4">
-          <a href="https://github.com/Amr-Walid" target="_blank" rel="noopener noreferrer" aria-label="Visit Amr Walid's GitHub profile" class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center hover:text-brand-400 hover:bg-brand-500/10 transition-all">
-            <svg class="w-5 h-5 fill-current text-gray-500 group-hover:text-brand-400" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/in/amrwalidmaher" target="_blank" rel="noopener noreferrer" aria-label="Visit Amr Walid's LinkedIn profile" class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center hover:text-brand-400 hover:bg-brand-500/10 transition-all">
-            <svg class="w-5 h-5 fill-current text-gray-500 group-hover:text-brand-400" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zM384 416h-66.5V310.2c0-25.2-.5-57.6-35.1-57.6-35.1 0-40.5 27.5-40.5 55.8V416h-66.5V202.2h63.8v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
-          </a>
-          <a href="mailto:amr.walid2022@feps.edu.eg" aria-label="Send email to Amr Walid" class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center hover:text-brand-400 hover:bg-brand-500/10 transition-all">
-            <svg class="w-5 h-5 fill-current text-gray-500 group-hover:text-brand-400" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg>
-          </a>
-        </div>
-        
-        <p class="text-sm text-gray-600">
-          &copy; 2026 Amr Walid. Built with passion.
-        </p>
       </div>
+      <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted" aria-label="Footer">
+        ${navLinks.map(([id, label]) => `<a href="#${id}" class="hover:text-fg transition-colors">${label}</a>`).join('')}
+      </nav>
+      <p class="text-sm text-muted">&copy; ${new Date().getFullYear()} Amr Walid. All rights reserved.</p>
     </div>
   </footer>
+  <button id="backToTop" class="back-to-top icon-btn" aria-label="Back to top">${icon('arrowUp', 'w-5 h-5')}</button>`;
 
-  <!-- ============ PROJECT MODAL ============ -->
-  <div id="projectModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-2 sm:p-6 opacity-0 transition-opacity duration-300">
-    <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-md" id="modalBackdrop"></div>
-    
-    <div class="relative w-full max-w-7xl h-[98vh] sm:h-[94vh] bg-[#faf9f8] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col scale-95 transition-transform duration-300 border border-white/20" id="modalContent">
-      
-      <!-- Close Button (Sticky on mobile, Absolute on desktop) -->
-      <div class="absolute top-0 right-0 p-3 sm:p-4 lg:p-6 z-[60] flex justify-end w-full lg:w-auto pointer-events-none">
-        <button id="closeModalBtn" class="pointer-events-auto w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/90 backdrop-blur-md shadow-md border border-gray-100 flex items-center justify-center text-gray-500 hover:text-slate-900 hover:scale-105 transition-all">
-          <svg class="w-5 h-5 fill-current" viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
-        </button>
-      </div>
-
-      <!-- Split Layout Container (Scrollable on mobile, Split on desktop) -->
-      <!-- Split Layout Container (Scrollable on mobile, Split on desktop) -->
-      <div id="modalScrollContainer" class="flex flex-col lg:flex-row h-full w-full overflow-y-auto lg:overflow-hidden custom-scrollbar">
-        
-        <!-- Left Side: Text Content (Order 2 on mobile, Order 1 on desktop) -->
-        <div class="order-2 lg:order-1 w-full lg:w-5/12 h-auto lg:h-full lg:overflow-y-auto p-6 sm:p-8 lg:p-12 xl:p-14 bg-white/60 border-t lg:border-t-0 lg:border-r border-gray-200/60 custom-scrollbar z-20">
-          
-          <!-- Title -->
-          <h2 id="modalTitle" class="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-slate-900 mb-4 sm:mb-6 leading-tight tracking-tight mt-4 lg:mt-0">Project Title</h2>
-          
-          <!-- Live Demo Button -->
-          <a id="modalLiveBtn" href="#" target="_blank" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 mb-6 sm:mb-8 bg-brand-600 text-white font-semibold rounded-xl hover:bg-brand-700 hover:-translate-y-0.5 transition-all shadow-md hover:shadow-lg w-fit text-sm hidden">
-             <svg class="w-4 h-4 fill-current" viewBox="0 0 512 512"><path d="M352 256c0 22.2-1.2 43.6-3.3 64H163.3c-2.1-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64h185.4c2.1 20.4 3.3 41.8 3.3 64zm28.8-64h123.1c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64zm112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6c78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7c10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5c11.6 26.1 20.9 58.2 27 94.7zm-209 0H18.6C48.6 85.9 112.2 29.1 190.6 8.4C165.1 42.6 145.3 96.1 135.3 160zM8.1 192H131.2c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64zm18.6 160h108.5c10 63.9 29.8 117.4 55.3 151.6C112.2 482.9 48.6 426.1 18.6 352zm149.1 0h176.6c-6.1 36.4-15.5 68.6-27 94.7c-10.5 23.6-22.2 40.7-33.5 51.5C272.6 508.8 263.3 512 256 512s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5c-11.6-26.1-20.9-58.2-27-94.7zm209 0h108.5c-30 74.1-93.6 130.9-171.9 151.6c25.5-34.2 45.3-87.7 55.3-151.6z"/></svg> Live Demo
-          </a>
-          
-          <!-- Category / Tech Stack -->
-          <div class="mb-8 sm:mb-10">
-            <h4 class="text-[10px] sm:text-xs font-bold text-gray-400 font-mono tracking-widest uppercase mb-3">Technologies</h4>
-            <div id="modalTechStack" class="flex flex-wrap gap-2"></div>
+const renderModal = () => `
+  <div id="projectModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel" id="modalContent">
+      <button class="icon-btn modal-close" data-close aria-label="Close case study">${icon('x', 'w-5 h-5')}</button>
+      <div class="modal-scroll" id="modalScroll">
+        <div class="modal-hero" id="modalHero"></div>
+        <div class="px-6 sm:px-10 lg:px-14 pb-12">
+          <div class="flex flex-wrap items-center gap-2 -mt-1">
+            <span id="modalCategory" class="card-cat static"></span>
+            <span id="modalStatus" class="card-status static hidden"></span>
+          </div>
+          <h2 id="modalTitle" class="mt-4 font-display font-bold tracking-tight text-fg text-3xl sm:text-4xl leading-tight"></h2>
+          <p id="modalSummary" class="mt-3 text-lg text-muted max-w-3xl"></p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a id="modalLiveBtn" href="#" target="_blank" rel="noopener" class="group btn-primary btn-sm hidden">${icon('globe', 'w-4 h-4')} Live demo</a>
+            <a id="modalGithubBtn" href="#" target="_blank" rel="noopener" class="btn-ghost btn-sm hidden">${icon('github', 'w-4 h-4')} Source code</a>
           </div>
 
-          <!-- Problem & Solution -->
-          <div class="space-y-6 sm:space-y-8 mb-8 sm:mb-10">
-             <div>
-                <h4 class="text-[10px] sm:text-xs font-bold text-brand-600 font-mono tracking-widest uppercase mb-2 sm:mb-3">The Challenge</h4>
-                <p id="modalProblem" class="text-gray-600 leading-relaxed text-sm sm:text-base">...</p>
-             </div>
-             <div>
-                <h4 class="text-[10px] sm:text-xs font-bold text-emerald-600 font-mono tracking-widest uppercase mb-2 sm:mb-3">The Solution</h4>
-                <p id="modalSolution" class="text-gray-600 leading-relaxed text-sm sm:text-base">...</p>
-             </div>
-          </div>
-
-          <!-- Architecture & Impact -->
-          <div class="space-y-6 sm:space-y-8 mb-8 sm:mb-10">
-            <div>
-              <h4 class="text-[10px] sm:text-xs font-bold text-purple-600 font-mono tracking-widest uppercase mb-2 sm:mb-3">Architecture</h4>
-              <p id="modalArchitecture" class="text-gray-600 leading-relaxed text-xs sm:text-sm font-mono bg-white p-3 sm:p-4 rounded-xl border border-gray-100 shadow-sm overflow-x-auto">...</p>
+          <div class="mt-10 grid lg:grid-cols-[1.4fr_1fr] gap-10">
+            <div class="space-y-8">
+              <div><h3 class="case-h">${icon('target', 'w-4 h-4')} The challenge</h3><p id="modalProblem" class="case-p"></p></div>
+              <div><h3 class="case-h">${icon('lightbulb', 'w-4 h-4')} The solution</h3><p id="modalSolution" class="case-p"></p></div>
+              <div><h3 class="case-h">${icon('layers', 'w-4 h-4')} Architecture</h3><div id="modalArchitecture" class="arch-flow"></div></div>
             </div>
-            <div>
-              <h4 class="text-[10px] sm:text-xs font-bold text-sky-600 font-mono tracking-widest uppercase mb-2 sm:mb-3">Key Impact</h4>
-              <ul id="modalImpact" class="space-y-2 text-gray-600 text-sm sm:text-base"></ul>
-            </div>
+            <aside class="space-y-8">
+              <div class="surface rounded-2xl p-6"><h3 class="case-h">${icon('rocket', 'w-4 h-4')} Key impact</h3><ul id="modalImpact" class="mt-4 space-y-3"></ul></div>
+              <div><h3 class="case-h">${icon('code', 'w-4 h-4')} Tech stack</h3><ul id="modalTechStack" class="card-chips mt-4"></ul></div>
+            </aside>
           </div>
 
-          <!-- Action Button -->
-          <div class="pt-4 border-t border-gray-200/60 pb-6 lg:pb-0 flex flex-col sm:flex-row gap-3">
-            <a id="modalGithubBtn" href="#" target="_blank" class="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 bg-slate-900 text-white font-semibold rounded-xl hover:bg-slate-800 hover:-translate-y-0.5 transition-all shadow-lg hover:shadow-xl w-full sm:w-auto text-sm sm:text-base">
-               <svg class="w-5 h-5 fill-current" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg> View Source Code
-            </a>
-          </div>
-
-        </div>
-
-        <!-- Right Side: Images (Order 1 on mobile, Order 2 on desktop) -->
-        <div class="order-1 lg:order-2 w-full lg:w-7/12 h-auto lg:h-full lg:overflow-y-auto bg-[#f8f9fa] p-6 pt-16 sm:p-8 sm:pt-20 lg:p-12 relative custom-scrollbar z-10 shrink-0">
-          <!-- Background Grid Pattern for style -->
-          <div class="absolute inset-0 grid-bg opacity-40 pointer-events-none hidden lg:block"></div>
-          
-          <div id="modalImages" class="relative z-10 flex flex-col gap-4 sm:gap-6 lg:gap-10 w-full max-w-4xl mx-auto items-center">
-            <!-- Images injected here -->
+          <div class="mt-12 pt-6 border-t border-line/10 flex items-center justify-between gap-4">
+            <button class="btn-ghost btn-sm" id="prevProject">${icon('chevronLeft', 'w-4 h-4')} <span class="hidden sm:inline">Previous</span></button>
+            <span class="text-xs font-mono text-muted" id="modalIndex"></span>
+            <button class="btn-ghost btn-sm" id="nextProject"><span class="hidden sm:inline">Next</span> ${icon('chevronRight', 'w-4 h-4')}</button>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 
-  <!-- ============ JAVASCRIPT ============ -->
-  <!-- Inject data for script.js (no CSS/JS syntax clash risk) -->
-  <script>window.PROJECTS = ${JSON.stringify(portfolioData.projects)};</script>
-  <script src="/assets/script.js" defer></script>
+  <div id="lightbox" class="lightbox hidden" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="icon-btn lb-close" data-lb-close aria-label="Close image">${icon('x', 'w-5 h-5')}</button>
+    <button class="icon-btn lb-prev" data-lb-prev aria-label="Previous image">${icon('chevronLeft', 'w-5 h-5')}</button>
+    <img id="lightboxImg" alt="">
+    <button class="icon-btn lb-next" data-lb-next aria-label="Next image">${icon('chevronRight', 'w-5 h-5')}</button>
+    <p id="lightboxCount" class="lb-count"></p>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>`;
 
+// ---------------------------------------------------------------- page
+
+export const renderPage = () => {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: p.name,
+    jobTitle: p.title,
+    email: `mailto:${p.email}`,
+    url: SITE_URL,
+    image: `${SITE_URL}/assets/profile.webp`,
+    address: { '@type': 'PostalAddress', addressLocality: 'Cairo', addressCountry: 'EG' },
+    alumniOf: 'Faculty of Economics & Political Science, Cairo University',
+    sameAs: [p.github, p.linkedin],
+    knowsAbout: ['Data Engineering', 'ETL', 'Apache Kafka', 'Apache Spark', 'ASP.NET Core', 'C#', 'Python', 'SQL', 'Next.js', 'Power BI', 'Automation']
+  };
+  const safeJson = (o: unknown) => JSON.stringify(o).replace(/</g, '\\u003c');
+
+  return `<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Amr Walid — Data Engineer &amp; Full-Stack Developer | Pipelines, Systems &amp; Automation</title>
+  <meta name="description" content="Amr Walid is a Data Engineer & Full-Stack developer in Cairo. Real-time data pipelines (Kafka, Spark, Azure), production business systems (POS, CRM, e-commerce, asset tracking), automation and WordPress sites.">
+  <meta name="author" content="Amr Walid">
+  <meta name="theme-color" content="#070a14" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f7f8fc" media="(prefers-color-scheme: light)">
+  <link rel="canonical" href="${SITE_URL}/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="${SITE_URL}/">
+  <meta property="og:title" content="Amr Walid — Data Engineer & Full-Stack Developer">
+  <meta property="og:description" content="Real-time data pipelines, production business systems and automation — end to end.">
+  <meta property="og:image" content="${SITE_URL}/assets/cryptopulse-architecture.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%233b8fff'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-family='Arial' font-weight='900' font-size='26' fill='white'%3EAW%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://avatars.githubusercontent.com; connect-src 'self' https://formspree.io;">
+
+  <script>
+    // Apply saved theme before first paint (no flash).
+    (function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.classList.remove('dark');document.documentElement.classList.add('light');}}catch(e){}})();
+  </script>
+  <link rel="stylesheet" href="/assets/styles.compiled.css">
+  <script type="application/ld+json">${safeJson(jsonLd)}</script>
+</head>
+<body class="bg-base text-fg font-sans antialiased">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div id="cursorGlow" aria-hidden="true"></div>
+  ${renderNav()}
+  <main id="main">
+    ${renderHero()}
+    ${renderMarquee()}
+    ${renderAbout()}
+    ${renderProjects()}
+    ${renderServices()}
+    ${renderExperience()}
+    ${renderContact()}
+  </main>
+  ${renderFooter()}
+  ${renderModal()}
+  <script>window.PROJECTS = ${safeJson(d.projects)};</script>
+  <script src="/assets/script.js" defer></script>
 </body>
-</html>`
-}
+</html>`;
+};

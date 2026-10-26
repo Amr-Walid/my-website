@@ -6,7 +6,7 @@ Amr Walid is a dedicated Data Engineer based in Cairo, Egypt, with a specialized
 
 2. PROFILE
 Name: Amr Walid
-Role: Data Engineer
+Role: Data Engineer & Full-Stack Developer
 Location: Cairo, Egypt
 Short Bio: Data Engineer specializing in building scalable data pipelines, ETL automation, and analytics infrastructure. I transform raw, chaotic data into structured, reliable assets that power business decisions.
 
@@ -38,6 +38,19 @@ Other Technologies:
 - Microsoft Fabric (Lakehouses, DP-700 in progress)
 
 4. PROJECTS
+(Full, up-to-date list with case studies: https://amrw.me/api/projects)
+
+Project Name: CryptoPulse — Real-Time Crypto Lakehouse on Azure
+Technologies Used: Kafka, Spark, Delta Lake, Azure ADLS Gen2, Airflow, dbt, PostgreSQL, FastAPI, Next.js, Docker.
+Link: https://github.com/Amr-Walid/Depi-Project
+
+Project Name: Retail POS & Reporting System — ASP.NET Core 8, SQL Server (179 tests). Link: https://github.com/Amr-Walid/invoice
+Project Name: FTD TechZone E-Commerce & CMS — ASP.NET Core MVC, SQL Server. Link: https://github.com/Amr-Walid/ftd
+Project Name: Asset Tracking & Support System — ASP.NET Core 8, SignalR, Hangfire. Link: https://github.com/Amr-Walid/assets_tracking
+Project Name: Social Media Governance Command Center — PostgreSQL, n8n, Metabase, Docker. Link: https://github.com/Amr-Walid/marketing_acc
+Project Name: WhatsApp Marketing & RFM Analytics — C#/.NET, SQL. Link: https://github.com/Amr-Walid/whatsapp_marketing
+Project Name: Custom WordPress themes (Greenio, Greenio Honey & Teas, AeroWind) — PHP, Carbon Fields. Links: https://github.com/Amr-Walid/wordpress-project1 , https://github.com/Amr-Walid/wordpress2 , https://github.com/Amr-Walid/wordpress3
+
 
 Project Name: Automated Crypto Price ETL Pipeline
 Description: A fully automated, cloud-hosted ETL pipeline extracting live market data.

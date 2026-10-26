@@ -1,4 +1,4 @@
-export const portfolioData = {
+const basePortfolio = {
   personal: {
     name: "Amr Walid",
     title: "Data Engineer & Full-Stack Developer",
@@ -160,7 +160,7 @@ export const portfolioData = {
     {
       id: "m365-project-management-system",
       title: "M365 Automated Project Management & Attendance System",
-      category: "Data Engineering",
+      category: "Automation",
       featured: true,
       image: "chart-bar",
       imageUrls: [
@@ -208,6 +208,7 @@ export const portfolioData = {
         "Implemented interactive data visualizations for sales, demographics, and regional performance."
       ],
       website: "https://dashboard.amrw.me/",
+      github: "https://github.com/Amr-Walid/Nextjs-dashboard",
       tags: ["Next.js", "AI Integration", "Dashboard", "React", "Data Analytics"]
     },
     {
@@ -315,6 +316,7 @@ export const portfolioData = {
         "Identifies top-performing products, regions, and seasonal trends",
         "Supports strategic pricing and marketing decisions"
       ],
+      github: "https://github.com/Amr-Walid/Excel-Dashboard",
       tags: ["BI", "Dashboard", "Excel", "Data Analysis", "Power Query"]
     },
     {
@@ -341,6 +343,189 @@ export const portfolioData = {
         "Enabled finance team to shift from manual reporting to self-service analytics"
       ],
       tags: ["Excel", "DAX", "Power Query", "BI Dashboard", "Finance Analytics"]
+    },
+    {
+      id: "cryptopulse-azure-lakehouse",
+      title: "CryptoPulse — Real-Time Crypto Lakehouse on Azure",
+      category: "Data Engineering",
+      featured: true,
+      image: "bolt",
+      imageUrls: [
+        "/assets/cryptopulse-architecture.webp",
+        "/assets/cryptopulse-architecture-2.webp"
+      ],
+      problem: "Crypto markets move every second, while prices, news and social sentiment live in completely different sources and formats. Analysts needed one trustworthy platform that ingests live and historical market data together with news and sentiment, keeps a full history, and serves clean, analytics-ready data through an API and a dashboard — not a pile of scripts.",
+      solution: "Built (as part of the DEPI Microsoft Azure Data Engineering track) a production-grade, end-to-end lakehouse. Five streams — Binance WebSocket prices, CoinGecko market data, NewsAPI headlines, RSS social feeds and Binance historical OHLCV — flow through Apache Kafka into Spark Structured Streaming and batch jobs, landing in a Medallion architecture (Bronze → Silver) on Azure Data Lake Storage Gen2 with Delta Lake. A FinBERT sentiment processor scores news and social posts. Silver data syncs into PostgreSQL (Supabase), dbt builds the Gold layer (daily OHLCV, market summary, sentiment, latest prices), Airflow orchestrates everything, and a secured FastAPI backend powers a Next.js dashboard with an AI assistant.",
+      architecture: "Binance WebSocket / Klines + CoinGecko + NewsAPI + RSS → Python producers → Apache Kafka topics → Spark Streaming & Batch → ADLS Gen2 Bronze (Delta) → Silver (Delta) + FinBERT sentiment → PostgreSQL (Supabase) → dbt Gold models → FastAPI → Next.js dashboard. Orchestrated by Airflow, packaged in ~15 Docker containers.",
+      techStack: ["Apache Kafka", "Apache Spark", "Delta Lake", "Azure ADLS Gen2", "Airflow", "dbt", "PostgreSQL", "FastAPI", "Next.js", "Docker", "FinBERT"],
+      impact: [
+        "4 real-time + historical data streams unified in one lakehouse",
+        "Medallion architecture (Bronze → Silver → Gold) on Azure Delta Lake",
+        "NLP sentiment scoring (FinBERT) on news and social feeds",
+        "dbt Gold layer for analytics-ready daily OHLCV, market summary & sentiment",
+        "Airflow DAGs for historical backfills and frequent price refreshes",
+        "Secured FastAPI backend + live Next.js dashboard with AI assistant",
+        "Fully containerized: ~15 services with Docker Compose"
+      ],
+      github: "https://github.com/Amr-Walid/Depi-Project",
+      website: "https://cryptopulse-five-red.vercel.app",
+      tags: ["Kafka", "Spark", "Azure", "Lakehouse", "dbt", "Airflow", "Real-Time"]
+    },
+    {
+      id: "ftd-techzone-ecommerce",
+      title: "FTD TechZone — E-Commerce & Corporate CMS Platform",
+      category: "Full-Stack",
+      featured: true,
+      image: "store",
+      problem: "An electronics distributor (multi-brand phones, smart-home and accessories) needed one bilingual website that is both a product catalogue / online store and a corporate site — with brand pages, installment purchasing, careers, news and events — all editable by non-technical staff without touching code. The previous site had placeholder content, fake numbers and false compliance claims flagged by a management audit.",
+      solution: "Built a full ASP.NET Core MVC platform on SQL Server with a complete admin back-office. Staff manage brands, categories, products (images, dynamic attributes & values), orders and order statuses, navigation menus, page sections (hero / cards / FAQ / rich text), contact info, site settings, news, events, job postings and applications, and incoming messages. The storefront includes cart & checkout, brand landing pages, and a dedicated installment flow (E-get) with a 'Buy on Installments' button on product pages. A 15-item management audit was fully resolved in code: real hotline, real stats, cleaned policies, removed invalid ISO claims, and fixed a product-saving bug in the admin.",
+      architecture: "Browser (Razor, RTL/LTR) → ASP.NET Core MVC Controllers (Storefront + Admin area) → Services → EF Core → SQL Server. ASP.NET Identity for admin auth, dynamic CMS sections (ContentBlock / PageSection / NavigationItem), product attribute EAV model, order pipeline (SalesOrder / Details / Status).",
+      techStack: ["ASP.NET Core MVC", "C#", "EF Core", "SQL Server", "ASP.NET Identity", "Razor", "JavaScript", "CSS"],
+      impact: [
+        "One platform for store, brand pages, installments, careers, news & events",
+        "Full admin back-office — non-technical staff edit everything",
+        "Dynamic product attributes & multi-image product galleries",
+        "Cart, checkout & order-status pipeline",
+        "Installment-purchase (E-get) guide page + in-product CTA",
+        "15/15 management-audit items resolved and verified in code"
+      ],
+      github: "https://github.com/Amr-Walid/ftd",
+      tags: ["ASP.NET Core", "E-Commerce", "CMS", "SQL Server", "C#"]
+    },
+    {
+      id: "social-media-governance-center",
+      title: "Social Media Governance Command Center",
+      category: "Automation",
+      featured: true,
+      image: "shield",
+      problem: "A multi-brand group of companies (several companies + a factory) had 40–120 social-media accounts across many platforms, with no central registry, no clear owner per account, personal emails holding business pages, and marketing staff creating accounts freely. Nobody knew what existed, who controlled it, or what was being published where — a governance problem far more than a tooling problem.",
+      solution: "Researched and engineered a complete governance system: a 20-document playbook (diagnosis, architecture, RACI & permissions, Business Manager setup per platform, build-vs-buy, API limits, security & secrets, SOPs, 90-day plan, KPIs, risk & recovery) plus a deployable self-hosted stack. A PostgreSQL governance schema (digital-asset registry, owners, access grants, approval gates) with protection triggers, Metabase dashboards, n8n automations, Mixpost for publishing, NocoDB, Vaultwarden for credentials, Uptime Kuma and Restic backups — all behind Caddy in Docker Compose. A Flask viewer runs every dashboard query live against a read-only database user, and a FINDINGS log documents real defects caught by actually executing the code.",
+      architecture: "Caddy (edge, TLS) → App tier: Metabase, n8n, Mixpost, NocoDB, Vaultwarden, Uptime Kuma, Flask viewer → Data tier: PostgreSQL (governance schema + triggers), MySQL, Redis → Restic encrypted backups. Read-only gov_reader role for dashboards.",
+      techStack: ["PostgreSQL / PL/pgSQL", "Docker Compose", "n8n", "Metabase", "Python / Flask", "Caddy", "Vaultwarden", "Shell"],
+      impact: [
+        "Single source of truth for every account, owner and access grant",
+        "Approval gate for new accounts + database-enforced protection triggers",
+        "Live governance dashboards executed as real SQL (not mock-ups)",
+        "Credentials moved into a self-hosted password vault",
+        "20-document playbook from executive summary to SOPs & 90-day rollout",
+        "Execution-verified: real defects found and logged by running the stack"
+      ],
+      github: "https://github.com/Amr-Walid/marketing_acc",
+      tags: ["Governance", "PostgreSQL", "n8n", "Metabase", "Docker", "Automation"]
+    },
+    {
+      id: "fleet-pulse-tracking",
+      title: "Fleet Pulse — Driver Tracking & Real-Time Alerts (System Design)",
+      category: "Full-Stack",
+      featured: false,
+      status: "System Design",
+      image: "truck",
+      problem: "A company was tracking its drivers with Life360 — a family app with no stop alerts, no unified dashboard, no export, only 30 days of history and data stored outside Egypt. Management needed to know immediately when a driver stops for more than 30 minutes, even when the phone loses internet coverage.",
+      solution: "Produced a full research and architecture package for a purpose-built fleet tracking system: an Android driver app (check-in / check-out only, background tracking with a motion state machine to save battery), an offline-first outbox in SQLite with sequence numbers and priority upload, an idempotent backend that recomputes stops when late data arrives, a Redis-based real-time stop detector with watchdog and Telegram / push escalation, and an Arabic React dashboard with KPIs, driver scores, heatmaps and automatic daily reports — plus Egypt's data-protection law (151/2020) compliance and a cost / roadmap plan (MVP in ~6–7 weeks).",
+      architecture: "Android app (Kotlin/Flutter + background geolocation) → SQLite outbox (offline, sequenced) → Backend API (Node/Go) → PostgreSQL + PostGIS + TimescaleDB → Redis driver state + 30s alert timer → Telegram / Push alerts → React (Arabic) dashboard & reports.",
+      techStack: ["System Design", "PostgreSQL / PostGIS", "TimescaleDB", "Redis", "Android", "React", "Offline-First"],
+      impact: [
+        "Real-time alert when a driver stops longer than a configurable threshold",
+        "Offline-first: every GPS point stored and replayed in order when back online",
+        "Battery-aware motion state machine instead of always-on GPS",
+        "Analytics plan: driver score, heatmaps, automatic daily report",
+        "Legal review against Egypt's Personal Data Protection Law 151/2020",
+        "Costed roadmap: ~$50–200 / month to run for 100 drivers"
+      ],
+      github: "https://github.com/Amr-Walid/tracking_car",
+      tags: ["System Design", "Real-Time", "Geo", "Redis", "Offline-First"]
+    },
+    {
+      id: "greenio-energy-wordpress",
+      title: "Greenio — Renewable Energy WordPress Theme",
+      category: "Web & WordPress",
+      featured: true,
+      image: "leaf",
+      imageUrls: [
+        "/assets/greenio-energy-cover.webp",
+        "/assets/greenio-energy-duo.webp",
+        "/assets/greenio-energy-services.webp"
+      ],
+      problem: "A clean-energy company needed a premium, fast landing site that their marketing team could fully edit — logo, CTAs, hero, stats, services and footer — without page builders, paid plugins or a developer for every change.",
+      solution: "Designed and developed a fully custom one-page WordPress theme from scratch: an overlapping-card hero (a deep-blue live CO₂ impact card overlapping both the hero and the next section), a 4-icon service grid and a zig-zag 'keep your environment clean' section. All content is editable through Carbon Fields (bundled via Composer, no plugin required): a Theme Options page for global settings and front-page field groups for every section, with graceful fallbacks. Vanilla JS adds live counters, smooth scroll, parallax and micro-interactions.",
+      architecture: "WordPress theme (header.php / front-page.php / footer.php) → functions.php (enqueues, menus, theme supports) → Carbon Fields containers (Theme Options + Front Page) → bundled Composer autoload → Vanilla JS (counters, parallax).",
+      techStack: ["WordPress", "PHP", "Carbon Fields", "Composer", "Vanilla JS", "CSS3", "Responsive / A11y"],
+      impact: [
+        "100% custom theme — no page builder, no paid plugins",
+        "Every section editable from the WordPress admin",
+        "Signature overlapping-card hero with live CO₂ counter",
+        "Fully responsive with accessibility in mind",
+        "Packaged as an installable theme zip + case study"
+      ],
+      github: "https://github.com/Amr-Walid/wordpress-project1",
+      tags: ["WordPress", "PHP", "Carbon Fields", "Landing Page"]
+    },
+    {
+      id: "greenio-honey-wordpress",
+      title: "Greenio Honey & Teas — Organic Store WordPress Theme",
+      category: "Web & WordPress",
+      featured: true,
+      image: "leaf",
+      imageUrls: [
+        "/assets/greenio-honey-showcase.webp",
+        "/assets/greenio-honey-mockup.webp"
+      ],
+      problem: "An organic brand selling raw honey varieties and herbal teas wanted a warm, premium storefront where they can manage products, prices, ingredients and promotions themselves — without being locked into a heavy page builder.",
+      solution: "Built a premium organic e-commerce showcase theme from scratch with a custom post type (organic_product + product_type taxonomy), product detail pages (price / old price, rating, weight, origin, ingredients, benefits repeater) and a shop archive. A Carbon Fields front-page builder controls the hero slider, features band, featured-products association, values, testimonials, trust badges and CTA strip, while Theme Options handle branding, header, contact and footer. Honey-amber / cream / forest-green brand system.",
+      architecture: "WordPress → Custom Post Type organic_product (+ taxonomy) → Carbon Fields (Theme Options, Front Page Builder, Product Details) → front-page / single / archive templates → responsive CSS + JS.",
+      techStack: ["WordPress", "PHP", "Carbon Fields", "Custom Post Types", "JavaScript", "CSS3"],
+      impact: [
+        "Custom product catalogue with sale prices, ratings & ingredients",
+        "Drag-free front-page builder for every homepage section",
+        "Clean brand system tailored for organic food",
+        "Fully responsive storefront and product pages"
+      ],
+      github: "https://github.com/Amr-Walid/wordpress2",
+      tags: ["WordPress", "E-Commerce", "Custom Post Types", "PHP"]
+    },
+    {
+      id: "aerowind-energy-wordpress",
+      title: "AeroWind Energy — Wind Turbines WordPress Theme",
+      category: "Web & WordPress",
+      featured: false,
+      image: "wind",
+      imageUrls: [
+        "/assets/aerowind-showcase.webp",
+        "/assets/aerowind-mockup.webp",
+        "/assets/aerowind-theme.webp"
+      ],
+      problem: "A residential wind-energy brand (home turbines and micro-power systems) needed a corporate site that showcases its turbine range with technical specs and captures leads — fully manageable from WordPress.",
+      solution: "Developed a fully responsive custom theme with a Sky-Blue / Navy identity: hero, zig-zag intro, 'Why Wind' card grid, turbines grid driven by a custom post type (aerowind_turbine) with dedicated detail pages (price, rated power, rotor diameter, cut-in wind speed, value), an outstanding-features band, Google 5-star testimonial and a working lead-capture form (name, email, phone, average bill, message). All content comes from Carbon Fields with a full Theme Options page; ACF is auto-deactivated to guarantee a clean environment.",
+      architecture: "WordPress → CPT aerowind_turbine + single template → Carbon Fields (Theme Options + front-page metaboxes) → lead form handler → responsive design system (Poppins + Inter).",
+      techStack: ["WordPress", "PHP", "Carbon Fields", "Custom Post Types", "Lead Forms", "CSS3"],
+      impact: [
+        "Turbine catalogue with technical specification pages",
+        "Working lead-capture form for sales enquiries",
+        "Announcement bar, header phone & CTA all editable",
+        "Responsive design with mobile hamburger navigation"
+      ],
+      github: "https://github.com/Amr-Walid/wordpress3",
+      tags: ["WordPress", "Corporate Site", "Lead Generation", "PHP"]
+    },
+    {
+      id: "qrcard-pro",
+      title: "QRCard Pro — Smart Digital Business Card Generator",
+      category: "Web & WordPress",
+      featured: false,
+      image: "qrcode",
+      problem: "Paper business cards get lost and go out of date. Professionals wanted a fast, Arabic-first way to create a premium digital card with all their contact details and links, and share it instantly with a QR code — with no app to install and no backend to maintain.",
+      solution: "Built a single-file, Arabic (RTL) web app that lets anyone fill in their details and social links and instantly generates a luxurious digital business card with a scannable QR code. The card data is encoded into the shareable link itself, so the card renders anywhere without a server or database. Deployed for free on GitHub Pages.",
+      architecture: "Static HTML / CSS / JS (single file) → form → data encoded into URL → QR code generation → card view rendered client-side from the link → GitHub Pages hosting.",
+      techStack: ["HTML5", "CSS3", "JavaScript", "QR Code", "RTL / Arabic UI", "GitHub Pages"],
+      impact: [
+        "Create and share a digital card in seconds",
+        "Zero backend — card data lives inside the link",
+        "Arabic-first, mobile-friendly premium design",
+        "Free static hosting on GitHub Pages"
+      ],
+      github: "https://github.com/Amr-Walid/qrhtml",
+      website: "https://amr-walid.github.io/qrhtml/",
+      tags: ["Web App", "QR", "RTL", "JavaScript"]
     }
   ],
 
@@ -422,5 +607,88 @@ export const portfolioData = {
       description: "Preparing for the DP-700 certification exam, focused on designing and implementing data solutions with Microsoft Fabric, including data pipelines, lakehouses, and data warehouses.",
       credential: "Microsoft Certified"
     }
+  ]
+};
+
+// ---------------------------------------------------------------------------
+// Presentation layer: ordering, one-line card summaries, stats & services.
+// Keeps the long-form case-study content above untouched and easy to edit.
+// ---------------------------------------------------------------------------
+
+/** Display order on the site (strongest / most recent work first). */
+const projectOrder = [
+  "cryptopulse-azure-lakehouse",
+  "retail-pos-system",
+  "ftd-techzone-ecommerce",
+  "asset-tracking-system",
+  "ai-powered-nextjs-dashboard",
+  "social-media-governance-center",
+  "whatsapp-marketing-system",
+  "sql-server-data-warehouse",
+  "unigroup-crm",
+  "m365-project-management-system",
+  "real-time-stock-pipeline",
+  "greenio-energy-wordpress",
+  "greenio-honey-wordpress",
+  "aerowind-energy-wordpress",
+  "fleet-pulse-tracking",
+  "payment-bg-analytics-dashboard",
+  "crypto-etl-pipeline",
+  "docker-etl-pipeline",
+  "adventure-works-dashboard",
+  "qrcard-pro"
+];
+
+/** Short, scannable one-liners shown on project cards. */
+const projectSummaries: Record<string, string> = {
+  "cryptopulse-azure-lakehouse": "Kafka → Spark → Delta Lake on Azure with dbt, Airflow, FinBERT sentiment and a live Next.js dashboard.",
+  "retail-pos-system": "Arabic RTL point-of-sale with barcode scanning, discounts, returns, receipts, audit log and 179 passing tests.",
+  "ftd-techzone-ecommerce": "Electronics store + corporate CMS with a full admin back-office, installments, careers, news and events.",
+  "asset-tracking-system": "Full asset lifecycle, custody, maintenance and support tickets with SignalR, Hangfire and QR tags.",
+  "ai-powered-nextjs-dashboard": "Arabic analytics dashboard with a streaming Gemini AI assistant that answers questions about the data.",
+  "social-media-governance-center": "Registry, ownership, approvals and live dashboards for 40–120 social accounts — self-hosted in Docker.",
+  "whatsapp-marketing-system": "RFM-segmented WhatsApp campaigns with throttled, anti-ban sending and order-funnel tracking.",
+  "sql-server-data-warehouse": "Medallion (Bronze → Silver → Gold) warehouse in T-SQL with a star-schema data mart.",
+  "unigroup-crm": "Multi-tenant CRM on Clean Architecture with role-based access and per-unit data isolation.",
+  "m365-project-management-system": "Forms + Power Automate + SharePoint + Excel/DAX — fully automated projects, attendance and KPIs.",
+  "real-time-stock-pipeline": "Event-driven pipeline: MongoDB Change Streams trigger analytics served by FastAPI, all in Docker.",
+  "greenio-energy-wordpress": "Custom WordPress theme with an overlapping-card hero, live CO₂ counter and Carbon Fields CMS.",
+  "greenio-honey-wordpress": "Organic honey & teas storefront theme with a product CPT and a front-page builder.",
+  "aerowind-energy-wordpress": "Wind-turbine corporate theme with spec pages and a working lead-capture form.",
+  "fleet-pulse-tracking": "Offline-first driver tracking with real-time stop alerts — full architecture, legal and cost plan.",
+  "payment-bg-analytics-dashboard": "Payment-cycle and bank-guarantee risk dashboards in Excel with Power Query and DAX.",
+  "crypto-etl-pipeline": "Hourly CoinGecko ETL running 24/7 on GitHub Actions, building a growing time-series dataset.",
+  "docker-etl-pipeline": "Reproducible Python → PostgreSQL ETL, spun up with a single docker compose up.",
+  "adventure-works-dashboard": "Interactive Excel sales dashboard with Power Query, data model, slicers and timelines.",
+  "qrcard-pro": "Arabic digital business-card generator with QR sharing — zero backend, hosted on GitHub Pages."
+};
+
+const orderedProjects = projectOrder
+  .map((id) => basePortfolio.projects.find((p: any) => p.id === id))
+  .filter(Boolean)
+  .concat(basePortfolio.projects.filter((p: any) => !projectOrder.includes(p.id)))
+  .map((p: any) => ({ ...p, summary: projectSummaries[p.id] || "" }));
+
+export const portfolioData = {
+  ...basePortfolio,
+  projects: orderedProjects,
+  stats: [
+    { value: orderedProjects.length, suffix: "+", label: "Projects shipped" },
+    { value: 4, suffix: "", label: "Engineering domains" },
+    { value: 179, suffix: "", label: "Automated tests in one system" },
+    { value: 15, suffix: "", label: "Docker services in one stack" }
+  ],
+  categories: ["Full-Stack", "Data Engineering", "Automation", "Data Analysis", "Web & WordPress"],
+  techMarquee: [
+    "Python", "SQL", "C#", "ASP.NET Core", "EF Core", "SQL Server", "PostgreSQL", "MongoDB",
+    "Apache Kafka", "Apache Spark", "Delta Lake", "Airflow", "dbt", "Azure", "Docker",
+    "FastAPI", "Next.js", "React", "TypeScript", "Power BI", "DAX", "Power Automate",
+    "WordPress", "PHP", "GitHub Actions", "Redis", "n8n", "Metabase"
+  ],
+  process: [
+    { step: "01", title: "Discover", text: "I map the real problem: the manual process, the messy data, the decisions that need to be faster." },
+    { step: "02", title: "Design", text: "Architecture, data model and screens agreed up-front — the simplest system that solves it." },
+    { step: "03", title: "Build", text: "Clean, tested code with roles, validation, audit logs and documentation baked in." },
+    { step: "04", title: "Ship & Support", text: "Deployed, monitored and handed over with training — then improved with real feedback." }
   ]
 };
