@@ -144,8 +144,9 @@ The site includes a **Services** section aimed at companies:
 
 | Period | Role | Organization |
 |--------|------|-------------|
-| 2026 — Present | Data Engineering Instructor | Applied Statistics Lab (ASL) |
-| 2025 — Present | Data Engineer Trainee | Digital Egypt Pioneers Initiative |
+| Oct 2025 — Present | Software Engineer (Best Employee of the Month — Aug 2026) | Uni Group |
+| Nov 2025 — Jul 2026 | Microsoft Data Engineer Trainee | Digital Egypt Pioneers Initiative (DEPI) |
+| 2026 — Aug 2026 | Data Engineering Instructor (Outstanding Instructor award) | Applied Statistics Lab (ASL), FEPS |
 | 2025 | Data Analyst Intern | EMAM Organization for Development and Culture |
 | 2025 | Statistical Data Trainee | Central Agency for Public Mobilization & Statistics (CAPMAS) |
 | 2022 — Present | Economics Student (Data Engineering Focus) | Faculty of Economics & Political Science, Cairo University |

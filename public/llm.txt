@@ -6,7 +6,8 @@ Amr Walid is a dedicated Data Engineer based in Cairo, Egypt, with a specialized
 
 2. PROFILE
 Name: Amr Walid
-Role: Data Engineer & Full-Stack Developer
+Role: Software Engineer at Uni Group (Oct 2025 — Present) · Data Engineer & Full-Stack Developer
+Experience: Software Engineer @ Uni Group (current, Best Employee of the Month — Aug 2026); Microsoft Data Engineer Trainee @ DEPI (Nov 2025 — Jul 2026, certified); Data Engineering Instructor @ ASL, FEPS (2026 — Aug 2026, Outstanding Instructor award)
 Location: Cairo, Egypt
 Short Bio: Data Engineer specializing in building scalable data pipelines, ETL automation, and analytics infrastructure. I transform raw, chaotic data into structured, reliable assets that power business decisions.
 

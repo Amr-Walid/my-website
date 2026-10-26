@@ -19,6 +19,7 @@ const navLinks = [
   ['projects', 'Work'],
   ['services', 'Services'],
   ['experience', 'Experience'],
+  ['awards', 'Awards'],
   ['contact', 'Contact']
 ];
 
@@ -48,7 +49,7 @@ const renderNav = () => `
     <nav class="nav-shell mx-auto mt-3 max-w-6xl px-3 sm:px-4" aria-label="Main">
       <div class="nav-inner flex items-center justify-between gap-3 rounded-2xl px-3 sm:px-4 h-16 transition-all duration-500">
         <a href="#hero" class="flex items-center gap-3 group" aria-label="Amr Walid — home">
-          <span class="logo-mark grid place-items-center w-10 h-10 rounded-xl font-black text-white text-sm tracking-tight">AW</span>
+          <img src="/assets/logo.svg" alt="" width="40" height="40" class="logo-mark w-10 h-10 rounded-xl">
           <span class="hidden sm:block leading-tight">
             <span class="block font-bold text-fg">Amr Walid</span>
             <span class="block text-[11px] font-mono text-muted">data · systems · automation</span>
@@ -188,9 +189,9 @@ const renderAbout = () => {
           <p class="eyebrow">About me</p>
           <h2 class="mt-3 font-display font-bold tracking-tight text-fg text-4xl sm:text-5xl leading-[1.05]">From raw data to <span class="gradient-text">production systems</span>.</h2>
           <div class="mt-6 space-y-5 text-lg leading-relaxed text-muted">
-            <p>I'm a Data Engineer and Full-Stack developer based in ${esc(p.location)}. I don't stop at prototypes — I design, build and ship complete systems that people use every day.</p>
+            <p>I'm a <span class="text-fg">Software Engineer at Uni Group</span> and a Data Engineer based in ${esc(p.location)}. I don't stop at prototypes — I design, build and ship complete systems that people use every day (and was named <span class="text-fg">Best Employee of the Month</span> for it).</p>
             <p>On the data side I build streaming and batch pipelines, lakehouses and warehouses. On the application side I build business software with <span class="text-fg">clean architecture, roles, validation, audit logs and tests</span> — so it keeps running after launch.</p>
-            <p>I study Economics &amp; Political Science at Cairo University, which keeps me focused on the question that matters: <span class="text-fg">what decision does this data or system make better?</span></p>
+            <p>I'm a DEPI-certified Microsoft Data Engineer, a former Data Engineering instructor at ASL, and I study Economics &amp; Political Science at Cairo University — which keeps me focused on the question that matters: <span class="text-fg">what decision does this data or system make better?</span></p>
           </div>
           <div class="mt-8 flex flex-wrap gap-3">
             <a href="${p.github}" target="_blank" rel="noopener" class="btn-ghost btn-sm">${icon('github', 'w-4 h-4')} github.com/Amr-Walid</a>
@@ -386,24 +387,14 @@ const renderExperience = () => `
         <div class="lg:sticky lg:top-28 self-start" data-reveal>
           <p class="eyebrow">Career path</p>
           <h2 class="mt-3 font-display font-bold tracking-tight text-fg text-4xl sm:text-5xl leading-[1.05]">Experience &amp; <span class="gradient-text">education</span></h2>
-          <p class="mt-4 text-lg text-muted leading-relaxed">Teaching, national training programmes and real client work — alongside an economics degree that sharpens how I think about data.</p>
+          <p class="mt-4 text-lg text-muted leading-relaxed">Software engineering at Uni Group, a national Microsoft Data Engineer programme and university teaching — alongside an economics degree that sharpens how I think about data.</p>
 
-          <div class="mt-10 space-y-3">
-            <p class="text-xs font-mono uppercase tracking-[0.2em] text-muted">Certifications</p>
-            ${d.certifications
-              .map(
-                (c: any) => `
-              <div class="cert">
-                <span class="cert-icon">${icon('award', 'w-5 h-5')}</span>
-                <div class="min-w-0">
-                  <p class="font-semibold text-fg text-sm leading-snug">${esc(c.title)}</p>
-                  <p class="text-xs text-muted mt-0.5">${esc(c.issuer)} · ${esc(c.credential)}</p>
-                </div>
-                <span class="cert-badge ${c.date === 'In Progress' ? 'progress' : ''}">${esc(c.date)}</span>
-              </div>`
-              )
-              .join('')}
+          <div class="mt-10 grid grid-cols-3 gap-3">
+            <div class="mini-stat"><span class="text-2xl font-display font-bold text-fg">1+</span><span>Year as Software Engineer</span></div>
+            <div class="mini-stat"><span class="text-2xl font-display font-bold text-fg">3</span><span>Awards &amp; honours</span></div>
+            <div class="mini-stat"><span class="text-2xl font-display font-bold text-fg">5</span><span>Certificates</span></div>
           </div>
+          <a href="#awards" class="mt-6 btn-ghost btn-sm">${icon('award', 'w-4 h-4')} View certificates &amp; awards</a>
         </div>
 
         <ol class="timeline relative">
@@ -412,14 +403,15 @@ const renderExperience = () => `
             .map(
               (e: any, i: number) => `
             <li class="timeline-item" data-reveal>
-              <span class="timeline-dot">${icon(i === d.experience.length - 1 ? 'graduation' : 'briefcase', 'w-4 h-4')}</span>
+              <span class="timeline-dot${e.current ? ' current' : ''}">${icon(e.education ? 'graduation' : 'briefcase', 'w-4 h-4')}</span>
               <div class="timeline-card spotlight">
                 <div class="flex flex-wrap items-center justify-between gap-2">
                   <span class="period">${esc(e.period)}</span>
-                  ${i === 0 ? '<span class="text-[11px] font-semibold text-emerald-400 flex items-center gap-1.5"><i class="w-1.5 h-1.5 rounded-full bg-emerald-400"></i>Current</span>' : ''}
+                  ${e.current ? '<span class="text-[11px] font-semibold text-emerald-400 flex items-center gap-1.5"><i class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></i>Current</span>' : ''}
                 </div>
                 <h3 class="mt-3 text-xl font-semibold text-fg">${esc(e.title)}</h3>
                 <p class="mt-1 text-sm font-medium text-accent-400">${esc(e.type)}</p>
+                ${e.award ? `<p class="award-pill">${icon('award', 'w-3.5 h-3.5')} ${esc(e.award)}</p>` : ''}
                 <p class="mt-3 text-sm leading-relaxed text-muted">${esc(e.description)}</p>
                 <ul class="mt-4 grid sm:grid-cols-2 gap-x-6 gap-y-2">
                   ${e.highlights.map((h: string) => `<li class="flex items-start gap-2 text-sm text-fg/75">${icon('check', 'w-4 h-4 mt-0.5 text-accent-400 shrink-0')}${esc(h)}</li>`).join('')}
@@ -432,6 +424,47 @@ const renderExperience = () => `
       </div>
     </div>
   </section>`;
+
+
+const renderAwards = () => {
+  const withImg = d.certifications.filter((c: any) => c.image);
+  const noImg = d.certifications.filter((c: any) => !c.image);
+  return `
+  <section id="awards" class="relative py-28 lg:py-36">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6">
+      ${sectionHead('Recognition', `Certificates &amp; <span class="gradient-text">awards</span>`, 'Honours from my employer and university, plus the national Microsoft Data Engineer programme. Click any certificate to view it full size.')}
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        ${withImg
+          .map(
+            (c: any, i: number) => `
+          <button class="cert-card group" data-reveal data-cert="${i}" aria-label="View certificate: ${esc(c.title)}">
+            <span class="cert-thumb"><img src="${c.image}" alt="${esc(c.title)} — ${esc(c.issuer)}" loading="lazy" decoding="async" width="400" height="280"></span>
+            <span class="cert-kind ${c.kind === 'Award' ? 'award' : ''}">${icon(c.kind === 'Award' ? 'award' : 'checkCircle', 'w-3.5 h-3.5')} ${esc(c.kind)}</span>
+            <span class="block mt-3 font-semibold text-fg leading-snug text-left">${esc(c.title)}</span>
+            <span class="block mt-1 text-xs text-muted text-left">${esc(c.issuer)}</span>
+            <span class="block mt-1 text-xs font-mono text-accent-400 text-left">${esc(c.date)}</span>
+          </button>`
+          )
+          .join('')}
+      </div>
+      <div class="mt-6 grid sm:grid-cols-2 gap-4">
+        ${noImg
+          .map(
+            (c: any) => `
+          <div class="cert" data-reveal>
+            <span class="cert-icon">${icon('award', 'w-5 h-5')}</span>
+            <div class="min-w-0">
+              <p class="font-semibold text-fg text-sm leading-snug">${esc(c.title)}</p>
+              <p class="text-xs text-muted mt-0.5">${esc(c.issuer)}</p>
+            </div>
+            <span class="cert-badge ${c.date === 'In Progress' ? 'progress' : ''}">${esc(c.date)}</span>
+          </div>`
+          )
+          .join('')}
+      </div>
+    </div>
+  </section>`;
+};
 
 const renderContact = () => `
   <section id="contact" class="relative py-28 lg:py-36 overflow-hidden">
@@ -495,7 +528,7 @@ const renderFooter = () => `
   <footer class="border-t border-line/[0.07] py-10">
     <div class="max-w-6xl mx-auto px-5 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-6">
       <div class="flex items-center gap-3">
-        <span class="logo-mark grid place-items-center w-9 h-9 rounded-xl font-black text-white text-xs">AW</span>
+        <img src="/assets/logo.svg" alt="" width="36" height="36" class="logo-mark w-9 h-9 rounded-xl" loading="lazy">
         <div class="leading-tight">
           <p class="font-semibold text-fg">Amr Walid</p>
           <p class="text-xs text-muted">${esc(p.title)}</p>
@@ -594,11 +627,16 @@ export const renderPage = () => {
   <meta property="og:description" content="Real-time data pipelines, production business systems and automation — end to end.">
   <meta property="og:image" content="${SITE_URL}/assets/cryptopulse-architecture.webp">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%233b8fff'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-family='Arial' font-weight='900' font-size='26' fill='white'%3EAW%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
+  <link rel="alternate icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://avatars.githubusercontent.com; connect-src 'self' https://formspree.io;">
 
   <script>
@@ -619,11 +657,12 @@ export const renderPage = () => {
     ${renderProjects()}
     ${renderServices()}
     ${renderExperience()}
+    ${renderAwards()}
     ${renderContact()}
   </main>
   ${renderFooter()}
   ${renderModal()}
-  <script>window.PROJECTS = ${safeJson(d.projects)};</script>
+  <script>window.PROJECTS = ${safeJson(d.projects)};window.CERTS = ${safeJson(d.certifications.filter((c: any) => c.image).map((c: any) => ({ src: c.image, title: c.title })))};</script>
   <script src="/assets/script.js" defer></script>
 </body>
 </html>`;

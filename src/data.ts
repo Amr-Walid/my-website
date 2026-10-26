@@ -531,36 +531,53 @@ const basePortfolio = {
 
   experience: [
     {
-      title: "Data Engineering Instructor",
-      type: "Applied Statistics Lab (ASL)",
-      period: "2026 — Present",
-      description: "Teaching the fundamentals of modern data engineering and helping students transition from data analysis to building scalable data systems.",
+      title: "Software Engineer",
+      type: "Uni Group",
+      period: "Oct 2025 — Present",
+      current: true,
+      award: "Best Employee of the Month — August 2026",
+      description: "Building the internal software, data and automation behind a multi-company group: business systems, customer platforms, marketing automation and digital-asset governance — from requirements to production.",
       highlights: [
-        "Teaching SQL, Python, and data pipeline concepts",
-        "Explaining ETL / ELT architecture and data workflow design",
-        "Guiding students through hands-on data engineering projects",
-        "Introducing real-world data engineering practices and tools"
+        "Designed and built the multi-tenant UniGroup CRM on ASP.NET Core (Clean Architecture)",
+        "Delivered business systems end to end: POS, asset tracking & support desk, e-commerce / CMS",
+        "Automated WhatsApp marketing campaigns with RFM customer segmentation",
+        "Engineered a governance system for the group's social-media accounts (PostgreSQL, n8n, Metabase)",
+        "Recognised as Best Employee of the Month (August 2026)"
       ]
     },
     {
-      title: "Data Engineer Trainee",
-      type: "Digital Egypt Pioneers Initiative",
-      period: "2025 — Present",
-      description: "Selected for the national Data Engineering program focused on modern data infrastructure and analytics systems.",
+      title: "Microsoft Data Engineer — Trainee",
+      type: "Digital Egypt Pioneers Initiative (DEPI) · MCIT",
+      period: "Nov 2025 — Jul 2026",
+      award: "Certificate of Achievement — Microsoft Data Engineer track",
+      description: "Completed the national Microsoft Data Engineer track sponsored by Egypt's Ministry of Communications & IT, delivered with eYouth and Berlitz.",
       highlights: [
-        "Building ETL / ELT pipelines using SQL and Python",
-        "Learning data modeling and warehouse design",
-        "Working with real-world data engineering scenarios",
-        "Developing structured data solutions for analytics"
+        "Built ETL / ELT pipelines with SQL, Python and Spark",
+        "Azure data stack: ADLS Gen2, Delta Lake, lakehouse design",
+        "Capstone: CryptoPulse — real-time crypto lakehouse (Kafka, Spark, dbt, Airflow)",
+        "Data modeling and warehouse design for analytics"
+      ]
+    },
+    {
+      title: "Data Engineering Instructor",
+      type: "Applied Statistics Lab (ASL) · FEPS, Cairo University",
+      period: "2026 — Aug 2026",
+      award: "Outstanding Instructor — Certificate of Excellence",
+      description: "Taught an intensive technical program in statistical programming, database management and quantitative modeling, helping students move from data analysis to building data systems.",
+      highlights: [
+        "Taught SQL, Python and data-pipeline concepts",
+        "Explained ETL / ELT architecture and data-workflow design",
+        "Mentored students through hands-on data projects",
+        "Awarded Outstanding Instructor + Certificate of Appreciation (July 2026)"
       ]
     },
     {
       title: "Data Analyst Intern",
       type: "EMAM Organization for Development and Culture",
-      period: "2025 — 2025",
+      period: "2025",
       description: "Conducted statistical research focused on environmental data and policy insights.",
       highlights: [
-        "Collected, cleaned, and analyzed environmental datasets",
+        "Collected, cleaned and analyzed environmental datasets",
         "Applied regression and hypothesis testing",
         "Built analytical reports and visualizations"
       ]
@@ -568,8 +585,8 @@ const basePortfolio = {
     {
       title: "Statistical Data Trainee",
       type: "Central Agency for Public Mobilization and Statistics (CAPMAS)",
-      period: "2025 — 2025",
-      description: "Completed a training program at Egypt’s national statistical agency.",
+      period: "2025",
+      description: "Completed a training program at Egypt's national statistical agency.",
       highlights: [
         "Worked with survey datasets and statistical indicators",
         "Learned official statistics methodologies",
@@ -580,32 +597,63 @@ const basePortfolio = {
       title: "Economics & Statistics Student",
       type: "Faculty of Economics & Political Science, Cairo University",
       period: "2022 — Present",
+      education: true,
       description: "Combining economic theory with strong statistical and analytical skills to understand and interpret real-world data.",
       highlights: [
-        "Applied econometric and statistical techniques on economic datasets",
-        "Developed solid foundations in probability, statistics, and data analysis",
-        "Worked on projects involving data cleaning, analysis, and visualization",
-        "Built analytical thinking for interpreting economic trends and relationships"
+        "Econometric and statistical techniques on economic datasets",
+        "Solid foundations in probability, statistics and data analysis",
+        "Projects in data cleaning, analysis and visualization",
+        "Analytical thinking for economic trends and relationships"
       ]
     }
   ],
 
   certifications: [
     {
+      title: "Best Employee of the Month",
+      issuer: "Uni Group",
+      date: "August 2026",
+      kind: "Award",
+      image: "/assets/cert-unigroup-best-employee.webp",
+      description: "Awarded by Uni Group in recognition of outstanding performance during August 2026."
+    },
+    {
+      title: "Outstanding Instructor — Certificate of Excellence",
+      issuer: "Applied Statistics Lab · FEPS, Cairo University",
+      date: "July 2026",
+      kind: "Award",
+      image: "/assets/cert-asl-outstanding-instructor.webp",
+      description: "For exceptional teaching, mentorship and leadership in statistical programming, database management and quantitative modeling."
+    },
+    {
+      title: "Microsoft Data Engineer — Certificate of Achievement",
+      issuer: "Digital Egypt Pioneers (DEPI) · MCIT",
+      date: "Nov 2025 – Jul 2026",
+      kind: "Certificate",
+      image: "/assets/cert-depi-data-engineer.webp",
+      description: "Completed the core learning outcomes of the Digital Egypt Pioneers Program — Microsoft Data Engineer track."
+    },
+    {
+      title: "Certificate of Appreciation",
+      issuer: "Applied Statistics Lab · FEPS, Cairo University",
+      date: "July 2026",
+      kind: "Certificate",
+      image: "/assets/cert-asl-appreciation.webp",
+      description: "In appreciation of dedicated instruction and support in the intensive technical program."
+    },
+    {
       title: "Get Started with Lakehouses in Microsoft Fabric",
-      issuer: "Microsoft",
+      issuer: "Microsoft Learn",
       date: "January 2026",
-      icon: "microsoft",
-      description: "Completed training on Microsoft Fabric lakehouse architecture, covering data ingestion, transformation, and storage patterns in the Microsoft data ecosystem.",
-      credential: "Microsoft Learn"
+      kind: "Training",
+      description: "Microsoft Fabric lakehouse architecture: ingestion, transformation and storage patterns."
     },
     {
       title: "DP-700: Fabric Data Engineer Associate",
-      issuer: "Microsoft",
+      issuer: "Microsoft Certified",
       date: "In Progress",
-      icon: "microsoft",
-      description: "Preparing for the DP-700 certification exam, focused on designing and implementing data solutions with Microsoft Fabric, including data pipelines, lakehouses, and data warehouses.",
-      credential: "Microsoft Certified"
+      kind: "Certification",
+      description: "Designing and implementing data solutions with Microsoft Fabric: pipelines, lakehouses and warehouses."
     }
   ]
 };

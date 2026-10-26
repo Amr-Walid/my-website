@@ -145,7 +145,7 @@
   function initReveal() {
     var els = $$('[data-reveal]');
     var counters = $$('[data-count]');
-    if (!('IntersectionObserver' in window)) {
+    if (!('IntersectionObserver' in window) || /[?&]reveal=all/.test(location.search)) {
       els.forEach(function (e) { e.classList.add('in'); });
       counters.forEach(animateCount);
       return;
@@ -238,22 +238,34 @@
   /* ---------------- 3D tilt, spotlight, magnetic buttons, cursor glow ---------------- */
   function initPointerFx() {
     if (!finePointer || reduceMotion) return;
+    var spotEv = null, spotRaf = 0;
     document.addEventListener('pointermove', function (e) {
-      var t = e.target.closest && e.target.closest('.spotlight, .project-card');
-      if (!t) return;
-      var r = t.getBoundingClientRect();
-      t.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-      t.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      spotEv = e;
+      if (spotRaf) return;
+      spotRaf = requestAnimationFrame(function () {
+        spotRaf = 0;
+        var t = spotEv.target.closest && spotEv.target.closest('.spotlight, .project-card');
+        if (!t) return;
+        var r = t.getBoundingClientRect();
+        t.style.setProperty('--mx', (spotEv.clientX - r.left) + 'px');
+        t.style.setProperty('--my', (spotEv.clientY - r.top) + 'px');
+      });
     }, { passive: true });
 
     $$('.project-card').forEach(function (card) {
+      var tr = 0, tx = 0, ty = 0;
       card.addEventListener('pointermove', function (e) {
-        var r = card.getBoundingClientRect();
-        var x = (e.clientX - r.left) / r.width - 0.5;
-        var y = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = 'perspective(900px) rotateX(' + (-y * 5).toFixed(2) + 'deg) rotateY(' + (x * 6).toFixed(2) + 'deg) translateY(-6px)';
-      });
-      card.addEventListener('pointerleave', function () { card.style.transform = ''; });
+        tx = e.clientX; ty = e.clientY;
+        if (tr) return;
+        tr = requestAnimationFrame(function () {
+          tr = 0;
+          var r = card.getBoundingClientRect();
+          var x = (tx - r.left) / r.width - 0.5;
+          var y = (ty - r.top) / r.height - 0.5;
+          card.style.transform = 'perspective(900px) rotateX(' + (-y * 5).toFixed(2) + 'deg) rotateY(' + (x * 6).toFixed(2) + 'deg) translateY(-6px)';
+        });
+      }, { passive: true });
+      card.addEventListener('pointerleave', function () { if (tr) { cancelAnimationFrame(tr); tr = 0; } card.style.transform = ''; });
     });
 
     $$('.magnetic').forEach(function (m) {
@@ -266,20 +278,32 @@
 
     var glow = $('#cursorGlow');
     var gx = -999, gy = -999, cx = gx, cy = gy;
-    window.addEventListener('pointermove', function (e) { gx = e.clientX; gy = e.clientY; }, { passive: true });
-    (function loop() {
-      cx += (gx - cx) * 0.12; cy += (gy - cy) * 0.12;
-      if (glow) glow.style.transform = 'translate3d(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px,0)';
-      requestAnimationFrame(loop);
-    })();
+    var glowRaf = 0;
+    function loop() {
+      cx += (gx - cx) * 0.14; cy += (gy - cy) * 0.14;
+      glow.style.transform = 'translate3d(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px,0)';
+      // stop the loop once the glow has caught up with the pointer (idle = 0 CPU)
+      glowRaf = (Math.abs(gx - cx) + Math.abs(gy - cy) > 0.5) ? requestAnimationFrame(loop) : 0;
+    }
+    if (glow) window.addEventListener('pointermove', function (e) {
+      gx = e.clientX; gy = e.clientY;
+      if (cx < -900) { cx = gx; cy = gy; }
+      if (!glowRaf) glowRaf = requestAnimationFrame(loop);
+    }, { passive: true });
 
     var portrait = $('[data-parallax]');
     if (portrait) {
+      var pr = 0, px = 0, py = 0;
       window.addEventListener('pointermove', function (e) {
-        if (window.scrollY > window.innerHeight) return;
-        var x = (e.clientX / window.innerWidth - 0.5) * 14;
-        var y = (e.clientY / window.innerHeight - 0.5) * 14;
-        portrait.style.translate = x.toFixed(1) + 'px ' + y.toFixed(1) + 'px';
+        if (root.classList.contains('paused-fx')) return;
+        px = e.clientX; py = e.clientY;
+        if (pr) return;
+        pr = requestAnimationFrame(function () {
+          pr = 0;
+          var x = (px / window.innerWidth - 0.5) * 14;
+          var y = (py / window.innerHeight - 0.5) * 14;
+          portrait.style.translate = x.toFixed(1) + 'px ' + y.toFixed(1) + 'px';
+        });
       }, { passive: true });
     }
   }
@@ -296,14 +320,16 @@
       W = c.clientWidth; H = c.clientHeight;
       c.width = W * dpr; c.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      var n = Math.round(Math.min(70, (W * H) / 22000));
+      var n = Math.round(Math.min(W < 768 ? 28 : 55, (W * H) / 26000));
       pts = [];
       for (var i = 0; i < n; i++) pts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35 });
     }
     function color(a) { return root.classList.contains('light') ? 'rgba(27,111,245,' + a + ')' : 'rgba(120,190,255,' + a + ')'; }
+    var raf = 0, inView = true;
     function frame() {
-      if (!running) return;
+      if (!running) { raf = 0; return; }
       ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = color(0.7); ctx.strokeStyle = color(1); ctx.lineWidth = 1;
       for (var i = 0; i < pts.length; i++) {
         var p = pts[i];
         p.x += p.vx; p.y += p.vy;
@@ -311,18 +337,17 @@
         if (p.y < 0 || p.y > H) p.vy *= -1;
         var dxm = p.x - mouse.x, dym = p.y - mouse.y;
         if (dxm * dxm + dym * dym < 16000) { p.x += dxm * 0.01; p.y += dym * 0.01; }
-        ctx.fillStyle = color(0.7);
-        ctx.beginPath(); ctx.arc(p.x, p.y, 1.4, 0, 6.283); ctx.fill();
+        ctx.fillRect(p.x - 1.2, p.y - 1.2, 2.4, 2.4);
         for (var j = i + 1; j < pts.length; j++) {
           var q = pts[j], dx = p.x - q.x, dy = p.y - q.y, dd = dx * dx + dy * dy;
-          if (dd < 14000) {
-            ctx.strokeStyle = color((1 - dd / 14000) * 0.25);
-            ctx.lineWidth = 1;
+          if (dd < 13000) {
+            ctx.globalAlpha = (1 - dd / 13000) * 0.35;
             ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
           }
         }
+        ctx.globalAlpha = 1;
       }
-      requestAnimationFrame(frame);
+      raf = requestAnimationFrame(frame);
     }
     size();
     var rt;
@@ -331,11 +356,15 @@
     c.parentElement.addEventListener('pointerleave', function () { mouse.x = mouse.y = -9999; });
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (es) {
-        var was = running; running = es[0].isIntersecting;
-        if (running && !was) requestAnimationFrame(frame);
+        inView = es[0].isIntersecting; sync();
       }).observe(c);
     }
-    requestAnimationFrame(frame);
+    function sync() {
+      running = inView && !document.hidden;
+      if (running && !raf) raf = requestAnimationFrame(frame);
+    }
+    document.addEventListener('visibilitychange', sync);
+    raf = requestAnimationFrame(frame);
   }
 
   /* ---------------- Timeline progress ---------------- */
@@ -348,7 +377,8 @@
       var pct = Math.max(0, Math.min(1, (window.innerHeight * 0.6 - r.top) / r.height));
       fill.style.height = (pct * 100) + '%';
     }
-    window.addEventListener('scroll', function () { requestAnimationFrame(update); }, { passive: true });
+    var tk = false;
+    window.addEventListener('scroll', function () { if (!tk) { tk = true; requestAnimationFrame(function () { tk = false; update(); }); } }, { passive: true });
     update();
   }
 
@@ -466,7 +496,7 @@
     $$('.lb-prev, .lb-next').forEach(function (b) { b.classList.toggle('hidden', galleryImgs.length < 2); });
   }
   function openLightbox(i) { $('#lightbox').classList.remove('hidden'); setLightbox(i); }
-  function closeLightbox() { $('#lightbox').classList.add('hidden'); setGallery(galleryIdx); }
+  function closeLightbox() { $('#lightbox').classList.add('hidden'); if (!$('#projectModal').classList.contains('hidden')) setGallery(galleryIdx); }
 
   function initModal() {
     var grid = $('#projectsGrid');
@@ -586,6 +616,32 @@
     }
   }
 
+  /* ---------------- Certificates & awards lightbox ---------------- */
+  function initCerts() {
+    var certs = window.CERTS || [];
+    if (!certs.length || !$('#lightbox')) return;
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest && e.target.closest('[data-cert]');
+      if (!b) return;
+      e.preventDefault();
+      galleryImgs = certs.map(function (c) { return c.src; });
+      openLightbox(Number(b.dataset.cert));
+      var img = $('#lightboxImg');
+      if (img) img.alt = certs[Number(b.dataset.cert)].title || '';
+    });
+  }
+
+  /* ---------------- Pause decorative animations when not visible ---------------- */
+  function initFxPause() {
+    var hero = $('#hero');
+    var heroVisible = true;
+    function sync() { root.classList.toggle('paused-fx', !heroVisible || document.hidden); }
+    if (hero && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { heroVisible = es[0].isIntersecting; sync(); }, { rootMargin: '80px' }).observe(hero);
+    }
+    document.addEventListener('visibilitychange', sync);
+  }
+
   function boot() {
     initTheme();
     initNavbar();
@@ -600,6 +656,8 @@
     initTimeline();
     initModal();
     initContact();
+    initCerts();
+    initFxPause();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();

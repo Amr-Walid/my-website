@@ -1,0 +1,13 @@
+{
+  "name": "Amr Walid — Data Engineer & Software Engineer",
+  "short_name": "Amr Walid",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070a14",
+  "theme_color": "#070a14",
+  "icons": [
+    { "src": "/assets/logo.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/assets/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
