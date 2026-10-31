@@ -149,7 +149,7 @@ The site includes a **Services** section aimed at companies:
 | 2026 — Aug 2026 | Data Engineering Instructor (Outstanding Instructor award) | Applied Statistics Lab (ASL), FEPS |
 | 2025 | Data Analyst Intern | EMAM Organization for Development and Culture |
 | 2025 | Statistical Data Trainee | Central Agency for Public Mobilization & Statistics (CAPMAS) |
-| 2022 — Present | Economics Student (Data Engineering Focus) | Faculty of Economics & Political Science, Cairo University |
+| 2022 — Jun 2026 | B.Sc. Economics — Graduate | Faculty of Economics & Political Science, Cairo University |
 
 ---
 
@@ -238,3 +238,19 @@ Or push to GitHub — Vercel auto-deploys on every commit.
 ---
 
 *Last updated: October 2026 | Built with Hono + Vite + Tailwind CSS | Deployed on Vercel*
+
+---
+
+## 📄 CV / Resume
+
+The downloadable CV is linked from the navbar ("CV"), the mobile menu, and the hero ("Download CV").
+
+- **Source:** `cv/cv.html` (A4, Alegreya serif — fonts bundled in `cv/fonts/`)
+- **Output:** `public/assets/Amr_Walid_CV.pdf` (served at `/assets/Amr_Walid_CV.pdf`)
+
+To regenerate after editing `cv/cv.html`:
+
+```bash
+pip install playwright && python -m playwright install chromium
+python cv/build_cv.py
+```

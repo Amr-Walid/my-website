@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Amr Walid Maher — CV</title>
+<style>
+  @font-face { font-family: "Alegreya"; src: url("fonts/Alegreya[wght].ttf") format("truetype"); font-weight: 400 900; font-style: normal; }
+  @font-face { font-family: "Alegreya"; src: url("fonts/Alegreya-Italic[wght].ttf") format("truetype"); font-weight: 400 900; font-style: italic; }
+
+  @page { size: A4; margin: 11mm 13mm 11mm 13mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Alegreya", Georgia, serif; font-size: 10pt; line-height: 1.22; color: #111; }
+  a { color: inherit; text-decoration: none; }
+  b, strong { font-weight: 700; }
+
+  /* ---------- header ---------- */
+  header { text-align: center; margin-bottom: 7pt; }
+  h1 { font-size: 22pt; font-weight: 700; letter-spacing: .2pt; margin-bottom: 4pt; }
+  .contact { display: flex; flex-wrap: wrap; justify-content: center; gap: 2pt 13pt; font-size: 8.8pt; }
+  .contact span { display: inline-flex; align-items: center; gap: 3.5pt; }
+  .contact svg { width: 8.5pt; height: 8.5pt; fill: #111; flex: none; }
+
+  /* ---------- sections ---------- */
+  h2 { font-size: 11.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: .4pt;
+       border-bottom: .9pt solid #111; padding-bottom: 1pt; margin: 8pt 0 4pt; }
+  p.summary { text-align: justify; font-size: 9.6pt; }
+
+  .entry { margin-bottom: 4.5pt; break-inside: avoid; }
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 10pt; }
+  .row .title { font-weight: 700; font-size: 9.9pt; }
+  .row .date { font-size: 9pt; white-space: nowrap; }
+  .sub { font-style: italic; font-size: 9.2pt; }
+  ul { margin: 1.5pt 0 0 12pt; }
+  li { font-size: 9.3pt; margin-bottom: .6pt; padding-left: 1pt; }
+  li::marker { font-size: 8pt; }
+
+  .proj .title svg { width: 7.5pt; height: 7.5pt; fill: #555; vertical-align: 0; margin-left: 2pt; }
+
+  /* ---------- skills ---------- */
+  .skills { display: grid; grid-template-columns: auto 1fr; gap: 1.5pt 8pt; font-size: 9.3pt; }
+  .skills dt { font-weight: 700; white-space: nowrap; }
+
+  .certs li { margin-bottom: 1pt; }
+  .gpa { display: inline-flex; align-items: center; gap: 3pt; font-size: 9pt; }
+  .gpa::before { content: ""; width: 5.5pt; height: 5.5pt; border-radius: 50%; background: #111; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Amr Walid Maher</h1>
+  <div class="contact">
+    <span><svg viewBox="0 0 24 24"><path d="M2 5h20v14H2zM4 7v.5l8 5 8-5V7l-8 5z"/></svg><a href="mailto:amr.walid2022@feps.edu.eg">amr.walid2022@feps.edu.eg</a></span>
+    <span><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg><a href="tel:+201063968726">+201063968726</a></span>
+    <span><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.3 7 13 7 13s7-7.7 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Cairo, Egypt</span>
+    <span><svg viewBox="0 0 24 24"><path d="M20.4 2H3.6C2.7 2 2 2.7 2 3.6v16.8c0 .9.7 1.6 1.6 1.6h16.8c.9 0 1.6-.7 1.6-1.6V3.6c0-.9-.7-1.6-1.6-1.6zM8 19H5V9h3zM6.5 7.7a1.7 1.7 0 1 1 0-3.4 1.7 1.7 0 0 1 0 3.4zM19 19h-3v-4.9c0-1.2 0-2.7-1.6-2.7S12.5 12.6 12.5 14v5h-3V9h2.9v1.4c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.7 2 3.7 4.7z"/></svg><a href="https://www.linkedin.com/in/amrwalidmaher">in/amrwalidmaher</a></span>
+    <span><svg viewBox="0 0 24 24"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.7.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg><a href="https://github.com/Amr-Walid">github.com/Amr-Walid</a></span>
+    <span><svg viewBox="0 0 24 24"><path d="M10.6 13.4a1 1 0 0 1 0-1.4l3.5-3.5a1 1 0 1 1 1.4 1.4L12 13.4a1 1 0 0 1-1.4 0zm-1.4 4.2a3 3 0 0 1-4.2-4.2l2.8-2.8-1.4-1.4-2.8 2.8a5 5 0 0 0 7 7l2.8-2.8-1.4-1.4zm9.6-13.6a5 5 0 0 0-7 0L9 6.8l1.4 1.4 2.8-2.8a3 3 0 0 1 4.2 4.2l-2.8 2.8 1.4 1.4 2.8-2.8a5 5 0 0 0 0-7z"/></svg><a href="https://amrw.me">amrw.me</a></span>
+  </div>
+</header>
+
+<h2>Professional Summary</h2>
+<p class="summary">
+  <b>Data Engineer and Full-Stack Developer</b> and Cairo University Economics graduate (2026), who ships complete,
+  production-grade systems — not just prototypes. I design robust <b>ETL/ELT pipelines, data warehouses and lakehouses</b> (Python, SQL, Spark, Kafka, Azure)
+  and build full <b>business applications</b> (POS, CRM, asset tracking, e-commerce) with <b>ASP.NET Core 8 / C#</b> and <b>Next.js / React</b>,
+  delivered with Docker, CI/CD and clean layered architecture. I combine data-engineering rigor with software-engineering discipline — validation,
+  testing, audit logging and security — to turn business problems into reliable systems that run in production.
+</p>
+
+<h2>Education</h2>
+<div class="entry">
+  <div class="row"><span class="title">Bachelor's Degree in Economics (Graduated)</span><span class="date">10/2022 – 06/2026</span></div>
+  <div class="sub">Faculty of Economics and Political Science – Cairo University</div>
+  <div class="gpa">GPA: 3.67 / 4.0</div>
+</div>
+
+<h2>Experience</h2>
+
+<div class="entry">
+  <div class="row"><span class="title">Software Engineer | Uni Group</span><span class="date">10/2025 – Present</span></div>
+  <ul>
+    <li>Building the internal software, data and automation behind a multi-company group — from requirements to production.</li>
+    <li>Designed and built the multi-tenant <b>UniGroup CRM</b> on ASP.NET Core (Clean Architecture) with role-based access and per-unit data isolation.</li>
+    <li>Delivered business systems end to end: <b>Retail POS</b> (179/179 tests passing), <b>Asset Tracking &amp; Support Desk</b>, and an <b>E-Commerce / CMS</b> platform.</li>
+    <li>Automated WhatsApp marketing campaigns with <b>RFM customer segmentation</b>; engineered a social-media governance system (PostgreSQL, n8n, Metabase).</li>
+    <li>Recognised as <b>Best Employee of the Month</b> (August 2026).</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="row"><span class="title">Data Analyst &amp; BI Developer (Project-based) | Kidana Development Co</span><span class="date">03/2026 – 05/2026</span></div>
+  <ul>
+    <li>Developed a BI solution using Excel (Power Query, Power Pivot, DAX) to centralize and analyze payment and bank guarantee data for the finance department.</li>
+    <li>Delivered two interactive dashboards that enabled the team to shift from manual reporting to self-service analytics with real-time visibility and proactive risk management.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="row"><span class="title">Microsoft Data Engineer Trainee | Digital Egypt Pioneers Initiative (DEPI) · MCIT</span><span class="date">11/2025 – 07/2026</span></div>
+  <ul>
+    <li>Completed the national Microsoft Data Engineer track; built ETL/ELT pipelines with SQL, Python and Spark on the Azure data stack (ADLS Gen2, Delta Lake).</li>
+    <li>Capstone: <b>CryptoPulse</b> — a real-time crypto lakehouse with Kafka, Spark, dbt and Airflow. Awarded a <b>Certificate of Achievement</b>.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="row"><span class="title">Data Engineering Instructor | Applied Statistics Lab (ASL) · FEPS, Cairo University</span><span class="date">05/2026 – 08/2026</span></div>
+  <ul>
+    <li>Taught an intensive program in SQL, Python, database management and ETL/ELT architecture, guiding students from data analysis to building data systems.</li>
+    <li>Mentored students through hands-on projects; awarded <b>Outstanding Instructor — Certificate of Excellence</b> and a Certificate of Appreciation.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="row"><span class="title">Data Analyst Intern | EMAM Organization for Development and Culture</span><span class="date">02/2025 – 10/2025</span></div>
+  <ul>
+    <li>Conducted statistical research on environmental data, applying regression and hypothesis testing to identify key trends.</li>
+    <li>Prepared data-driven reports and visualizations to support policy recommendations and ensure data quality.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="row"><span class="title">Trainee | Central Agency for Public Mobilization and Statistics (CAPMAS)</span><span class="date">07/2025 – 08/2025</span></div>
+  <ul>
+    <li>Gained hands-on experience across the full data lifecycle at Egypt's national statistical agency, from survey design to statistical reporting.</li>
+  </ul>
+</div>
+
+<h2>Projects</h2>
+
+<div class="entry proj">
+  <div class="row"><a class="title" href="https://github.com/Amr-Walid/Depi-Project">CryptoPulse — Real-Time Crypto Lakehouse on Azure<svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z"/></svg></a></div>
+  <div class="sub">Data Engineer · Kafka, Spark, Delta Lake, Azure ADLS Gen2, Airflow, dbt, FastAPI, Next.js, Docker</div>
+  <ul>
+    <li>Unified 4 live and historical streams (Binance, CoinGecko, NewsAPI, RSS) through <b>Kafka</b> and <b>Spark Structured Streaming</b> into a Medallion lakehouse on Azure.</li>
+    <li>Added FinBERT sentiment scoring, a <b>dbt</b> Gold layer and <b>Airflow</b> DAGs; served data via FastAPI and a live Next.js dashboard (~15 Docker services).</li>
+  </ul>
+</div>
+
+<div class="entry proj">
+  <div class="row"><a class="title" href="https://github.com/Amr-Walid/invoice">Retail POS &amp; Reporting System<svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z"/></svg></a></div>
+  <div class="sub">Full-Stack Developer · ASP.NET Core 8, C#, EF Core, SQL Server, Identity, xUnit</div>
+  <ul>
+    <li>Built an Arabic (RTL) point-of-sale with barcode/camera scanning, discount codes, returns, thermal receipts and CODE-128 label printing.</li>
+    <li>Role-based access (Admin/Agent), full audit log, live dashboard and CSV reports; shipped with <b>179/179 passing tests</b> and a 0-error build.</li>
+  </ul>
+</div>
+
+<div class="entry proj">
+  <div class="row"><a class="title" href="https://github.com/Amr-Walid/assets_tracking">Asset Tracking &amp; Technical Support System<svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z"/></svg></a></div>
+  <div class="sub">Full-Stack Developer · ASP.NET Core 8, EF Core, Hangfire, SignalR, Serilog, ClosedXML</div>
+  <ul>
+    <li>Tracks the full asset lifecycle, custody, preventive maintenance and support tickets with per-company isolation via EF Core Global Query Filters.</li>
+    <li>Real-time SignalR notifications, Hangfire background jobs, QR asset tags and Arabic Excel report export on a clean 4-layer architecture.</li>
+  </ul>
+</div>
+
+<div class="entry proj">
+  <div class="row"><a class="title" href="https://github.com/Amr-Walid/Sqlserver-DataWarehouse-Project">End-to-End SQL Server Data Warehouse<svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z"/></svg></a></div>
+  <div class="sub">Data Engineer · SQL Server, T-SQL, Medallion Architecture, Star Schema</div>
+  <ul>
+    <li>Built a complete warehouse integrating ERP and CRM data with a Medallion architecture and T-SQL ETL pipelines into a <b>Star Schema</b> data mart.</li>
+  </ul>
+</div>
+
+<div class="entry proj">
+  <div class="row"><a class="title" href="https://dashboard.amrw.me/">AI-Powered Enterprise Analytics Dashboard<svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z"/></svg></a></div>
+  <div class="sub">Full-Stack / Data · Next.js, React 19, Vercel AI SDK, Google Gemini, Recharts, TypeScript</div>
+  <ul>
+    <li>Arabic (RTL) analytics dashboard with a streaming <b>Gemini AI assistant</b> that answers questions about the underlying sales data in real time.</li>
+  </ul>
+</div>
+
+<div class="entry proj">
+  <div class="row"><a class="title" href="https://github.com/Amr-Walid/ftd">FTD TechZone — E-Commerce &amp; Corporate CMS Platform<svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z"/></svg></a></div>
+  <div class="sub">Full-Stack Developer · ASP.NET Core MVC, C#, EF Core, SQL Server, Identity</div>
+  <ul>
+    <li>Bilingual store + corporate site with a full admin back-office: products, dynamic attributes, orders, installments, careers, news and events.</li>
+  </ul>
+</div>
+
+<div class="entry proj">
+  <div class="row"><a class="title" href="https://github.com/Amr-Walid/whatsapp_marketing">WhatsApp Marketing &amp; Customer Analytics System<svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z"/></svg></a></div>
+  <div class="sub">Automation · C# / .NET, JavaScript, SQL, RFM Segmentation</div>
+  <ul>
+    <li>RFM-segmented campaigns with throttled, anti-ban sending and order-funnel tracking to target high-value customers instead of blind blasting.</li>
+  </ul>
+</div>
+
+<div class="entry proj">
+  <div class="row"><a class="title" href="https://github.com/Amr-Walid/real-time-stock-pipeline">Real-Time Stock Data Pipeline<svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z"/></svg></a></div>
+  <div class="sub">Data Engineer · Python, MongoDB Change Streams, FastAPI, Docker Compose</div>
+  <ul>
+    <li>Event-driven pipeline where MongoDB Change Streams trigger aggregation analytics exposed through FastAPI, fully containerized.</li>
+  </ul>
+</div>
+
+<div class="entry proj">
+  <div class="row"><span class="title">M365 Automated Project Management &amp; Attendance System</span></div>
+  <div class="sub">Automation / BI · Microsoft Forms, Power Automate, SharePoint, Power Query, DAX</div>
+  <ul>
+    <li>Fully automated project lifecycle and attendance tracking with validation flows, email alerts and a live DAX-driven KPI dashboard.</li>
+  </ul>
+</div>
+
+<div class="entry proj">
+  <div class="row"><a class="title" href="https://github.com/Amr-Walid/crypto-price-analyzer">Automated Crypto Price ETL &amp; Dockerized PostgreSQL Pipelines<svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z"/></svg></a></div>
+  <div class="sub">Data Engineer · Python, Pandas, GitHub Actions, Docker, PostgreSQL</div>
+  <ul>
+    <li>Hourly CoinGecko ETL running 24/7 on <b>GitHub Actions</b>, plus a reproducible Python → PostgreSQL ETL launched with a single <b>docker compose up</b>.</li>
+  </ul>
+</div>
+
+<h2>Technical Skills</h2>
+<dl class="skills">
+  <dt>Data Engineering:</dt><dd>ETL/ELT Pipelines, Data Modeling, Data Warehousing, Medallion / Lakehouse, Kafka, Spark, Airflow, dbt, Delta Lake</dd>
+  <dt>Languages:</dt><dd>Python (Pandas, PySpark), SQL / T-SQL, C#, TypeScript / JavaScript, PHP</dd>
+  <dt>Backend &amp; Full-Stack:</dt><dd>ASP.NET Core 8, EF Core, Clean Architecture, REST APIs, FastAPI, Next.js / React, Identity &amp; RBAC, Multi-Tenancy</dd>
+  <dt>Databases &amp; Cloud:</dt><dd>SQL Server, PostgreSQL, MongoDB, Redis, Azure (ADLS Gen2), Google BigQuery, Microsoft Fabric</dd>
+  <dt>DevOps &amp; Automation:</dt><dd>Docker &amp; Docker Compose, GitHub Actions (CI/CD), Git, Power Automate / M365, n8n, Playwright</dd>
+  <dt>BI &amp; Visualization:</dt><dd>Power BI, Excel (Advanced), Power Query, Power Pivot, DAX, Tableau, Looker Studio, Metabase</dd>
+</dl>
+
+<h2>Certifications &amp; Awards</h2>
+<ul class="certs">
+  <li><b>Best Employee of the Month</b> — Uni Group (August 2026)</li>
+  <li><b>Outstanding Instructor — Certificate of Excellence</b> — Applied Statistics Lab, FEPS, Cairo University (July 2026)</li>
+  <li><b>Microsoft Data Engineer — Certificate of Achievement</b> — Digital Egypt Pioneers Initiative (DEPI), MCIT (2026)</li>
+  <li><b>Certificate of Appreciation</b> — Applied Statistics Lab, FEPS, Cairo University (July 2026)</li>
+  <li><b>Get Started with Lakehouses in Microsoft Fabric</b> — Microsoft Learn (January 2026)</li>
+  <li><b>DP-700: Fabric Data Engineer Associate</b> — Microsoft Certified (In Progress)</li>
+</ul>
+
+</body>
+</html>

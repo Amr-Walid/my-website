@@ -198,8 +198,6 @@
   .chip-count { @apply text-[11px] font-mono rounded-full px-1.5 py-px; background: rgb(var(--c-fg) / .08); }
   .chip-tab.active .chip-count { background: rgb(255 255 255 / .2); }
 
-  .skill-fill { width: 0; background: linear-gradient(90deg, #1b6ff5, #38bdf8, #2dd4bf); transition: width 1.4s cubic-bezier(.2,.8,.2,1); }
-  .skill-panel.in .skill-fill { width: var(--w); }
 
   /* Project cards */
   .project-card {
