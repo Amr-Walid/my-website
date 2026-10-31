@@ -75,9 +75,9 @@ my-web/
 
 | # | Project | Tech Stack | GitHub |
 |---|---------|-----------|--------|
-| 1 | **Retail POS & Reporting System** | ASP.NET Core 8, C#, EF Core, SQL Server, ZXing Barcode | [↗](https://github.com/Amr-Walid/invoice) |
-| 2 | **UniGroup CRM (Multi-Tenant)** | ASP.NET Core, C#, Clean Architecture, EF Core, Docker | [↗](https://github.com/Amr-Walid/crm) |
-| 3 | **Asset Tracking & Support System (ATS)** | ASP.NET Core 8, EF Core, Hangfire, SignalR, QRCoder | [↗](https://github.com/Amr-Walid/assets_tracking) |
+| 1 | **Retail POS & Reporting System** | ASP.NET Core 8, C#, EF Core, SQL Server, ZXing Barcode | 🔒 Private |
+| 2 | **UniGroup CRM (Multi-Tenant)** | ASP.NET Core, C#, Clean Architecture, EF Core, Docker | 🔒 Private |
+| 3 | **Asset Tracking & Support System (ATS)** | ASP.NET Core 8, EF Core, Hangfire, SignalR, QRCoder | 🔒 Private |
 | 4 | **FTD TechZone — E-Commerce & Corporate CMS** | ASP.NET Core MVC, EF Core, SQL Server, Identity | [↗](https://github.com/Amr-Walid/ftd) |
 | 5 | **Fleet Pulse — Driver Tracking (System Design)** | PostGIS, TimescaleDB, Redis, Android, React | [↗](https://github.com/Amr-Walid/tracking_car) |
 
@@ -114,7 +114,7 @@ my-web/
 | 13 | **Greenio — Renewable Energy WordPress Theme** | WordPress, PHP, Carbon Fields | [↗](https://github.com/Amr-Walid/wordpress-project1) |
 | 14 | **Greenio Honey & Teas — Organic Store Theme** | WordPress, CPT, Carbon Fields | [↗](https://github.com/Amr-Walid/wordpress2) |
 | 15 | **AeroWind Energy — Wind Turbines Theme** | WordPress, CPT, Lead Forms | [↗](https://github.com/Amr-Walid/wordpress3) |
-| 16 | **QRCard Pro — Digital Business Card** | HTML, JS, QR, GitHub Pages | [↗](https://github.com/Amr-Walid/qrhtml) |
+| 16 | **QRCard Pro — Digital Business Card** | HTML, JS, QR, GitHub Pages | [↗](https://github.com/UniGroup-Egypt/qrhtml) |
 
 ## 🧩 Services (for Businesses)
 

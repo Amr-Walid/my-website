@@ -88,7 +88,6 @@ const basePortfolio = {
         "CSV export with UTF-8 BOM — opens correctly in Arabic Excel",
         "179/179 automated tests passing, 0 build errors"
       ],
-      github: "https://github.com/Amr-Walid/invoice",
       tags: ["ASP.NET Core", "POS", "SQL Server", "C#", "Business System", "RTL"]
     },
     {
@@ -109,7 +108,6 @@ const basePortfolio = {
         "Documented end-to-end: requirements, DB design, implementation plan",
         "Containerized for reproducible deployment"
       ],
-      github: "https://github.com/Amr-Walid/crm",
       tags: ["CRM", "ASP.NET Core", "Clean Architecture", "Multi-Tenant", "C#"]
     },
     {
@@ -154,7 +152,6 @@ const basePortfolio = {
         "QR-code asset tagging and Arabic (RTL) Excel report export",
         "Clean layered architecture with FluentValidation and Serilog logging"
       ],
-      github: "https://github.com/Amr-Walid/assets_tracking",
       tags: ["ASP.NET Core", "Asset Management", "Clean Architecture", "SignalR", "C#"]
     },
     {
@@ -523,8 +520,8 @@ const basePortfolio = {
         "Arabic-first, mobile-friendly premium design",
         "Free static hosting on GitHub Pages"
       ],
-      github: "https://github.com/Amr-Walid/qrhtml",
-      website: "https://amr-walid.github.io/qrhtml/",
+      github: "https://github.com/UniGroup-Egypt/qrhtml",
+      website: "https://unigroup-egypt.github.io/qrhtml/",
       tags: ["Web App", "QR", "RTL", "JavaScript"]
     }
   ],
@@ -665,25 +662,27 @@ const basePortfolio = {
 
 /** Display order on the site (strongest / most recent work first). */
 const projectOrder = [
+  // --- with screenshots, strongest first ---
   "cryptopulse-azure-lakehouse",
   "retail-pos-system",
-  "ftd-techzone-ecommerce",
   "asset-tracking-system",
   "ai-powered-nextjs-dashboard",
-  "social-media-governance-center",
   "whatsapp-marketing-system",
   "sql-server-data-warehouse",
-  "unigroup-crm",
   "m365-project-management-system",
   "real-time-stock-pipeline",
+  "payment-bg-analytics-dashboard",
   "greenio-energy-wordpress",
   "greenio-honey-wordpress",
   "aerowind-energy-wordpress",
-  "fleet-pulse-tracking",
-  "payment-bg-analytics-dashboard",
   "crypto-etl-pipeline",
   "docker-etl-pipeline",
   "adventure-works-dashboard",
+  // --- no screenshots yet ---
+  "ftd-techzone-ecommerce",
+  "unigroup-crm",
+  "social-media-governance-center",
+  "fleet-pulse-tracking",
   "qrcard-pro"
 ];
 
