@@ -13,6 +13,8 @@ const esc = (s: unknown = ''): string =>
     .replace(/"/g, '&quot;');
 
 const SITE_URL = 'https://amrw.me';
+const CV_URL = '/assets/Amr_Walid_CV.pdf';
+const CV_FILE = 'Amr_Walid_Maher_CV.pdf';
 
 const navLinks = [
   ['about', 'About'],
@@ -63,6 +65,7 @@ const renderNav = () => `
             <span class="theme-icon-dark">${icon('moon', 'w-[18px] h-[18px]')}</span>
             <span class="theme-icon-light">${icon('sun', 'w-[18px] h-[18px]')}</span>
           </button>
+          <a href="${CV_URL}" download="${CV_FILE}" class="hidden sm:inline-flex btn-ghost btn-sm magnetic" aria-label="Download CV (PDF)">${icon('download', 'w-4 h-4')} CV</a>
           <a href="#contact" class="hidden sm:inline-flex btn-primary btn-sm magnetic">Hire me ${icon('arrowUpRight', 'w-4 h-4')}</a>
           <button id="mobileMenuBtn" class="icon-btn md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
             <span class="menu-open">${icon('menu', 'w-5 h-5')}</span>
@@ -72,6 +75,7 @@ const renderNav = () => `
       </div>
       <div id="mobileMenu" class="md:hidden hidden mt-2 rounded-2xl surface p-3">
         ${navLinks.map(([id, label]) => `<a href="#${id}" class="block px-4 py-3 rounded-xl text-fg/80 hover:bg-fg/5 hover:text-fg font-medium">${label}</a>`).join('')}
+        <a href="${CV_URL}" download="${CV_FILE}" class="btn-ghost w-full justify-center mt-2">${icon('download', 'w-4 h-4')} Download CV</a>
         <a href="#contact" class="group btn-primary w-full justify-center mt-2">Hire me ${icon('arrowUpRight', 'w-4 h-4')}</a>
       </div>
     </nav>
@@ -109,6 +113,7 @@ const renderHero = () => `
 
           <div class="hero-in mt-8 flex flex-wrap items-center gap-3" style="--d:400ms">
             <a href="#projects" class="group btn-primary magnetic">View my work ${icon('arrowRight', 'w-4 h-4 transition-transform group-hover:translate-x-1')}</a>
+            <a href="${CV_URL}" download="${CV_FILE}" class="btn-ghost magnetic">${icon('download', 'w-4 h-4')} Download CV</a>
             <a href="#contact" class="btn-ghost magnetic">Start a project</a>
             <div class="flex items-center gap-2 ml-1">
               <a href="${p.github}" target="_blank" rel="noopener" class="icon-btn" aria-label="GitHub">${icon('github', 'w-[18px] h-[18px]')}</a>
@@ -174,7 +179,6 @@ const sectionHead = (eyebrow: string, title: string, sub = '', center = true) =>
   </div>`;
 
 const renderAbout = () => {
-  const skillGroups = Object.entries(d.skills) as [string, { name: string; level: number }[]][];
   const pillars = [
     ['database', 'Data Engineering', 'Kafka, Spark, Delta Lake, Airflow, dbt, SQL Server warehouses and ETL that runs on schedule.'],
     ['monitor', 'Full-Stack Systems', 'ASP.NET Core 8 / C#, EF Core, Next.js — POS, CRM, e-commerce and support desks in production.'],
@@ -191,7 +195,7 @@ const renderAbout = () => {
           <div class="mt-6 space-y-5 text-lg leading-relaxed text-muted">
             <p>I'm a <span class="text-fg">Software Engineer at Uni Group</span> and a Data Engineer based in ${esc(p.location)}. I don't stop at prototypes — I design, build and ship complete systems that people use every day (and was named <span class="text-fg">Best Employee of the Month</span> for it).</p>
             <p>On the data side I build streaming and batch pipelines, lakehouses and warehouses. On the application side I build business software with <span class="text-fg">clean architecture, roles, validation, audit logs and tests</span> — so it keeps running after launch.</p>
-            <p>I'm a DEPI-certified Microsoft Data Engineer, a former Data Engineering instructor at ASL, and I study Economics &amp; Political Science at Cairo University — which keeps me focused on the question that matters: <span class="text-fg">what decision does this data or system make better?</span></p>
+            <p>I'm a DEPI-certified Microsoft Data Engineer, a former Data Engineering instructor at ASL, and a graduate of the Faculty of Economics &amp; Political Science, Cairo University (Class of 2026) — which keeps me focused on the question that matters: <span class="text-fg">what decision does this data or system make better?</span></p>
           </div>
           <div class="mt-8 flex flex-wrap gap-3">
             <a href="${p.github}" target="_blank" rel="noopener" class="btn-ghost btn-sm">${icon('github', 'w-4 h-4')} github.com/Amr-Walid</a>
@@ -208,42 +212,6 @@ const renderAbout = () => {
               <h3 class="mt-4 font-semibold text-fg text-lg">${t}</h3>
               <p class="mt-2 text-sm leading-relaxed text-muted">${txt}</p>
             </article>`
-            )
-            .join('')}
-        </div>
-      </div>
-
-      <!-- Skills -->
-      <div class="mt-24" data-reveal>
-        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8">
-          <div>
-            <p class="eyebrow">Toolbox</p>
-            <h3 class="mt-3 font-display font-bold text-fg text-3xl sm:text-4xl tracking-tight">Skills &amp; technologies</h3>
-          </div>
-          <div class="skill-tabs flex flex-wrap gap-2" role="tablist" aria-label="Skill categories">
-            ${skillGroups
-              .map(
-                ([g], i) =>
-                  `<button role="tab" id="skill-tab-${i}" aria-controls="skill-panel-${i}" tabindex="${i === 0 ? 0 : -1}" class="chip-tab${i === 0 ? ' active' : ''}" data-skill-tab="${i}" aria-selected="${i === 0}">${esc(g)}</button>`
-              )
-              .join('')}
-          </div>
-        </div>
-        <div class="surface rounded-3xl p-6 sm:p-8">
-          ${skillGroups
-            .map(
-              ([, list], i) => `
-            <div class="skill-panel grid sm:grid-cols-2 gap-x-10 gap-y-6${i === 0 ? '' : ' hidden'}" data-skill-panel="${i}" id="skill-panel-${i}" role="tabpanel" aria-labelledby="skill-tab-${i}">
-              ${list
-                .map(
-                  (s) => `
-                <div>
-                  <div class="flex justify-between text-sm mb-2"><span class="font-medium text-fg">${esc(s.name)}</span><span class="font-mono text-muted tabular-nums">${s.level}%</span></div>
-                  <div class="h-2 rounded-full bg-fg/[0.06] overflow-hidden" role="progressbar" aria-label="${esc(s.name)}" aria-valuenow="${s.level}" aria-valuemin="0" aria-valuemax="100"><div class="skill-fill h-full rounded-full" style="--w:${s.level}%"></div></div>
-                </div>`
-                )
-                .join('')}
-            </div>`
             )
             .join('')}
         </div>

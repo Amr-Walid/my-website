@@ -172,39 +172,6 @@
     }, 1500);
   }
 
-  /* ---------------- Skills tabs ---------------- */
-  function initSkills() {
-    var tabs = $$('[data-skill-tab]');
-    var panels = $$('[data-skill-panel]');
-    function show(i) {
-      tabs.forEach(function (t) { var on = t.dataset.skillTab === String(i); t.classList.toggle('active', on); t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
-      panels.forEach(function (p) {
-        var on = p.dataset.skillPanel === String(i);
-        p.classList.toggle('hidden', !on);
-        p.classList.remove('in');
-        if (on) requestAnimationFrame(function () { requestAnimationFrame(function () { p.classList.add('in'); }); });
-      });
-    }
-    tabs.forEach(function (t, i) {
-      t.addEventListener('click', function () { show(t.dataset.skillTab); });
-      // WAI-ARIA tabs: arrow keys move between tabs
-      t.addEventListener('keydown', function (e) {
-        var n = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-        if (!n) return;
-        e.preventDefault();
-        var next = tabs[(i + n + tabs.length) % tabs.length];
-        next.focus(); show(next.dataset.skillTab);
-      });
-    });
-    var first = panels[0];
-    if (first && 'IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (es) {
-        if (es[0].isIntersecting) { first.classList.add('in'); io.disconnect(); }
-      }, { threshold: 0.3 });
-      io.observe(first);
-    } else if (first) first.classList.add('in');
-  }
-
   /* ---------------- Project filters + show more ---------------- */
   var INITIAL = 9;
   var currentFilter = 'all';
@@ -659,7 +626,6 @@
     initActiveNav();
     initTyped();
     initReveal();
-    initSkills();
     initFilters();
     initPointerFx();
     initCanvas();

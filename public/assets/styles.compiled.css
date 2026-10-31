@@ -1248,16 +1248,6 @@ a:hover > .logo-mark {
   background: rgb(255 255 255 / .2);
 }
 
-.skill-fill {
-  width: 0;
-  background: linear-gradient(90deg, #1b6ff5, #38bdf8, #2dd4bf);
-  transition: width 1.4s cubic-bezier(.2,.8,.2,1);
-}
-
-.skill-panel.in .skill-fill {
-  width: var(--w);
-}
-
 /* Project cards */
 
 .project-card {
@@ -2489,10 +2479,6 @@ main, header, footer {
   margin-bottom: 0.5rem;
 }
 
-.mb-8 {
-  margin-bottom: 2rem;
-}
-
 .ml-1 {
   margin-left: 0.25rem;
 }
@@ -2815,11 +2801,6 @@ main, header, footer {
   gap: 1.5rem;
 }
 
-.gap-x-10 {
-  -moz-column-gap: 2.5rem;
-       column-gap: 2.5rem;
-}
-
 .gap-x-6 {
   -moz-column-gap: 1.5rem;
        column-gap: 1.5rem;
@@ -2827,10 +2808,6 @@ main, header, footer {
 
 .gap-y-2 {
   row-gap: 0.5rem;
-}
-
-.gap-y-6 {
-  row-gap: 1.5rem;
 }
 
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
@@ -2881,10 +2858,6 @@ main, header, footer {
 
 .rounded-2xl {
   border-radius: 1rem;
-}
-
-.rounded-3xl {
-  border-radius: 1.5rem;
 }
 
 .rounded-\[2rem\] {
@@ -2966,10 +2939,6 @@ main, header, footer {
 
 .bg-fg\/\[0\.03\] {
   background-color: rgb(var(--c-fg) / 0.03);
-}
-
-.bg-fg\/\[0\.06\] {
-  background-color: rgb(var(--c-fg) / 0.06);
 }
 
 .bg-rose-400 {
@@ -3690,20 +3659,8 @@ main, header, footer {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .sm\:flex-row {
-    flex-direction: row;
-  }
-
-  .sm\:items-end {
-    align-items: flex-end;
-  }
-
   .sm\:p-10 {
     padding: 2.5rem;
-  }
-
-  .sm\:p-8 {
-    padding: 2rem;
   }
 
   .sm\:px-10 {

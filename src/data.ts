@@ -594,11 +594,11 @@ const basePortfolio = {
       ]
     },
     {
-      title: "Economics & Statistics Student",
+      title: "Bachelor's Degree in Economics — Graduate",
       type: "Faculty of Economics & Political Science, Cairo University",
-      period: "2022 — Present",
+      period: "2022 — Jun 2026",
       education: true,
-      description: "Combining economic theory with strong statistical and analytical skills to understand and interpret real-world data.",
+      description: "Graduated in June 2026, combining economic theory with strong statistical and analytical skills to understand and interpret real-world data.",
       highlights: [
         "Econometric and statistical techniques on economic datasets",
         "Solid foundations in probability, statistics and data analysis",
