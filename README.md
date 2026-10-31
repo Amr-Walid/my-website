@@ -5,7 +5,7 @@
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-amrwalidmaher-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/amrwalidmaher)
 [![GitHub](https://img.shields.io/badge/GitHub-Amr--Walid-black?style=flat&logo=github)](https://github.com/Amr-Walid)
-[![Email](https://img.shields.io/badge/Email-amr.walid2022@feps.edu.eg-red?style=flat&logo=gmail)](mailto:amr.walid2022@feps.edu.eg)
+[![Email](https://img.shields.io/badge/Email-amrw0109%40gmail.com-red?style=flat&logo=gmail)](mailto:amrw0109@gmail.com)
 
 ---
 
@@ -42,7 +42,6 @@ my-web/
 │       ├── styles.css         # Source Tailwind CSS
 │       ├── styles.compiled.css# Compiled output CSS (auto-generated)
 │       ├── script.js          # Client-side interactivity
-│       ├── logo.webp
 │       ├── profile.webp
 │       └── *.webp             # Project screenshots & diagrams
 ├── vite.config.ts             # Vite + Hono build config
@@ -146,6 +145,7 @@ The site includes a **Services** section aimed at companies:
 |--------|------|-------------|
 | Oct 2025 — Present | Software Engineer (Best Employee of the Month — Aug 2026) | Uni Group |
 | Nov 2025 — Jul 2026 | Microsoft Data Engineer Trainee | Digital Egypt Pioneers Initiative (DEPI) |
+| Mar 2026 — May 2026 | Data Analyst & BI Developer (Remote) | Kidana Development Co |
 | 2026 — Aug 2026 | Data Engineering Instructor (Outstanding Instructor award) | Applied Statistics Lab (ASL), FEPS |
 | 2025 | Data Analyst Intern | EMAM Organization for Development and Culture |
 | 2025 | Statistical Data Trainee | Central Agency for Public Mobilization & Statistics (CAPMAS) |
@@ -230,7 +230,7 @@ Or push to GitHub — Vercel auto-deploys on every commit.
 
 ## 📞 Contact
 
-- **Email**: amr.walid2022@feps.edu.eg
+- **Email**: amrw0109@gmail.com
 - **LinkedIn**: [linkedin.com/in/amrwalidmaher](https://www.linkedin.com/in/amrwalidmaher)
 - **GitHub**: [github.com/Amr-Walid](https://github.com/Amr-Walid)
 - **Location**: Cairo, Egypt
@@ -254,3 +254,11 @@ To regenerate after editing `cv/cv.html`:
 pip install playwright && python -m playwright install chromium
 python cv/build_cv.py
 ```
+
+## ⚡ Performance notes
+
+- Project cards load 760px thumbnails from `public/assets/thumbs/`; the case-study modal keeps the full-size images.
+  After adding or changing project screenshots run: `python scripts/make_thumbs.py`
+- The hero portrait is preloaded with `fetchpriority="high"` (it's the LCP element).
+- Tailwind CSS is built with `--minify`.
+- `scripts/postbuild.mjs` adds `Cache-Control` headers for `/assets/*` to the Vercel build output.

@@ -570,7 +570,7 @@
       label.textContent = 'Sending…';
       fetch('https://formspree.io/f/xgonndrg', { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
         .then(function (r) { if (!r.ok) throw new Error('send failed'); show('Thanks! Your message was sent — I will get back to you within 24 hours.', true); form.reset(); })
-        .catch(function () { show('Something went wrong. Please email me directly at amr.walid2022@feps.edu.eg', false); })
+        .catch(function () { show('Something went wrong. Please email me directly at amrw0109@gmail.com', false); })
         .then(function () { btn.disabled = false; label.textContent = 'Send message'; });
     });
     $$('.field input, .field textarea', form).forEach(function (i) {

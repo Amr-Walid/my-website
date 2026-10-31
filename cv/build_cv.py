@@ -20,4 +20,4 @@ with sync_playwright() as p:
     page.pdf(path=str(OUT), format="A4", print_background=True, prefer_css_page_size=True)
     browser.close()
 
-print(f"CV written to {OUT}")
+print(f"CV written to {OUT} ({OUT.stat().st_size // 1024} KB)")

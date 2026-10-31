@@ -3,9 +3,9 @@
   "type": "module",
   "scripts": {
     "dev": "npm run build:css && vite",
-    "build": "npm run build:css && vite build",
+    "build": "npm run build:css && vite build && node scripts/postbuild.mjs",
     "vercel-build": "npm run build",
-    "build:css": "tailwindcss -i ./public/assets/styles.css -o ./public/assets/styles.compiled.css",
+    "build:css": "tailwindcss -i ./public/assets/styles.css -o ./public/assets/styles.compiled.css --minify",
     "watch:css": "tailwindcss -i ./public/assets/styles.css -o ./public/assets/styles.compiled.css --watch"
   },
   "dependencies": {

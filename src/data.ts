@@ -4,7 +4,7 @@ const basePortfolio = {
     title: "Data Engineer & Full-Stack Developer",
     headline: "Data Pipelines, Business Systems & Automation — End to End",
     tagline: "I build the full stack of data-driven products: scalable ETL pipelines, production business systems (POS, CRM, asset tracking), and marketing automation — from the database to the dashboard.",
-    email: "amr.walid2022@feps.edu.eg",
+    email: "amrw0109@gmail.com",
     location: "Cairo, Egypt",
     linkedin: "https://www.linkedin.com/in/amrwalidmaher",
     github: "https://github.com/Amr-Walid",
@@ -553,6 +553,20 @@ const basePortfolio = {
         "Azure data stack: ADLS Gen2, Delta Lake, lakehouse design",
         "Capstone: CryptoPulse — real-time crypto lakehouse (Kafka, Spark, dbt, Airflow)",
         "Data modeling and warehouse design for analytics"
+      ]
+    },
+    {
+      title: "Data Analyst & BI Developer (Remote)",
+      type: "Kidana Development Co",
+      period: "Mar 2026 — May 2026",
+      description: "Worked remotely with Kidana's finance department as a Data Analyst, turning raw payment and bank-guarantee data into clear Excel reports and interactive Excel & Power BI dashboards.",
+      highlights: [
+        "Built recurring Excel reports for payments, vendors, banks and bank guarantees",
+        "Cleaned and transformed raw data with Power Query and modeled it with Power Pivot (fact & dimension tables)",
+        "Wrote DAX measures for payment cycle, approval duration, hold / delay time, exposure and risk levels",
+        "Delivered interactive Excel and Power BI dashboards: Payment Performance and Bank Guarantee (BG) risk",
+        "Flagged critical / expiring guarantees with a 90-day maturity view for proactive risk management",
+        "Moved the finance team from manual reporting to self-service analytics"
       ]
     },
     {

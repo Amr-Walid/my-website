@@ -142,7 +142,7 @@ const renderHero = () => `
             <div class="portrait-ring ring-2"></div>
             <div class="portrait-glow"></div>
             <div class="absolute inset-6 sm:inset-8 rounded-full overflow-hidden border border-line/10 bg-base-2 shadow-2xl">
-              <img src="/assets/profile.webp" alt="Portrait of Amr Walid" width="320" height="320" fetchpriority="high" decoding="async" class="w-full h-full object-cover object-[center_20%]">
+              <img src="/assets/profile.webp" alt="Portrait of Amr Walid" width="320" height="320" fetchpriority="high" class="w-full h-full object-cover object-[center_20%]">
             </div>
             <div class="float-chip top-4 -left-2 sm:-left-6" style="--fd:0s">${icon('database', 'w-4 h-4 text-accent-400')}<span>Pipelines</span></div>
             <div class="float-chip top-1/2 -right-4 sm:-right-10" style="--fd:1.2s">${icon('monitor', 'w-4 h-4 text-brand-400')}<span>Systems</span></div>
@@ -225,7 +225,7 @@ const renderProjectCard = (pr: any, i: number) => {
   const ic = projectIcon[pr.image] || categoryIcon[pr.category] || 'code';
   const hue = categoryHue[pr.category] || categoryHue['Full-Stack'];
   const media = imgs.length
-    ? `<img src="${imgs[0]}" alt="${esc(pr.title)} preview" loading="lazy" decoding="async" class="card-img">`
+    ? `<img src="${imgs[0].replace('/assets/', '/assets/thumbs/')}" alt="${esc(pr.title)} preview" width="760" height="475" loading="${i < 3 ? 'eager' : 'lazy'}" decoding="async" class="card-img">`
     : `<div class="card-art bg-gradient-to-br ${hue}">
          <div class="card-art-grid"></div>
          <span class="card-art-icon">${icon(ic, 'w-10 h-10')}</span>
@@ -611,6 +611,7 @@ export const renderPage = () => {
     // Apply saved theme before first paint (no flash).
     (function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.classList.remove('dark');document.documentElement.classList.add('light');}}catch(e){}})();
   </script>
+  <link rel="preload" as="image" href="/assets/profile.webp" fetchpriority="high">
   <link rel="stylesheet" href="/assets/styles.compiled.css">
   <script type="application/ld+json">${safeJson(jsonLd)}</script>
 </head>
