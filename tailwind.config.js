@@ -14,14 +14,15 @@ export default {
         line: v('--c-line'),
         brand: {
           300: '#8eccff',
-          400: '#59b0ff',
+          // theme-aware: bright on dark, deep on light (keeps text >= 4.5:1)
+          400: v('--c-brand-ink'),
           500: '#3b8fff',
           600: '#1b6ff5',
           700: '#1459e1'
         },
         accent: {
           300: '#7dd3fc',
-          400: '#38bdf8',
+          400: v('--c-accent-ink'),
           500: '#0ea5e9'
         }
       },

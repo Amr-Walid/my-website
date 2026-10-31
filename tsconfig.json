@@ -12,4 +12,6 @@
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx"
   },
+  "include": ["index.tsx", "src/**/*.ts", "vite.config.ts"],
+  "exclude": ["node_modules", "dist", ".vercel", "skills"]
 }

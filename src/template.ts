@@ -34,7 +34,7 @@ const categoryIcon: Record<string, string> = {
 const categoryHue: Record<string, string> = {
   'Full-Stack': 'from-sky-500/30 via-blue-600/20 to-indigo-700/30',
   'Data Engineering': 'from-cyan-400/30 via-teal-500/20 to-blue-700/30',
-  Automation: 'from-violet-500/30 via-fuchsia-500/20 to-sky-600/30',
+  Automation: 'from-teal-400/30 via-cyan-500/20 to-sky-600/30',
   'Data Analysis': 'from-amber-400/30 via-orange-500/20 to-rose-600/30',
   'Web & WordPress': 'from-emerald-400/30 via-green-500/20 to-cyan-600/30'
 };
@@ -44,7 +44,7 @@ const projectImages = (pr: any): string[] => pr.imageUrls || (pr.imageUrl ? [pr.
 // ---------------------------------------------------------------- sections
 
 const renderNav = () => `
-  <div id="scrollProgress" class="fixed top-0 left-0 h-[3px] w-0 z-[70] bg-gradient-to-r from-brand-500 via-accent-400 to-violet-500"></div>
+  <div id="scrollProgress" class="fixed top-0 left-0 h-[3px] w-0 z-[70] bg-gradient-to-r from-brand-500 via-accent-400 to-teal-400"></div>
   <header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-500">
     <nav class="nav-shell mx-auto mt-3 max-w-6xl px-3 sm:px-4" aria-label="Main">
       <div class="nav-inner flex items-center justify-between gap-3 rounded-2xl px-3 sm:px-4 h-16 transition-all duration-500">
@@ -141,18 +141,18 @@ const renderHero = () => `
             </div>
             <div class="float-chip top-4 -left-2 sm:-left-6" style="--fd:0s">${icon('database', 'w-4 h-4 text-accent-400')}<span>Pipelines</span></div>
             <div class="float-chip top-1/2 -right-4 sm:-right-10" style="--fd:1.2s">${icon('monitor', 'w-4 h-4 text-brand-400')}<span>Systems</span></div>
-            <div class="float-chip bottom-6 left-0 sm:-left-4" style="--fd:2.4s">${icon('workflow', 'w-4 h-4 text-violet-400')}<span>Automation</span></div>
+            <div class="float-chip bottom-6 left-0 sm:-left-4" style="--fd:2.4s">${icon('workflow', 'w-4 h-4 text-teal-400')}<span>Automation</span></div>
             <div class="code-card hidden sm:block -bottom-10 right-0 sm:-right-6">
               <div class="flex gap-1.5 mb-2"><i class="bg-rose-400"></i><i class="bg-amber-400"></i><i class="bg-emerald-400"></i></div>
-              <code><span class="text-violet-400">SELECT</span> impact<br><span class="text-violet-400">FROM</span> raw_data<br><span class="text-violet-400">WHERE</span> manual = <span class="text-emerald-400">false</span>;</code>
+              <code><span class="text-sky-400">SELECT</span> impact<br><span class="text-sky-400">FROM</span> raw_data<br><span class="text-sky-400">WHERE</span> manual = <span class="text-emerald-400">false</span>;</code>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <a href="#about" class="scroll-cue absolute bottom-6 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-[11px] font-mono uppercase tracking-[0.2em] text-muted hover:text-fg" aria-label="Scroll to About">
-      <span class="mouse"><span></span></span>scroll
+    <a href="#about" class="scroll-cue absolute bottom-6 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-xs text-muted hover:text-fg" aria-label="Scroll to About">
+      <span class="mouse"><span></span></span>Scroll
     </a>
   </section>`;
 
@@ -182,7 +182,7 @@ const renderAbout = () => {
     ['chartBar', 'Analytics & BI', 'Power BI, Excel / DAX and custom web dashboards with AI-assisted insights.']
   ];
   return `
-  <section id="about" class="relative py-28 lg:py-36">
+  <section id="about" class="relative py-24 lg:py-32">
     <div class="max-w-6xl mx-auto px-5 sm:px-6">
       <div class="grid lg:grid-cols-[1fr_1.1fr] gap-14 lg:gap-20 items-start">
         <div data-reveal>
@@ -220,11 +220,11 @@ const renderAbout = () => {
             <p class="eyebrow">Toolbox</p>
             <h3 class="mt-3 font-display font-bold text-fg text-3xl sm:text-4xl tracking-tight">Skills &amp; technologies</h3>
           </div>
-          <div class="skill-tabs flex flex-wrap gap-2" role="tablist">
+          <div class="skill-tabs flex flex-wrap gap-2" role="tablist" aria-label="Skill categories">
             ${skillGroups
               .map(
                 ([g], i) =>
-                  `<button role="tab" class="chip-tab${i === 0 ? ' active' : ''}" data-skill-tab="${i}" aria-selected="${i === 0}">${esc(g)}</button>`
+                  `<button role="tab" id="skill-tab-${i}" aria-controls="skill-panel-${i}" tabindex="${i === 0 ? 0 : -1}" class="chip-tab${i === 0 ? ' active' : ''}" data-skill-tab="${i}" aria-selected="${i === 0}">${esc(g)}</button>`
               )
               .join('')}
           </div>
@@ -233,13 +233,13 @@ const renderAbout = () => {
           ${skillGroups
             .map(
               ([, list], i) => `
-            <div class="skill-panel grid sm:grid-cols-2 gap-x-10 gap-y-6${i === 0 ? '' : ' hidden'}" data-skill-panel="${i}">
+            <div class="skill-panel grid sm:grid-cols-2 gap-x-10 gap-y-6${i === 0 ? '' : ' hidden'}" data-skill-panel="${i}" id="skill-panel-${i}" role="tabpanel" aria-labelledby="skill-tab-${i}">
               ${list
                 .map(
                   (s) => `
                 <div>
                   <div class="flex justify-between text-sm mb-2"><span class="font-medium text-fg">${esc(s.name)}</span><span class="font-mono text-muted tabular-nums">${s.level}%</span></div>
-                  <div class="h-2 rounded-full bg-fg/[0.06] overflow-hidden"><div class="skill-fill h-full rounded-full" style="--w:${s.level}%"></div></div>
+                  <div class="h-2 rounded-full bg-fg/[0.06] overflow-hidden" role="progressbar" aria-label="${esc(s.name)}" aria-valuenow="${s.level}" aria-valuemin="0" aria-valuemax="100"><div class="skill-fill h-full rounded-full" style="--w:${s.level}%"></div></div>
                 </div>`
                 )
                 .join('')}
@@ -292,7 +292,7 @@ const renderProjects = () => {
   const counts: Record<string, number> = {};
   d.projects.forEach((pr: any) => (counts[pr.category] = (counts[pr.category] || 0) + 1));
   return `
-  <section id="projects" class="relative py-28 lg:py-36 bg-base-2/40 border-y border-line/[0.06]">
+  <section id="projects" class="relative py-24 lg:py-32 bg-base-2/40 border-y border-line/[0.06]">
     <div class="max-w-6xl mx-auto px-5 sm:px-6">
       ${sectionHead(
         'Selected work',
@@ -300,12 +300,12 @@ const renderProjects = () => {
         `${d.projects.length} real projects across data engineering, business systems, automation and the web — each with the problem, the architecture and the impact.`
       )}
 
-      <div class="flex flex-wrap justify-center gap-2 mb-12" role="tablist" aria-label="Filter projects" data-reveal>
-        <button class="chip-tab active" data-filter="all" role="tab" aria-selected="true">All <span class="chip-count">${d.projects.length}</span></button>
+      <div class="flex flex-wrap justify-center gap-2 mb-12" role="group" aria-label="Filter projects by category" data-reveal>
+        <button class="chip-tab active" data-filter="all" aria-pressed="true">All <span class="chip-count">${d.projects.length}</span></button>
         ${d.categories
           .map(
             (c: string) =>
-              `<button class="chip-tab" data-filter="${esc(c)}" role="tab" aria-selected="false">${icon(categoryIcon[c], 'w-4 h-4')} ${esc(c)} <span class="chip-count">${counts[c] || 0}</span></button>`
+              `<button class="chip-tab" data-filter="${esc(c)}" aria-pressed="false">${icon(categoryIcon[c], 'w-4 h-4')} ${esc(c)} <span class="chip-count">${counts[c] || 0}</span></button>`
           )
           .join('')}
       </div>
@@ -330,7 +330,7 @@ const renderServices = () => {
     ['chartBar', 'Dashboards & BI', 'See your business clearly with KPI dashboards in Power BI, Excel (Power Query / DAX) or custom web apps with AI insights.', ['Power BI & Excel dashboards', 'KPI & performance reporting', 'AI-assisted web dashboards']]
   ];
   return `
-  <section id="services" class="relative py-28 lg:py-36">
+  <section id="services" class="relative py-24 lg:py-32">
     <div class="max-w-6xl mx-auto px-5 sm:px-6">
       ${sectionHead(
         'How I can help',
@@ -381,7 +381,7 @@ const renderServices = () => {
 };
 
 const renderExperience = () => `
-  <section id="experience" class="relative py-28 lg:py-36 bg-base-2/40 border-y border-line/[0.06]">
+  <section id="experience" class="relative py-24 lg:py-32 bg-base-2/40 border-y border-line/[0.06]">
     <div class="max-w-6xl mx-auto px-5 sm:px-6">
       <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-14">
         <div class="lg:sticky lg:top-28 self-start" data-reveal>
@@ -430,7 +430,7 @@ const renderAwards = () => {
   const withImg = d.certifications.filter((c: any) => c.image);
   const noImg = d.certifications.filter((c: any) => !c.image);
   return `
-  <section id="awards" class="relative py-28 lg:py-36">
+  <section id="awards" class="relative py-24 lg:py-32">
     <div class="max-w-6xl mx-auto px-5 sm:px-6">
       ${sectionHead('Recognition', `Certificates &amp; <span class="gradient-text">awards</span>`, 'Honours from my employer and university, plus the national Microsoft Data Engineer programme. Click any certificate to view it full size.')}
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -467,7 +467,7 @@ const renderAwards = () => {
 };
 
 const renderContact = () => `
-  <section id="contact" class="relative py-28 lg:py-36 overflow-hidden">
+  <section id="contact" class="relative py-24 lg:py-32 overflow-hidden">
     <div class="aurora aurora-soft" aria-hidden="true"><span></span><span></span></div>
     <div class="relative max-w-6xl mx-auto px-5 sm:px-6">
       <div class="contact-shell rounded-[2rem] p-6 sm:p-10 lg:p-14" data-reveal>
@@ -480,7 +480,7 @@ const renderContact = () => `
             <div class="mt-8 space-y-3">
               <div class="contact-row">
                 <span class="pillar-icon">${icon('mail', 'w-5 h-5')}</span>
-                <a href="mailto:${p.email}" class="min-w-0 flex-1"><span class="block text-xs text-muted">Email</span><span class="block font-medium text-fg truncate">${esc(p.email)}</span></a>
+                <a href="mailto:${p.email}" class="min-w-0 flex-1"><span class="block text-xs text-muted">Email</span><span class="block font-medium text-fg break-all">${esc(p.email)}</span></a>
                 <button class="icon-btn" id="copyEmail" data-email="${esc(p.email)}" aria-label="Copy email">${icon('copy', 'w-4 h-4')}</button>
               </div>
               <a href="${p.linkedin}" target="_blank" rel="noopener" class="contact-row">
@@ -503,8 +503,8 @@ const renderContact = () => `
 
           <form id="contactForm" class="space-y-4" novalidate>
             <div class="grid sm:grid-cols-2 gap-4">
-              <label class="field"><span>Name *</span><input type="text" name="name" required autocomplete="name" placeholder="Your name"></label>
-              <label class="field"><span>Email *</span><input type="email" name="email" required autocomplete="email" placeholder="you@company.com"></label>
+              <label class="field"><span>Name *</span><input type="text" name="name" required maxlength="100" autocomplete="name" placeholder="Your name"></label>
+              <label class="field"><span>Email *</span><input type="email" name="email" required maxlength="254" autocomplete="email" placeholder="you@company.com"></label>
             </div>
             <div>
               <span class="block text-sm font-medium text-fg/80 mb-2">I'm interested in</span>
@@ -514,10 +514,10 @@ const renderContact = () => `
                   .join('')}
               </div>
             </div>
-            <label class="field"><span>Message *</span><textarea name="message" rows="5" required placeholder="Tell me about your project, timeline and goals…"></textarea></label>
-            <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off">
+            <label class="field"><span>Message *</span><textarea name="message" rows="5" required maxlength="5000" placeholder="Tell me about your project, timeline and goals…"></textarea></label>
+            <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
             <button type="submit" id="submitBtn" class="group btn-primary w-full justify-center py-4 text-base">${icon('send', 'w-4 h-4')} <span>Send message</span></button>
-            <p id="formMessage" class="hidden text-sm font-medium rounded-xl px-4 py-3" role="status"></p>
+            <p id="formMessage" class="hidden text-sm font-medium rounded-xl px-4 py-3" role="status" aria-live="polite"></p>
           </form>
         </div>
       </div>

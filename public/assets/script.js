@@ -177,7 +177,7 @@
     var tabs = $$('[data-skill-tab]');
     var panels = $$('[data-skill-panel]');
     function show(i) {
-      tabs.forEach(function (t) { var on = t.dataset.skillTab === String(i); t.classList.toggle('active', on); t.setAttribute('aria-selected', on); });
+      tabs.forEach(function (t) { var on = t.dataset.skillTab === String(i); t.classList.toggle('active', on); t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
       panels.forEach(function (p) {
         var on = p.dataset.skillPanel === String(i);
         p.classList.toggle('hidden', !on);
@@ -185,7 +185,17 @@
         if (on) requestAnimationFrame(function () { requestAnimationFrame(function () { p.classList.add('in'); }); });
       });
     }
-    tabs.forEach(function (t) { t.addEventListener('click', function () { show(t.dataset.skillTab); }); });
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { show(t.dataset.skillTab); });
+      // WAI-ARIA tabs: arrow keys move between tabs
+      t.addEventListener('keydown', function (e) {
+        var n = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!n) return;
+        e.preventDefault();
+        var next = tabs[(i + n + tabs.length) % tabs.length];
+        next.focus(); show(next.dataset.skillTab);
+      });
+    });
     var first = panels[0];
     if (first && 'IntersectionObserver' in window) {
       var io = new IntersectionObserver(function (es) {
@@ -225,7 +235,7 @@
   function initFilters() {
     $$('[data-filter]').forEach(function (b) {
       b.addEventListener('click', function () {
-        $$('[data-filter]').forEach(function (x) { x.classList.toggle('active', x === b); x.setAttribute('aria-selected', x === b); });
+        $$('[data-filter]').forEach(function (x) { x.classList.toggle('active', x === b); x.setAttribute('aria-pressed', x === b); });
         currentFilter = b.dataset.filter;
         applyFilter(true);
       });
@@ -395,8 +405,8 @@
     var imgs = p.imageUrls || (p.imageUrl ? [p.imageUrl] : []);
     galleryImgs = imgs; galleryIdx = 0;
     if (!imgs.length) {
-      hero.innerHTML = '<div class="modal-gallery grid place-items-center bg-gradient-to-br from-brand-600/30 via-violet-600/20 to-accent-500/20" style="aspect-ratio:21/7">' +
-        '<div class="text-center px-6"><p class="font-mono text-xs uppercase tracking-[0.2em] text-muted">' + esc(p.category) + '</p>' +
+      hero.innerHTML = '<div class="modal-gallery grid place-items-center bg-gradient-to-br from-brand-600/30 via-teal-600/20 to-accent-500/20" style="aspect-ratio:21/7">' +
+        '<div class="text-center px-6"><p class="text-sm font-semibold text-muted">' + esc(p.category) + '</p>' +
         '<p class="mt-2 font-display text-2xl sm:text-3xl font-bold text-fg">' + esc((p.techStack || []).slice(0, 3).join(' · ')) + '</p></div></div>';
       return;
     }

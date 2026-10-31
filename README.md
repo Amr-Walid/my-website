@@ -219,8 +219,12 @@ Or push to GitHub — Vercel auto-deploys on every commit.
 - 🔍 **Project filters** with counts + "Show all" (5 categories, 20 projects)
 - 🗂️ **Case-study modal** — gallery with thumbnails, full-screen lightbox, architecture flow, prev/next (keyboard ← → + swipe), deep links (`#project=<id>`), focus trap
 - 📬 **Contact form** (Formspree) with validation, topic chips, honeypot, copy-email button, live Cairo time
-- ♿ **Accessible**: skip link, keyboard-operable cards, ARIA, `prefers-reduced-motion` support
-- 📱 **Fully responsive**, lighter effects on mobile
+- ♿ **Accessible**: skip link, keyboard-operable cards, WAI-ARIA tabs (arrow keys) for skills, `aria-pressed` filters, labelled skill bars, text contrast ≥ 4.5:1 in **both** themes (theme-aware `brand-400` / `accent-400` tokens), `prefers-reduced-motion` support
+- 🎨 **One palette**: blue → sky → teal gradient (no purple), sentence-case section labels
+- 🔒 **Hardened**: `secureHeaders` middleware (HSTS, nosniff, frame-options, referrer-policy) and server-side validation on `POST /api/contact` (types, email format, length limits)
+- 📱 **Fully responsive**, lighter effects on mobile, no horizontal overflow at 390px
+
+> **Note:** `skills/` holds local AI-agent skills and is git-ignored (also excluded from `tsconfig.json`). It is not part of the site.
 
 ---
 
