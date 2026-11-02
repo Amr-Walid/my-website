@@ -96,6 +96,7 @@ const basePortfolio = {
       category: "Full-Stack",
       featured: true,
       image: "users",
+      imageUrl: "/assets/project-unigroup-crm.webp",
       problem: "A group operating several business units needed one CRM to manage customers, leads, and company data across departments — with strict data isolation between units, clear role-based permissions, and a codebase that could grow without turning into spaghetti.",
       solution: "Built a CRM on ASP.NET Core with C# following Clean Architecture (Domain / Application / Infrastructure / Web) to keep business rules independent of frameworks and databases. Implemented role-based access control and a multi-tenant company structure so each business unit's data stays isolated, with localization support and a Docker-based setup for reproducible deployment. The project is backed by detailed design docs (requirements, database design, clean-architecture guide, implementation plan).",
       architecture: "Web (Controllers / Views) → Application (Use Cases, Interfaces) → Domain (Entities, Business Rules) → Infrastructure (EF Core, Identity, Persistence). Multi-tenant isolation + role-based authorization. Containerized with Docker.",
@@ -374,6 +375,7 @@ const basePortfolio = {
       category: "Full-Stack",
       featured: true,
       image: "store",
+      imageUrl: "/assets/project-ftd-techzone.webp",
       problem: "An electronics distributor (multi-brand phones, smart-home and accessories) needed one bilingual website that is both a product catalogue / online store and a corporate site — with brand pages, installment purchasing, careers, news and events — all editable by non-technical staff without touching code. The previous site had placeholder content, fake numbers and false compliance claims flagged by a management audit.",
       solution: "Built a full ASP.NET Core MVC platform on SQL Server with a complete admin back-office. Staff manage brands, categories, products (images, dynamic attributes & values), orders and order statuses, navigation menus, page sections (hero / cards / FAQ / rich text), contact info, site settings, news, events, job postings and applications, and incoming messages. The storefront includes cart & checkout, brand landing pages, and a dedicated installment flow (E-get) with a 'Buy on Installments' button on product pages. A 15-item management audit was fully resolved in code: real hotline, real stats, cleaned policies, removed invalid ISO claims, and fixed a product-saving bug in the admin.",
       architecture: "Browser (Razor, RTL/LTR) → ASP.NET Core MVC Controllers (Storefront + Admin area) → Services → EF Core → SQL Server. ASP.NET Identity for admin auth, dynamic CMS sections (ContentBlock / PageSection / NavigationItem), product attribute EAV model, order pipeline (SalesOrder / Details / Status).",
@@ -395,6 +397,7 @@ const basePortfolio = {
       category: "Automation",
       featured: true,
       image: "shield",
+      imageUrl: "/assets/project-social-governance.webp",
       problem: "A multi-brand group of companies (several companies + a factory) had 40–120 social-media accounts across many platforms, with no central registry, no clear owner per account, personal emails holding business pages, and marketing staff creating accounts freely. Nobody knew what existed, who controlled it, or what was being published where — a governance problem far more than a tooling problem.",
       solution: "Researched and engineered a complete governance system: a 20-document playbook (diagnosis, architecture, RACI & permissions, Business Manager setup per platform, build-vs-buy, API limits, security & secrets, SOPs, 90-day plan, KPIs, risk & recovery) plus a deployable self-hosted stack. A PostgreSQL governance schema (digital-asset registry, owners, access grants, approval gates) with protection triggers, Metabase dashboards, n8n automations, Mixpost for publishing, NocoDB, Vaultwarden for credentials, Uptime Kuma and Restic backups — all behind Caddy in Docker Compose. A Flask viewer runs every dashboard query live against a read-only database user, and a FINDINGS log documents real defects caught by actually executing the code.",
       architecture: "Caddy (edge, TLS) → App tier: Metabase, n8n, Mixpost, NocoDB, Vaultwarden, Uptime Kuma, Flask viewer → Data tier: PostgreSQL (governance schema + triggers), MySQL, Redis → Restic encrypted backups. Read-only gov_reader role for dashboards.",
@@ -417,6 +420,7 @@ const basePortfolio = {
       featured: false,
       status: "System Design",
       image: "truck",
+      imageUrl: "/assets/project-fleet-pulse.webp",
       problem: "A company was tracking its drivers with Life360 — a family app with no stop alerts, no unified dashboard, no export, only 30 days of history and data stored outside Egypt. Management needed to know immediately when a driver stops for more than 30 minutes, even when the phone loses internet coverage.",
       solution: "Produced a full research and architecture package for a purpose-built fleet tracking system: an Android driver app (check-in / check-out only, background tracking with a motion state machine to save battery), an offline-first outbox in SQLite with sequence numbers and priority upload, an idempotent backend that recomputes stops when late data arrives, a Redis-based real-time stop detector with watchdog and Telegram / push escalation, and an Arabic React dashboard with KPIs, driver scores, heatmaps and automatic daily reports — plus Egypt's data-protection law (151/2020) compliance and a cost / roadmap plan (MVP in ~6–7 weeks).",
       architecture: "Android app (Kotlin/Flutter + background geolocation) → SQLite outbox (offline, sequenced) → Backend API (Node/Go) → PostgreSQL + PostGIS + TimescaleDB → Redis driver state + 30s alert timer → Telegram / Push alerts → React (Arabic) dashboard & reports.",
@@ -510,6 +514,7 @@ const basePortfolio = {
       category: "Web & WordPress",
       featured: false,
       image: "qrcode",
+      imageUrl: "/assets/project-qrcard-pro.webp",
       problem: "Paper business cards get lost and go out of date. Professionals wanted a fast, Arabic-first way to create a premium digital card with all their contact details and links, and share it instantly with a QR code — with no app to install and no backend to maintain.",
       solution: "Built a single-file, Arabic (RTL) web app that lets anyone fill in their details and social links and instantly generates a luxurious digital business card with a scannable QR code. The card data is encoded into the shareable link itself, so the card renders anywhere without a server or database. Deployed for free on GitHub Pages.",
       architecture: "Static HTML / CSS / JS (single file) → form → data encoded into URL → QR code generation → card view rendered client-side from the link → GitHub Pages hosting.",
@@ -609,12 +614,27 @@ const basePortfolio = {
     {
       title: "Statistical Data Trainee",
       type: "Central Agency for Public Mobilization and Statistics (CAPMAS)",
-      period: "2025",
-      description: "Completed a training program at Egypt's national statistical agency.",
+      period: "Jul 2025 — Aug 2025",
+      award: "Certificate of Completion — CAPMAS training programme",
+      description: "Completed an internship at CAPMAS, Egypt's official authority for statistics and national censuses, working across the data lifecycle from survey design to statistical reporting.",
       highlights: [
-        "Worked with survey datasets and statistical indicators",
-        "Learned official statistics methodologies",
-        "Practiced data reporting and analysis"
+        "Built core skills in SPSS and statistical data analysis",
+        "Prepared, cleaned and structured survey data for meaningful insights",
+        "Explored how population and economic censuses are conducted",
+        "Learned how national data infrastructures and official statistics work"
+      ]
+    },
+    {
+      title: "Consumer Protection Awareness Workshop — Trainee",
+      type: "Consumer Protection Agency (CPA) · Egypt",
+      period: "Jul 2024",
+      award: "Certificate of Appreciation — Consumer Protection Agency",
+      description: "Took part in the agency's awareness programme on consumer rights and on the role of the Consumer Protection Agency in market oversight, introduced through Consumer Protection Law No. 181 of 2018.",
+      highlights: [
+        "Consumer rights and how citizens can claim them under Law 181/2018",
+        "How the agency monitors markets and fights commercial fraud and misleading claims",
+        "Why awareness and transparency matter in any market",
+        "Sparked interest in economic regulation, economic policy and financial awareness"
       ]
     },
     {
@@ -666,6 +686,30 @@ const basePortfolio = {
       description: "Completed all training phases of the Kun Safiran (\"Be an Ambassador\") initiative for sustainable development, run with the National Institute for Governance & Sustainable Development. Certificate no. AT-0263431."
     },
     {
+      title: "Statistical Training Programme — Certificate",
+      issuer: "Central Agency for Public Mobilization and Statistics (CAPMAS)",
+      date: "Jul – Aug 2025",
+      kind: "Certificate",
+      image: "/assets/cert-capmas-training.webp",
+      description: "Completed the CAPMAS training programme in SPSS, statistical analysis and census methodology."
+    },
+    {
+      title: "Financial Literacy — Certificate of Achievement",
+      issuer: "EBank (Export Development Bank of Egypt) · EBSM",
+      date: "",
+      kind: "Certificate",
+      image: "/assets/cert-ebank-financial-literacy.webp",
+      description: "Attended the financial literacy sessions of the Egyptian Banking System Model (EBSM) with EBank."
+    },
+    {
+      title: "Certificate of Appreciation — Consumer Protection Workshop",
+      issuer: "Consumer Protection Agency · Egypt",
+      date: "July 2024",
+      kind: "Certificate",
+      image: "/assets/cert-cpa-consumer-protection.webp",
+      description: "For attending and actively participating in an awareness workshop on the agency's role and Consumer Protection Law No. 181 of 2018 (24 July 2024)."
+    },
+    {
       title: "Certificate of Appreciation",
       issuer: "Applied Statistics Lab · FEPS, Cairo University",
       date: "July 2026",
@@ -713,7 +757,7 @@ const projectOrder = [
   "crypto-etl-pipeline",
   "docker-etl-pipeline",
   "adventure-works-dashboard",
-  // --- no screenshots yet ---
+  // --- AI-generated cover art (no real screenshots) ---
   "ftd-techzone-ecommerce",
   "unigroup-crm",
   "social-media-governance-center",

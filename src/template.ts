@@ -41,6 +41,10 @@ const categoryHue: Record<string, string> = {
   'Web & WordPress': 'from-emerald-400/30 via-green-500/20 to-cyan-600/30'
 };
 
+/** Awards plus certificates of appreciation count as honours; everything else completed is a certificate. */
+const isHonour = (c: any) => c.kind === 'Award' || /Appreciation/i.test(c.title);
+const honourCount = d.certifications.filter(isHonour).length;
+const certificateCount = d.certifications.filter((c: any) => !isHonour(c) && c.date !== 'In Progress').length;
 const projectImages = (pr: any): string[] => pr.imageUrls || (pr.imageUrl ? [pr.imageUrl] : []);
 
 // ---------------------------------------------------------------- sections
@@ -359,8 +363,8 @@ const renderExperience = () => `
 
           <div class="mt-10 grid grid-cols-3 gap-3">
             <div class="mini-stat"><span class="text-2xl font-display font-bold text-fg">1+</span><span>Year as Software Engineer</span></div>
-            <div class="mini-stat"><span class="text-2xl font-display font-bold text-fg">3</span><span>Awards &amp; honours</span></div>
-            <div class="mini-stat"><span class="text-2xl font-display font-bold text-fg">5</span><span>Certificates</span></div>
+            <div class="mini-stat"><span class="text-2xl font-display font-bold text-fg">${honourCount}</span><span>Awards &amp; honours</span></div>
+            <div class="mini-stat"><span class="text-2xl font-display font-bold text-fg">${certificateCount}</span><span>Certificates</span></div>
           </div>
           <a href="#awards" class="mt-6 btn-ghost btn-sm">${icon('award', 'w-4 h-4')} View certificates &amp; awards</a>
         </div>
@@ -400,7 +404,7 @@ const renderAwards = () => {
   return `
   <section id="awards" class="relative py-24 lg:py-32">
     <div class="max-w-6xl mx-auto px-5 sm:px-6">
-      ${sectionHead('Recognition', `Certificates &amp; <span class="gradient-text">awards</span>`, 'Honours from my employer and university, plus the national Microsoft Data Engineer programme. Click any certificate to view it full size.')}
+      ${sectionHead('Recognition', `Certificates &amp; <span class="gradient-text">awards</span>`, 'Honours from my employer and university, national training programmes and government agencies. Click any certificate to view it full size.')}
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
         ${withImg
           .map(
@@ -410,7 +414,7 @@ const renderAwards = () => {
             <span class="cert-kind ${c.kind === 'Award' ? 'award' : ''}">${icon(c.kind === 'Award' ? 'award' : 'checkCircle', 'w-3.5 h-3.5')} ${esc(c.kind)}</span>
             <span class="block mt-3 font-semibold text-fg leading-snug text-left">${esc(c.title)}</span>
             <span class="block mt-1 text-xs text-muted text-left">${esc(c.issuer)}</span>
-            <span class="block mt-1 text-xs font-mono text-accent-400 text-left">${esc(c.date)}</span>
+            ${c.date ? `<span class="block mt-1 text-xs font-mono text-accent-400 text-left">${esc(c.date)}</span>` : ''}
           </button>`
           )
           .join('')}

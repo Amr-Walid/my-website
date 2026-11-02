@@ -7,7 +7,7 @@
   @font-face { font-family: "Alegreya"; src: url("fonts/Alegreya[wght].ttf") format("truetype"); font-weight: 400 900; font-style: normal; }
   @font-face { font-family: "Alegreya"; src: url("fonts/Alegreya-Italic[wght].ttf") format("truetype"); font-weight: 400 900; font-style: italic; }
 
-  @page { size: A4; margin: 11mm 13mm 11mm 13mm; }
+  @page { size: A4; margin: 10mm 13mm 9mm 13mm; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   body { font-family: "Alegreya", Georgia, serif; font-size: 10pt; line-height: 1.22; color: #111; }
@@ -23,10 +23,10 @@
 
   /* ---------- sections ---------- */
   h2 { font-size: 11.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: .4pt;
-       border-bottom: .9pt solid #111; padding-bottom: 1pt; margin: 8pt 0 4pt; }
+       border-bottom: .9pt solid #111; padding-bottom: 1pt; margin: 7pt 0 3.5pt; }
   p.summary { text-align: justify; font-size: 9.6pt; }
 
-  .entry { margin-bottom: 4.5pt; break-inside: avoid; }
+  .entry { margin-bottom: 4pt; break-inside: avoid; }
   .row { display: flex; justify-content: space-between; align-items: baseline; gap: 10pt; }
   .row .title { font-weight: 700; font-size: 9.9pt; }
   .row .date { font-size: 9pt; white-space: nowrap; }
@@ -41,7 +41,8 @@
   .skills { display: grid; grid-template-columns: auto 1fr; gap: 1.5pt 8pt; font-size: 9.3pt; }
   .skills dt { font-weight: 700; white-space: nowrap; }
 
-  .certs li { margin-bottom: 1pt; }
+  .certs { columns: 2; column-gap: 14pt; margin-left: 11pt; }
+  .certs li { margin-bottom: .6pt; font-size: 8.8pt; break-inside: avoid; }
   .gpa { display: inline-flex; align-items: center; gap: 3pt; font-size: 9pt; }
   .gpa::before { content: ""; width: 5.5pt; height: 5.5pt; border-radius: 50%; background: #111; }
 </style>
@@ -132,7 +133,14 @@
 <div class="entry">
   <div class="row"><span class="title">Trainee | Central Agency for Public Mobilization and Statistics (CAPMAS)</span><span class="date">07/2025 – 08/2025</span></div>
   <ul>
-    <li>Gained hands-on experience across the full data lifecycle at Egypt's national statistical agency, from survey design to statistical reporting.</li>
+    <li>Internship at Egypt's national statistics and census authority: SPSS and statistical analysis, preparing and cleaning survey data, and how population and economic censuses are run. Awarded a <b>Certificate of Completion</b>.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="row"><span class="title">Workshop Participant | Consumer Protection Agency (CPA), Egypt</span><span class="date">07/2024</span></div>
+  <ul>
+    <li>Awareness workshop on consumer rights, market oversight and Consumer Protection Law No. 181/2018; awarded a <b>Certificate of Appreciation</b>.</li>
   </ul>
 </div>
 
@@ -233,13 +241,16 @@
 
 <h2>Certifications &amp; Awards</h2>
 <ul class="certs">
-  <li><b>Best Employee of the Month</b> — Uni Group (August 2026)</li>
-  <li><b>Outstanding Instructor — Certificate of Excellence</b> — Applied Statistics Lab, FEPS, Cairo University (July 2026)</li>
-  <li><b>Microsoft Data Engineer — Certificate of Achievement</b> — Digital Egypt Pioneers Initiative (DEPI), MCIT (2026)</li>
-  <li><b>Kun Safiran for Sustainable Development — Certificate of Completion</b> — Ministry of Planning &amp; NIGSD (Sep 2025)</li>
-  <li><b>Certificate of Appreciation</b> — Applied Statistics Lab, FEPS, Cairo University (July 2026)</li>
-  <li><b>Get Started with Lakehouses in Microsoft Fabric</b> — Microsoft Learn (January 2026)</li>
-  <li><b>DP-700: Fabric Data Engineer Associate</b> — Microsoft Certified (In Progress)</li>
+  <li><b>Best Employee of the Month</b> — Uni Group (08/2026)</li>
+  <li><b>Outstanding Instructor</b> — ASL, FEPS, Cairo Univ. (07/2026)</li>
+  <li><b>Certificate of Appreciation</b> — ASL, FEPS, Cairo Univ. (07/2026)</li>
+  <li><b>Microsoft Data Engineer</b> — DEPI, MCIT (2026)</li>
+  <li><b>Lakehouses in Microsoft Fabric</b> — Microsoft Learn (01/2026)</li>
+  <li><b>DP-700: Fabric Data Engineer</b> — Microsoft (In Progress)</li>
+  <li><b>Kun Safiran — Sustainable Development</b> — Ministry of Planning (2025)</li>
+  <li><b>Statistical Training Programme</b> — CAPMAS (2025)</li>
+  <li><b>Financial Literacy</b> — EBank · EBSM</li>
+  <li><b>Consumer Protection Workshop</b> — CPA, Egypt (07/2024)</li>
 </ul>
 
 </body>
