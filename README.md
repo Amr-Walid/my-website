@@ -161,8 +161,6 @@ The site includes a **Services** section aimed at companies:
 - ✅ **Statistical Training Programme — Certificate** — CAPMAS (Jul – Aug 2025)
 - ✅ **Financial Literacy — Certificate of Achievement** — EBank · EBSM
 - ✅ **Certificate of Appreciation — Consumer Protection Workshop** — Consumer Protection Agency (July 2024)
-- ✅ **Get Started with Lakehouses in Microsoft Fabric** — Microsoft Learn (January 2026)
-- 🔄 **DP-700: Fabric Data Engineer Associate** — Microsoft Certified *(In Progress)*
 
 ---
 

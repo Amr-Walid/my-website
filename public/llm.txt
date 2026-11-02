@@ -36,7 +36,7 @@ Other Technologies:
 - PostgreSQL
 - Git & Version Control
 - Google BigQuery
-- Microsoft Fabric (Lakehouses, DP-700 in progress)
+- Microsoft Fabric (Lakehouses)
 
 4. PROJECTS
 (Full, up-to-date list with case studies: https://amrw.me/api/projects)

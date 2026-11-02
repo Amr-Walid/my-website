@@ -419,7 +419,7 @@ const renderAwards = () => {
           )
           .join('')}
       </div>
-      <div class="mt-6 grid sm:grid-cols-2 gap-4">
+      ${noImg.length ? `<div class="mt-6 grid sm:grid-cols-2 gap-4">
         ${noImg
           .map(
             (c: any) => `
@@ -433,7 +433,7 @@ const renderAwards = () => {
           </div>`
           )
           .join('')}
-      </div>
+      </div>` : ''}
     </div>
   </section>`;
 };

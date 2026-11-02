@@ -716,20 +716,6 @@ const basePortfolio = {
       kind: "Certificate",
       image: "/assets/cert-asl-appreciation.webp",
       description: "In appreciation of dedicated instruction and support in the intensive technical program."
-    },
-    {
-      title: "Get Started with Lakehouses in Microsoft Fabric",
-      issuer: "Microsoft Learn",
-      date: "January 2026",
-      kind: "Training",
-      description: "Microsoft Fabric lakehouse architecture: ingestion, transformation and storage patterns."
-    },
-    {
-      title: "DP-700: Fabric Data Engineer Associate",
-      issuer: "Microsoft Certified",
-      date: "In Progress",
-      kind: "Certification",
-      description: "Designing and implementing data solutions with Microsoft Fabric: pipelines, lakehouses and warehouses."
     }
   ]
 };
