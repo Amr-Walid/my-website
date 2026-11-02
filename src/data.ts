@@ -594,6 +594,19 @@ const basePortfolio = {
       ]
     },
     {
+      title: "Sustainable Development Ambassador — Trainee",
+      type: "Kun Safiran Initiative · Ministry of Planning & NIGSD",
+      period: "Jul 2025 — Sep 2025",
+      award: "Certificate of Completion — Kun Safiran for Sustainable Development",
+      description: "Completed all training phases of the national Kun Safiran (\"Be an Ambassador\") initiative for sustainable development, run by Egypt's Ministry of Planning, Economic Development & International Cooperation with the National Institute for Governance & Sustainable Development.",
+      highlights: [
+        "Completed every training phase of the programme (July – September 2025)",
+        "Studied the UN Sustainable Development Goals (SDGs) and Egypt Vision 2030",
+        "Part of the national Sustainability Awareness Initiative, listed under the UN SDG Acceleration Actions",
+        "Certified by the Ministry of Planning and NIGSD (certificate no. AT-0263431)"
+      ]
+    },
+    {
       title: "Statistical Data Trainee",
       type: "Central Agency for Public Mobilization and Statistics (CAPMAS)",
       period: "2025",
@@ -643,6 +656,14 @@ const basePortfolio = {
       kind: "Certificate",
       image: "/assets/cert-depi-data-engineer.webp",
       description: "Completed the core learning outcomes of the Digital Egypt Pioneers Program — Microsoft Data Engineer track."
+    },
+    {
+      title: "Kun Safiran for Sustainable Development — Certificate of Completion",
+      issuer: "Ministry of Planning, Economic Development & International Cooperation · NIGSD",
+      date: "Jul – Sep 2025",
+      kind: "Certificate",
+      image: "/assets/cert-kun-safiran-sdg.webp",
+      description: "Completed all training phases of the Kun Safiran (\"Be an Ambassador\") initiative for sustainable development, run with the National Institute for Governance & Sustainable Development. Certificate no. AT-0263431."
     },
     {
       title: "Certificate of Appreciation",

@@ -148,6 +148,7 @@ The site includes a **Services** section aimed at companies:
 | Mar 2026 — May 2026 | Data Analyst & BI Developer (Remote) | Kidana Development Co |
 | 2026 — Aug 2026 | Data Engineering Instructor (Outstanding Instructor award) | Applied Statistics Lab (ASL), FEPS |
 | 2025 | Data Analyst Intern | EMAM Organization for Development and Culture |
+| Jul 2025 — Sep 2025 | Sustainable Development Ambassador — Trainee | Kun Safiran Initiative · Ministry of Planning & NIGSD |
 | 2025 | Statistical Data Trainee | Central Agency for Public Mobilization & Statistics (CAPMAS) |
 | 2022 — Jun 2026 | B.Sc. Economics — Graduate | Faculty of Economics & Political Science, Cairo University |
 
@@ -155,6 +156,7 @@ The site includes a **Services** section aimed at companies:
 
 ## 🏅 Certifications
 
+- ✅ **Kun Safiran for Sustainable Development — Certificate of Completion** — Ministry of Planning & NIGSD (Jul – Sep 2025)
 - ✅ **Get Started with Lakehouses in Microsoft Fabric** — Microsoft Learn (January 2026)
 - 🔄 **DP-700: Fabric Data Engineer Associate** — Microsoft Certified *(In Progress)*
 
